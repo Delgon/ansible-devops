@@ -14,3 +14,7 @@
     - cis_enhanced_security
 
 - include_tasks: tasks/providers/cis/cis_webhook.yml
+
+- name: "Pause for 200 minutes to fetch the files..."
+  pause:
+    minutes: 200
