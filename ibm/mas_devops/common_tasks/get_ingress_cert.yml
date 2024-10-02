@@ -4,7 +4,9 @@
 - name: Clear private_root_ca_name fact
   ansible.builtin.set_fact:
     private_root_ca_name: ""
-    include_cluster_ingress_cert_chain: "{{ lookup('env', 'INCLUDE_CLUSTER_INGRESS_CERT_CHAIN') | default('false', True) | bool }}"
+    include_cluster_ingress_cert_chain: |
+      "{% if include_cluster_ingress_cert_chain is not none %}{{ include_cluster_ingress_cert_chain }}
+      {% else %}{{ lookup('env', 'INCLUDE_CLUSTER_INGRESS_CERT_CHAIN') | default('false', True) | bool }}{% endif %}"
 
 - name: "Lookup Proxy: cluster"
   kubernetes.core.k8s_info:
