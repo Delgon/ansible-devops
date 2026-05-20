@@ -1,394 +1,990 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://ibm-mas.github.io/ansible-devops/roles/nvidia_gpu/" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>nvidia_gpu - MAS Devops Collection</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
-        <link href="../../extra.css" rel="stylesheet" />
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>nvidia_gpu - MAS DevOps Ansible Collection</title>
+
+    <!-- Pure CSS (https://pure-css.github.io/) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="../../js/theme.js"></script>
+
+    <!-- Carbon theme zones (white, g10, g90, g100) -->
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css">
+
+    <!-- The Carbon web-components/framework -->
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/ui-shell.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/accordion.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/breadcrumb.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/select.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/tabs.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/search.min.js"></script>
+
+    <!-- HighlightJS code formatting support -->
+    <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <!-- Required by MkDocs search -->
+    <script>var base_url = "../..";</script>
+
+    <!-- User defined extras -->
     
+    
+
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: black; }
+        </style></head>
+
+  <body class="md-grid" data-theme-default="g90">
+    <!-- Header -->
+    <cds-header aria-label="MAS DevOps Ansible Collection" class="md-header">
+      <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+      <cds-header-name href="../.." prefix="IBM">MAS DevOps Ansible Collection</cds-header-name>
+      <cds-header-nav menu-bar-label="IBM MAS DevOps Ansible Collection">
+          <cds-header-nav-item is-active="" target="" href="">Ansible</cds-header-nav-item>
+          <cds-header-nav-item target="" href="https://ibm-mas.github.io/cli/">CLI</cds-header-nav-item>
+      </cds-header-nav>
+
+      <div class="cds--header__global">
+<div class="md-theme-toggle" data-theme-default="g90">
+  <button class="md-theme-toggle__button" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="md-theme-toggle__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+    </svg>
+  </button>
+  <div class="md-theme-toggle__menu" hidden="">
+    <button class="md-theme-toggle__option" data-theme="white">
+      <span class="md-theme-toggle__label">Light</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--white"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g10">
+      <span class="md-theme-toggle__label">Light Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g10"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g90">
+      <span class="md-theme-toggle__label">Dark Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g90"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g100">
+      <span class="md-theme-toggle__label">Dark</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g100"></span>
+    </button>
+  </div>
+</div>
+        <cds-search id="header-search" label-text="Search" cds-search-input="search-event" expandable=""></cds-search>
+      </div>
       <script>
-        // Current page data
-        var mkdocs_page_name = "nvidia_gpu";
-        var mkdocs_page_input_path = "roles/nvidia_gpu.md";
-        var mkdocs_page_url = "/ansible-devops/roles/nvidia_gpu/";
+        var el = document.getElementById("header-search");
+        el.addEventListener("cds-search-input", function (ev) {
+          console.info(ev.detail.value)
+          document.getElementById("header-search-value").setAttribute("value", ev.detail.value);
+        });
+        el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            location.href="../../search.html?q=" + document.querySelector("#header-search").shadowRoot.querySelector("#input").value;
+          }
+        });
       </script>
+
+      
+    </cds-header>
+
+    <!-- Main container with three-column layout -->
+    <div class="md-container">
+      <!-- Left sidebar - Navigation -->
+      <aside class="md-sidebar md-sidebar--primary" data-md-component="sidebar">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            <cds-side-nav aria-label="Side navigation">
+              <cds-side-nav-items>
+                
+                  
+  <cds-side-nav-menu title="General Information">
     
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+      
+  <cds-side-nav-menu-item href="../..">
+    Home
+  </cds-side-nav-menu-item>
 
-<body class="wy-body-for-nav" role="document">
+    
+      
+  <cds-side-nav-menu-item href="../../execution-environment/">
+    Ansible Automation Platform
+  </cds-side-nav-menu-item>
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> MAS Devops Collection
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+  </cds-side-nav-menu>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Playbooks</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/ocp/">OCP</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/cp4d/">Install Cloud Pak For Data</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-core/">Install Core</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-iot/">Add IoT</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-manage/">Add Manage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-monitor/">Add Monitor</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-optimizer/">Add Optimizer</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-predict/">Add Predict</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-visualinspection/">Add Visual Inspection</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-update/">Update</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-upgrade/">Upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/uninstall-core/">Uninstall Core</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: OCP Mgmt</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_cluster_monitoring/">ocp_cluster_monitoring</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_config/">ocp_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_deprovision/">ocp_deprovision</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_efs/">ocp_efs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_github_oauth/">ocp_github_oauth</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_login/">ocp_login</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_node_config/">ocp_node_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_provision/">ocp_provision</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_roks_upgrade_registry_storage/">ocp_roks_upgrade_registry_storage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_upgrade/">ocp_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_verify/">ocp_verify</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Dependency Mgmt</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../appconnect/">appconnect</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_bucket_access_point/">aws_bucket_access_point</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_documentdb_user/">aws_documentdb_user</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_policy/">aws_policy</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_route53/">aws_route53</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_user_creation/">aws_user_creation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_vpc/">aws_vpc</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cert_manager/">cert_manager</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cis/">cis</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../common_services/">common-services</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../configure_manage_eventstreams/">configure_manage_eventstreams</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cos/">cos</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cos_bucket/">cos_bucket</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d_admin_pwd_update/">cp4d_admin_pwd_update</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d/">cp4d</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d_service/">cp4d_service</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2/">db2</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2_backup/">db2_backup</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2_restore/">db2_restore</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../dro/">dro</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../grafana/">grafana</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ibm_catalogs/">ibm_catalogs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../kafka/">kafka</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">nvidia_gpu</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables">Role Variables</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#nfd_namespace">nfd_namespace</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#nfd_channel">nfd_channel</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#gpu_namespace">gpu_namespace</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#gpu_channel">gpu_channel</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#gpu_driver_version">gpu_driver_version</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#gpu_driver_repository_path">gpu_driver_repository_path</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#example-playbook">Example Playbook</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
-    </li>
-    </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mongodb/">mongodb</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocs/">ocs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../sls/">sls</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../turbonomic/">turbonomic</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../uds/">uds</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Image Mirroring</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_case_prepare/">mirror_case_prepare</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_extras_prepare/">mirror_extras_prepare</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_images/">mirror_images</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_ocp/">mirror_ocp</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_contentsourcepolicy/">ocp_contentsourcepolicy</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_simulate_disconnected_network/">ocp_simulate_disconnected_network</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../registry/">registry</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Suite Mgmt</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_config/">suite_app_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_install/">suite_app_install</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_uninstall/">suite_app_uninstall</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_upgrade/">suite_app_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_rollback/">suite_app_rollback</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_certs/">suite_certs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_config/">suite_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_db2_setup_for_manage/">suite_db2_setup_for_manage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_dns/">suite_dns</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_install/">suite_install</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_birt_report_config/">suite_manage_birt_report_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_bim_config/">suite_manage_bim_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_customer_files_config/">suite_manage_customer_files_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_doclinks_config/">suite_manage_doclinks_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_import_certs_config/">suite_manage_import_certs_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_load_dbc_scripts/">suite_manage_load_dbc_scripts</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_logging_config/">suite_manage_logging_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_pvc_config/">suite_manage_pvc_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_uninstall/">suite_uninstall</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_upgrade/">suite_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_rollback/">suite_rollback</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_verify/">suite_verify</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Utilities</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../ansible_version_check/">ansible_version_check</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../entitlement_key_rotation/">entitlement_key_rotation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_jdbc/">gencfg_jdbc</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_watsonstudio/">gencfg_watsonstudio</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_workspace/">gencfg_workspace</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../install_operator/">install_operator</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_mongo/">gencfg_mongo</a>
-                  </li>
-              </ul>
-      </div>
-    </div>
-    </nav>
+                
+                  
+  <cds-side-nav-menu title="Playbooks">
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/ocp/">
+    OCP
+  </cds-side-nav-menu-item>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">MAS Devops Collection</a>
-        
-      </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Roles: Dependency Mgmt</li>
-      <li class="breadcrumb-item active">nvidia_gpu</li>
-    <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/ibm-mas/ansible-devops/blob/master/docs/roles/nvidia_gpu.md" class="icon icon-github"> Edit on GitHub</a>
-    </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
-              
-                <h1 id="nvidia_gpu">nvidia_gpu<a class="headerlink" href="#nvidia_gpu" title="Permanent link"></a></h1>
-<p>This role installs the <strong>NVIDIA Graphical Processing Unit (GPU)</strong> operator and its prerequisite <strong>Node Feature Discovery (NFD)</strong> operator in an IBM Cloud Openshift cluster console. The role first installs the NFD operator and continues with the final step to install the NVIDIA GPU Operator. The NFD Operator is installed using the Red Hat Operators catalog source and the GPU operator is installed using the Certified Operators catalog source.</p>
-<h2 id="role-variables">Role Variables<a class="headerlink" href="#role-variables" title="Permanent link"></a></h2>
-<h3 id="nfd_namespace">nfd_namespace<a class="headerlink" href="#nfd_namespace" title="Permanent link"></a></h3>
-<p>The namespace where the node feature discovery operator will be deployed.</p>
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/cp4d/">
+    Install Cloud Pak For Data
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/aiservice/">
+    Install AI Service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-core/">
+    Install Core
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-iot/">
+    Add IoT
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-manage/">
+    Add Manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-monitor/">
+    Add Monitor
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-optimizer/">
+    Add Optimizer
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-predict/">
+    Add Predict
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-visualinspection/">
+    Add Visual Inspection
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-facilities/">
+    Add Real Estate and Facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-update/">
+    Update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-upgrade/">
+    Upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/backup-restore/">
+    Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/legacy-backup-restore/">
+    Legacy Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: OCP Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../ocp_cluster_monitoring/">
+    ocp_cluster_monitoring
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_config/">
+    ocp_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_deprovision/">
+    ocp_deprovision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_efs/">
+    ocp_efs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_github_oauth/">
+    ocp_github_oauth
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_login/">
+    ocp_login
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_node_config/">
+    ocp_node_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_provision/">
+    ocp_provision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_roks_upgrade_registry_storage/">
+    ocp_roks_upgrade_registry_storage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_upgrade/">
+    ocp_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_verify/">
+    ocp_verify
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Dependency Mgmt" active="" expanded="">
+    
+      
+  <cds-side-nav-menu-item href="../aws_bucket_access_point/">
+    aws_bucket_access_point
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_documentdb_user/">
+    aws_documentdb_user
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_policy/">
+    aws_policy
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_route53/">
+    aws_route53
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_user_creation/">
+    aws_user_creation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_vpc/">
+    aws_vpc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cert_manager/">
+    cert_manager
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cis/">
+    cis
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../configure_manage_eventstreams/">
+    configure_manage_eventstreams
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos/">
+    cos
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos_bucket/">
+    cos_bucket
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_admin_pwd_update/">
+    cp4d_admin_pwd_update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d/">
+    cp4d
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_service/">
+    cp4d_service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../db2/">
+    db2
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../dro/">
+    dro
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../eck/">
+    eck
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../grafana/">
+    grafana
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ibm_catalogs/">
+    ibm_catalogs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../kafka/">
+    kafka
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../longhorn/">
+    longhorn
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="./" active="" expanded="">
+    nvidia_gpu
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mongodb/">
+    mongodb
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocs/">
+    ocs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../sls/">
+    sls
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../turbonomic/">
+    turbonomic
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Image Mirroring">
+    
+      
+  <cds-side-nav-menu-item href="../mirror_case_prepare/">
+    mirror_case_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_extras_prepare/">
+    mirror_extras_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_images/">
+    mirror_images
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_ocp/">
+    mirror_ocp
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_idms/">
+    ocp_idms
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_simulate_disconnected_network/">
+    ocp_simulate_disconnected_network
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../registry/">
+    registry
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Suite Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_config/">
+    suite_app_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_install/">
+    suite_app_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_uninstall/">
+    suite_app_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_upgrade/">
+    suite_app_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_rollback/">
+    suite_app_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_backup/">
+    suite_app_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_restore/">
+    suite_app_restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_certs/">
+    suite_certs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_config/">
+    suite_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_manage/">
+    suite_db2_setup_for_manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_facilities/">
+    suite_db2_setup_for_facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_dns/">
+    suite_dns
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_install/">
+    suite_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_attachments_config/">
+    suite_manage_attachments_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_birt_report_config/">
+    suite_manage_birt_report_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_bim_config/">
+    suite_manage_bim_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_customer_files_config/">
+    suite_manage_customer_files_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_imagestitching_config/">
+    suite_manage_imagestitching_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_import_certs_config/">
+    suite_manage_import_certs_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_load_dbc_scripts/">
+    suite_manage_load_dbc_scripts
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_logging_config/">
+    suite_manage_logging_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_pvc_config/">
+    suite_manage_pvc_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_uninstall/">
+    suite_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_upgrade/">
+    suite_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_rollback/">
+    suite_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_verify/">
+    suite_verify
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_backup/">
+    suite_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_restore/">
+    suite_restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Utilities">
+    
+      
+  <cds-side-nav-menu-item href="../ansible_version_check/">
+    ansible_version_check
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../entitlement_key_rotation/">
+    entitlement_key_rotation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_jdbc/">
+    gencfg_jdbc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_watsonstudio/">
+    gencfg_watsonstudio
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_workspace/">
+    gencfg_workspace
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_mongo/">
+    gencfg_mongo
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+              </cds-side-nav-items>
+            </cds-side-nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="md-content" data-md-component="content">
+        <article class="md-content__inner">
+          <!-- Breadcrumbs -->
+          <div class="md-breadcrumbs"><cds-breadcrumb no-trailing-slash="">
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="../..">Home</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+      <cds-breadcrumb-item>Roles: Dependency Mgmt</cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#nvidia_gpu">nvidia_gpu</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+
+  <cds-breadcrumb-item aria-current="page">
+    <cds-select id="breadcrumbs-toc" inline="" placeholder="..." oninput="changeAnchor(this.value)">
+    
+    
+      <cds-select-item value="#prerequisites">Prerequisites</cds-select-item>
+    
+      <cds-select-item value="#role-variables">Role Variables</cds-select-item>
+    
+      <cds-select-item value="#example-playbook">Example Playbook</cds-select-item>
+    
+      <cds-select-item value="#run-role-playbook">Run Role Playbook</cds-select-item>
+    
+      <cds-select-item value="#license">License</cds-select-item>
+    
+    </cds-select>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+          </div>
+
+          <!-- Page content -->
+          <div class="rst-content">
+            
+            <h1 id="nvidia_gpu">nvidia_gpu<a class="headerlink" href="#nvidia_gpu" title="Permanent link">¤</a></h1>
+<p>This role installs and configures the NVIDIA GPU Operator on OpenShift clusters to enable GPU workloads. The GPU Operator manages the lifecycle of NVIDIA software components required to run GPU-accelerated applications.</p>
+<p>The role automatically installs the Node Feature Discovery (NFD) Operator as a prerequisite, then deploys the NVIDIA GPU Operator and creates a ClusterPolicy to configure GPU support across the cluster. This is required for applications like Maximo Visual Inspection that need GPU acceleration.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">¤</a></h2>
 <ul>
-<li>Environment Variable: <code>NFD_NAMESPACE</code></li>
-<li>Default Value: <code>openshift-nfd</code></li>
+<li>OpenShift cluster with GPU-enabled worker nodes</li>
+<li>Cluster administrator access</li>
+<li>GPU-capable hardware (NVIDIA GPUs) available in the cluster</li>
 </ul>
-<h3 id="nfd_channel">nfd_channel<a class="headerlink" href="#nfd_channel" title="Permanent link"></a></h3>
-<p>The channel to subscribe to for the nfd operator installation and updates. Available channels may be found in the package manifest of nfd operator in openshift.</p>
+<h2 id="role-variables">Role Variables<a class="headerlink" href="#role-variables" title="Permanent link">¤</a></h2>
+<h3 id="gpu-operator-variables">GPU Operator Variables<a class="headerlink" href="#gpu-operator-variables" title="Permanent link">¤</a></h3>
+<h4 id="gpu_namespace">gpu_namespace<a class="headerlink" href="#gpu_namespace" title="Permanent link">¤</a></h4>
+<p>Namespace for NVIDIA GPU Operator installation.</p>
 <ul>
-<li>Environment Variable: <code>NFD_CHANNEL</code></li>
-<li>Default Value: <code>stable</code></li>
-</ul>
-<h3 id="gpu_namespace">gpu_namespace<a class="headerlink" href="#gpu_namespace" title="Permanent link"></a></h3>
-<p>The namespace where the NVIDIA GPU operator will be deployed. For version 1.8.x, use of single namespace is not supported, therefore use <code>openshift-operators</code>.</p>
-<ul>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>GPU_NAMESPACE</code></li>
-<li>Default Value: <code>nvidia-gpu-operator</code></li>
+<li>Default: <code>nvidia-gpu-operator</code></li>
 </ul>
-<h3 id="gpu_channel">gpu_channel<a class="headerlink" href="#gpu_channel" title="Permanent link"></a></h3>
-<p>The channel to subscribe to for the gpu operator installation and updates. Available channels may be found in the package manifest of gpu-operator-certified operator in openshift.</p>
+<p><strong>Purpose</strong>: Specifies the OpenShift namespace where the NVIDIA GPU Operator and its components will be deployed.</p>
+<p><strong>When to use</strong>: Use default unless you have specific namespace requirements or multiple GPU operator instances.</p>
+<p><strong>Valid values</strong>: Valid Kubernetes namespace name (lowercase alphanumeric with hyphens)</p>
+<p><strong>Impact</strong>: All GPU Operator resources (deployments, services, ClusterPolicy) will be created in this namespace.</p>
+<p><strong>Related variables</strong>: <a href="#nfd_namespace"><code>nfd_namespace</code></a></p>
+<p><strong>Notes</strong>:
+- Default namespace is recommended for most deployments
+- Namespace will be created if it doesn't exist
+- GPU Operator manages cluster-wide GPU resources regardless of namespace</p>
+<h4 id="gpu_channel">gpu_channel<a class="headerlink" href="#gpu_channel" title="Permanent link">¤</a></h4>
+<p>NVIDIA GPU Operator subscription channel.</p>
 <ul>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>GPU_CHANNEL</code></li>
-<li>Default Value: <code>v23.3</code></li>
+<li>Default: <code>v24.9</code></li>
 </ul>
-<h3 id="gpu_driver_version">gpu_driver_version<a class="headerlink" href="#gpu_driver_version" title="Permanent link"></a></h3>
-<p>The gpu driver version image that needs to be pulled from the gpu driver repository. It is recommended that the right version of GPU driver is used depending on the OS version. The default versions are shown below. See the attached links for more information and to decide which driver version to use.</p>
+<p><strong>Purpose</strong>: Determines which version stream of the NVIDIA GPU Operator will be installed from OperatorHub.</p>
+<p><strong>When to use</strong>: Use default for latest stable version. Specify older channel for compatibility with specific OpenShift versions or when stability is prioritized over features.</p>
+<p><strong>Valid values</strong>: Valid GPU Operator channel versions (e.g., <code>v24.9</code>, <code>v24.6</code>, <code>v23.9</code>)</p>
+<p><strong>Impact</strong>: Controls which operator version is installed and which features are available. Newer channels may require newer OpenShift versions.</p>
+<p><strong>Related variables</strong>: <a href="#gpu_driver_version"><code>gpu_driver_version</code></a></p>
+<p><strong>Notes</strong>:
+- Check <a href="https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/platform-support.html">NVIDIA GPU Operator releases</a> for compatibility
+- Newer channels provide latest features and driver support
+- Consider OpenShift version compatibility when selecting channel</p>
+<h4 id="gpu_driver_version">gpu_driver_version<a class="headerlink" href="#gpu_driver_version" title="Permanent link">¤</a></h4>
+<p>Specific NVIDIA GPU driver version to install.</p>
 <ul>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>GPU_DRIVER_VERSION</code></li>
-<li>Default Value: <code>470.182.03</code> if ocp version 4.10+ and <code>450.80.02</code> otherwise
-The deciding factor for which image version to use is the RHEL or RHCOS version.
-RHEL 8.6            ---&gt; 470.182.03
-RHEL 7.9            ---&gt; 450.80.02
-The version of RHEL that is used by OCP version is per https://cloud.ibm.com/docs/openshift?topic=openshift-rhel_migrate</li>
+<li>Default: None (uses latest compatible version)</li>
 </ul>
-<p>OCP 4.10+           ---&gt; RHEL 8
-OCP 4.9             ---&gt; Either RHEL 8 or RHEL 7 with 7 being the default
-OCP 4.6, 4.7, &amp; 4.8 ---&gt; RHEL 7</p>
-<p>RHCOS 4.9 &amp; 4.0     ---&gt; 470.182.03
-RHCOS 4.4 - 4.6     ---&gt; 450.80.02
-For other RHCOS versions find an appropriate driver version at https://catalog.ngc.nvidia.com/orgs/nvidia/containers/driver/tags</p>
-<h3 id="gpu_driver_repository_path">gpu_driver_repository_path<a class="headerlink" href="#gpu_driver_repository_path" title="Permanent link"></a></h3>
-<p>The gpu driver repository. If using a different repository, you can set the value for this repo. We only support public repositories at the moment.</p>
+<p><strong>Purpose</strong>: Pins the NVIDIA GPU driver to a specific version instead of using the latest version provided by the operator channel.</p>
+<p><strong>When to use</strong>: Specify when you need a particular driver version for compatibility, stability, or certification requirements. Leave unset to use the latest compatible driver.</p>
+<p><strong>Valid values</strong>: Valid NVIDIA driver version string (e.g., <code>535.129.03</code>, <code>550.54.15</code>)</p>
+<p><strong>Impact</strong>: When set, the specified driver version will be installed. When unset, the operator installs the latest driver compatible with the operator channel.</p>
+<p><strong>Related variables</strong>: <a href="#gpu_channel"><code>gpu_channel</code></a>, <a href="#gpu_driver_repository_path"><code>gpu_driver_repository_path</code></a></p>
+<p><strong>Notes</strong>:
+- Latest driver is usually recommended unless specific version is required
+- Verify driver compatibility with your GPU hardware
+- Check <a href="https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/platform-support.html">NVIDIA driver compatibility matrix</a>
+- Driver version must be available in the specified repository</p>
+<h4 id="gpu_driver_repository_path">gpu_driver_repository_path<a class="headerlink" href="#gpu_driver_repository_path" title="Permanent link">¤</a></h4>
+<p>Container registry path for NVIDIA driver images.</p>
 <ul>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>GPU_DRIVER_REPOSITORY_PATH</code></li>
-<li>Default Value: <code>nvcr.io/nvidia</code></li>
+<li>Default: <code>nvcr.io/nvidia</code></li>
 </ul>
-<p>For more information on the NVIDIA GPU and NFD operators, visit https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/openshift/install-gpu-ocp.html</p>
-<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link"></a></h2>
+<p><strong>Purpose</strong>: Specifies the container registry location where NVIDIA GPU driver container images are stored.</p>
+<p><strong>When to use</strong>: Use default for public NVIDIA registry. Override for air-gapped environments or when using a mirrored registry.</p>
+<p><strong>Valid values</strong>: Valid container registry path (e.g., <code>nvcr.io/nvidia</code>, <code>registry.example.com/nvidia-drivers</code>)</p>
+<p><strong>Impact</strong>: GPU Operator will pull driver container images from this registry location.</p>
+<p><strong>Related variables</strong>: <a href="#gpu_driver_version"><code>gpu_driver_version</code></a></p>
+<p><strong>Notes</strong>:
+- Default points to NVIDIA's official registry
+- For air-gapped deployments, mirror images to internal registry
+- Ensure registry is accessible from OpenShift cluster
+- May require image pull secrets for private registries</p>
+<h3 id="node-feature-discovery-variables">Node Feature Discovery Variables<a class="headerlink" href="#node-feature-discovery-variables" title="Permanent link">¤</a></h3>
+<h4 id="nfd_namespace">nfd_namespace<a class="headerlink" href="#nfd_namespace" title="Permanent link">¤</a></h4>
+<p>Namespace for Node Feature Discovery Operator installation.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>NFD_NAMESPACE</code></li>
+<li>Default: <code>openshift-nfd</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the OpenShift namespace where the Node Feature Discovery (NFD) Operator will be deployed. NFD is a prerequisite for GPU Operator.</p>
+<p><strong>When to use</strong>: Use default unless you have specific namespace requirements. NFD must be installed before GPU Operator.</p>
+<p><strong>Valid values</strong>: Valid Kubernetes namespace name (lowercase alphanumeric with hyphens)</p>
+<p><strong>Impact</strong>: NFD Operator resources will be created in this namespace. NFD detects GPU hardware and labels nodes accordingly.</p>
+<p><strong>Related variables</strong>: <a href="#gpu_namespace"><code>gpu_namespace</code></a>, <a href="#nfd_channel"><code>nfd_channel</code></a></p>
+<p><strong>Notes</strong>:
+- NFD is automatically installed by this role as a prerequisite
+- Default <code>openshift-nfd</code> is the standard namespace for NFD
+- NFD labels nodes with hardware features for GPU Operator to use
+- Namespace will be created if it doesn't exist</p>
+<h4 id="nfd_channel">nfd_channel<a class="headerlink" href="#nfd_channel" title="Permanent link">¤</a></h4>
+<p>Node Feature Discovery Operator subscription channel.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>NFD_CHANNEL</code></li>
+<li>Default: <code>stable</code></li>
+</ul>
+<p><strong>Purpose</strong>: Determines which version stream of the Node Feature Discovery Operator will be installed from OperatorHub.</p>
+<p><strong>When to use</strong>: Use default <code>stable</code> for production deployments. Other channels may be available for testing or specific versions.</p>
+<p><strong>Valid values</strong>: Valid NFD Operator channel (typically <code>stable</code>, may include version-specific channels)</p>
+<p><strong>Impact</strong>: Controls which NFD operator version is installed. The <code>stable</code> channel provides production-ready releases.</p>
+<p><strong>Related variables</strong>: <a href="#nfd_namespace"><code>nfd_namespace</code></a>, <a href="#gpu_channel"><code>gpu_channel</code></a></p>
+<p><strong>Notes</strong>:
+- <code>stable</code> channel is recommended for production
+- NFD is a prerequisite for GPU Operator functionality
+- Check OperatorHub for available channels in your OpenShift version
+- NFD version should be compatible with OpenShift version</p>
+<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link">¤</a></h2>
+<p>After installing the Ansible Collection you can include this role in your own custom playbooks.</p>
 <pre><code class="language-yaml">- hosts: localhost
-  any_errors_fatal: true
+  vars:
+    gpu_namespace: nvidia-gpu-operator
+    gpu_channel: v24.9
+    nfd_namespace: openshift-nfd
   roles:
     - ibm.mas_devops.nvidia_gpu
 </code></pre>
-<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link"></a></h2>
+<h2 id="run-role-playbook">Run Role Playbook<a class="headerlink" href="#run-role-playbook" title="Permanent link">¤</a></h2>
+<p>After installing the Ansible Collection you can easily run the role standalone using the <code>run_role</code> playbook provided.</p>
+<pre><code class="language-bash">export GPU_NAMESPACE=nvidia-gpu-operator
+export GPU_CHANNEL=v24.9
+export NFD_NAMESPACE=openshift-nfd
+ROLE_NAME=nvidia_gpu ansible-playbook ibm.mas_devops.run_role
+</code></pre>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">¤</a></h2>
 <p>EPL-2.0</p>
-              
-            </div>
-          </div><footer>
+            
+          </div>
 
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
+          <!-- Navigation footer (prev/next) -->
+<nav class="md-footer-nav" aria-label="Footer navigation">
+  <div class="md-footer-nav__inner">
+    <a href="../longhorn/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+      <div class="md-footer-nav__direction">
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+        <span>Previous</span>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">longhorn</span>
+      </div>
+    </a>
+    <a href="../mongodb/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+      <div class="md-footer-nav__direction">
+        <span>Next</span>
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+        </svg>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">mongodb</span>
+      </div>
+    </a>
   </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
-          
-        </div>
+</nav>
+        </article>
       </div>
 
-    </section>
-
+      <!-- Right sidebar - Table of Contents -->
+      <aside class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<nav class="md-sidebar md-sidebar--secondary" aria-label="Table of contents">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <div class="md-toc">
+        <div class="md-toc__title">On this page</div>
+        <ul class="md-toc__list">
+              <li class="md-toc__item">
+                <a href="#prerequisites" class="md-toc__link" data-md-level="1">
+                  Prerequisites
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables" class="md-toc__link" data-md-level="1">
+                  Role Variables
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#gpu-operator-variables" class="md-toc__link" data-md-level="2">
+                          GPU Operator Variables
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#node-feature-discovery-variables" class="md-toc__link" data-md-level="2">
+                          Node Feature Discovery Variables
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#example-playbook" class="md-toc__link" data-md-level="1">
+                  Example Playbook
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#run-role-playbook" class="md-toc__link" data-md-level="1">
+                  Run Role Playbook
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#license" class="md-toc__link" data-md-level="1">
+                  License
+                </a>
+              </li>
+        </ul>
+      </div>
+    </div>
   </div>
+</nav>
+      </aside>
+    </div>
 
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-        <span>
-          <a href="https://github.com/ibm-mas/ansible-devops" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
-        </span>
-    
-    
-      <span><a href="../kafka/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../mongodb/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
-</div>
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "../..";</script>
-    <script src="../../js/theme_extra.js"></script>
-    <script src="../../js/theme.js"></script>
-      <script src="../../search/main.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
-
-</body>
-</html>
+    <!-- Footer - Full width outside container -->
+    <footer class="md-footer">
+      Built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/durera/mkdocs-carbon">Carbon theme</a>
+    </footer>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": false, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

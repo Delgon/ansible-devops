@@ -1,0 +1,1200 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ocp_idms - MAS DevOps Ansible Collection</title>
+
+    <!-- Pure CSS (https://pure-css.github.io/) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="../../js/theme.js"></script>
+
+    <!-- Carbon theme zones (white, g10, g90, g100) -->
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css">
+
+    <!-- The Carbon web-components/framework -->
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/ui-shell.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/accordion.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/breadcrumb.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/select.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/tabs.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/search.min.js"></script>
+
+    <!-- HighlightJS code formatting support -->
+    <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <!-- Required by MkDocs search -->
+    <script>var base_url = "../..";</script>
+
+    <!-- User defined extras -->
+    
+    
+
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: black; }
+        </style></head>
+
+  <body class="md-grid" data-theme-default="g90">
+    <!-- Header -->
+    <cds-header aria-label="MAS DevOps Ansible Collection" class="md-header">
+      <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+      <cds-header-name href="../.." prefix="IBM">MAS DevOps Ansible Collection</cds-header-name>
+      <cds-header-nav menu-bar-label="IBM MAS DevOps Ansible Collection">
+          <cds-header-nav-item is-active="" target="" href="">Ansible</cds-header-nav-item>
+          <cds-header-nav-item target="" href="https://ibm-mas.github.io/cli/">CLI</cds-header-nav-item>
+      </cds-header-nav>
+
+      <div class="cds--header__global">
+<div class="md-theme-toggle" data-theme-default="g90">
+  <button class="md-theme-toggle__button" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="md-theme-toggle__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+    </svg>
+  </button>
+  <div class="md-theme-toggle__menu" hidden="">
+    <button class="md-theme-toggle__option" data-theme="white">
+      <span class="md-theme-toggle__label">Light</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--white"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g10">
+      <span class="md-theme-toggle__label">Light Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g10"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g90">
+      <span class="md-theme-toggle__label">Dark Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g90"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g100">
+      <span class="md-theme-toggle__label">Dark</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g100"></span>
+    </button>
+  </div>
+</div>
+        <cds-search id="header-search" label-text="Search" cds-search-input="search-event" expandable=""></cds-search>
+      </div>
+      <script>
+        var el = document.getElementById("header-search");
+        el.addEventListener("cds-search-input", function (ev) {
+          console.info(ev.detail.value)
+          document.getElementById("header-search-value").setAttribute("value", ev.detail.value);
+        });
+        el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            location.href="../../search.html?q=" + document.querySelector("#header-search").shadowRoot.querySelector("#input").value;
+          }
+        });
+      </script>
+
+      
+    </cds-header>
+
+    <!-- Main container with three-column layout -->
+    <div class="md-container">
+      <!-- Left sidebar - Navigation -->
+      <aside class="md-sidebar md-sidebar--primary" data-md-component="sidebar">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            <cds-side-nav aria-label="Side navigation">
+              <cds-side-nav-items>
+                
+                  
+  <cds-side-nav-menu title="General Information">
+    
+      
+  <cds-side-nav-menu-item href="../..">
+    Home
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../execution-environment/">
+    Ansible Automation Platform
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Playbooks">
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/ocp/">
+    OCP
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/cp4d/">
+    Install Cloud Pak For Data
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/aiservice/">
+    Install AI Service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-core/">
+    Install Core
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-iot/">
+    Add IoT
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-manage/">
+    Add Manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-monitor/">
+    Add Monitor
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-optimizer/">
+    Add Optimizer
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-predict/">
+    Add Predict
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-visualinspection/">
+    Add Visual Inspection
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-facilities/">
+    Add Real Estate and Facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-update/">
+    Update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-upgrade/">
+    Upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/backup-restore/">
+    Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/legacy-backup-restore/">
+    Legacy Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: OCP Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../ocp_cluster_monitoring/">
+    ocp_cluster_monitoring
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_config/">
+    ocp_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_deprovision/">
+    ocp_deprovision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_efs/">
+    ocp_efs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_github_oauth/">
+    ocp_github_oauth
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_login/">
+    ocp_login
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_node_config/">
+    ocp_node_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_provision/">
+    ocp_provision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_roks_upgrade_registry_storage/">
+    ocp_roks_upgrade_registry_storage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_upgrade/">
+    ocp_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_verify/">
+    ocp_verify
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Dependency Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../aws_bucket_access_point/">
+    aws_bucket_access_point
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_documentdb_user/">
+    aws_documentdb_user
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_policy/">
+    aws_policy
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_route53/">
+    aws_route53
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_user_creation/">
+    aws_user_creation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_vpc/">
+    aws_vpc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cert_manager/">
+    cert_manager
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cis/">
+    cis
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../configure_manage_eventstreams/">
+    configure_manage_eventstreams
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos/">
+    cos
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos_bucket/">
+    cos_bucket
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_admin_pwd_update/">
+    cp4d_admin_pwd_update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d/">
+    cp4d
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_service/">
+    cp4d_service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../db2/">
+    db2
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../dro/">
+    dro
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../eck/">
+    eck
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../grafana/">
+    grafana
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ibm_catalogs/">
+    ibm_catalogs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../kafka/">
+    kafka
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../longhorn/">
+    longhorn
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../nvidia_gpu/">
+    nvidia_gpu
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mongodb/">
+    mongodb
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocs/">
+    ocs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../sls/">
+    sls
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../turbonomic/">
+    turbonomic
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Image Mirroring" active="" expanded="">
+    
+      
+  <cds-side-nav-menu-item href="../mirror_case_prepare/">
+    mirror_case_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_extras_prepare/">
+    mirror_extras_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_images/">
+    mirror_images
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_ocp/">
+    mirror_ocp
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="./" active="" expanded="">
+    ocp_idms
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_simulate_disconnected_network/">
+    ocp_simulate_disconnected_network
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../registry/">
+    registry
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Suite Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_config/">
+    suite_app_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_install/">
+    suite_app_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_uninstall/">
+    suite_app_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_upgrade/">
+    suite_app_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_rollback/">
+    suite_app_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_backup/">
+    suite_app_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_restore/">
+    suite_app_restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_certs/">
+    suite_certs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_config/">
+    suite_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_manage/">
+    suite_db2_setup_for_manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_facilities/">
+    suite_db2_setup_for_facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_dns/">
+    suite_dns
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_install/">
+    suite_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_attachments_config/">
+    suite_manage_attachments_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_birt_report_config/">
+    suite_manage_birt_report_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_bim_config/">
+    suite_manage_bim_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_customer_files_config/">
+    suite_manage_customer_files_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_imagestitching_config/">
+    suite_manage_imagestitching_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_import_certs_config/">
+    suite_manage_import_certs_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_load_dbc_scripts/">
+    suite_manage_load_dbc_scripts
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_logging_config/">
+    suite_manage_logging_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_pvc_config/">
+    suite_manage_pvc_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_uninstall/">
+    suite_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_upgrade/">
+    suite_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_rollback/">
+    suite_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_verify/">
+    suite_verify
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_backup/">
+    suite_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_restore/">
+    suite_restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Utilities">
+    
+      
+  <cds-side-nav-menu-item href="../ansible_version_check/">
+    ansible_version_check
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../entitlement_key_rotation/">
+    entitlement_key_rotation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_jdbc/">
+    gencfg_jdbc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_watsonstudio/">
+    gencfg_watsonstudio
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_workspace/">
+    gencfg_workspace
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_mongo/">
+    gencfg_mongo
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+              </cds-side-nav-items>
+            </cds-side-nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="md-content" data-md-component="content">
+        <article class="md-content__inner">
+          <!-- Breadcrumbs -->
+          <div class="md-breadcrumbs"><cds-breadcrumb no-trailing-slash="">
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="../..">Home</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+      <cds-breadcrumb-item>Roles: Image Mirroring</cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#ocp_idms">ocp_idms</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+
+  <cds-breadcrumb-item aria-current="page">
+    <cds-select id="breadcrumbs-toc" inline="" placeholder="..." oninput="changeAnchor(this.value)">
+    
+    
+      <cds-select-item value="#role-variables-general">Role Variables - General</cds-select-item>
+    
+      <cds-select-item value="#role-variables-target-registry">Role Variables - Target Registry</cds-select-item>
+    
+      <cds-select-item value="#example-playbook">Example Playbook</cds-select-item>
+    
+      <cds-select-item value="#license">License</cds-select-item>
+    
+    </cds-select>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+          </div>
+
+          <!-- Page content -->
+          <div class="rst-content">
+            
+            <h1 id="ocp_idms">ocp_idms<a class="headerlink" href="#ocp_idms" title="Permanent link">¤</a></h1>
+<p>Installs an <strong>ImageDigestMirrorSet</strong> (IDMS)for IBM Maximo Application Suite's Maximo Operator Catalog.
+Also install IDMS suitable for the Red Hat Operator Catalogs created by <a href="../mirror_ocp/">mirror_ocp</a>.
+If there are legacy <strong>ImageContentSourcePolicies</strong> installed by previous versions of this role, they will be deleted.</p>
+<p>If PRODUCT_FAMILY is aiservice then it will install an <strong>ImageTagMirrorSet</strong> for OpenDataHub</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This role doesn't work on IBMCloud ROKS.  IBM Cloud RedHat OpenShift Service does not implement support for <code>ImageDigestMirrorSet</code>.  If you want to use image mirroring you must manually configure each worker node individually using the IBM Cloud command line tool.</p>
+</div>
+<p>IBM Maximo Operator Catalog Content
+All content used in the MAS install is sourced from three registries: <strong>icr.io</strong>, <strong>cp.icr.io</strong>, &amp; <strong>quay.io</strong>:</p>
+<ul>
+<li><strong>icr.io/cpopen</strong> All IBM operators</li>
+<li><strong>icr.io/ibm-truststore-mgr</strong> IBM truststore manager worker image</li>
+<li><strong>icr.io/ibm-sls</strong> IBM SLS content</li>
+<li><strong>icr.io/db2u</strong> IBM Db2 Universal operator content</li>
+<li><strong>cp.icr.io/cp</strong> All IBM entitled container images</li>
+<li><strong>quay.io/opencloudio</strong> IBM common services</li>
+<li><strong>quay.io/mongodb</strong> MongoDb Community Edition Operator &amp; associated container images</li>
+<li><strong>quay.io/amlen</strong> Eclipse Amlen - Message Broker for IoT/Mobile/Web</li>
+<li><strong>quay.io/ibmmas</strong> Non-product IBM Maximo Application Suite images (e.g. MAS CLI)</li>
+</ul>
+<p>Red Hat Operator Catalog Content
+All content from the subset of the Red Hat operator catalogs supported by <a href="../mirror_ocp/">mirror_ocp</a> is sourced from eight registries: <strong>icr.io</strong>, <strong>docker.io</strong>, <strong>quay.io</strong>, <strong>gcr.io</strong>, <strong>ghcr.io</strong>, <strong>nvcr.io</strong>, <strong>registry.connect.redhat.com</strong>, and <strong>registry.redhat.io</strong>:</p>
+<ul>
+<li><strong>icr.io/cpopen</strong></li>
+<li><strong>docker.io/grafana</strong></li>
+<li><strong>quay.io/community-operator-pipeline-prod</strong></li>
+<li><strong>quay.io/operator-pipeline-prod</strong></li>
+<li><strong>quay.io/openshift-community-operators</strong></li>
+<li><strong>quay.io/strimzi</strong></li>
+<li><strong>quay.io/rh-marketplace</strong></li>
+<li><strong>gcr.io/kubebuilder</strong></li>
+<li><strong>ghcr.io/grafana</strong></li>
+<li><strong>ghcr.io/open-telemetry</strong></li>
+<li><strong>nvcr.io/nvidia</strong></li>
+<li><strong>registry.connect.redhat.com/crunchydata</strong></li>
+<li><strong>registry.connect.redhat.com/nvidia</strong></li>
+<li><strong>registry.connect.redhat.com/turbonomic</strong></li>
+<li><strong>registry.connect.redhat.com/rh-marketplace</strong></li>
+<li><strong>registry.redhat.io/openshift4</strong></li>
+<li><strong>registry.redhat.io/source-to-image</strong></li>
+<li><strong>registry.redhat.io/odf4</strong></li>
+<li><strong>registry.redhat.io/cert-manager</strong></li>
+<li><strong>registry.redhat.io/rhceph</strong></li>
+<li><strong>registry.redhat.io/amq-streams</strong></li>
+<li><strong>registry.redhat.io/ubi8</strong></li>
+<li><strong>registry.redhat.io/openshift-pipelines</strong></li>
+<li><strong>registry.redhat.io/openshift-serverless-1</strong></li>
+<li><strong>registry.redhat.io/lvms4</strong></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A content source policy for this content is only configured when <strong>setup_redhat_catalogs</strong> is set to <code>True</code>.</p>
+</div>
+<p>If you are managing the Red Hat Operator Catalogs yourself the content therein may well be different depending how you have configured mirroring.</p>
+<h2 id="role-variables-general">Role Variables - General<a class="headerlink" href="#role-variables-general" title="Permanent link">¤</a></h2>
+<h3 id="product_family">product_family<a class="headerlink" href="#product_family" title="Permanent link">¤</a></h3>
+<p>Product family for ImageDigestMirrorSet configuration.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>PRODUCT_FAMILY</code></li>
+<li>Default: <code>mas</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies which product family's ImageDigestMirrorSet (IDMS) to create. Different product families have different image source registries.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>mas</code>) for IBM Maximo Application Suite deployments
+- Set to <code>aiservice</code> for AI Service deployments (creates ImageTagMirrorSet for OpenDataHub)
+- Determines which image registries are configured in the IDMS</p>
+<p><strong>Valid values</strong>: <code>mas</code>, <code>aiservice</code></p>
+<p><strong>Impact</strong>:
+- <code>mas</code>: Creates IDMS for MAS-related registries (icr.io, cp.icr.io, quay.io)
+- <code>aiservice</code>: Creates ImageTagMirrorSet for OpenDataHub registries</p>
+<p><strong>Related variables</strong>:
+- <code>registry_prefix</code>: Prefix for IBM content in target registry</p>
+<p><strong>Note</strong>: MAS and AI Service have different image source registries. The IDMS/ITMS configuration varies based on the product family.</p>
+<h3 id="setup_redhat_release">setup_redhat_release<a class="headerlink" href="#setup_redhat_release" title="Permanent link">¤</a></h3>
+<p>Enable ImageDigestMirrorSet for Red Hat release content.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>SETUP_REDHAT_RELEASE</code></li>
+<li>Default: <code>false</code></li>
+</ul>
+<p><strong>Purpose</strong>: Controls whether to create an ImageDigestMirrorSet for mirrored Red Hat OpenShift platform release content. Required when using mirrored OpenShift platform images.</p>
+<p><strong>When to use</strong>:
+- Set to <code>true</code> when you've mirrored OpenShift platform images with <code>mirror_ocp</code> role
+- Leave as <code>false</code> (default) if not using mirrored platform images
+- Only needed for air-gapped OpenShift installations or upgrades</p>
+<p><strong>Valid values</strong>: <code>true</code>, <code>false</code></p>
+<p><strong>Impact</strong>:
+- <code>true</code>: Creates IDMS named <code>ibm-mas-redhat-release</code> for platform images
+- <code>false</code>: No IDMS created for platform images</p>
+<p><strong>Related variables</strong>:
+- <code>registry_prefix_redhat</code>: Prefix for Red Hat content in target registry
+- <code>setup_redhat_catalogs</code>: Related but separate (for operator catalogs)</p>
+<p><strong>Note</strong>: This creates an additional IDMS policy. Only enable if you've mirrored OpenShift platform images using the <code>mirror_ocp</code> role with <code>mirror_redhat_platform=true</code>.</p>
+<h3 id="setup_redhat_catalogs">setup_redhat_catalogs<a class="headerlink" href="#setup_redhat_catalogs" title="Permanent link">¤</a></h3>
+<p>Enable CatalogSources and ImageDigestMirrorSet for Red Hat operator catalogs.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>SETUP_REDHAT_CATALOGS</code></li>
+<li>Default: <code>false</code></li>
+</ul>
+<p><strong>Purpose</strong>: Controls whether to create CatalogSources and ImageDigestMirrorSet for mirrored Red Hat operator catalog content. Required when using mirrored Red Hat operators.</p>
+<p><strong>When to use</strong>:
+- Set to <code>true</code> when you've mirrored Red Hat operator catalogs with <code>mirror_ocp</code> role
+- Leave as <code>false</code> (default) if not using mirrored operator catalogs
+- Required for air-gapped deployments using Red Hat operators</p>
+<p><strong>Valid values</strong>: <code>true</code>, <code>false</code></p>
+<p><strong>Impact</strong>:
+- <code>true</code>: Creates CatalogSources and IDMS named <code>ibm-mas-redhat-catalogs</code> for operator images
+- <code>false</code>: No CatalogSources or IDMS created for operator catalogs</p>
+<p><strong>Related variables</strong>:
+- <code>registry_prefix_redhat</code>: Prefix for Red Hat content in target registry
+- <code>redhat_catalogs_prefix</code>: Optional prefix for CatalogSource names
+- <code>setup_redhat_release</code>: Related but separate (for platform images)</p>
+<p><strong>Note</strong>: This creates CatalogSources for certified-operator-index, community-operator-index, and redhat-operator-index. Only enable if you've mirrored operator catalogs using the <code>mirror_ocp</code> role with <code>mirror_redhat_operators=true</code>.</p>
+<h2 id="role-variables-target-registry">Role Variables - Target Registry<a class="headerlink" href="#role-variables-target-registry" title="Permanent link">¤</a></h2>
+<h3 id="registry_private_host">registry_private_host<a class="headerlink" href="#registry_private_host" title="Permanent link">¤</a></h3>
+<p>Private hostname for the mirror registry.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>REGISTRY_PRIVATE_HOST</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the private/internal hostname of the mirror registry accessible from within the OpenShift cluster. Used in ImageDigestMirrorSet to redirect image pulls.</p>
+<p><strong>When to use</strong>:
+- Always required for IDMS configuration
+- Must be the hostname accessible from cluster nodes
+- Typically an internal/private hostname or IP address</p>
+<p><strong>Valid values</strong>: Valid hostname or IP address accessible from cluster (e.g., <code>registry.internal.example.com</code>, <code>10.0.0.100</code>)</p>
+<p><strong>Impact</strong>: Cluster nodes will pull images from this registry. Incorrect hostname will cause image pull failures.</p>
+<p><strong>Related variables</strong>:
+- <code>registry_private_port</code>: Port for this registry
+- <code>registry_private_ca_file</code>: CA certificate for this registry</p>
+<p><strong>Note</strong>: This must be the hostname accessible from within the cluster, not necessarily the public hostname. For disconnected environments, this is typically an internal registry.</p>
+<h3 id="registry_private_port">registry_private_port<a class="headerlink" href="#registry_private_port" title="Permanent link">¤</a></h3>
+<p>Private port for the mirror registry.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>REGISTRY_PRIVATE_PORT</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the private/internal port of the mirror registry accessible from within the OpenShift cluster.</p>
+<p><strong>When to use</strong>:
+- Set if registry uses a non-standard port
+- Leave unset if registry uses standard HTTPS port (443)
+- Must match the port accessible from cluster nodes</p>
+<p><strong>Valid values</strong>: Valid port number (e.g., <code>443</code>, <code>5000</code>, <code>32500</code>)</p>
+<p><strong>Impact</strong>: Cluster nodes will pull images from this port. Incorrect port will cause image pull failures.</p>
+<p><strong>Related variables</strong>:
+- <code>registry_private_host</code>: Hostname for this registry</p>
+<p><strong>Note</strong>: If unset, the registry URL will not include a port (assumes standard HTTPS port 443).</p>
+<h3 id="registry_private_ca_file">registry_private_ca_file<a class="headerlink" href="#registry_private_ca_file" title="Permanent link">¤</a></h3>
+<p>Path to registry CA certificate file.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>REGISTRY_PRIVATE_CA_FILE</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the path to the CA certificate file for the mirror registry. Required for cluster nodes to trust the registry's TLS certificate.</p>
+<p><strong>When to use</strong>:
+- Always required for IDMS configuration
+- Must be the CA certificate that signed the registry's TLS certificate
+- Required even if registry uses self-signed certificates</p>
+<p><strong>Valid values</strong>: Absolute path to CA certificate file (e.g., <code>~/registry-ca.crt</code>, <code>/tmp/registry-ca.pem</code>)</p>
+<p><strong>Impact</strong>: CA certificate is added to cluster nodes' trust store. Without it, nodes cannot pull images from the registry.</p>
+<p><strong>Related variables</strong>:
+- <code>registry_private_host</code>: Registry using this CA certificate</p>
+<p><strong>Note</strong>: The CA certificate is added to all cluster nodes via MachineConfig. This causes nodes to reboot. Ensure the certificate is valid and matches the registry's TLS certificate.</p>
+<h3 id="registry_username">registry_username<a class="headerlink" href="#registry_username" title="Permanent link">¤</a></h3>
+<p>Username for mirror registry authentication.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>REGISTRY_USERNAME</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Provides the username for authenticating to the mirror registry. Used to create pull secrets for cluster nodes.</p>
+<p><strong>When to use</strong>:
+- Always required for IDMS configuration
+- Must have pull permissions from the mirror registry
+- Credentials are stored in cluster pull secret</p>
+<p><strong>Valid values</strong>: Valid username for the mirror registry</p>
+<p><strong>Impact</strong>: Used to authenticate image pulls from the mirror registry. Without valid credentials, image pulls will fail.</p>
+<p><strong>Related variables</strong>:
+- <code>registry_password</code>: Password paired with this username</p>
+<p><strong>Note</strong>: Credentials are added to the cluster's global pull secret. Keep credentials secure.</p>
+<h3 id="registry_password">registry_password<a class="headerlink" href="#registry_password" title="Permanent link">¤</a></h3>
+<p>Password for mirror registry authentication.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>REGISTRY_PASSWORD</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Provides the password for authenticating to the mirror registry. Used to create pull secrets for cluster nodes.</p>
+<p><strong>When to use</strong>:
+- Always required for IDMS configuration
+- Must correspond to the provided username
+- Credentials are stored in cluster pull secret</p>
+<p><strong>Valid values</strong>: Valid password for the mirror registry</p>
+<p><strong>Impact</strong>: Used to authenticate image pulls from the mirror registry. Without valid credentials, image pulls will fail.</p>
+<p><strong>Related variables</strong>:
+- <code>registry_username</code>: Username paired with this password</p>
+<p><strong>Note</strong>: Credentials are added to the cluster's global pull secret. Keep passwords secure. Never commit to version control.</p>
+<h3 id="registry_prefix">registry_prefix<a class="headerlink" href="#registry_prefix" title="Permanent link">¤</a></h3>
+<p>Path prefix for IBM content in mirror registry.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>REGISTRY_PREFIX</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies an optional path prefix for IBM Maximo Operator Catalog images in the mirror registry. Helps organize registry content.</p>
+<p><strong>When to use</strong>:
+- Leave unset if images are at registry root
+- Set to match the prefix used when mirroring with <code>mirror_images</code> role
+- Recommended: Use catalog datestamp (e.g., <code>mas-241107</code>, <code>mas-241205</code>)</p>
+<p><strong>Valid values</strong>: Valid registry path (e.g., <code>mas-241107</code>, <code>mas-241205</code>, <code>ibm-mas</code>)</p>
+<p><strong>Impact</strong>: IDMS will redirect image pulls to <code>{host}:{port}/{prefix}/{reponame}</code>. Must match the actual image locations in the registry.</p>
+<p><strong>Related variables</strong>:
+- <code>registry_private_host</code>: Registry containing these images
+- <code>registry_prefix_redhat</code>: Separate prefix for Red Hat content</p>
+<p><strong>Note</strong>: Must match the prefix used when mirroring images. Using datestamp prefixes helps organize multiple mirror versions in the same registry.</p>
+<h3 id="registry_prefix_redhat">registry_prefix_redhat<a class="headerlink" href="#registry_prefix_redhat" title="Permanent link">¤</a></h3>
+<p>Path prefix for Red Hat content in mirror registry.</p>
+<ul>
+<li><strong>Optional</strong> (Required when <code>setup_redhat_release=true</code> or <code>setup_redhat_catalogs=true</code>)</li>
+<li>Environment Variable: <code>REGISTRY_PREFIX_REDHAT</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies an optional path prefix for Red Hat Release and Operator Catalog images in the mirror registry. Helps organize registry content.</p>
+<p><strong>When to use</strong>:
+- Required when <code>setup_redhat_release=true</code> or <code>setup_redhat_catalogs=true</code>
+- Set to match the prefix used when mirroring with <code>mirror_ocp</code> role
+- Recommended: Use OpenShift release (e.g., <code>ocp-412</code>, <code>ocp-414</code>)</p>
+<p><strong>Valid values</strong>: Valid registry path (e.g., <code>ocp-412</code>, <code>ocp-414</code>, <code>ocp-419</code>)</p>
+<p><strong>Impact</strong>: IDMS will redirect Red Hat image pulls to <code>{host}:{port}/{prefix}/{reponame}</code>. Must match the actual image locations in the registry.</p>
+<p><strong>Related variables</strong>:
+- <code>setup_redhat_release</code>: Whether to create IDMS for platform images
+- <code>setup_redhat_catalogs</code>: Whether to create IDMS for operator catalogs
+- <code>registry_prefix</code>: Separate prefix for IBM content</p>
+<p><strong>Note</strong>: Must match the prefix used when mirroring Red Hat content with <code>mirror_ocp</code> role. Using OpenShift release prefixes helps organize multiple OCP versions in the same registry.</p>
+<h3 id="redhat_catalogs_prefix">redhat_catalogs_prefix<a class="headerlink" href="#redhat_catalogs_prefix" title="Permanent link">¤</a></h3>
+<p>Prefix for Red Hat CatalogSource names.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>REDHAT_CATALOGS_PREFIX</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies an optional prefix for the CatalogSource names created for Red Hat operator catalogs. Helps avoid naming conflicts.</p>
+<p><strong>When to use</strong>:
+- Leave unset for default CatalogSource names
+- Set to add a prefix to CatalogSource names (e.g., <code>ibm-mas</code>)
+- Only applies when <code>setup_redhat_catalogs=true</code></p>
+<p><strong>Valid values</strong>: Valid Kubernetes resource name prefix (e.g., <code>ibm-mas</code>, <code>mas</code>, <code>custom</code>)</p>
+<p><strong>Impact</strong>:
+- When set to <code>ibm-mas</code>: Creates <code>ibm-mas-certified-operator-index</code>, <code>ibm-mas-community-operator-index</code>, <code>ibm-mas-redhat-operator-index</code>
+- When unset: Creates <code>certified-operator-index</code>, <code>community-operator-index</code>, <code>redhat-operator-index</code></p>
+<p><strong>Related variables</strong>:
+- <code>setup_redhat_catalogs</code>: Must be <code>true</code> for this to apply</p>
+<p><strong>Note</strong>: Use a prefix if you need to distinguish these CatalogSources from others in the cluster or to avoid naming conflicts.</p>
+<h3 id="machine_config_multiupdate">machine_config_multiupdate<a class="headerlink" href="#machine_config_multiupdate" title="Permanent link">¤</a></h3>
+<p>Enable parallel node updates during MachineConfig application.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>MACHINE_CONFIG_MULTIUPDATE</code></li>
+<li>Default: <code>false</code></li>
+</ul>
+<p><strong>Purpose</strong>: Controls whether multiple worker nodes can be updated in parallel when applying MachineConfig changes (for CA certificate installation). Speeds up initial setup but requires careful consideration.</p>
+<p><strong>When to use</strong>:
+- Leave as <code>false</code> (default) for production environments
+- Set to <code>true</code> only during initial cluster setup with lightly loaded nodes
+- Only recommended when nodes can be safely drained in parallel</p>
+<p><strong>Valid values</strong>: <code>true</code>, <code>false</code></p>
+<p><strong>Impact</strong>:
+- <code>true</code>: Multiple worker nodes updated in parallel (faster but riskier)
+- <code>false</code>: Worker nodes updated one at a time (slower but safer)</p>
+<p><strong>Related variables</strong>:
+- <code>registry_private_ca_file</code>: CA certificate that triggers MachineConfig updates</p>
+<p><strong>Note</strong>: <strong>WARNING</strong> - Only enable during initial setup when nodes are lightly loaded. In production, leave as <code>false</code> to ensure workload availability during node updates. MachineConfig changes cause node reboots.</p>
+<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link">¤</a></h2>
+<pre><code class="language-yaml">- hosts: localhost
+  vars:
+    registry_private_host: myocp-5f1320191125833da1cac8216c06779e-0000.us-south.containers.appdomain.cloud
+    registry_private_port: 32500
+    registry_private_ca_file: ~/registry-ca.crt
+
+    registry_username: admin
+    registry_password: 8934jk77s862!  # Not a real password, don't worry security folks
+
+    setup_redhat_catalogs: true
+
+  roles:
+    - ibm.mas_devops.ocp_contentsourcepolicy
+</code></pre>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">¤</a></h2>
+<p>EPL-2.0</p>
+            
+          </div>
+
+          <!-- Navigation footer (prev/next) -->
+<nav class="md-footer-nav" aria-label="Footer navigation">
+  <div class="md-footer-nav__inner">
+    <a href="../mirror_ocp/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+      <div class="md-footer-nav__direction">
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+        <span>Previous</span>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">mirror_ocp</span>
+      </div>
+    </a>
+    <a href="../ocp_simulate_disconnected_network/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+      <div class="md-footer-nav__direction">
+        <span>Next</span>
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+        </svg>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">ocp_simulate_disconnected_network</span>
+      </div>
+    </a>
+  </div>
+</nav>
+        </article>
+      </div>
+
+      <!-- Right sidebar - Table of Contents -->
+      <aside class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<nav class="md-sidebar md-sidebar--secondary" aria-label="Table of contents">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <div class="md-toc">
+        <div class="md-toc__title">On this page</div>
+        <ul class="md-toc__list">
+              <li class="md-toc__item">
+                <a href="#role-variables-general" class="md-toc__link" data-md-level="1">
+                  Role Variables - General
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#product_family" class="md-toc__link" data-md-level="2">
+                          product_family
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#setup_redhat_release" class="md-toc__link" data-md-level="2">
+                          setup_redhat_release
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#setup_redhat_catalogs" class="md-toc__link" data-md-level="2">
+                          setup_redhat_catalogs
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-target-registry" class="md-toc__link" data-md-level="1">
+                  Role Variables - Target Registry
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#registry_private_host" class="md-toc__link" data-md-level="2">
+                          registry_private_host
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#registry_private_port" class="md-toc__link" data-md-level="2">
+                          registry_private_port
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#registry_private_ca_file" class="md-toc__link" data-md-level="2">
+                          registry_private_ca_file
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#registry_username" class="md-toc__link" data-md-level="2">
+                          registry_username
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#registry_password" class="md-toc__link" data-md-level="2">
+                          registry_password
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#registry_prefix" class="md-toc__link" data-md-level="2">
+                          registry_prefix
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#registry_prefix_redhat" class="md-toc__link" data-md-level="2">
+                          registry_prefix_redhat
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#redhat_catalogs_prefix" class="md-toc__link" data-md-level="2">
+                          redhat_catalogs_prefix
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#machine_config_multiupdate" class="md-toc__link" data-md-level="2">
+                          machine_config_multiupdate
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#example-playbook" class="md-toc__link" data-md-level="1">
+                  Example Playbook
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#license" class="md-toc__link" data-md-level="1">
+                  License
+                </a>
+              </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+      </aside>
+    </div>
+
+    <!-- Footer - Full width outside container -->
+    <footer class="md-footer">
+      Built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/durera/mkdocs-carbon">Carbon theme</a>
+    </footer>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": false, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

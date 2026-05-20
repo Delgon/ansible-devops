@@ -1,0 +1,1308 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>smtp - MAS DevOps Ansible Collection</title>
+
+    <!-- Pure CSS (https://pure-css.github.io/) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="../../js/theme.js"></script>
+
+    <!-- Carbon theme zones (white, g10, g90, g100) -->
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css">
+
+    <!-- The Carbon web-components/framework -->
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/ui-shell.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/accordion.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/breadcrumb.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/select.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/tabs.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/search.min.js"></script>
+
+    <!-- HighlightJS code formatting support -->
+    <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <!-- Required by MkDocs search -->
+    <script>var base_url = "../..";</script>
+
+    <!-- User defined extras -->
+    
+    
+
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: black; }
+        </style></head>
+
+  <body class="md-grid" data-theme-default="g90">
+    <!-- Header -->
+    <cds-header aria-label="MAS DevOps Ansible Collection" class="md-header">
+      <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+      <cds-header-name href="../.." prefix="IBM">MAS DevOps Ansible Collection</cds-header-name>
+      <cds-header-nav menu-bar-label="IBM MAS DevOps Ansible Collection">
+          <cds-header-nav-item is-active="" target="" href="">Ansible</cds-header-nav-item>
+          <cds-header-nav-item target="" href="https://ibm-mas.github.io/cli/">CLI</cds-header-nav-item>
+      </cds-header-nav>
+
+      <div class="cds--header__global">
+<div class="md-theme-toggle" data-theme-default="g90">
+  <button class="md-theme-toggle__button" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="md-theme-toggle__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+    </svg>
+  </button>
+  <div class="md-theme-toggle__menu" hidden="">
+    <button class="md-theme-toggle__option" data-theme="white">
+      <span class="md-theme-toggle__label">Light</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--white"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g10">
+      <span class="md-theme-toggle__label">Light Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g10"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g90">
+      <span class="md-theme-toggle__label">Dark Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g90"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g100">
+      <span class="md-theme-toggle__label">Dark</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g100"></span>
+    </button>
+  </div>
+</div>
+        <cds-search id="header-search" label-text="Search" cds-search-input="search-event" expandable=""></cds-search>
+      </div>
+      <script>
+        var el = document.getElementById("header-search");
+        el.addEventListener("cds-search-input", function (ev) {
+          console.info(ev.detail.value)
+          document.getElementById("header-search-value").setAttribute("value", ev.detail.value);
+        });
+        el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            location.href="../../search.html?q=" + document.querySelector("#header-search").shadowRoot.querySelector("#input").value;
+          }
+        });
+      </script>
+
+      
+    </cds-header>
+
+    <!-- Main container with three-column layout -->
+    <div class="md-container">
+      <!-- Left sidebar - Navigation -->
+      <aside class="md-sidebar md-sidebar--primary" data-md-component="sidebar">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            <cds-side-nav aria-label="Side navigation">
+              <cds-side-nav-items>
+                
+                  
+  <cds-side-nav-menu title="General Information">
+    
+      
+  <cds-side-nav-menu-item href="../..">
+    Home
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../execution-environment/">
+    Ansible Automation Platform
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Playbooks">
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/ocp/">
+    OCP
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/cp4d/">
+    Install Cloud Pak For Data
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/aiservice/">
+    Install AI Service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-core/">
+    Install Core
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-iot/">
+    Add IoT
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-manage/">
+    Add Manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-monitor/">
+    Add Monitor
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-optimizer/">
+    Add Optimizer
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-predict/">
+    Add Predict
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-visualinspection/">
+    Add Visual Inspection
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-facilities/">
+    Add Real Estate and Facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-update/">
+    Update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-upgrade/">
+    Upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/backup-restore/">
+    Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/legacy-backup-restore/">
+    Legacy Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: OCP Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../ocp_cluster_monitoring/">
+    ocp_cluster_monitoring
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_config/">
+    ocp_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_deprovision/">
+    ocp_deprovision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_efs/">
+    ocp_efs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_github_oauth/">
+    ocp_github_oauth
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_login/">
+    ocp_login
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_node_config/">
+    ocp_node_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_provision/">
+    ocp_provision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_roks_upgrade_registry_storage/">
+    ocp_roks_upgrade_registry_storage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_upgrade/">
+    ocp_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_verify/">
+    ocp_verify
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Dependency Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../aws_bucket_access_point/">
+    aws_bucket_access_point
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_documentdb_user/">
+    aws_documentdb_user
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_policy/">
+    aws_policy
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_route53/">
+    aws_route53
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_user_creation/">
+    aws_user_creation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_vpc/">
+    aws_vpc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cert_manager/">
+    cert_manager
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cis/">
+    cis
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../configure_manage_eventstreams/">
+    configure_manage_eventstreams
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos/">
+    cos
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos_bucket/">
+    cos_bucket
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_admin_pwd_update/">
+    cp4d_admin_pwd_update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d/">
+    cp4d
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_service/">
+    cp4d_service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../db2/">
+    db2
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../dro/">
+    dro
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../eck/">
+    eck
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../grafana/">
+    grafana
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ibm_catalogs/">
+    ibm_catalogs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../kafka/">
+    kafka
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../longhorn/">
+    longhorn
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../nvidia_gpu/">
+    nvidia_gpu
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mongodb/">
+    mongodb
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocs/">
+    ocs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../sls/">
+    sls
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../turbonomic/">
+    turbonomic
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Image Mirroring">
+    
+      
+  <cds-side-nav-menu-item href="../mirror_case_prepare/">
+    mirror_case_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_extras_prepare/">
+    mirror_extras_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_images/">
+    mirror_images
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_ocp/">
+    mirror_ocp
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_idms/">
+    ocp_idms
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_simulate_disconnected_network/">
+    ocp_simulate_disconnected_network
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../registry/">
+    registry
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Suite Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_config/">
+    suite_app_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_install/">
+    suite_app_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_uninstall/">
+    suite_app_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_upgrade/">
+    suite_app_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_rollback/">
+    suite_app_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_backup/">
+    suite_app_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_restore/">
+    suite_app_restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_certs/">
+    suite_certs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_config/">
+    suite_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_manage/">
+    suite_db2_setup_for_manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_facilities/">
+    suite_db2_setup_for_facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_dns/">
+    suite_dns
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_install/">
+    suite_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_attachments_config/">
+    suite_manage_attachments_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_birt_report_config/">
+    suite_manage_birt_report_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_bim_config/">
+    suite_manage_bim_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_customer_files_config/">
+    suite_manage_customer_files_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_imagestitching_config/">
+    suite_manage_imagestitching_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_import_certs_config/">
+    suite_manage_import_certs_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_load_dbc_scripts/">
+    suite_manage_load_dbc_scripts
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_logging_config/">
+    suite_manage_logging_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_pvc_config/">
+    suite_manage_pvc_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_uninstall/">
+    suite_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_upgrade/">
+    suite_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_rollback/">
+    suite_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_verify/">
+    suite_verify
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_backup/">
+    suite_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_restore/">
+    suite_restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Utilities">
+    
+      
+  <cds-side-nav-menu-item href="../ansible_version_check/">
+    ansible_version_check
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../entitlement_key_rotation/">
+    entitlement_key_rotation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_jdbc/">
+    gencfg_jdbc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_watsonstudio/">
+    gencfg_watsonstudio
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_workspace/">
+    gencfg_workspace
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_mongo/">
+    gencfg_mongo
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+              </cds-side-nav-items>
+            </cds-side-nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="md-content" data-md-component="content">
+        <article class="md-content__inner">
+          <!-- Breadcrumbs -->
+          <div class="md-breadcrumbs"><cds-breadcrumb no-trailing-slash="">
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="../..">Home</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#smtp">smtp</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+
+  <cds-breadcrumb-item aria-current="page">
+    <cds-select id="breadcrumbs-toc" inline="" placeholder="..." oninput="changeAnchor(this.value)">
+    
+    
+      <cds-select-item value="#role-variables">Role Variables</cds-select-item>
+    
+      <cds-select-item value="#example-playbook">Example Playbook</cds-select-item>
+    
+      <cds-select-item value="#license">License</cds-select-item>
+    
+    </cds-select>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+          </div>
+
+          <!-- Page content -->
+          <div class="rst-content">
+            
+            <h1 id="smtp">smtp<a class="headerlink" href="#smtp" title="Permanent link">¤</a></h1>
+<p>Generate an SMTP configuration that can be directly applied to IBM Maximo Application Suite.
+The role supports the Twilio SendGrid email provider.  <a href="https://docs.sendgrid.com/">Twilio SendGrid</a></p>
+<p>Prior to running this role, you must create an account with SendGrid.  The SendGrid account needs to support creating subusers.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The role will generate a yaml file containing the definition of a Secret and SmtpCfg resource that can be used to configure the smtp email provider for MAS.
+This file can be directly applied using <code>oc apply -f $MAS_CONFIG_DIR/smtp-$MAS_INSTANCE_ID.yml"</code> or used in conjunction with the <a href="../suite_config/">suite_config</a> role.</p>
+</div>
+<p>This role will create a subuser that must be validated.  An email with a validation link will be sent to the primary email address.  You need to validate the subuser using this link.  If validation fails, you can resend the email using the SendGrid admin UI.</p>
+<h2 id="role-variables">Role Variables<a class="headerlink" href="#role-variables" title="Permanent link">¤</a></h2>
+<h3 id="smtp_type">smtp_type<a class="headerlink" href="#smtp_type" title="Permanent link">¤</a></h3>
+<p>SMTP email provider type for MAS email notifications.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>SMTP_TYPE</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies which SMTP email service provider to use for sending MAS notifications and alerts.</p>
+<p><strong>When to use</strong>: Always required when configuring SMTP for MAS. Currently only SendGrid is supported.</p>
+<p><strong>Valid values</strong>: <code>sendgrid</code> (only supported provider)</p>
+<p><strong>Impact</strong>: Determines which SMTP provider configuration will be created and which API endpoints will be used.</p>
+<p><strong>Related variables</strong>: <a href="#sendgrid_primary_apikey"><code>sendgrid_primary_apikey</code></a>, <a href="#sendgrid_hostname"><code>sendgrid_hostname</code></a></p>
+<p><strong>Notes</strong>:
+- SendGrid is currently the only supported SMTP provider
+- Requires an active SendGrid account with subuser support
+- Future versions may support additional SMTP providers</p>
+<h3 id="mas_instance_id">mas_instance_id<a class="headerlink" href="#mas_instance_id" title="Permanent link">¤</a></h3>
+<p>MAS instance identifier for SMTP configuration.</p>
+<ul>
+<li><strong>Required</strong> (if generating SmtpCfg)</li>
+<li>Environment Variable: <code>MAS_INSTANCE_ID</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Identifies which MAS instance the SMTP configuration will be applied to.</p>
+<p><strong>When to use</strong>: Required when generating SmtpCfg resource. If not set along with <code>mas_config_dir</code>, the role will not generate configuration files.</p>
+<p><strong>Valid values</strong>: Valid MAS instance ID (3-12 lowercase alphanumeric characters, e.g., <code>prod</code>, <code>dev</code>, <code>masinst1</code>)</p>
+<p><strong>Impact</strong>: Used to name the generated SmtpCfg resource and target the correct MAS instance.</p>
+<p><strong>Related variables</strong>: <a href="#mas_config_dir"><code>mas_config_dir</code></a>, <a href="#sendgrid_subuser_username"><code>sendgrid_subuser_username</code></a></p>
+<p><strong>Notes</strong>:
+- Must match the instance ID used during MAS installation
+- Used in default subuser username: <code>ibm-mas_{mas_instance_id}</code>
+- Both this and <code>mas_config_dir</code> must be set to generate configuration</p>
+<h3 id="mas_config_dir">mas_config_dir<a class="headerlink" href="#mas_config_dir" title="Permanent link">¤</a></h3>
+<p>Local directory for generated SMTP configuration files.</p>
+<ul>
+<li><strong>Required</strong> (if generating SmtpCfg)</li>
+<li>Environment Variable: <code>MAS_CONFIG_DIR</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies where to save the generated SmtpCfg resource YAML file containing SMTP configuration and credentials.</p>
+<p><strong>When to use</strong>: Required when generating SmtpCfg resource. If not set along with <code>mas_instance_id</code>, the role will not generate configuration files.</p>
+<p><strong>Valid values</strong>: Valid local filesystem path (e.g., <code>~/masconfig</code>, <code>/opt/mas/config</code>)</p>
+<p><strong>Impact</strong>: SmtpCfg YAML file will be created in this directory as <code>smtp-{mas_instance_id}.yml</code>.</p>
+<p><strong>Related variables</strong>: <a href="#mas_instance_id"><code>mas_instance_id</code></a></p>
+<p><strong>Notes</strong>:
+- Can be applied manually: <code>oc apply -f $MAS_CONFIG_DIR/smtp-$MAS_INSTANCE_ID.yml</code>
+- Can be used with <a href="../suite_config/"><code>suite_config</code></a> role for automated configuration
+- Both this and <code>mas_instance_id</code> must be set to generate configuration
+- Use consistent directory across all MAS DevOps roles</p>
+<h3 id="mas_pod_templates_dir">mas_pod_templates_dir<a class="headerlink" href="#mas_pod_templates_dir" title="Permanent link">¤</a></h3>
+<p>Directory containing pod template customizations for SMTP.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>MAS_POD_TEMPLATES_DIR</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Provides custom pod template configurations for the SMTP service pods, allowing resource limits, node selectors, and other Kubernetes pod specifications.</p>
+<p><strong>When to use</strong>: Set when you need to customize SMTP pod resources, scheduling, or other pod-level configurations.</p>
+<p><strong>Valid values</strong>: Valid directory path containing <code>ibm-mas-smtpcfg.yml</code> file</p>
+<p><strong>Impact</strong>: Pod template configuration is inserted into SmtpCfg spec under <code>podTemplates</code> element.</p>
+<p><strong>Related variables</strong>: None</p>
+<p><strong>Notes</strong>:
+- File must be named <code>ibm-mas-smtpcfg.yml</code>
+- See <a href="https://github.com/ibm-mas/cli/blob/master/image/cli/mascli/templates/pod-templates/best-effort/ibm-mas-smtpcfg.yml">BestEfforts reference</a>
+- Full documentation: <a href="https://www.ibm.com/docs/en/mas-cd/continuous-delivery?topic=configuring-customizing-workloads">Customizing Pod Templates</a>
+- Optional - only needed for custom resource requirements</p>
+<h3 id="sendgrid_primary_username">sendgrid_primary_username<a class="headerlink" href="#sendgrid_primary_username" title="Permanent link">¤</a></h3>
+<p>Primary SendGrid account username.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>SMTP_PRIMARY_USERNAME</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Identifies the primary SendGrid account that will be used to create a subuser for MAS email operations.</p>
+<p><strong>When to use</strong>: Always required. Must be the username of an existing SendGrid account with subuser creation permissions.</p>
+<p><strong>Valid values</strong>: Valid SendGrid account username</p>
+<p><strong>Impact</strong>: Used to authenticate to SendGrid API for subuser creation and management.</p>
+<p><strong>Related variables</strong>: <a href="#sendgrid_primary_apikey"><code>sendgrid_primary_apikey</code></a>, <a href="#sendgrid_primary_email"><code>sendgrid_primary_email</code></a></p>
+<p><strong>Notes</strong>:
+- Must have permissions to create subusers in SendGrid
+- Primary account credentials are only used during setup, not stored in MAS
+- Subuser will be created under this primary account</p>
+<h3 id="sendgrid_primary_email">sendgrid_primary_email<a class="headerlink" href="#sendgrid_primary_email" title="Permanent link">¤</a></h3>
+<p>Primary SendGrid account email address.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>SMTP_PRIMARY_EMAIL</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Provides the email address associated with the primary SendGrid account. Validation emails will be sent to this address.</p>
+<p><strong>When to use</strong>: Always required. Must match the email registered with the SendGrid primary account.</p>
+<p><strong>Valid values</strong>: Valid email address registered with SendGrid account</p>
+<p><strong>Impact</strong>: Subuser validation emails will be sent to this address. You must validate the subuser using the link in the email.</p>
+<p><strong>Related variables</strong>: <a href="#sendgrid_primary_username"><code>sendgrid_primary_username</code></a>, <a href="#sendgrid_subuser_email"><code>sendgrid_subuser_email</code></a></p>
+<p><strong>Notes</strong>:
+- Validation email will be sent after subuser creation
+- Must validate subuser before it can send emails
+- Can resend validation email from SendGrid admin UI if needed</p>
+<h3 id="sendgrid_subuser_email">sendgrid_subuser_email<a class="headerlink" href="#sendgrid_subuser_email" title="Permanent link">¤</a></h3>
+<p>Email address for the SendGrid subuser.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>SMTP_SUBUSER_EMAIL</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the email address for the SendGrid subuser that will be created for MAS email operations.</p>
+<p><strong>When to use</strong>: Always required. This subuser will be dedicated to sending MAS notifications.</p>
+<p><strong>Valid values</strong>: Valid email address (can be same as primary or different)</p>
+<p><strong>Impact</strong>: This email will be associated with the subuser account and used for subuser-specific operations.</p>
+<p><strong>Related variables</strong>: <a href="#sendgrid_subuser_username"><code>sendgrid_subuser_username</code></a>, <a href="#sendgrid_primary_email"><code>sendgrid_primary_email</code></a></p>
+<p><strong>Notes</strong>:
+- Subuser provides isolation from primary account
+- See <a href="https://docs.sendgrid.com/ui/account-and-settings/subusers">SendGrid subusers documentation</a>
+- Can use same email as primary account if desired</p>
+<h3 id="sendgrid_defaultrecipientemail">sendgrid_defaultrecipientemail<a class="headerlink" href="#sendgrid_defaultrecipientemail" title="Permanent link">¤</a></h3>
+<p>Default recipient email address for MAS notifications.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>SENDGRID_DEFAULTRECIPIENTEMAIL</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the default destination email address for MAS notifications when no specific recipient is configured.</p>
+<p><strong>When to use</strong>: Always required. This is the fallback email address for system notifications.</p>
+<p><strong>Valid values</strong>: Valid email address</p>
+<p><strong>Impact</strong>: MAS will send notifications to this address when no other recipient is specified in the notification configuration.</p>
+<p><strong>Related variables</strong>: None</p>
+<p><strong>Notes</strong>:
+- Acts as fallback for unconfigured notifications
+- Can be overridden per notification type in MAS
+- Typically set to admin or operations team email</p>
+<h3 id="sendgrid_primary_apikey">sendgrid_primary_apikey<a class="headerlink" href="#sendgrid_primary_apikey" title="Permanent link">¤</a></h3>
+<p>API key for the primary SendGrid account.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>SENDGRID_PRIMARY_APIKEY</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Provides authentication credentials for SendGrid API to create and configure the subuser.</p>
+<p><strong>When to use</strong>: Always required. Must be an API key from the primary SendGrid account with subuser management permissions.</p>
+<p><strong>Valid values</strong>: Valid SendGrid API key with appropriate permissions</p>
+<p><strong>Impact</strong>: Used to authenticate SendGrid API calls for subuser creation and IP assignment.</p>
+<p><strong>Related variables</strong>: <a href="#sendgrid_primary_username"><code>sendgrid_primary_username</code></a></p>
+<p><strong>Notes</strong>:
+- Store securely, never commit to version control
+- Requires permissions: subuser creation, IP management
+- Only used during setup, not stored in MAS configuration
+- Generate from SendGrid console: Settings &gt; API Keys</p>
+<h3 id="sendgrid_ips">sendgrid_ips<a class="headerlink" href="#sendgrid_ips" title="Permanent link">¤</a></h3>
+<p>SendGrid IP addresses to assign to the subuser.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>SENDGRID_IPS</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies which SendGrid IP addresses should be assigned to the subuser for sending emails.</p>
+<p><strong>When to use</strong>: Always required. Must be IP addresses already allocated to your primary SendGrid account.</p>
+<p><strong>Valid values</strong>: JSON array of IP addresses (e.g., <code>'["192.0.2.1", "192.0.2.2"]'</code>)</p>
+<p><strong>Impact</strong>: Subuser will send emails from these IP addresses. Affects email deliverability and reputation.</p>
+<p><strong>Related variables</strong>: <a href="#sendgrid_primary_apikey"><code>sendgrid_primary_apikey</code></a></p>
+<p><strong>Notes</strong>:
+- IPs must already be allocated to primary account
+- Find IPs in SendGrid console: Settings &gt; IP Addresses
+- Format as JSON array string
+- IP reputation affects email deliverability</p>
+<h3 id="sendgrid_subuser_username">sendgrid_subuser_username<a class="headerlink" href="#sendgrid_subuser_username" title="Permanent link">¤</a></h3>
+<p>Username for the SendGrid subuser.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>SMTP_SUBUSER_USERNAME</code></li>
+<li>Default: <code>ibm-mas_{mas_instance_id}</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the username for the SendGrid subuser that will be created for MAS.</p>
+<p><strong>When to use</strong>: Override default if you need a specific naming convention or have multiple MAS instances sharing a SendGrid account.</p>
+<p><strong>Valid values</strong>: Valid SendGrid username (alphanumeric, hyphens, underscores)</p>
+<p><strong>Impact</strong>: Subuser will be created with this username in SendGrid.</p>
+<p><strong>Related variables</strong>: <a href="#mas_instance_id"><code>mas_instance_id</code></a>, <a href="#sendgrid_subuser_email"><code>sendgrid_subuser_email</code></a></p>
+<p><strong>Notes</strong>:
+- Default includes MAS instance ID for uniqueness
+- Must be unique within the SendGrid account
+- See <a href="https://docs.sendgrid.com/ui/account-and-settings/subusers">SendGrid subusers documentation</a></p>
+<h3 id="sendgrid_defaultsendername">sendgrid_defaultsendername<a class="headerlink" href="#sendgrid_defaultsendername" title="Permanent link">¤</a></h3>
+<p>Display name for emails sent by MAS.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>SENDGRID_DEFAULTSENDERNAME</code></li>
+<li>Default: Empty string</li>
+</ul>
+<p><strong>Purpose</strong>: Provides a human-readable sender name that appears in email clients when MAS sends notifications.</p>
+<p><strong>When to use</strong>: Set to provide a friendly sender name like "MAS Production Alerts" or "Maximo Notifications".</p>
+<p><strong>Valid values</strong>: Any string (e.g., <code>MAS Notifications</code>, <code>Maximo Production</code>)</p>
+<p><strong>Impact</strong>: This name appears as the sender in email clients, making emails more recognizable to recipients.</p>
+<p><strong>Related variables</strong>: None</p>
+<p><strong>Notes</strong>:
+- Improves email recognition and trust
+- Recommended for production deployments
+- Can be left empty for default behavior</p>
+<h3 id="sendgrid_defaultshouldemailpasswords">sendgrid_defaultshouldemailpasswords<a class="headerlink" href="#sendgrid_defaultshouldemailpasswords" title="Permanent link">¤</a></h3>
+<p>Enable password delivery via email.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>SENDGRID_DEFAULTSHOULDEMAILPASSWORDS</code></li>
+<li>Default: <code>false</code></li>
+</ul>
+<p><strong>Purpose</strong>: Controls whether MAS should send user passwords via email when creating or resetting accounts.</p>
+<p><strong>When to use</strong>: Set to <code>true</code> only if your security policy allows password transmission via email.</p>
+<p><strong>Valid values</strong>:
+- <code>true</code> - Send passwords via email
+- <code>false</code> - Do not send passwords via email (recommended)</p>
+<p><strong>Impact</strong>: When <code>true</code>, new user passwords and password resets will be emailed. When <code>false</code>, passwords must be communicated through other means.</p>
+<p><strong>Related variables</strong>: None</p>
+<p><strong>Notes</strong>:
+- <strong>Security</strong>: Sending passwords via email is generally not recommended
+- Default <code>false</code> follows security best practices
+- Consider alternative password delivery methods</p>
+<h3 id="sendgrid_configscope">sendgrid_configscope<a class="headerlink" href="#sendgrid_configscope" title="Permanent link">¤</a></h3>
+<p>Configuration scope for SMTP settings.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>SENDGRID_CONFIGSCOPE</code></li>
+<li>Default: <code>system</code></li>
+</ul>
+<p><strong>Purpose</strong>: Defines the scope level for SMTP configuration in MAS.</p>
+<p><strong>When to use</strong>: Use default <code>system</code> for system-wide SMTP configuration. Other scopes may be supported in future versions.</p>
+<p><strong>Valid values</strong>: <code>system</code> (currently only supported value)</p>
+<p><strong>Impact</strong>: Determines which MAS components can use this SMTP configuration.</p>
+<p><strong>Related variables</strong>: None</p>
+<p><strong>Notes</strong>:
+- System scope makes SMTP available to all MAS components
+- Future versions may support workspace or application scopes</p>
+<h3 id="sendgrid_hostname">sendgrid_hostname<a class="headerlink" href="#sendgrid_hostname" title="Permanent link">¤</a></h3>
+<p>SendGrid SMTP server hostname.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>SENDGRID_HOSTNAME</code></li>
+<li>Default: <code>smtp.sendgrid.net</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the SendGrid SMTP server hostname for email transmission.</p>
+<p><strong>When to use</strong>: Use default unless SendGrid changes their SMTP endpoint or you're using a custom configuration.</p>
+<p><strong>Valid values</strong>: Valid SendGrid SMTP hostname</p>
+<p><strong>Impact</strong>: MAS will connect to this hostname for sending emails via SMTP protocol.</p>
+<p><strong>Related variables</strong>: <a href="#sendgrid_port"><code>sendgrid_port</code></a>, <a href="#sendgrid_security"><code>sendgrid_security</code></a></p>
+<p><strong>Notes</strong>:
+- Default is SendGrid's standard SMTP endpoint
+- Rarely needs to be changed
+- Verify with SendGrid documentation if unsure</p>
+<h3 id="sendgrid_port">sendgrid_port<a class="headerlink" href="#sendgrid_port" title="Permanent link">¤</a></h3>
+<p>SendGrid SMTP server port.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>SENDGRID_PORT</code></li>
+<li>Default: <code>465</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the port number for SMTP connections to SendGrid.</p>
+<p><strong>When to use</strong>: Use default <code>465</code> for SSL/TLS connections. Change only if using different security configuration.</p>
+<p><strong>Valid values</strong>:
+- <code>465</code> - SMTP with SSL/TLS (recommended, default)
+- <code>587</code> - SMTP with STARTTLS
+- <code>25</code> - Unencrypted SMTP (not recommended)</p>
+<p><strong>Impact</strong>: Determines which port MAS uses to connect to SendGrid SMTP server.</p>
+<p><strong>Related variables</strong>: <a href="#sendgrid_hostname"><code>sendgrid_hostname</code></a>, <a href="#sendgrid_security"><code>sendgrid_security</code></a></p>
+<p><strong>Notes</strong>:
+- Port 465 is recommended for secure connections
+- Must match the security setting
+- Port 25 is often blocked by ISPs</p>
+<h3 id="sendgrid_security">sendgrid_security<a class="headerlink" href="#sendgrid_security" title="Permanent link">¤</a></h3>
+<p>SMTP connection security protocol.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>SENDGRID_SECURITY</code></li>
+<li>Default: <code>SSL</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the security protocol for SMTP connections to SendGrid.</p>
+<p><strong>When to use</strong>: Use default <code>SSL</code> for secure connections on port 465. Change to <code>STARTTLS</code> if using port 587.</p>
+<p><strong>Valid values</strong>:
+- <code>SSL</code> - SSL/TLS encryption (recommended, default)
+- <code>STARTTLS</code> - Upgrade to TLS after initial connection
+- <code>NONE</code> - No encryption (not recommended)</p>
+<p><strong>Impact</strong>: Determines how SMTP connections are encrypted.</p>
+<p><strong>Related variables</strong>: <a href="#sendgrid_port"><code>sendgrid_port</code></a>, <a href="#sendgrid_hostname"><code>sendgrid_hostname</code></a></p>
+<p><strong>Notes</strong>:
+- SSL on port 465 is recommended
+- STARTTLS on port 587 is also secure
+- Never use NONE in production</p>
+<h3 id="sendgrid_authentication">sendgrid_authentication<a class="headerlink" href="#sendgrid_authentication" title="Permanent link">¤</a></h3>
+<p>Enable SMTP authentication.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>SENDGRID_AUTHENTICATION</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p><strong>Purpose</strong>: Controls whether SMTP authentication is required for SendGrid connections.</p>
+<p><strong>When to use</strong>: Always use default <code>true</code>. Authentication is required by SendGrid.</p>
+<p><strong>Valid values</strong>:
+- <code>true</code> - Enable authentication (required)
+- <code>false</code> - Disable authentication (will fail)</p>
+<p><strong>Impact</strong>: When <code>true</code>, MAS will authenticate using subuser credentials. When <code>false</code>, connection will fail.</p>
+<p><strong>Related variables</strong>: <a href="#sendgrid_subuser_username"><code>sendgrid_subuser_username</code></a></p>
+<p><strong>Notes</strong>:
+- Must be <code>true</code> for SendGrid
+- Authentication uses subuser credentials
+- Do not change from default</p>
+<h3 id="sendgrid_api_url">sendgrid_api_url<a class="headerlink" href="#sendgrid_api_url" title="Permanent link">¤</a></h3>
+<p>SendGrid API endpoint URL.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>SENDGRID_API_URL</code></li>
+<li>Default: <code>api.sendgrid.com</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the SendGrid API endpoint for REST API calls during subuser creation and management.</p>
+<p><strong>When to use</strong>: Use default unless SendGrid changes their API endpoint or you're using a custom configuration.</p>
+<p><strong>Valid values</strong>: Valid SendGrid API hostname</p>
+<p><strong>Impact</strong>: Role will make REST API calls to this endpoint for subuser management.</p>
+<p><strong>Related variables</strong>: <a href="#sendgrid_primary_apikey"><code>sendgrid_primary_apikey</code></a></p>
+<p><strong>Notes</strong>:
+- Default is SendGrid's standard API endpoint
+- Used during role execution, not by MAS
+- Rarely needs to be changed</p>
+<h3 id="custom_labels">custom_labels<a class="headerlink" href="#custom_labels" title="Permanent link">¤</a></h3>
+<p>Custom labels for MAS SMTP resources.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>CUSTOM_LABELS</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Allows adding custom key-value labels to SMTP-related Kubernetes resources for organization and automation.</p>
+<p><strong>When to use</strong>: Set when you need to tag resources for cost tracking, environment identification, or automation purposes.</p>
+<p><strong>Valid values</strong>: Comma-separated key=value pairs (e.g., <code>environment=production,team=platform,cost-center=engineering</code>)</p>
+<p><strong>Impact</strong>: Labels are applied to generated SmtpCfg and related resources.</p>
+<p><strong>Related variables</strong>: None</p>
+<p><strong>Notes</strong>:
+- Useful for resource organization and tracking
+- Can be used by automation tools for resource discovery
+- Follow Kubernetes label naming conventions</p>
+<h3 id="sendgrid_debug">sendgrid_debug<a class="headerlink" href="#sendgrid_debug" title="Permanent link">¤</a></h3>
+<p>Enable debug logging for SendGrid API calls.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>SENDGRID_DEBUG</code></li>
+<li>Default: <code>False</code></li>
+</ul>
+<p><strong>Purpose</strong>: Controls whether detailed SendGrid REST API call results are displayed in Ansible logs.</p>
+<p><strong>When to use</strong>: Set to <code>True</code> when troubleshooting SendGrid integration issues or subuser creation problems.</p>
+<p><strong>Valid values</strong>:
+- <code>True</code> - Display API call results in logs
+- <code>False</code> - Normal logging (default)</p>
+<p><strong>Impact</strong>: When <code>True</code>, detailed API responses are logged, which may include sensitive information.</p>
+<p><strong>Related variables</strong>: None</p>
+<p><strong>Notes</strong>:
+- Use only for troubleshooting
+- May expose sensitive data in logs
+- Disable after troubleshooting is complete</p>
+<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link">¤</a></h2>
+<h3 id="generate-a-configuration">Generate a configuration<a class="headerlink" href="#generate-a-configuration" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    mas_instance_id: inst1
+    mas_config_dir: /home/me/masconfig
+    smtp_type: sendgrid
+    sendgrid_primary_username: myusername
+    sendgrid_primary_email: myemail@mydomain
+    sendgrid_subuser_username: mysubusername
+    sendgrid_subuser_email: mysubuser@mydomain
+    sendgrid_defaultrecipientemail: myemail@mydomain
+    sendgrid_defaultsendername: 'My Name'
+    sendgrid_primary_apikey: xxxx
+    sendgrid_ips: '["XXX.XXX.XXX.XXX"]'
+
+  roles:
+    - ibm.mas_devops.smtp
+</code></pre>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">¤</a></h2>
+<p>EPL-2.0</p>
+            
+          </div>
+
+          <!-- Navigation footer (prev/next) -->
+<nav class="md-footer-nav" aria-label="Footer navigation">
+  <div class="md-footer-nav__inner">
+  </div>
+</nav>
+        </article>
+      </div>
+
+      <!-- Right sidebar - Table of Contents -->
+      <aside class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<nav class="md-sidebar md-sidebar--secondary" aria-label="Table of contents">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <div class="md-toc">
+        <div class="md-toc__title">On this page</div>
+        <ul class="md-toc__list">
+              <li class="md-toc__item">
+                <a href="#role-variables" class="md-toc__link" data-md-level="1">
+                  Role Variables
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#smtp_type" class="md-toc__link" data-md-level="2">
+                          smtp_type
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_instance_id" class="md-toc__link" data-md-level="2">
+                          mas_instance_id
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_config_dir" class="md-toc__link" data-md-level="2">
+                          mas_config_dir
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_pod_templates_dir" class="md-toc__link" data-md-level="2">
+                          mas_pod_templates_dir
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_primary_username" class="md-toc__link" data-md-level="2">
+                          sendgrid_primary_username
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_primary_email" class="md-toc__link" data-md-level="2">
+                          sendgrid_primary_email
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_subuser_email" class="md-toc__link" data-md-level="2">
+                          sendgrid_subuser_email
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_defaultrecipientemail" class="md-toc__link" data-md-level="2">
+                          sendgrid_defaultrecipientemail
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_primary_apikey" class="md-toc__link" data-md-level="2">
+                          sendgrid_primary_apikey
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_ips" class="md-toc__link" data-md-level="2">
+                          sendgrid_ips
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_subuser_username" class="md-toc__link" data-md-level="2">
+                          sendgrid_subuser_username
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_defaultsendername" class="md-toc__link" data-md-level="2">
+                          sendgrid_defaultsendername
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_defaultshouldemailpasswords" class="md-toc__link" data-md-level="2">
+                          sendgrid_defaultshouldemailpasswords
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_configscope" class="md-toc__link" data-md-level="2">
+                          sendgrid_configscope
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_hostname" class="md-toc__link" data-md-level="2">
+                          sendgrid_hostname
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_port" class="md-toc__link" data-md-level="2">
+                          sendgrid_port
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_security" class="md-toc__link" data-md-level="2">
+                          sendgrid_security
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_authentication" class="md-toc__link" data-md-level="2">
+                          sendgrid_authentication
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_api_url" class="md-toc__link" data-md-level="2">
+                          sendgrid_api_url
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#custom_labels" class="md-toc__link" data-md-level="2">
+                          custom_labels
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sendgrid_debug" class="md-toc__link" data-md-level="2">
+                          sendgrid_debug
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#example-playbook" class="md-toc__link" data-md-level="1">
+                  Example Playbook
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#generate-a-configuration" class="md-toc__link" data-md-level="2">
+                          Generate a configuration
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#license" class="md-toc__link" data-md-level="1">
+                  License
+                </a>
+              </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+      </aside>
+    </div>
+
+    <!-- Footer - Full width outside container -->
+    <footer class="md-footer">
+      Built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/durera/mkdocs-carbon">Carbon theme</a>
+    </footer>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": false, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

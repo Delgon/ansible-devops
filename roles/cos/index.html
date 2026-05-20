@@ -1,372 +1,1245 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://ibm-mas.github.io/ansible-devops/roles/cos/" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>cos - MAS Devops Collection</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
-        <link href="../../extra.css" rel="stylesheet" />
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>cos - MAS DevOps Ansible Collection</title>
+
+    <!-- Pure CSS (https://pure-css.github.io/) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="../../js/theme.js"></script>
+
+    <!-- Carbon theme zones (white, g10, g90, g100) -->
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css">
+
+    <!-- The Carbon web-components/framework -->
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/ui-shell.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/accordion.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/breadcrumb.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/select.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/tabs.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/search.min.js"></script>
+
+    <!-- HighlightJS code formatting support -->
+    <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <!-- Required by MkDocs search -->
+    <script>var base_url = "../..";</script>
+
+    <!-- User defined extras -->
     
+    
+
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: black; }
+        </style></head>
+
+  <body class="md-grid" data-theme-default="g90">
+    <!-- Header -->
+    <cds-header aria-label="MAS DevOps Ansible Collection" class="md-header">
+      <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+      <cds-header-name href="../.." prefix="IBM">MAS DevOps Ansible Collection</cds-header-name>
+      <cds-header-nav menu-bar-label="IBM MAS DevOps Ansible Collection">
+          <cds-header-nav-item is-active="" target="" href="">Ansible</cds-header-nav-item>
+          <cds-header-nav-item target="" href="https://ibm-mas.github.io/cli/">CLI</cds-header-nav-item>
+      </cds-header-nav>
+
+      <div class="cds--header__global">
+<div class="md-theme-toggle" data-theme-default="g90">
+  <button class="md-theme-toggle__button" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="md-theme-toggle__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+    </svg>
+  </button>
+  <div class="md-theme-toggle__menu" hidden="">
+    <button class="md-theme-toggle__option" data-theme="white">
+      <span class="md-theme-toggle__label">Light</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--white"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g10">
+      <span class="md-theme-toggle__label">Light Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g10"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g90">
+      <span class="md-theme-toggle__label">Dark Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g90"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g100">
+      <span class="md-theme-toggle__label">Dark</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g100"></span>
+    </button>
+  </div>
+</div>
+        <cds-search id="header-search" label-text="Search" cds-search-input="search-event" expandable=""></cds-search>
+      </div>
       <script>
-        // Current page data
-        var mkdocs_page_name = "cos";
-        var mkdocs_page_input_path = "roles/cos.md";
-        var mkdocs_page_url = "/ansible-devops/roles/cos/";
+        var el = document.getElementById("header-search");
+        el.addEventListener("cds-search-input", function (ev) {
+          console.info(ev.detail.value)
+          document.getElementById("header-search-value").setAttribute("value", ev.detail.value);
+        });
+        el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            location.href="../../search.html?q=" + document.querySelector("#header-search").shadowRoot.querySelector("#input").value;
+          }
+        });
       </script>
+
+      
+    </cds-header>
+
+    <!-- Main container with three-column layout -->
+    <div class="md-container">
+      <!-- Left sidebar - Navigation -->
+      <aside class="md-sidebar md-sidebar--primary" data-md-component="sidebar">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            <cds-side-nav aria-label="Side navigation">
+              <cds-side-nav-items>
+                
+                  
+  <cds-side-nav-menu title="General Information">
     
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+      
+  <cds-side-nav-menu-item href="../..">
+    Home
+  </cds-side-nav-menu-item>
 
-<body class="wy-body-for-nav" role="document">
+    
+      
+  <cds-side-nav-menu-item href="../../execution-environment/">
+    Ansible Automation Platform
+  </cds-side-nav-menu-item>
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> MAS Devops Collection
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+  </cds-side-nav-menu>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Playbooks</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/ocp/">OCP</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/cp4d/">Install Cloud Pak For Data</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-core/">Install Core</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-iot/">Add IoT</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-manage/">Add Manage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-monitor/">Add Monitor</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-optimizer/">Add Optimizer</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-predict/">Add Predict</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-visualinspection/">Add Visual Inspection</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-update/">Update</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-upgrade/">Upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/uninstall-core/">Uninstall Core</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: OCP Mgmt</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_cluster_monitoring/">ocp_cluster_monitoring</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_config/">ocp_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_deprovision/">ocp_deprovision</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_efs/">ocp_efs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_github_oauth/">ocp_github_oauth</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_login/">ocp_login</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_node_config/">ocp_node_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_provision/">ocp_provision</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_roks_upgrade_registry_storage/">ocp_roks_upgrade_registry_storage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_upgrade/">ocp_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_verify/">ocp_verify</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Dependency Mgmt</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../appconnect/">appconnect</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_bucket_access_point/">aws_bucket_access_point</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_documentdb_user/">aws_documentdb_user</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_policy/">aws_policy</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_route53/">aws_route53</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_user_creation/">aws_user_creation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_vpc/">aws_vpc</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cert_manager/">cert_manager</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cis/">cis</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../common_services/">common-services</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../configure_manage_eventstreams/">configure_manage_eventstreams</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">cos</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables">Role Variables</a>
-    </li>
-    </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cos_bucket/">cos_bucket</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d_admin_pwd_update/">cp4d_admin_pwd_update</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d/">cp4d</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d_service/">cp4d_service</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2/">db2</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2_backup/">db2_backup</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2_restore/">db2_restore</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../dro/">dro</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../grafana/">grafana</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ibm_catalogs/">ibm_catalogs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../kafka/">kafka</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../nvidia_gpu/">nvidia_gpu</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mongodb/">mongodb</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocs/">ocs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../sls/">sls</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../turbonomic/">turbonomic</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../uds/">uds</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Image Mirroring</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_case_prepare/">mirror_case_prepare</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_extras_prepare/">mirror_extras_prepare</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_images/">mirror_images</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_ocp/">mirror_ocp</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_contentsourcepolicy/">ocp_contentsourcepolicy</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_simulate_disconnected_network/">ocp_simulate_disconnected_network</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../registry/">registry</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Suite Mgmt</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_config/">suite_app_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_install/">suite_app_install</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_uninstall/">suite_app_uninstall</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_upgrade/">suite_app_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_rollback/">suite_app_rollback</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_certs/">suite_certs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_config/">suite_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_db2_setup_for_manage/">suite_db2_setup_for_manage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_dns/">suite_dns</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_install/">suite_install</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_birt_report_config/">suite_manage_birt_report_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_bim_config/">suite_manage_bim_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_customer_files_config/">suite_manage_customer_files_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_doclinks_config/">suite_manage_doclinks_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_import_certs_config/">suite_manage_import_certs_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_load_dbc_scripts/">suite_manage_load_dbc_scripts</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_logging_config/">suite_manage_logging_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_pvc_config/">suite_manage_pvc_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_uninstall/">suite_uninstall</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_upgrade/">suite_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_rollback/">suite_rollback</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_verify/">suite_verify</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Utilities</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../ansible_version_check/">ansible_version_check</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../entitlement_key_rotation/">entitlement_key_rotation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_jdbc/">gencfg_jdbc</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_watsonstudio/">gencfg_watsonstudio</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_workspace/">gencfg_workspace</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../install_operator/">install_operator</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_mongo/">gencfg_mongo</a>
-                  </li>
-              </ul>
-      </div>
-    </div>
-    </nav>
+                
+                  
+  <cds-side-nav-menu title="Playbooks">
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/ocp/">
+    OCP
+  </cds-side-nav-menu-item>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">MAS Devops Collection</a>
-        
-      </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Roles: Dependency Mgmt</li>
-      <li class="breadcrumb-item active">cos</li>
-    <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/ibm-mas/ansible-devops/blob/master/docs/roles/cos.md" class="icon icon-github"> Edit on GitHub</a>
-    </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
-              
-                <h1 id="cos">cos<a class="headerlink" href="#cos" title="Permanent link"></a></h1>
-<p>This role provides support for:
-- Provisioning and Configuring Cloud Object Storage in MAS. It currently supports two providers:</p>
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/cp4d/">
+    Install Cloud Pak For Data
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/aiservice/">
+    Install AI Service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-core/">
+    Install Core
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-iot/">
+    Add IoT
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-manage/">
+    Add Manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-monitor/">
+    Add Monitor
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-optimizer/">
+    Add Optimizer
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-predict/">
+    Add Predict
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-visualinspection/">
+    Add Visual Inspection
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-facilities/">
+    Add Real Estate and Facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-update/">
+    Update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-upgrade/">
+    Upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/backup-restore/">
+    Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/legacy-backup-restore/">
+    Legacy Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: OCP Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../ocp_cluster_monitoring/">
+    ocp_cluster_monitoring
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_config/">
+    ocp_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_deprovision/">
+    ocp_deprovision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_efs/">
+    ocp_efs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_github_oauth/">
+    ocp_github_oauth
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_login/">
+    ocp_login
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_node_config/">
+    ocp_node_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_provision/">
+    ocp_provision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_roks_upgrade_registry_storage/">
+    ocp_roks_upgrade_registry_storage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_upgrade/">
+    ocp_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_verify/">
+    ocp_verify
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Dependency Mgmt" active="" expanded="">
+    
+      
+  <cds-side-nav-menu-item href="../aws_bucket_access_point/">
+    aws_bucket_access_point
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_documentdb_user/">
+    aws_documentdb_user
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_policy/">
+    aws_policy
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_route53/">
+    aws_route53
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_user_creation/">
+    aws_user_creation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_vpc/">
+    aws_vpc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cert_manager/">
+    cert_manager
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cis/">
+    cis
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../configure_manage_eventstreams/">
+    configure_manage_eventstreams
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="./" active="" expanded="">
+    cos
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos_bucket/">
+    cos_bucket
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_admin_pwd_update/">
+    cp4d_admin_pwd_update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d/">
+    cp4d
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_service/">
+    cp4d_service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../db2/">
+    db2
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../dro/">
+    dro
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../eck/">
+    eck
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../grafana/">
+    grafana
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ibm_catalogs/">
+    ibm_catalogs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../kafka/">
+    kafka
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../longhorn/">
+    longhorn
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../nvidia_gpu/">
+    nvidia_gpu
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mongodb/">
+    mongodb
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocs/">
+    ocs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../sls/">
+    sls
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../turbonomic/">
+    turbonomic
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Image Mirroring">
+    
+      
+  <cds-side-nav-menu-item href="../mirror_case_prepare/">
+    mirror_case_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_extras_prepare/">
+    mirror_extras_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_images/">
+    mirror_images
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_ocp/">
+    mirror_ocp
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_idms/">
+    ocp_idms
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_simulate_disconnected_network/">
+    ocp_simulate_disconnected_network
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../registry/">
+    registry
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Suite Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_config/">
+    suite_app_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_install/">
+    suite_app_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_uninstall/">
+    suite_app_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_upgrade/">
+    suite_app_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_rollback/">
+    suite_app_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_backup/">
+    suite_app_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_restore/">
+    suite_app_restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_certs/">
+    suite_certs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_config/">
+    suite_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_manage/">
+    suite_db2_setup_for_manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_facilities/">
+    suite_db2_setup_for_facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_dns/">
+    suite_dns
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_install/">
+    suite_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_attachments_config/">
+    suite_manage_attachments_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_birt_report_config/">
+    suite_manage_birt_report_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_bim_config/">
+    suite_manage_bim_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_customer_files_config/">
+    suite_manage_customer_files_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_imagestitching_config/">
+    suite_manage_imagestitching_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_import_certs_config/">
+    suite_manage_import_certs_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_load_dbc_scripts/">
+    suite_manage_load_dbc_scripts
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_logging_config/">
+    suite_manage_logging_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_pvc_config/">
+    suite_manage_pvc_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_uninstall/">
+    suite_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_upgrade/">
+    suite_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_rollback/">
+    suite_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_verify/">
+    suite_verify
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_backup/">
+    suite_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_restore/">
+    suite_restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Utilities">
+    
+      
+  <cds-side-nav-menu-item href="../ansible_version_check/">
+    ansible_version_check
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../entitlement_key_rotation/">
+    entitlement_key_rotation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_jdbc/">
+    gencfg_jdbc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_watsonstudio/">
+    gencfg_watsonstudio
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_workspace/">
+    gencfg_workspace
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_mongo/">
+    gencfg_mongo
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+              </cds-side-nav-items>
+            </cds-side-nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="md-content" data-md-component="content">
+        <article class="md-content__inner">
+          <!-- Breadcrumbs -->
+          <div class="md-breadcrumbs"><cds-breadcrumb no-trailing-slash="">
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="../..">Home</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+      <cds-breadcrumb-item>Roles: Dependency Mgmt</cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#cos">cos</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+
+  <cds-breadcrumb-item aria-current="page">
+    <cds-select id="breadcrumbs-toc" inline="" placeholder="..." oninput="changeAnchor(this.value)">
+    
+    
+      <cds-select-item value="#role-variables-general">Role Variables - General</cds-select-item>
+    
+      <cds-select-item value="#role-variables-general_1">Role Variables - General</cds-select-item>
+    
+      <cds-select-item value="#role-variables-ibm-cos">Role Variables - IBM COS</cds-select-item>
+    
+      <cds-select-item value="#role-variables-mas-configuration">Role Variables - MAS Configuration</cds-select-item>
+    
+      <cds-select-item value="#example-playbook">Example Playbook</cds-select-item>
+    
+      <cds-select-item value="#license">License</cds-select-item>
+    
+    </cds-select>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+          </div>
+
+          <!-- Page content -->
+          <div class="rst-content">
+            
+            <h1 id="cos">cos<a class="headerlink" href="#cos" title="Permanent link">¤</a></h1>
+<p>This role provides support for:</p>
 <ul>
+<li>Provisioning and Configuring Cloud Object Storage in MAS. It currently supports two providers:<ul>
 <li>In-cluster Ceph Object Storage leveraging OpenShift Container Storage</li>
-<li>
-<p>IBM Cloud Object Storage</p>
+<li>IBM Cloud Object Storage</li>
+</ul>
 </li>
-<li>
-<p>Deprovision Cloud Object Store. It currently supports one provider:</p>
-<ul>
+<li>Deprovision Cloud Object Store. It currently supports one provider:<ul>
 <li>IBM Cloud Object Storage</li>
 </ul>
 </li>
 </ul>
 <p>Currently this role only supports generating a system-scoped ObjectStorageCfg resource, but the generated file can be modified if you wish to use other scopes.</p>
-<h2 id="role-variables">Role Variables<a class="headerlink" href="#role-variables" title="Permanent link"></a></h2>
-<h1 id="ibm-cloud-object-storage-ibm">IBM Cloud Object Storage (ibm)<a class="headerlink" href="#ibm-cloud-object-storage-ibm" title="Permanent link"></a></h1>
-<h1 id="-">---------------------------------------------------------------------------------------------------------------------<a class="headerlink" href="#-" title="Permanent link"></a></h1>
-<h3 id="cos_type">cos_type<a class="headerlink" href="#cos_type" title="Permanent link"></a></h3>
-<p>Required.  Which COS provider to use; can be set to either <code>ibm</code> for IBM Cloud Object Storage or <code>ocs</code> for OpenShift Container Storage</p>
+<h2 id="role-variables-general">Role Variables - General<a class="headerlink" href="#role-variables-general" title="Permanent link">¤</a></h2>
+<h2 id="role-variables-general_1">Role Variables - General<a class="headerlink" href="#role-variables-general_1" title="Permanent link">¤</a></h2>
+<h3 id="cos_type">cos_type<a class="headerlink" href="#cos_type" title="Permanent link">¤</a></h3>
+<p>The Cloud Object Storage provider to use for MAS.</p>
 <ul>
+<li><strong>Required</strong></li>
 <li>Environment Variable: <code>COS_TYPE</code></li>
 <li>Default Value: None</li>
 </ul>
-<h3 id="cos_action">cos_action<a class="headerlink" href="#cos_action" title="Permanent link"></a></h3>
-<p>Required.  Which action you want to run for the COS instance. You can either <code>provision</code> or <code>deprovision</code> a COS instance in your IBM Cloud account.</p>
+<p><strong>Purpose</strong>: Determines which object storage backend will be provisioned and configured for MAS. Different providers have different capabilities, costs, and operational characteristics.</p>
+<p><strong>When to use</strong>: Always required when provisioning object storage. Choose based on your deployment platform, cost requirements, and operational preferences.</p>
+<p><strong>Valid values</strong>:
+- <code>ibm</code> - IBM Cloud Object Storage (managed cloud service)
+- <code>ocs</code> - OpenShift Container Storage / OpenShift Data Foundation (in-cluster Ceph-based storage)</p>
+<p><strong>Impact</strong>:
+- <strong><code>ibm</code></strong>: Provisions IBM Cloud COS instance, requires IBM Cloud account and API key, incurs cloud costs, provides unlimited scalability
+- <strong><code>ocs</code></strong>: Creates Ceph object store within OpenShift cluster, requires OCS/ODF operator installed, uses cluster storage capacity, no external costs
+- Determines which set of configuration variables are required
+- Affects the generated ObjectStorageCfg resource format</p>
+<p><strong>Related variables</strong>:
+- When <code>cos_type=ibm</code>: Requires <a href="#ibmcloud_apikey"><code>ibmcloud_apikey</code></a>, <a href="#cos_instance_name"><code>cos_instance_name</code></a>, <a href="#cos_url"><code>cos_url</code></a>
+- When <code>cos_type=ocs</code>: Requires OCS/ODF operator to be installed in the cluster
+- <a href="#cos_action"><code>cos_action</code></a> - Whether to provision or deprovision</p>
+<p><strong>Notes</strong>:
+- IBM COS is recommended for production deployments requiring high availability and unlimited capacity
+- OCS is suitable for on-premises or air-gapped deployments where external cloud services are not available
+- OCS requires sufficient cluster storage capacity and OCS/ODF operator installation
+- IBM COS provides better separation of concerns (storage managed separately from compute)
+- Consider data residency and compliance requirements when choosing provider</p>
+<h3 id="cos_action">cos_action<a class="headerlink" href="#cos_action" title="Permanent link">¤</a></h3>
+<p>The action to perform on the Cloud Object Storage instance.</p>
 <ul>
+<li><strong>Required</strong></li>
 <li>Environment Variable: <code>COS_ACTION</code></li>
 <li>Default Value: <code>provision</code></li>
 </ul>
-<h3 id="ibmcos_instance_name">ibmcos_instance_name<a class="headerlink" href="#ibmcos_instance_name" title="Permanent link"></a></h3>
-<p>Provide an optional name for the Object Storage instance.  This is only used when cos_type is set to <code>ibm</code> for IBM Cloud Object Storage.</p>
+<p><strong>Purpose</strong>: Controls whether to create a new COS instance or delete an existing one. This allows the same role to handle both lifecycle operations.</p>
+<p><strong>When to use</strong>:
+- Use <code>provision</code> (default) when setting up object storage for a new MAS deployment
+- Use <code>deprovision</code> when cleaning up COS resources after MAS uninstallation</p>
+<p><strong>Valid values</strong>:
+- <code>provision</code> - Create and configure COS instance, generate ObjectStorageCfg
+- <code>deprovision</code> - Delete COS instance (IBM COS only, not supported for OCS)</p>
+<p><strong>Impact</strong>:
+- <strong>Provision</strong>: Creates COS instance, generates credentials, creates ObjectStorageCfg resource
+- <strong>Deprovision</strong>: Permanently deletes IBM Cloud COS instance and all data (irreversible)
+- Deprovisioning is only supported for <code>cos_type=ibm</code>, not for OCS
+- All data stored in the COS instance will be lost during deprovisioning</p>
+<p><strong>Related variables</strong>:
+- <a href="#cos_type"><code>cos_type</code></a> - Determines which provider to provision/deprovision
+- <a href="#cos_instance_name"><code>cos_instance_name</code></a> - Identifies which instance to deprovision</p>
+<p><strong>Notes</strong>:
+- Deprovisioning is irreversible - ensure all data is backed up first
+- For OCS, deprovisioning must be done manually through OpenShift console
+- Verify no applications are using the COS instance before deprovisioning
+- IBM Cloud COS deprovisioning may fail if buckets contain data</p>
+<h3 id="ocp_ingress_tls_secret_name">ocp_ingress_tls_secret_name<a class="headerlink" href="#ocp_ingress_tls_secret_name" title="Permanent link">¤</a></h3>
+<p>The name of the OpenShift cluster's default router certificate secret.</p>
 <ul>
-<li>Environment Variable: <code>COS_INSTANCE_NAME</code></li>
-<li>Default Value: <code>Object Storage for MAS</code>, if <code>mas_instance_id</code> is set the MAS instance ID will be appended to this name.</li>
-</ul>
-<h3 id="ibmcos_location_info">ibmcos_location_info<a class="headerlink" href="#ibmcos_location_info" title="Permanent link"></a></h3>
-<p>Required. The location where the instance available
-  - Environment Variable: <code>COS_LOCATION</code>
-  - Default Value: <code>global</code></p>
-<h3 id="ibmcos_plan_type">ibmcos_plan_type<a class="headerlink" href="#ibmcos_plan_type" title="Permanent link"></a></h3>
-<p>Required (For Provisioning). The plan type of the service
-  - Environment Variable: <code>COS_PLAN</code>
-  - Default Value: <code>standard</code></p>
-<h3 id="ibmcos_url">ibmcos_url<a class="headerlink" href="#ibmcos_url" title="Permanent link"></a></h3>
-<p>Required (For Provisioning). The COS region location url endpoint. Needed to generage a system-scoped ObjectStorageCfg resource configuration file for MAS.
-  - Environment Variable: <code>COS_REGION_LOCATION_URL</code>
-  - Default Value: <code>https://s3.us.cloud-object-storage.appdomain.cloud</code></p>
-<h3 id="ibmcos_resource_key_iam_role">ibmcos_resource_key_iam_role<a class="headerlink" href="#ibmcos_resource_key_iam_role" title="Permanent link"></a></h3>
-<p>Provide an optional role when cos service credential is getting created during COS provisioning.
-  - Environment Variable: <code>COS_RESOURCE_KEY_IAM_ROLE</code>
-  - Default Value: <code>Manager</code> </p>
-<h3 id="ibmcloud_apikey">ibmcloud_apikey<a class="headerlink" href="#ibmcloud_apikey" title="Permanent link"></a></h3>
-<p>Required if cos_type is set to <code>ibm</code>.  Provide your IBM Cloud API Key.</p>
-<ul>
-<li>Environment Variable: <code>IBMCLOUD_APIKEY</code></li>
-<li>Default Value: None</li>
-</ul>
-<h3 id="ibmcloud_resourcegroup">ibmcloud_resourcegroup<a class="headerlink" href="#ibmcloud_resourcegroup" title="Permanent link"></a></h3>
-<p>Only used when cos_type is set to <code>ibm</code>.  Provide the name of the resource group which will own the COS instance.</p>
-<ul>
-<li>Environment Variable: <code>IBMCLOUD_RESOURCEGROUP</code></li>
-<li>Default Value: <code>Default</code></li>
-</ul>
-<h3 id="mas_instance_id">mas_instance_id<a class="headerlink" href="#mas_instance_id" title="Permanent link"></a></h3>
-<p>The instance ID of Maximo Application Suite that the ObjectStorageCfg configuration will target.  If this or <code>mas_config_dir</code> are not set then the role will not generate a ObjectStorageCfg template.</p>
-<ul>
-<li>Environment Variable: <code>MAS_INSTANCE_ID</code></li>
-<li>Default Value: None</li>
-</ul>
-<h3 id="mas_config_dir">mas_config_dir<a class="headerlink" href="#mas_config_dir" title="Permanent link"></a></h3>
-<p>Local directory to save the generated ObjectStorageCfg resource definition.  This can be used to manually configure a MAS instance to connect to the Kafka cluster, or used as an input to the <a href="../suite_config/">suite_config</a> role. If this or <code>mas_instance_id</code> are not set then the role will not generate a ObjectStorageCfg template.</p>
-<ul>
-<li>Environment Variable: <code>MAS_CONFIG_DIR</code></li>
-<li>Default Value: None</li>
-</ul>
-<h3 id="cluster-ingres-tls-secret-name">cluster ingres tls secret name<a class="headerlink" href="#cluster-ingres-tls-secret-name" title="Permanent link"></a></h3>
-<p>Specify the name of the cluster's ingres tls secret which contains the default router certificate.</p>
-<ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>OCP_INGRESS_TLS_SECRET_NAME</code></li>
-<li>Default Value: router-certs-default</li>
+<li>Default Value: <code>router-certs-default</code></li>
 </ul>
-<h3 id="custom_labels">custom_labels<a class="headerlink" href="#custom_labels" title="Permanent link"></a></h3>
-<p>List of comma separated key=value pairs for setting custom labels on instance specific resources.</p>
+<p><strong>Purpose</strong>: Specifies the secret containing the cluster's ingress TLS certificate. This is used when configuring OCS to ensure proper certificate validation for S3 API access.</p>
+<p><strong>When to use</strong>: Only needed in rare cases where the cluster uses a non-standard ingress certificate secret name, or when the role cannot automatically determine the correct secret name.</p>
+<p><strong>Valid values</strong>:
+- Any valid secret name in the <code>openshift-ingress</code> namespace
+- Default <code>router-certs-default</code> works for most OpenShift clusters
+- Must contain TLS certificate and key</p>
+<p><strong>Impact</strong>:
+- Used to extract the cluster's ingress certificate for OCS configuration
+- Incorrect value will cause certificate validation failures when accessing OCS
+- Only relevant when <code>cos_type=ocs</code></p>
+<p><strong>Related variables</strong>:
+- <a href="#cos_type"><code>cos_type</code></a> - Only used when set to <code>ocs</code>
+- <a href="#include_cluster_ingress_cert_chain"><code>include_cluster_ingress_cert_chain</code></a> - Controls certificate chain inclusion</p>
+<p><strong>Notes</strong>:
+- The default value works for standard OpenShift installations
+- Only override if you have customized your cluster's ingress certificates
+- The secret must exist in the <code>openshift-ingress</code> namespace
+- Not used for IBM Cloud COS (<code>cos_type=ibm</code>)</p>
+<h3 id="custom_labels">custom_labels<a class="headerlink" href="#custom_labels" title="Permanent link">¤</a></h3>
+<p>Custom key-value labels to apply to provisioned resources.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>CUSTOM_LABELS</code></li>
 <li>Default Value: None</li>
 </ul>
-<h3 id="include_cluster_ingress_cert_chain">include_cluster_ingress_cert_chain<a class="headerlink" href="#include_cluster_ingress_cert_chain" title="Permanent link"></a></h3>
-<p>Optional. When set to <code>True</code>, includes the complete certificates chain in the generated MAS configuration, when a trusted certificate authority is found in your cluster's ingress.</p>
+<p><strong>Purpose</strong>: Allows adding custom labels to COS-related resources for organization, cost tracking, or automation purposes. Labels are applied to instance-specific resources.</p>
+<p><strong>When to use</strong>: When you need to tag resources for cost allocation, environment identification, team ownership, or integration with other automation tools.</p>
+<p><strong>Valid values</strong>:
+- Comma-separated key=value pairs
+- Example: <code>environment=production,team=platform,cost-center=engineering</code>
+- Keys and values must follow Kubernetes label naming conventions
+- Maximum 63 characters per key/value</p>
+<p><strong>Impact</strong>:
+- Labels are applied to COS instance and related resources
+- Useful for cost tracking and resource organization in IBM Cloud
+- Can be used by automation tools for resource discovery
+- Does not affect functionality, only metadata</p>
+<p><strong>Related variables</strong>:
+- Applied to resources created by this role regardless of <code>cos_type</code></p>
+<p><strong>Notes</strong>:
+- Labels are metadata only and do not affect resource behavior
+- Use consistent labeling across all MAS resources for better management
+- IBM Cloud supports label-based cost allocation and reporting
+- Labels can be modified after resource creation</p>
+<h2 id="role-variables-ibm-cos">Role Variables - IBM COS<a class="headerlink" href="#role-variables-ibm-cos" title="Permanent link">¤</a></h2>
+<h3 id="cos_instance_name">cos_instance_name<a class="headerlink" href="#cos_instance_name" title="Permanent link">¤</a></h3>
+<p>The name for the IBM Cloud Object Storage instance.</p>
 <ul>
-<li>Optional</li>
-<li>Environment Variable: <code>INCLUDE_CLUSTER_INGRESS_CERT_CHAIN</code></li>
-<li>Default: <code>False</code></li>
+<li><strong>Optional</strong> (IBM COS only)</li>
+<li>Environment Variable: <code>COS_INSTANCE_NAME</code></li>
+<li>Default Value: <code>Object Storage for MAS</code> (appended with MAS instance ID if set)</li>
 </ul>
-<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link"></a></h2>
+<p><strong>Purpose</strong>: Specifies a custom name for the IBM Cloud COS instance. This name appears in the IBM Cloud console and is used for identification and management.</p>
+<p><strong>When to use</strong>: Only relevant when <code>cos_type=ibm</code>. Provide a descriptive name that follows your organization's naming conventions.</p>
+<p><strong>Valid values</strong>:
+- Any string following IBM Cloud resource naming conventions
+- If not specified, defaults to <code>Object Storage for MAS</code> or <code>Object Storage for MAS &lt;mas_instance_id&gt;</code>
+- Recommended format: <code>&lt;environment&gt;-&lt;purpose&gt;-cos</code> (e.g., <code>prod-mas-cos</code>, <code>dev-maximo-cos</code>)</p>
+<p><strong>Impact</strong>:
+- Used as the display name in IBM Cloud console
+- Helps identify the COS instance among other cloud resources
+- Used during deprovisioning to locate the instance
+- Does not affect functionality, only identification</p>
+<p><strong>Related variables</strong>:
+- <a href="#cos_type"><code>cos_type</code></a> - Must be <code>ibm</code> for this to be used
+- <a href="#mas_instance_id"><code>mas_instance_id</code></a> - Appended to default name if set
+- <a href="#cos_resourcegroup"><code>cos_resourcegroup</code></a> - Resource group containing this instance</p>
+<p><strong>Notes</strong>:
+- Not used for OCS (<code>cos_type=ocs</code>)
+- Use descriptive names for easier management in multi-instance environments
+- The name can include the MAS instance ID for clarity
+- IBM Cloud allows renaming instances after creation</p>
+<h3 id="cos_location_info">cos_location_info<a class="headerlink" href="#cos_location_info" title="Permanent link">¤</a></h3>
+<p>The geographic location where the IBM Cloud COS instance will be available.</p>
+<ul>
+<li><strong>Required</strong> (IBM COS only)</li>
+<li>Environment Variable: <code>COS_LOCATION</code></li>
+<li>Default Value: <code>global</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the geographic scope of the IBM Cloud COS instance. This determines data residency and availability characteristics.</p>
+<p><strong>When to use</strong>: Only relevant when <code>cos_type=ibm</code>. Use <code>global</code> for maximum flexibility, or specify a region for data residency compliance.</p>
+<p><strong>Valid values</strong>:
+- <code>global</code> - Instance available globally with automatic region selection
+- Specific region codes: <code>us-south</code>, <code>us-east</code>, <code>eu-gb</code>, <code>eu-de</code>, <code>jp-tok</code>, <code>au-syd</code>, etc.
+- Cross-region: <code>us</code>, <code>eu</code>, <code>ap</code> for multi-region redundancy</p>
+<p><strong>Impact</strong>:
+- <code>global</code> provides maximum flexibility and automatic failover
+- Regional instances ensure data stays within specific geographic boundaries
+- Affects data residency compliance and latency
+- Cannot be changed after instance creation</p>
+<p><strong>Related variables</strong>:
+- <a href="#cos_type"><code>cos_type</code></a> - Must be <code>ibm</code> for this to be used
+- <a href="#cos_url"><code>cos_url</code></a> - Should match the location for optimal performance</p>
+<p><strong>Notes</strong>:
+- <code>global</code> is recommended for most deployments unless data residency is required
+- Regional instances may have lower latency for local access
+- Consider compliance requirements (GDPR, data sovereignty) when choosing location
+- Not applicable for OCS (<code>cos_type=ocs</code>)</p>
+<h3 id="cos_plan_type">cos_plan_type<a class="headerlink" href="#cos_plan_type" title="Permanent link">¤</a></h3>
+<p>The IBM Cloud COS service plan tier.</p>
+<ul>
+<li><strong>Required</strong> (IBM COS only, for provisioning)</li>
+<li>Environment Variable: <code>COS_PLAN</code></li>
+<li>Default Value: <code>standard</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the IBM Cloud COS service plan, which determines pricing and available features.</p>
+<p><strong>When to use</strong>: Only relevant when <code>cos_type=ibm</code> and <code>cos_action=provision</code>. The standard plan is suitable for most MAS deployments.</p>
+<p><strong>Valid values</strong>:
+- <code>standard</code> - Standard plan with pay-as-you-go pricing
+- <code>lite</code> - Free tier with limited capacity (not recommended for production)</p>
+<p><strong>Impact</strong>:
+- Determines pricing model and billing
+- Standard plan provides unlimited capacity with usage-based pricing
+- Lite plan has capacity limits and is not suitable for production MAS
+- Cannot be changed after provisioning (requires recreation)</p>
+<p><strong>Related variables</strong>:
+- <a href="#cos_type"><code>cos_type</code></a> - Must be <code>ibm</code> for this to be used
+- <a href="#cos_action"><code>cos_action</code></a> - Only used during provisioning</p>
+<p><strong>Notes</strong>:
+- Always use <code>standard</code> plan for production MAS deployments
+- Lite plan is only suitable for development/testing with minimal data
+- Pricing is based on storage capacity, requests, and data transfer
+- Not applicable for OCS (<code>cos_type=ocs</code>)</p>
+<h3 id="cos_url">cos_url<a class="headerlink" href="#cos_url" title="Permanent link">¤</a></h3>
+<p>The IBM Cloud COS regional endpoint URL for S3 API access.</p>
+<ul>
+<li><strong>Required</strong> (IBM COS only, for provisioning)</li>
+<li>Environment Variable: <code>COS_REGION_LOCATION_URL</code></li>
+<li>Default Value: <code>https://s3.us.cloud-object-storage.appdomain.cloud</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the S3-compatible API endpoint URL for accessing the IBM Cloud COS instance. This URL is used in the generated ObjectStorageCfg resource for MAS to connect to COS.</p>
+<p><strong>When to use</strong>: Only relevant when <code>cos_type=ibm</code>. Should match the region where your COS instance is located for optimal performance.</p>
+<p><strong>Valid values</strong>:
+- Regional endpoints: <code>https://s3.&lt;region&gt;.cloud-object-storage.appdomain.cloud</code>
+- Examples:
+  - US: <code>https://s3.us.cloud-object-storage.appdomain.cloud</code>
+  - EU: <code>https://s3.eu.cloud-object-storage.appdomain.cloud</code>
+  - AP: <code>https://s3.ap.cloud-object-storage.appdomain.cloud</code>
+- Private endpoints: <code>https://s3.private.&lt;region&gt;.cloud-object-storage.appdomain.cloud</code>
+- Direct endpoints: <code>https://s3.direct.&lt;region&gt;.cloud-object-storage.appdomain.cloud</code></p>
+<p><strong>Impact</strong>:
+- Determines which IBM Cloud COS endpoint MAS will use for object storage operations
+- Affects network latency and data transfer costs
+- Private endpoints provide better security and lower costs for in-cloud access
+- Must be accessible from the OpenShift cluster</p>
+<p><strong>Related variables</strong>:
+- <a href="#cos_type"><code>cos_type</code></a> - Must be <code>ibm</code> for this to be used
+- <a href="#cos_location_info"><code>cos_location_info</code></a> - Should align with the endpoint region</p>
+<p><strong>Notes</strong>:
+- Use regional endpoints matching your COS instance location for best performance
+- Private endpoints recommended for OpenShift clusters running in IBM Cloud
+- Direct endpoints provide better performance for high-throughput workloads
+- Ensure network connectivity from OpenShift cluster to the endpoint
+- Not applicable for OCS (<code>cos_type=ocs</code>)</p>
+<h3 id="cos_resource_key_iam_role">cos_resource_key_iam_role<a class="headerlink" href="#cos_resource_key_iam_role" title="Permanent link">¤</a></h3>
+<p>The IAM role to assign to the COS service credentials.</p>
+<ul>
+<li><strong>Optional</strong> (IBM COS only)</li>
+<li>Environment Variable: <code>COS_RESOURCE_KEY_IAM_ROLE</code></li>
+<li>Default Value: <code>Manager</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the IAM role level for the service credentials (resource key) created during COS provisioning. This determines the permissions granted to MAS for accessing the COS instance.</p>
+<p><strong>When to use</strong>: Only relevant when <code>cos_type=ibm</code>. The default <code>Manager</code> role provides full access required by MAS.</p>
+<p><strong>Valid values</strong>:
+- <code>Manager</code> - Full access to COS instance (create/read/update/delete buckets and objects)
+- <code>Writer</code> - Read and write access to objects, limited bucket operations
+- <code>Reader</code> - Read-only access to objects
+- <code>Content Reader</code> - Read-only access without listing capabilities</p>
+<p><strong>Impact</strong>:
+- Determines what operations MAS can perform on the COS instance
+- <code>Manager</code> role is required for MAS to create and manage buckets
+- Lower privilege roles will cause MAS functionality to fail
+- Credentials are generated with this role during provisioning</p>
+<p><strong>Related variables</strong>:
+- <a href="#cos_type"><code>cos_type</code></a> - Must be <code>ibm</code> for this to be used
+- <a href="#cos_use_hmac"><code>cos_use_hmac</code></a> - Controls credential format</p>
+<p><strong>Notes</strong>:
+- Always use <code>Manager</code> role for MAS deployments (default)
+- Lower privilege roles are not sufficient for MAS operations
+- The role is assigned to the service credentials, not the instance itself
+- Not applicable for OCS (<code>cos_type=ocs</code>)</p>
+<h3 id="cos_use_hmac">cos_use_hmac<a class="headerlink" href="#cos_use_hmac" title="Permanent link">¤</a></h3>
+<p>Controls whether to use HMAC-style credentials for COS access.</p>
+<ul>
+<li><strong>Optional</strong> (IBM COS only)</li>
+<li>Environment Variable: <code>COS_USE_HMAC</code></li>
+<li>Default Value: <code>true</code></li>
+</ul>
+<p><strong>Purpose</strong>: Determines whether to generate HMAC (AWS S3-compatible) credentials or IAM-based credentials for accessing IBM Cloud COS. MAS requires HMAC credentials for S3 API compatibility.</p>
+<p><strong>When to use</strong>: Should always be <code>true</code> for MAS deployments. Setting to <code>false</code> will prevent MAS from accessing the COS instance.</p>
+<p><strong>Valid values</strong>:
+- <code>true</code> - Generate HMAC credentials (AWS S3-compatible access key and secret key)
+- <code>false</code> - Use IAM API key authentication (not compatible with MAS)</p>
+<p><strong>Impact</strong>:
+- When <code>true</code>: Generates S3-compatible access key ID and secret access key
+- When <code>false</code>: MAS will not be able to access the COS instance
+- HMAC credentials are required for S3 API compatibility
+- Cannot be changed after credential creation (requires new credentials)</p>
+<p><strong>Related variables</strong>:
+- <a href="#cos_type"><code>cos_type</code></a> - Must be <code>ibm</code> for this to be used
+- <a href="#cos_resource_key_iam_role"><code>cos_resource_key_iam_role</code></a> - Role assigned to HMAC credentials</p>
+<p><strong>Notes</strong>:
+- <strong>Always use <code>true</code> for MAS deployments</strong> - this is critical
+- HMAC credentials provide S3 API compatibility required by MAS
+- Setting to <code>false</code> will cause MAS object storage configuration to fail
+- Not applicable for OCS (<code>cos_type=ocs</code>)</p>
+<h3 id="cos_apikey">cos_apikey<a class="headerlink" href="#cos_apikey" title="Permanent link">¤</a></h3>
+<p>The IBM Cloud API key specifically for COS operations.</p>
+<ul>
+<li><strong>Required</strong> (IBM COS only)</li>
+<li>Environment Variable: <code>COS_APIKEY</code></li>
+<li>Default Value: Falls back to <code>ibmcloud_apikey</code> if not set</li>
+</ul>
+<p><strong>Purpose</strong>: Provides an optional dedicated API key for COS operations. This allows using a less privileged API key specifically for COS management, following the principle of least privilege.</p>
+<p><strong>When to use</strong>: Only relevant when <code>cos_type=ibm</code>. Set this if you want to use a different API key for COS than for other IBM Cloud operations.</p>
+<p><strong>Valid values</strong>:
+- A valid IBM Cloud API key with COS service permissions
+- Must have permissions to create and manage COS instances
+- Format: 44-character alphanumeric string</p>
+<p><strong>Impact</strong>:
+- If set, this API key is used instead of <code>ibmcloud_apikey</code> for COS operations
+- Allows separation of permissions between COS and other IBM Cloud services
+- Falls back to <code>ibmcloud_apikey</code> if not specified</p>
+<p><strong>Related variables</strong>:
+- <a href="#ibmcloud_apikey"><code>ibmcloud_apikey</code></a> - Fallback if this is not set
+- <a href="#cos_type"><code>cos_type</code></a> - Must be <code>ibm</code> for this to be used</p>
+<p><strong>Notes</strong>:
+- Optional - defaults to <code>ibmcloud_apikey</code> if not provided
+- Use a dedicated key for better security and permission isolation
+- The key must have COS service management permissions
+- Not applicable for OCS (<code>cos_type=ocs</code>)</p>
+<h3 id="ibmcloud_apikey">ibmcloud_apikey<a class="headerlink" href="#ibmcloud_apikey" title="Permanent link">¤</a></h3>
+<p>The default IBM Cloud API key for all IBM Cloud operations.</p>
+<ul>
+<li><strong>Required</strong> (IBM COS only)</li>
+<li>Environment Variable: <code>IBMCLOUD_APIKEY</code></li>
+<li>Default Value: None</li>
+</ul>
+<p><strong>Purpose</strong>: Provides the primary IBM Cloud API key used across multiple roles in the collection. This is the default authentication method for IBM Cloud services.</p>
+<p><strong>When to use</strong>: Always required when <code>cos_type=ibm</code>. This API key must have permissions to create and manage COS instances.</p>
+<p><strong>Valid values</strong>:
+- A valid IBM Cloud API key with appropriate permissions
+- Must have Editor or Administrator role on COS service
+- Must have access to the specified resource group
+- Format: 44-character alphanumeric string</p>
+<p><strong>Impact</strong>:
+- Used for all IBM Cloud operations unless <code>cos_apikey</code> is specified
+- Determines which IBM Cloud account owns the COS instance
+- Account will be billed for COS usage
+- Required permissions: COS service management, resource group access</p>
+<p><strong>Related variables</strong>:
+- <a href="#cos_apikey"><code>cos_apikey</code></a> - Can override this for COS-specific operations
+- <a href="#ibmcloud_resourcegroup"><code>ibmcloud_resourcegroup</code></a> - Must have access to this resource group
+- <a href="#cos_type"><code>cos_type</code></a> - Must be <code>ibm</code> for this to be used</p>
+<p><strong>Notes</strong>:
+- Store API keys securely using environment variables or secrets management
+- Never commit API keys to version control
+- Consider using service IDs with restricted permissions
+- Used by multiple roles in the collection for consistency
+- Not applicable for OCS (<code>cos_type=ocs</code>)</p>
+<h3 id="cos_resourcegroup">cos_resourcegroup<a class="headerlink" href="#cos_resourcegroup" title="Permanent link">¤</a></h3>
+<p>The IBM Cloud resource group for the COS instance.</p>
+<ul>
+<li><strong>Optional</strong> (IBM COS only)</li>
+<li>Environment Variable: <code>COS_RESOURCEGROUP</code></li>
+<li>Default Value: Falls back to <code>ibmcloud_resourcegroup</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the resource group in IBM Cloud where the COS instance will be created. This allows using a different resource group for COS than for other IBM Cloud resources.</p>
+<p><strong>When to use</strong>: Only relevant when <code>cos_type=ibm</code>. Set this if you want to organize COS in a different resource group than other IBM Cloud resources.</p>
+<p><strong>Valid values</strong>:
+- Any existing resource group name in your IBM Cloud account
+- Common examples: <code>Default</code>, <code>Storage</code>, <code>MAS-Resources</code>
+- Must exist before provisioning
+- Case-sensitive</p>
+<p><strong>Impact</strong>:
+- Determines billing and cost allocation for the COS instance
+- Controls IAM access policies
+- Falls back to <code>ibmcloud_resourcegroup</code> if not specified
+- Cannot be changed after instance creation</p>
+<p><strong>Related variables</strong>:
+- <a href="#ibmcloud_resourcegroup"><code>ibmcloud_resourcegroup</code></a> - Fallback if this is not set
+- <a href="#ibmcloud_apikey"><code>ibmcloud_apikey</code></a> - Must have access to this resource group
+- <a href="#cos_type"><code>cos_type</code></a> - Must be <code>ibm</code> for this to be used</p>
+<p><strong>Notes</strong>:
+- Optional - defaults to <code>ibmcloud_resourcegroup</code> if not provided
+- Use for organizing COS separately from other resources
+- Ensure the API key has access to the specified resource group
+- Not applicable for OCS (<code>cos_type=ocs</code>)</p>
+<h3 id="ibmcloud_resourcegroup">ibmcloud_resourcegroup<a class="headerlink" href="#ibmcloud_resourcegroup" title="Permanent link">¤</a></h3>
+<p>The default IBM Cloud resource group for all IBM Cloud resources.</p>
+<ul>
+<li><strong>Optional</strong> (IBM COS only)</li>
+<li>Environment Variable: <code>IBMCLOUD_RESOURCEGROUP</code></li>
+<li>Default Value: <code>Default</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the default resource group used across multiple roles in the collection. This provides consistency in resource organization.</p>
+<p><strong>When to use</strong>: Only relevant when <code>cos_type=ibm</code>. Set this to organize all IBM Cloud resources in a specific resource group.</p>
+<p><strong>Valid values</strong>:
+- Any existing resource group name in your IBM Cloud account
+- Common examples: <code>Default</code>, <code>Production</code>, <code>Development</code>
+- Must exist before provisioning
+- Case-sensitive</p>
+<p><strong>Impact</strong>:
+- Used as the default resource group for COS and other IBM Cloud resources
+- Determines billing and cost allocation
+- Controls IAM access policies
+- Can be overridden by <code>cos_resourcegroup</code> for COS-specific placement</p>
+<p><strong>Related variables</strong>:
+- <a href="#cos_resourcegroup"><code>cos_resourcegroup</code></a> - Can override this for COS
+- <a href="#ibmcloud_apikey"><code>ibmcloud_apikey</code></a> - Must have access to this resource group
+- <a href="#cos_type"><code>cos_type</code></a> - Must be <code>ibm</code> for this to be used</p>
+<p><strong>Notes</strong>:
+- Defaults to <code>Default</code> resource group if not specified
+- Use consistent resource groups across all MAS-related services
+- Helps with cost tracking and access management
+- Not applicable for OCS (<code>cos_type=ocs</code>)</p>
+<h2 id="role-variables-mas-configuration">Role Variables - MAS Configuration<a class="headerlink" href="#role-variables-mas-configuration" title="Permanent link">¤</a></h2>
+<h3 id="mas_instance_id">mas_instance_id<a class="headerlink" href="#mas_instance_id" title="Permanent link">¤</a></h3>
+<p>The MAS instance ID that the ObjectStorageCfg will target.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>MAS_INSTANCE_ID</code></li>
+<li>Default Value: None</li>
+</ul>
+<p><strong>Purpose</strong>: Identifies the specific MAS instance for which the ObjectStorageCfg resource will be generated. This ensures the object storage configuration is associated with the correct MAS deployment.</p>
+<p><strong>When to use</strong>: Required if you want the role to generate an ObjectStorageCfg resource. If not set (along with <code>mas_config_dir</code>), the role will only provision the storage but not generate MAS configuration.</p>
+<p><strong>Valid values</strong>:
+- Alphanumeric string, typically 3-12 characters
+- Common examples: <code>prod</code>, <code>dev</code>, <code>test</code>, <code>masinst1</code>
+- Should match the MAS instance ID used throughout your deployment
+- Lowercase recommended</p>
+<p><strong>Impact</strong>:
+- Used to generate the ObjectStorageCfg resource name and namespace
+- If not set, no ObjectStorageCfg will be generated (storage only)
+- Must match the actual MAS instance ID for configuration to work
+- Both this and <code>mas_config_dir</code> must be set for config generation</p>
+<p><strong>Related variables</strong>:
+- <a href="#mas_config_dir"><code>mas_config_dir</code></a> - Both must be set for config generation
+- Used consistently across all MAS DevOps roles</p>
+<p><strong>Notes</strong>:
+- Use the same <code>mas_instance_id</code> across all MAS components
+- If you only want to provision storage without MAS config, leave this unset
+- The ObjectStorageCfg will be created in the <code>mas-&lt;instance-id&gt;-core</code> namespace
+- Required for automated MAS configuration via <code>suite_config</code> role</p>
+<h3 id="mas_config_dir">mas_config_dir<a class="headerlink" href="#mas_config_dir" title="Permanent link">¤</a></h3>
+<p>Local directory where the ObjectStorageCfg resource will be saved.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>MAS_CONFIG_DIR</code></li>
+<li>Default Value: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the local directory path where the generated ObjectStorageCfg YAML file will be saved. This file can be used to manually configure MAS or as input to the <code>suite_config</code> role.</p>
+<p><strong>When to use</strong>: Required if you want the role to generate an ObjectStorageCfg resource. If not set (along with <code>mas_instance_id</code>), the role will only provision the storage but not generate MAS configuration.</p>
+<p><strong>Valid values</strong>:
+- Any valid local filesystem path (e.g., <code>~/masconfig</code>, <code>/opt/mas/config</code>)
+- Directory will be created if it doesn't exist
+- Should have write permissions
+- Recommended to use an absolute path</p>
+<p><strong>Impact</strong>:
+- ObjectStorageCfg YAML file is saved in this directory
+- If not set, no ObjectStorageCfg will be generated (storage only)
+- Required for subsequent MAS configuration steps
+- Both this and <code>mas_instance_id</code> must be set for config generation</p>
+<p><strong>Related variables</strong>:
+- <a href="#mas_instance_id"><code>mas_instance_id</code></a> - Both must be set for config generation
+- Used consistently across all MAS DevOps roles for configuration storage</p>
+<p><strong>Notes</strong>:
+- Use the same <code>mas_config_dir</code> across all MAS DevOps roles
+- The generated file can be applied manually with <code>oc apply -f</code>
+- Can be used as input to the <code>suite_config</code> role for automated configuration
+- If you only want to provision storage without MAS config, leave this unset</p>
+<h3 id="include_cluster_ingress_cert_chain">include_cluster_ingress_cert_chain<a class="headerlink" href="#include_cluster_ingress_cert_chain" title="Permanent link">¤</a></h3>
+<p>Controls whether to include the complete certificate chain in the ObjectStorageCfg.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>INCLUDE_CLUSTER_INGRESS_CERT_CHAIN</code></li>
+<li>Default Value: <code>False</code></li>
+</ul>
+<p><strong>Purpose</strong>: When enabled, includes the complete TLS certificate chain from the cluster's ingress in the generated ObjectStorageCfg resource. This is useful when the cluster uses certificates from a trusted certificate authority.</p>
+<p><strong>When to use</strong>: Set to <code>True</code> when your OpenShift cluster's ingress uses certificates signed by a trusted CA and you want MAS to validate the complete certificate chain when accessing OCS.</p>
+<p><strong>Valid values</strong>:
+- <code>True</code> - Include complete certificate chain in ObjectStorageCfg
+- <code>False</code> - Include only the leaf certificate (default)</p>
+<p><strong>Impact</strong>:
+- When <code>True</code>: ObjectStorageCfg includes full certificate chain for proper validation
+- When <code>False</code>: Only the leaf certificate is included
+- Primarily relevant for OCS (<code>cos_type=ocs</code>) with custom certificates
+- Helps with certificate validation in environments with intermediate CAs</p>
+<p><strong>Related variables</strong>:
+- <a href="#cos_type"><code>cos_type</code></a> - Most relevant for <code>ocs</code>
+- <a href="#ocp_ingress_tls_secret_name"><code>ocp_ingress_tls_secret_name</code></a> - Source of certificates</p>
+<p><strong>Notes</strong>:
+- Default <code>False</code> is sufficient for most deployments
+- Enable if you experience certificate validation issues with OCS
+- Not typically needed for IBM Cloud COS (<code>cos_type=ibm</code>)
+- The certificate chain is extracted from the cluster's ingress configuration</p>
+<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link">¤</a></h2>
 <p>Create the Ceph Object store on the existing OCS cluster and prepare the objectstorageCfg yaml to mas_config_dir.</p>
 <pre><code class="language-yaml">- hosts: localhost
   any_errors_fatal: true
@@ -388,53 +1261,182 @@
   roles:
     - ibm.mas_devops.cos
 </code></pre>
-<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link"></a></h2>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">¤</a></h2>
 <p>EPL-2.0</p>
-              
-            </div>
-          </div><footer>
+            
+          </div>
 
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
+          <!-- Navigation footer (prev/next) -->
+<nav class="md-footer-nav" aria-label="Footer navigation">
+  <div class="md-footer-nav__inner">
+    <a href="../configure_manage_eventstreams/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+      <div class="md-footer-nav__direction">
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+        <span>Previous</span>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">configure_manage_eventstreams</span>
+      </div>
+    </a>
+    <a href="../cos_bucket/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+      <div class="md-footer-nav__direction">
+        <span>Next</span>
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+        </svg>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">cos_bucket</span>
+      </div>
+    </a>
   </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
-          
-        </div>
+</nav>
+        </article>
       </div>
 
-    </section>
-
+      <!-- Right sidebar - Table of Contents -->
+      <aside class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<nav class="md-sidebar md-sidebar--secondary" aria-label="Table of contents">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <div class="md-toc">
+        <div class="md-toc__title">On this page</div>
+        <ul class="md-toc__list">
+              <li class="md-toc__item">
+                <a href="#role-variables-general" class="md-toc__link" data-md-level="1">
+                  Role Variables - General
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-general_1" class="md-toc__link" data-md-level="1">
+                  Role Variables - General
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#cos_type" class="md-toc__link" data-md-level="2">
+                          cos_type
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#cos_action" class="md-toc__link" data-md-level="2">
+                          cos_action
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#ocp_ingress_tls_secret_name" class="md-toc__link" data-md-level="2">
+                          ocp_ingress_tls_secret_name
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#custom_labels" class="md-toc__link" data-md-level="2">
+                          custom_labels
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-ibm-cos" class="md-toc__link" data-md-level="1">
+                  Role Variables - IBM COS
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#cos_instance_name" class="md-toc__link" data-md-level="2">
+                          cos_instance_name
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#cos_location_info" class="md-toc__link" data-md-level="2">
+                          cos_location_info
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#cos_plan_type" class="md-toc__link" data-md-level="2">
+                          cos_plan_type
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#cos_url" class="md-toc__link" data-md-level="2">
+                          cos_url
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#cos_resource_key_iam_role" class="md-toc__link" data-md-level="2">
+                          cos_resource_key_iam_role
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#cos_use_hmac" class="md-toc__link" data-md-level="2">
+                          cos_use_hmac
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#cos_apikey" class="md-toc__link" data-md-level="2">
+                          cos_apikey
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#ibmcloud_apikey" class="md-toc__link" data-md-level="2">
+                          ibmcloud_apikey
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#cos_resourcegroup" class="md-toc__link" data-md-level="2">
+                          cos_resourcegroup
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#ibmcloud_resourcegroup" class="md-toc__link" data-md-level="2">
+                          ibmcloud_resourcegroup
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-mas-configuration" class="md-toc__link" data-md-level="1">
+                  Role Variables - MAS Configuration
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#mas_instance_id" class="md-toc__link" data-md-level="2">
+                          mas_instance_id
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_config_dir" class="md-toc__link" data-md-level="2">
+                          mas_config_dir
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#include_cluster_ingress_cert_chain" class="md-toc__link" data-md-level="2">
+                          include_cluster_ingress_cert_chain
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#example-playbook" class="md-toc__link" data-md-level="1">
+                  Example Playbook
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#license" class="md-toc__link" data-md-level="1">
+                  License
+                </a>
+              </li>
+        </ul>
+      </div>
+    </div>
   </div>
+</nav>
+      </aside>
+    </div>
 
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-        <span>
-          <a href="https://github.com/ibm-mas/ansible-devops" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
-        </span>
-    
-    
-      <span><a href="../configure_manage_eventstreams/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../cos_bucket/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
-</div>
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "../..";</script>
-    <script src="../../js/theme_extra.js"></script>
-    <script src="../../js/theme.js"></script>
-      <script src="../../search/main.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
-
-</body>
-</html>
+    <!-- Footer - Full width outside container -->
+    <footer class="md-footer">
+      Built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/durera/mkdocs-carbon">Carbon theme</a>
+    </footer>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": false, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

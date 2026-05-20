@@ -1,0 +1,1714 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Backup and Restore - MAS DevOps Ansible Collection</title>
+
+    <!-- Pure CSS (https://pure-css.github.io/) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="../../js/theme.js"></script>
+
+    <!-- Carbon theme zones (white, g10, g90, g100) -->
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css">
+
+    <!-- The Carbon web-components/framework -->
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/ui-shell.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/accordion.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/breadcrumb.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/select.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/tabs.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/search.min.js"></script>
+
+    <!-- HighlightJS code formatting support -->
+    <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <!-- Required by MkDocs search -->
+    <script>var base_url = "../..";</script>
+
+    <!-- User defined extras -->
+    
+    
+
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: black; }
+        </style></head>
+
+  <body class="md-grid" data-theme-default="g90">
+    <!-- Header -->
+    <cds-header aria-label="MAS DevOps Ansible Collection" class="md-header">
+      <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+      <cds-header-name href="../.." prefix="IBM">MAS DevOps Ansible Collection</cds-header-name>
+      <cds-header-nav menu-bar-label="IBM MAS DevOps Ansible Collection">
+          <cds-header-nav-item is-active="" target="" href="">Ansible</cds-header-nav-item>
+          <cds-header-nav-item target="" href="https://ibm-mas.github.io/cli/">CLI</cds-header-nav-item>
+      </cds-header-nav>
+
+      <div class="cds--header__global">
+<div class="md-theme-toggle" data-theme-default="g90">
+  <button class="md-theme-toggle__button" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="md-theme-toggle__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+    </svg>
+  </button>
+  <div class="md-theme-toggle__menu" hidden="">
+    <button class="md-theme-toggle__option" data-theme="white">
+      <span class="md-theme-toggle__label">Light</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--white"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g10">
+      <span class="md-theme-toggle__label">Light Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g10"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g90">
+      <span class="md-theme-toggle__label">Dark Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g90"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g100">
+      <span class="md-theme-toggle__label">Dark</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g100"></span>
+    </button>
+  </div>
+</div>
+        <cds-search id="header-search" label-text="Search" cds-search-input="search-event" expandable=""></cds-search>
+      </div>
+      <script>
+        var el = document.getElementById("header-search");
+        el.addEventListener("cds-search-input", function (ev) {
+          console.info(ev.detail.value)
+          document.getElementById("header-search-value").setAttribute("value", ev.detail.value);
+        });
+        el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            location.href="../../search.html?q=" + document.querySelector("#header-search").shadowRoot.querySelector("#input").value;
+          }
+        });
+      </script>
+
+      
+        <cds-header-nav>
+          <cds-header-nav-item href="https://github.com/ibm-mas/ansible-devops/blob/master/docs/playbooks/backup-restore.md">Edit on GitHub</cds-header-nav-item>
+        </cds-header-nav>
+      
+    </cds-header>
+
+    <!-- Main container with three-column layout -->
+    <div class="md-container">
+      <!-- Left sidebar - Navigation -->
+      <aside class="md-sidebar md-sidebar--primary" data-md-component="sidebar">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            <cds-side-nav aria-label="Side navigation">
+              <cds-side-nav-items>
+                
+                  
+  <cds-side-nav-menu title="General Information">
+    
+      
+  <cds-side-nav-menu-item href="../..">
+    Home
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../execution-environment/">
+    Ansible Automation Platform
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Playbooks" active="" expanded="">
+    
+      
+  <cds-side-nav-menu-item href="../ocp/">
+    OCP
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d/">
+    Install Cloud Pak For Data
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aiservice/">
+    Install AI Service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-core/">
+    Install Core
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-iot/">
+    Add IoT
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-manage/">
+    Add Manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-monitor/">
+    Add Monitor
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-optimizer/">
+    Add Optimizer
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-predict/">
+    Add Predict
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-visualinspection/">
+    Add Visual Inspection
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-facilities/">
+    Add Real Estate and Facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-update/">
+    Update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-upgrade/">
+    Upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="./" active="" expanded="">
+    Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../legacy-backup-restore/">
+    Legacy Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: OCP Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_cluster_monitoring/">
+    ocp_cluster_monitoring
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_config/">
+    ocp_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_deprovision/">
+    ocp_deprovision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_efs/">
+    ocp_efs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_github_oauth/">
+    ocp_github_oauth
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_login/">
+    ocp_login
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_node_config/">
+    ocp_node_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_provision/">
+    ocp_provision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_roks_upgrade_registry_storage/">
+    ocp_roks_upgrade_registry_storage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_upgrade/">
+    ocp_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_verify/">
+    ocp_verify
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Dependency Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_bucket_access_point/">
+    aws_bucket_access_point
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_documentdb_user/">
+    aws_documentdb_user
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_policy/">
+    aws_policy
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_route53/">
+    aws_route53
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_user_creation/">
+    aws_user_creation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_vpc/">
+    aws_vpc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cert_manager/">
+    cert_manager
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cis/">
+    cis
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/configure_manage_eventstreams/">
+    configure_manage_eventstreams
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cos/">
+    cos
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cos_bucket/">
+    cos_bucket
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cp4d_admin_pwd_update/">
+    cp4d_admin_pwd_update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cp4d/">
+    cp4d
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cp4d_service/">
+    cp4d_service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/db2/">
+    db2
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/dro/">
+    dro
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/eck/">
+    eck
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/grafana/">
+    grafana
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ibm_catalogs/">
+    ibm_catalogs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/kafka/">
+    kafka
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/longhorn/">
+    longhorn
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/nvidia_gpu/">
+    nvidia_gpu
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/mongodb/">
+    mongodb
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocs/">
+    ocs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/sls/">
+    sls
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/turbonomic/">
+    turbonomic
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Image Mirroring">
+    
+      
+  <cds-side-nav-menu-item href="../../roles/mirror_case_prepare/">
+    mirror_case_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/mirror_extras_prepare/">
+    mirror_extras_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/mirror_images/">
+    mirror_images
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/mirror_ocp/">
+    mirror_ocp
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_idms/">
+    ocp_idms
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_simulate_disconnected_network/">
+    ocp_simulate_disconnected_network
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/registry/">
+    registry
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Suite Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_config/">
+    suite_app_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_install/">
+    suite_app_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_uninstall/">
+    suite_app_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_upgrade/">
+    suite_app_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_rollback/">
+    suite_app_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_backup/">
+    suite_app_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_restore/">
+    suite_app_restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_certs/">
+    suite_certs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_config/">
+    suite_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_db2_setup_for_manage/">
+    suite_db2_setup_for_manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_db2_setup_for_facilities/">
+    suite_db2_setup_for_facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_dns/">
+    suite_dns
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_install/">
+    suite_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_attachments_config/">
+    suite_manage_attachments_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_birt_report_config/">
+    suite_manage_birt_report_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_bim_config/">
+    suite_manage_bim_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_customer_files_config/">
+    suite_manage_customer_files_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_imagestitching_config/">
+    suite_manage_imagestitching_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_import_certs_config/">
+    suite_manage_import_certs_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_load_dbc_scripts/">
+    suite_manage_load_dbc_scripts
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_logging_config/">
+    suite_manage_logging_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_pvc_config/">
+    suite_manage_pvc_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_uninstall/">
+    suite_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_upgrade/">
+    suite_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_rollback/">
+    suite_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_verify/">
+    suite_verify
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_backup/">
+    suite_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_restore/">
+    suite_restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Utilities">
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ansible_version_check/">
+    ansible_version_check
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/entitlement_key_rotation/">
+    entitlement_key_rotation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/gencfg_jdbc/">
+    gencfg_jdbc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/gencfg_watsonstudio/">
+    gencfg_watsonstudio
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/gencfg_workspace/">
+    gencfg_workspace
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/gencfg_mongo/">
+    gencfg_mongo
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+              </cds-side-nav-items>
+            </cds-side-nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="md-content" data-md-component="content">
+        <article class="md-content__inner">
+          <!-- Breadcrumbs -->
+          <div class="md-breadcrumbs"><cds-breadcrumb no-trailing-slash="">
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="../..">Home</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+      <cds-breadcrumb-item>Playbooks</cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#backup-and-restore">Backup and Restore</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+
+  <cds-breadcrumb-item aria-current="page">
+    <cds-select id="breadcrumbs-toc" inline="" placeholder="..." oninput="changeAnchor(this.value)">
+    
+    
+      <cds-select-item value="#overview">Overview</cds-select-item>
+    
+    </cds-select>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+          </div>
+
+          <!-- Page content -->
+          <div class="rst-content">
+            
+            <h1 id="backup-and-restore">Backup and Restore<a class="headerlink" href="#backup-and-restore" title="Permanent link">¤</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>These playbooks are samples to demonstrate how to use the roles in this collection.</p>
+<p>They are <strong>not intended for production use</strong> as-is, they are a starting point for power users to aid in the development of their own Ansible playbooks using the roles in this collection.</p>
+<p>The recommended way to perform backup and restore operations for MAS is to use the <a href="https://ibm-mas.github.io/cli/">MAS CLI</a>, which uses this Ansible Collection to deliver a complete managed lifecycle for your MAS instance.</p>
+</div>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¤</a></h2>
+<p>MAS Devops Collection includes playbooks/guidance for backing up and restoring MAS components and their dependencies. The backup and restore operations are designed to protect your MAS installation and enable disaster recovery, cluster migration, and testing scenarios.</p>
+<p><strong>Supported Components:</strong>
+- <a href="#mongodb-community-backup-and-restore">MongoDB Community</a>
+- <a href="#mas-core-backup-and-restore">MAS Core</a>
+- <a href="#db2-backup-and-restore">Db2 Backup and Restore</a>
+- <a href="#manage-application-backup-and-restore">Manage Application</a></p>
+<p><strong>Roles Supporting Backup/Restore:</strong>
+- <a href="../../roles/cert_manager/"><code>ibm.mas_devops.cert_manager</code></a>
+- <a href="../../roles/db2/"><code>ibm.mas_devops.db2</code></a>
+- <a href="../../roles/ibm_catalogs/"><code>ibm.mas_devops.ibm_catalogs</code></a>
+- <a href="../../roles/mongodb/"><code>ibm.mas_devops.mongodb</code></a>
+- <a href="../../roles/sls/"><code>ibm.mas_devops.sls</code></a>
+- <a href="../../roles/suite_backup/"><code>ibm.mas_devops.suite_backup</code></a>
+- <a href="../../roles/suite_restore/"><code>ibm.mas_devops.suite_restore</code></a>
+- <a href="../../roles/suite_app_backup/"><code>ibm.mas_devops.suite_app_backup</code></a>
+- <a href="../../roles/suite_app_restore/"><code>ibm.mas_devops.suite_app_restore</code></a></p>
+<h1 id="mongodb-community-backup-and-restore">MongoDB Community Backup and Restore<a class="headerlink" href="#mongodb-community-backup-and-restore" title="Permanent link">¤</a></h1>
+<h2 id="overview_1">Overview<a class="headerlink" href="#overview_1" title="Permanent link">¤</a></h2>
+<p>This playbook performs backup and restore operations for MongoDB Community Edition instances. It supports backing up both the MongoDB instance configuration and database data.</p>
+<p><strong>Important</strong>: 
+- Supports MongoDB Community Edition only
+- Can backup/restore entire instance or individual databases
+- Backup includes both Kubernetes resources and database data</p>
+<h2 id="playbook-content">Playbook Content<a class="headerlink" href="#playbook-content" title="Permanent link">¤</a></h2>
+<p>The playbook executes the following operations:</p>
+<h3 id="backup-operation">Backup Operation<a class="headerlink" href="#backup-operation" title="Permanent link">¤</a></h3>
+<ol>
+<li><a href="../../roles/mongodb/">Backup MongoDB Instance Resources</a> - Kubernetes resources (Deployment, Custom resources, ConfigMaps, Secrets)</li>
+<li><a href="../../roles/mongodb/">Backup MongoDB Database Data</a> - Database data using mongodump</li>
+</ol>
+<h3 id="restore-operation">Restore Operation<a class="headerlink" href="#restore-operation" title="Permanent link">¤</a></h3>
+<ol>
+<li><a href="../../roles/mongodb/">Restore MongoDB Instance Resources</a> - Recreate Kubernetes resources</li>
+<li><a href="../../roles/mongodb/">Restore MongoDB Database Data</a> - Restore database data using mongorestore</li>
+</ol>
+<h2 id="required-environment-variables">Required Environment Variables<a class="headerlink" href="#required-environment-variables" title="Permanent link">¤</a></h2>
+<h3 id="common-variables-backup-and-restore">Common Variables (Backup and Restore)<a class="headerlink" href="#common-variables-backup-and-restore" title="Permanent link">¤</a></h3>
+<ul>
+<li><code>MAS_INSTANCE_ID</code> - The instance ID of the MAS installation</li>
+<li><code>MAS_BACKUP_DIR</code> - Directory where backup files will be stored/retrieved (e.g., <code>/tmp/mas_backups</code>)</li>
+<li><code>MONGODB_ACTION</code> - Set to <code>backup</code>, <code>backup-database</code>, <code>restore</code>, or <code>restore-database</code></li>
+<li><code>MONGODB_INSTANCE_NAME</code> - MongoDB instance name (default: <code>mas-mongo-ce</code>)</li>
+<li><code>MONGODB_NAMESPACE</code> - Namespace where MongoDB is installed (default: <code>mongoce</code>)</li>
+</ul>
+<h3 id="backup-specific-variables">Backup-Specific Variables<a class="headerlink" href="#backup-specific-variables" title="Permanent link">¤</a></h3>
+<ul>
+<li><code>MONGODB_BACKUP_VERSION</code> - (Optional) Custom version identifier for the backup. If not provided, defaults to timestamp format <code>YYYYMMDD-HHMMSS</code></li>
+</ul>
+<h3 id="restore-specific-variables">Restore-Specific Variables<a class="headerlink" href="#restore-specific-variables" title="Permanent link">¤</a></h3>
+<ul>
+<li><code>MONGODB_BACKUP_VERSION</code> - (Required) The backup version identifier to restore</li>
+</ul>
+<h2 id="optional-environment-variables">Optional Environment Variables<a class="headerlink" href="#optional-environment-variables" title="Permanent link">¤</a></h2>
+<h3 id="storage-class-override-restore">Storage Class Override (Restore)<a class="headerlink" href="#storage-class-override-restore" title="Permanent link">¤</a></h3>
+<ul>
+<li><code>OVERRIDE_STORAGECLASS</code> - Set to <code>true</code> to override storage class names from backup (default: <code>false</code>)</li>
+<li><code>MONGODB_STORAGECLASS_NAME_RWO</code> - Custom RWO storage class for MongoDB</li>
+</ul>
+<h3 id="application-specific">Application-Specific<a class="headerlink" href="#application-specific" title="Permanent link">¤</a></h3>
+<ul>
+<li><code>MAS_APP_ID</code> - (Optional) MAS application ID if backing up application-specific database</li>
+</ul>
+<h2 id="usage-examples">Usage Examples<a class="headerlink" href="#usage-examples" title="Permanent link">¤</a></h2>
+<h3 id="backup-mongodb-instance">Backup MongoDB Instance<a class="headerlink" href="#backup-mongodb-instance" title="Permanent link">¤</a></h3>
+<p>Create a complete backup of MongoDB instance and all databases:</p>
+<pre><code class="language-bash">export MAS_INSTANCE_ID=inst1
+export MAS_BACKUP_DIR=/backup/mas
+export MONGODB_ACTION=backup
+export MONGODB_INSTANCE_NAME=mas-mongo-ce
+export MONGODB_NAMESPACE=mongoce
+
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook ibm.mas_devops.br_mongodb
+</code></pre>
+<h3 id="backup-with-custom-version">Backup with Custom Version<a class="headerlink" href="#backup-with-custom-version" title="Permanent link">¤</a></h3>
+<p>Create a backup with a custom version identifier:</p>
+<pre><code class="language-bash">export MAS_INSTANCE_ID=inst1
+export MAS_BACKUP_DIR=/backup/mas
+export MONGODB_ACTION=backup
+export MONGODB_BACKUP_VERSION=pre-upgrade-mongo
+export MONGODB_INSTANCE_NAME=mas-mongo-ce
+
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook ibm.mas_devops.br_mongodb
+</code></pre>
+<h3 id="backup-individual-database">Backup Individual Database<a class="headerlink" href="#backup-individual-database" title="Permanent link">¤</a></h3>
+<p>Create a backup of a specific database only:</p>
+<pre><code class="language-bash">export MAS_INSTANCE_ID=inst1
+export MAS_BACKUP_DIR=/backup/mas
+export MONGODB_ACTION=backup-database
+export MONGODB_INSTANCE_NAME=mas-mongo-ce
+export MAS_APP_ID=manage
+
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook ibm.mas_devops.br_mongodb
+</code></pre>
+<h3 id="restore-mongodb-instance">Restore MongoDB Instance<a class="headerlink" href="#restore-mongodb-instance" title="Permanent link">¤</a></h3>
+<p>Restore MongoDB instance from a backup:</p>
+<pre><code class="language-bash">export MAS_INSTANCE_ID=inst1
+export MAS_BACKUP_DIR=/backup/mas
+export MONGODB_ACTION=restore
+export MONGODB_BACKUP_VERSION=20260122-131500
+export MONGODB_INSTANCE_NAME=mas-mongo-ce
+export MONGODB_NAMESPACE=mongoce
+
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook ibm.mas_devops.br_mongodb
+</code></pre>
+<h3 id="restore-with-storage-class-override">Restore with Storage Class Override<a class="headerlink" href="#restore-with-storage-class-override" title="Permanent link">¤</a></h3>
+<p>Restore MongoDB to a different cluster with different storage class:</p>
+<pre><code class="language-bash">export MAS_INSTANCE_ID=inst1
+export MAS_BACKUP_DIR=/backup/mas
+export MONGODB_ACTION=restore
+export MONGODB_BACKUP_VERSION=20260122-131500
+export MONGODB_INSTANCE_NAME=mas-mongo-ce
+export MONGODB_NAMESPACE=mongoce
+
+# Override storage class
+export OVERRIDE_STORAGECLASS=true
+export MONGODB_STORAGECLASS_NAME_RWO=ocs-storagecluster-ceph-rbd
+
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook ibm.mas_devops.br_mongodb
+</code></pre>
+<h3 id="restore-individual-database">Restore Individual Database<a class="headerlink" href="#restore-individual-database" title="Permanent link">¤</a></h3>
+<p>Restore a specific database only:</p>
+<pre><code class="language-bash">export MAS_INSTANCE_ID=inst1
+export MAS_BACKUP_DIR=/backup/mas
+export MONGODB_ACTION=restore-database
+export MONGODB_BACKUP_VERSION=20260122-131500
+export MONGODB_INSTANCE_NAME=mas-mongo-ce
+export MAS_APP_ID=manage
+
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook ibm.mas_devops.br_mongodb
+</code></pre>
+<h2 id="important-considerations">Important Considerations<a class="headerlink" href="#important-considerations" title="Permanent link">¤</a></h2>
+<h3 id="backup-actions">Backup Actions<a class="headerlink" href="#backup-actions" title="Permanent link">¤</a></h3>
+<ul>
+<li><strong>backup</strong>: Full backup of MongoDB instance (Kubernetes resources + all database data)</li>
+<li><strong>backup-database</strong>: Backup specific database data only (requires <code>MAS_APP_ID</code>)</li>
+</ul>
+<h3 id="restore-actions">Restore Actions<a class="headerlink" href="#restore-actions" title="Permanent link">¤</a></h3>
+<ul>
+<li><strong>restore</strong>: Full restore of MongoDB instance (Kubernetes resources + all database data)</li>
+<li><strong>restore-database</strong>: Restore specific database data only (requires <code>MAS_APP_ID</code>)</li>
+</ul>
+<h3 id="prerequisites-for-restore">Prerequisites for Restore<a class="headerlink" href="#prerequisites-for-restore" title="Permanent link">¤</a></h3>
+<ul>
+<li>Target cluster must have MongoDB Community Operator installed</li>
+<li>Sufficient storage capacity for database restoration</li>
+<li>Same or compatible MongoDB version as the backup</li>
+<li>Target cluster must use the same MAS instance ID as the backup</li>
+</ul>
+<h3 id="backup-best-practices">Backup Best Practices<a class="headerlink" href="#backup-best-practices" title="Permanent link">¤</a></h3>
+<ol>
+<li><strong>Regular Schedule</strong>: Perform backups regularly, especially before:</li>
+<li>MongoDB upgrades</li>
+<li>MAS upgrades</li>
+<li>Configuration changes</li>
+<li><strong>Full vs Database Backups</strong>: </li>
+<li>Use full backups for complete disaster recovery</li>
+<li>Use database backups for application-specific data protection</li>
+<li><strong>Test Restores</strong>: Periodically test restore procedures in non-production environments</li>
+<li><strong>Secure Storage</strong>: Store backups in a secure location separate from the cluster</li>
+</ol>
+<h3 id="restore-best-practices">Restore Best Practices<a class="headerlink" href="#restore-best-practices" title="Permanent link">¤</a></h3>
+<ol>
+<li><strong>Pre-Restore Validation</strong>:</li>
+<li>Verify backup archive exists and is complete</li>
+<li>Confirm target cluster has sufficient resources</li>
+<li>Verify MongoDB instance name matches the backup</li>
+<li><strong>Post-Restore Verification</strong>:</li>
+<li>Verify MongoDB pods are running</li>
+<li>Test database connectivity</li>
+<li>Verify data integrity</li>
+<li>Check application connectivity to MongoDB</li>
+</ol>
+<h3 id="storage-requirements">Storage Requirements<a class="headerlink" href="#storage-requirements" title="Permanent link">¤</a></h3>
+<ul>
+<li>Plan for sufficient storage for MongoDB backups</li>
+<li>Database backups can be large depending on data size</li>
+<li>Backup directory structure: <code>{mas_backup_dir}/backup-{version}-mongoce/</code></li>
+</ul>
+<h3 id="security-considerations">Security Considerations<a class="headerlink" href="#security-considerations" title="Permanent link">¤</a></h3>
+<ul>
+<li>Backup files contain sensitive data including database contents and credentials</li>
+<li>Secure backup directory with appropriate permissions (chmod 700 recommended)</li>
+<li>Consider encrypting backups for long-term storage</li>
+<li>Restrict access to backup files to authorized personnel only</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you do not want to set up all the dependencies on your local system, you can run the playbook inside our docker image: <code>docker run -ti --pull always quay.io/ibmmas/cli</code></p>
+</div>
+<h2 id="additional-resources">Additional Resources<a class="headerlink" href="#additional-resources" title="Permanent link">¤</a></h2>
+<p>For detailed information about MongoDB backup and restore operations, refer to the role documentation:
+- <a href="../../roles/mongodb/">MongoDB Backup/Restore</a></p>
+<h1 id="db2-backup-and-restore">Db2 Backup and Restore<a class="headerlink" href="#db2-backup-and-restore" title="Permanent link">¤</a></h1>
+<h2 id="overview_2">Overview<a class="headerlink" href="#overview_2" title="Permanent link">¤</a></h2>
+<p>This playbook performs backup and restore operations for IBM Db2 Universal Operator instances. It supports both online and offline backups, and can store backups either on disk or in S3-compatible object storage(database backups only).</p>
+<p><strong>Important</strong>: The playbook supports multiple backup actions:
+- <code>backup</code> - Full Db2 instance backup
+- <code>backup-database</code> - Individual database backup
+- <code>restore</code> - Full Db2 instance restore
+- <code>restore-database</code> - Individual database restore</p>
+<h2 id="required-environment-variables_1">Required Environment Variables<a class="headerlink" href="#required-environment-variables_1" title="Permanent link">¤</a></h2>
+<h3 id="common-variables-backup-and-restore_1">Common Variables (Backup and Restore)<a class="headerlink" href="#common-variables-backup-and-restore_1" title="Permanent link">¤</a></h3>
+<ul>
+<li><code>MAS_INSTANCE_ID</code> - The instance ID of the MAS installation</li>
+<li><code>MAS_BACKUP_DIR</code> - Directory where backup files will be stored/retrieved (e.g., <code>/tmp/mas_backups</code>)</li>
+<li><code>DB2_INSTANCE_NAME</code> - Name of the Db2 instance</li>
+<li><code>DB2_ACTION</code> - Set to <code>backup</code>, <code>backup-database</code>, <code>restore</code>, or <code>restore-database</code></li>
+</ul>
+<h3 id="backup-specific-variables_1">Backup-Specific Variables<a class="headerlink" href="#backup-specific-variables_1" title="Permanent link">¤</a></h3>
+<ul>
+<li><code>DB2_BACKUP_TYPE</code> - Set to <code>online</code> or <code>offline</code> (default: <code>online</code>)</li>
+<li><code>BACKUP_VENDOR</code> - Set to <code>disk</code> or <code>s3</code> (default: <code>disk</code>)</li>
+</ul>
+<h3 id="restore-specific-variables_1">Restore-Specific Variables<a class="headerlink" href="#restore-specific-variables_1" title="Permanent link">¤</a></h3>
+<ul>
+<li><code>DB2_BACKUP_VERSION</code> - (Required) The backup version identifier to restore</li>
+</ul>
+<h3 id="s3-storage-variables-when-backup_vendors3">S3 Storage Variables (when BACKUP_VENDOR=s3)<a class="headerlink" href="#s3-storage-variables-when-backup_vendors3" title="Permanent link">¤</a></h3>
+<ul>
+<li><code>BACKUP_S3_ALIAS</code> - S3 alias name (default: <code>S3DB2COS</code>)</li>
+<li><code>BACKUP_S3_ENDPOINT</code> - S3 endpoint URL</li>
+<li><code>BACKUP_S3_BUCKET</code> - S3 bucket name</li>
+<li><code>BACKUP_S3_ACCESS_KEY</code> - S3 access key</li>
+<li><code>BACKUP_S3_SECRET_KEY</code> - S3 secret key</li>
+</ul>
+<h2 id="optional-environment-variables_1">Optional Environment Variables<a class="headerlink" href="#optional-environment-variables_1" title="Permanent link">¤</a></h2>
+<h3 id="db2-configuration">Db2 Configuration<a class="headerlink" href="#db2-configuration" title="Permanent link">¤</a></h3>
+<ul>
+<li><code>DB2_NAMESPACE</code> - Namespace where Db2 is installed (default: <code>db2u</code>)</li>
+</ul>
+<h3 id="storage-class-override-restore_1">Storage Class Override (Restore)<a class="headerlink" href="#storage-class-override-restore_1" title="Permanent link">¤</a></h3>
+<ul>
+<li><code>OVERRIDE_STORAGECLASS</code> - Set to <code>true</code> to override storage class names from backup (default: <code>false</code>)</li>
+<li><code>CUSTOM_STORAGE_CLASS_RWO</code> - Storage class for Read-write-only</li>
+<li><code>CUSTOM_STORAGE_CLASS_RWX</code> - Storage class for Read-write-many</li>
+</ul>
+<h2 id="usage-examples_1">Usage Examples<a class="headerlink" href="#usage-examples_1" title="Permanent link">¤</a></h2>
+<h3 id="backup-db2-to-disk-online">Backup Db2 to Disk (Online)<a class="headerlink" href="#backup-db2-to-disk-online" title="Permanent link">¤</a></h3>
+<p>Create an online backup of Db2 instance to local disk:</p>
+<pre><code class="language-bash">export MAS_INSTANCE_ID=inst1
+export MAS_BACKUP_DIR=/backup/mas
+export DB2_INSTANCE_NAME=db2w-shared
+export DB2_ACTION=backup
+export DB2_BACKUP_TYPE=online
+export BACKUP_VENDOR=disk
+
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook ibm.mas_devops.br_db2
+</code></pre>
+<h3 id="backup-db2-to-s3">Backup Db2 to S3<a class="headerlink" href="#backup-db2-to-s3" title="Permanent link">¤</a></h3>
+<p>Create a backup of Db2 instance to S3 storage:</p>
+<pre><code class="language-bash">export MAS_INSTANCE_ID=inst1
+export MAS_BACKUP_DIR=/backup/mas
+export DB2_INSTANCE_NAME=db2w-shared
+export DB2_ACTION=backup
+export DB2_BACKUP_TYPE=online
+export BACKUP_VENDOR=s3
+export BACKUP_S3_ENDPOINT=https://s3.us-east.cloud-object-storage.appdomain.cloud
+export BACKUP_S3_BUCKET=mas-db2-backups
+export BACKUP_S3_ACCESS_KEY=your-access-key
+export BACKUP_S3_SECRET_KEY=your-secret-key
+
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook ibm.mas_devops.br_db2
+</code></pre>
+<h3 id="restore-db2-from-backup">Restore Db2 from Backup<a class="headerlink" href="#restore-db2-from-backup" title="Permanent link">¤</a></h3>
+<p>Restore Db2 instance from a previous backup:</p>
+<pre><code class="language-bash">export MAS_INSTANCE_ID=inst1
+export MAS_BACKUP_DIR=/backup/mas
+export DB2_INSTANCE_NAME=db2w-shared
+export DB2_ACTION=restore
+export DB2_BACKUP_VERSION=20260122-131500
+export BACKUP_VENDOR=disk
+
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook ibm.mas_devops.br_db2
+</code></pre>
+<h3 id="restore-with-storage-class-override_1">Restore with Storage Class Override<a class="headerlink" href="#restore-with-storage-class-override_1" title="Permanent link">¤</a></h3>
+<p>Restore Db2 to a different cluster with different storage classes:</p>
+<pre><code class="language-bash">export MAS_INSTANCE_ID=inst1
+export MAS_BACKUP_DIR=/backup/mas
+export DB2_INSTANCE_NAME=db2w-shared
+export DB2_ACTION=restore
+export DB2_BACKUP_VERSION=20260122-131500
+export BACKUP_VENDOR=disk
+
+# Override storage classes
+export OVERRIDE_STORAGECLASS=true
+export DB2_META_STORAGE_CLASS=ocs-storagecluster-ceph-rbd
+export DB2_DATA_STORAGE_CLASS=ocs-storagecluster-ceph-rbd
+export DB2_BACKUP_STORAGE_CLASS=ocs-storagecluster-ceph-rbd
+export DB2_LOGS_STORAGE_CLASS=ocs-storagecluster-ceph-rbd
+export DB2_TEMP_STORAGE_CLASS=ocs-storagecluster-ceph-rbd
+
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook ibm.mas_devops.br_db2
+</code></pre>
+<h2 id="important-considerations_1">Important Considerations<a class="headerlink" href="#important-considerations_1" title="Permanent link">¤</a></h2>
+<h3 id="backup-types">Backup Types<a class="headerlink" href="#backup-types" title="Permanent link">¤</a></h3>
+<ul>
+<li><strong>Online Backup</strong>: Database remains available during backup (recommended for production)</li>
+<li><strong>Offline Backup</strong>: Database is taken offline during backup (faster but causes downtime)</li>
+</ul>
+<h3 id="storage-vendor-options">Storage Vendor Options<a class="headerlink" href="#storage-vendor-options" title="Permanent link">¤</a></h3>
+<ul>
+<li><strong>Disk</strong>: Stores backups on local filesystem or mounted storage</li>
+<li><strong>S3</strong>: Stores backups in S3-compatible object storage (recommended for production)</li>
+</ul>
+<h3 id="prerequisites-for-restore_1">Prerequisites for Restore<a class="headerlink" href="#prerequisites-for-restore_1" title="Permanent link">¤</a></h3>
+<ul>
+<li>Target cluster must have Db2 Universal Operator installed</li>
+<li>Sufficient storage capacity for database restoration</li>
+<li>Same or compatible Db2 version as the backup</li>
+</ul>
+<h1 id="mas-core-backup-and-restore">MAS Core Backup and Restore<a class="headerlink" href="#mas-core-backup-and-restore" title="Permanent link">¤</a></h1>
+<h2 id="overview_3">Overview<a class="headerlink" href="#overview_3" title="Permanent link">¤</a></h2>
+<p>This guide shows backup and restore operations for IBM Maximo Application Suite Core and its dependencies. This guidance can be used to build your own playbooks to run against any OCP cluster regardless of its type; whether it's running in IBM Cloud, Azure, AWS, or your local datacenter.</p>
+<p><strong>Important</strong>: Backup can only be restored to an instance with the same MAS instance ID.</p>
+<h2 id="guidance-content">Guidance Content<a class="headerlink" href="#guidance-content" title="Permanent link">¤</a></h2>
+<p>Sequence of roles:</p>
+<h3 id="backup-operation_1">Backup Operation<a class="headerlink" href="#backup-operation_1" title="Permanent link">¤</a></h3>
+<ol>
+<li><a href="../../roles/ibm_catalogs/">Backup IBM Operator Catalogs</a> (~1 minute)</li>
+<li><a href="../../roles/cert_manager/">Backup Certificate Manager</a> (~1 minute)</li>
+<li><a href="../../roles/mongodb/">Backup MongoDB Community Edition</a> (~5-30 minutes depending on database size)</li>
+<li><a href="../../roles/sls/">Backup Suite License Service</a> (~2 minutes, optional)</li>
+<li><a href="../../roles/suite_backup/">Backup MAS Core</a> (~5 minutes)</li>
+</ol>
+<h3 id="restore-operation_1">Restore Operation<a class="headerlink" href="#restore-operation_1" title="Permanent link">¤</a></h3>
+<ol>
+<li><a href="../../roles/ibm_catalogs/">Restore IBM Operator Catalogs</a> (~2 minutes)</li>
+<li><a href="../../roles/cert_manager/">Restore Certificate Manager</a> (~5 minutes)</li>
+<li><a href="../../roles/grafana/">Install Grafana</a> (~10 minutes, optional)</li>
+<li><a href="../../roles/mongodb/">Restore MongoDB Community Edition</a> (~10-60 minutes depending on database size)</li>
+<li><a href="../../roles/sls/">Restore Suite License Service</a> (~10 minutes, optional)</li>
+<li><a href="../../roles/dro/">Install Data Reporter Operator</a> (~10 minutes, optional)</li>
+<li><a href="../../roles/suite_restore/">Restore MAS Core</a> (~30 minutes)</li>
+</ol>
+<p>All timings are estimates. See the individual role documentation for more information and full details of all configuration options.</p>
+<h2 id="important-considerations_2">Important Considerations<a class="headerlink" href="#important-considerations_2" title="Permanent link">¤</a></h2>
+<h3 id="prerequisites-for-restore_2">Prerequisites for Restore<a class="headerlink" href="#prerequisites-for-restore_2" title="Permanent link">¤</a></h3>
+<ul>
+<li>Target cluster must have sufficient resources (CPU, memory, storage)</li>
+<li>Certificate Manager must be installed (handled by playbook)</li>
+<li>Target cluster must use the same MAS instance ID as the backup</li>
+<li>Backup files must be accessible from the restore environment</li>
+</ul>
+<h3 id="backup-best-practices_1">Backup Best Practices<a class="headerlink" href="#backup-best-practices_1" title="Permanent link">¤</a></h3>
+<ol>
+<li><strong>Regular Schedule</strong>: Perform backups regularly, especially before:</li>
+<li>MAS upgrades</li>
+<li>Configuration changes</li>
+<li>Application installations</li>
+<li>Cluster maintenance</li>
+<li><strong>Test Restores</strong>: Periodically test restore procedures in non-production environments</li>
+<li><strong>Secure Storage</strong>: Store backups in a secure location separate from the cluster</li>
+<li><strong>Retention Policy</strong>: Implement and document backup retention policies</li>
+<li><strong>Verify Integrity</strong>: Verify backup integrity after completion</li>
+</ol>
+<h3 id="restore-best-practices_1">Restore Best Practices<a class="headerlink" href="#restore-best-practices_1" title="Permanent link">¤</a></h3>
+<ol>
+<li><strong>Pre-Restore Validation</strong>:</li>
+<li>Verify backup archive exists and is complete</li>
+<li>Confirm target cluster has sufficient resources</li>
+<li>Verify MAS instance ID matches the backup</li>
+<li><strong>Dependency Coordination</strong>:</li>
+<li>Ensure all external services (SLS, DRO, databases) are accessible</li>
+<li>Verify network connectivity to external services</li>
+<li><strong>Post-Restore Verification</strong>:</li>
+<li>Verify Suite status is Ready</li>
+<li>Verify all Workspaces are Ready</li>
+<li>Test application connectivity</li>
+<li>Test user authentication</li>
+</ol>
+<h3 id="storage-requirements_1">Storage Requirements<a class="headerlink" href="#storage-requirements_1" title="Permanent link">¤</a></h3>
+<ul>
+<li>Ensure sufficient storage in the backup directory</li>
+<li>Plan for at least 2x the database size for MongoDB backups</li>
+<li>Monitor disk space during backup operations</li>
+<li>Backup directory structure: <code>{mas_backup_dir}/backup-{version}-{component}/</code></li>
+</ul>
+<h3 id="security-considerations_1">Security Considerations<a class="headerlink" href="#security-considerations_1" title="Permanent link">¤</a></h3>
+<ul>
+<li>Backup files contain sensitive data including credentials and certificates</li>
+<li>Secure backup directory with appropriate permissions (chmod 700 recommended)</li>
+<li>Consider encrypting backups for long-term storage</li>
+<li>Restrict access to backup files to authorized personnel only</li>
+<li>Ensure secure transfer of backup files to restore environment</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you do not want to set up all the dependencies on your local system, you can run the playbook inside our docker image: <code>docker run -ti --pull always quay.io/ibmmas/cli</code></p>
+</div>
+<h2 id="additional-resources_1">Additional Resources<a class="headerlink" href="#additional-resources_1" title="Permanent link">¤</a></h2>
+<p>For detailed information about individual backup and restore operations, refer to the role documentation:
+- <a href="../../roles/ibm_catalogs/">IBM Operator Catalogs Backup/Restore</a>
+- <a href="../../roles/cert_manager/">Certificate Manager Backup/Restore</a>
+- <a href="../../roles/mongodb/">MongoDB Backup/Restore</a>
+- <a href="../../roles/sls/">SLS Backup/Restore</a>
+- <a href="../../roles/suite_backup/">MAS Core Backup</a>
+- <a href="../../roles/suite_restore/">MAS Core Restore</a>
+- <a href="../../roles/db2/">Db2 Backup/Restore</a></p>
+<h1 id="manage-application-backup-and-restore">Manage Application Backup and Restore<a class="headerlink" href="#manage-application-backup-and-restore" title="Permanent link">¤</a></h1>
+<h2 id="overview_4">Overview<a class="headerlink" href="#overview_4" title="Permanent link">¤</a></h2>
+<p>This guide shows backup and restore operations for IBM Maximo Manage application.</p>
+<p><strong>Important</strong>:
+- Backup can only be restored to an instance with the same MAS instance ID
+- You <strong>MUST</strong> run the <a href="#db2-backup-and-restore">DB2 backup and restore playbook</a> as a prerequisite step before running Manage backup or restore operations</p>
+<h2 id="content">Content<a class="headerlink" href="#content" title="Permanent link">¤</a></h2>
+<p>Executes the following operations:</p>
+<h3 id="backup-operation_2">Backup Operation<a class="headerlink" href="#backup-operation_2" title="Permanent link">¤</a></h3>
+<ol>
+<li><strong><a href="../../roles/db2/">Backup Db2 Database</a> - PREREQUISITE STEP</strong> (run <code>br_db2.yml</code> playbook separately first)</li>
+<li><a href="../../roles/suite_app_backup/">Backup Manage Application</a></li>
+</ol>
+<h3 id="restore-operation_2">Restore Operation<a class="headerlink" href="#restore-operation_2" title="Permanent link">¤</a></h3>
+<ol>
+<li><strong><a href="../../roles/db2/">Restore Db2 Database</a> - PREREQUISITE STEP</strong> (run <code>br_db2.yml</code> playbook separately first)</li>
+<li><a href="../../roles/suite_app_restore/">Restore Manage Application</a></li>
+</ol>
+<h2 id="important-considerations_3">Important Considerations<a class="headerlink" href="#important-considerations_3" title="Permanent link">¤</a></h2>
+<h3 id="prerequisites-for-restore_3">Prerequisites for Restore<a class="headerlink" href="#prerequisites-for-restore_3" title="Permanent link">¤</a></h3>
+<ul>
+<li>Target cluster must have MAS Core installed and configured</li>
+<li>Target cluster must have Db2 Universal Operator installed</li>
+<li>Workspace must exist with the same workspace ID</li>
+<li>Sufficient resources (CPU, memory, storage) for both Db2 and Manage</li>
+<li>Target cluster must use the same MAS instance ID as the backup</li>
+</ul>
+<h3 id="backup-best-practices_2">Backup Best Practices<a class="headerlink" href="#backup-best-practices_2" title="Permanent link">¤</a></h3>
+<ol>
+<li><strong>Two-Step Process</strong>: Always backup DB2 first, then Manage application</li>
+<li>Run <code>br_db2.yml</code> playbook before running Manage application backup</li>
+<li>DB2 backup is NOT automatically included in Manage backup</li>
+<li><strong>Version Alignment</strong>: Use consistent version identifiers for both DB2 and Manage backups for easier tracking</li>
+<li><strong>Regular Schedule</strong>: Perform backups regularly, especially before:</li>
+<li>Manage upgrades or updates</li>
+<li>Configuration changes</li>
+<li>Data migrations</li>
+<li><strong>Test Restores</strong>: Periodically test restore procedures in non-production environments</li>
+<li><strong>Secure Storage</strong>: Store backups in a secure location, preferably using S3 storage</li>
+</ol>
+<h3 id="restore-best-practices_2">Restore Best Practices<a class="headerlink" href="#restore-best-practices_2" title="Permanent link">¤</a></h3>
+<ol>
+<li><strong>Pre-Restore Validation</strong>:</li>
+<li>Verify both DB2 and Manage backup archives exist</li>
+<li>Confirm target cluster has sufficient resources</li>
+<li>Verify MAS instance ID and workspace ID match the backup</li>
+<li><strong>Restore Order</strong>: <strong>CRITICAL</strong> - Always restore DB2 first, then Manage application</li>
+<li>Run <code>br_db2.yml</code> playbook before running Manage application restore</li>
+<li>DB2 restore is NOT automatically included in Manage restore</li>
+<li><strong>Post-Restore Verification</strong>:</li>
+<li>Verify DB2 instance is running and accessible</li>
+<li>Verify Manage workspace status is Ready</li>
+<li>Test Manage application functionality</li>
+<li>Verify data integrity</li>
+</ol>
+<h3 id="storage-requirements_2">Storage Requirements<a class="headerlink" href="#storage-requirements_2" title="Permanent link">¤</a></h3>
+<ul>
+<li>Plan for sufficient storage for both Db2 and Manage backups</li>
+<li>Db2 backups can be large depending on database size</li>
+<li>Manage application configuration is relatively small</li>
+<li>Consider using S3 storage for production backups</li>
+</ul>
+<h3 id="security-considerations_2">Security Considerations<a class="headerlink" href="#security-considerations_2" title="Permanent link">¤</a></h3>
+<ul>
+<li>Backup files contain sensitive data including database contents and credentials</li>
+<li>Secure backup directory with appropriate permissions</li>
+<li>Consider encrypting backups for long-term storage</li>
+<li>Restrict access to backup files to authorized personnel only</li>
+<li>Ensure secure transfer of backup files to restore environment</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you do not want to set up all the dependencies on your local system, you can run the playbook inside our docker image: <code>docker run -ti --pull always quay.io/ibmmas/cli</code></p>
+</div>
+<h2 id="additional-resources_2">Additional Resources<a class="headerlink" href="#additional-resources_2" title="Permanent link">¤</a></h2>
+<p>For detailed information about individual backup and restore operations, refer to the role documentation:
+- <a href="../../roles/db2/">Db2 Backup/Restore</a>
+- <a href="../../roles/suite_app_backup/">Manage Application Backup</a>
+- <a href="../../roles/suite_app_restore/">Manage Application Restore</a></p>
+            
+          </div>
+
+          <!-- Navigation footer (prev/next) -->
+<nav class="md-footer-nav" aria-label="Footer navigation">
+  <div class="md-footer-nav__inner">
+    <a href="../mas-upgrade/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+      <div class="md-footer-nav__direction">
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+        <span>Previous</span>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">Upgrade</span>
+      </div>
+    </a>
+    <a href="../legacy-backup-restore/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+      <div class="md-footer-nav__direction">
+        <span>Next</span>
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+        </svg>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">Legacy Backup and Restore</span>
+      </div>
+    </a>
+  </div>
+</nav>
+        </article>
+      </div>
+
+      <!-- Right sidebar - Table of Contents -->
+      <aside class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<nav class="md-sidebar md-sidebar--secondary" aria-label="Table of contents">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <div class="md-toc">
+        <div class="md-toc__title">On this page</div>
+        <ul class="md-toc__list">
+              <li class="md-toc__item">
+                <a href="#backup-and-restore" class="md-toc__link" data-md-level="1">
+                  Backup and Restore
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#overview" class="md-toc__link" data-md-level="2">
+                          Overview
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#mongodb-community-backup-and-restore" class="md-toc__link" data-md-level="1">
+                  MongoDB Community Backup and Restore
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#overview_1" class="md-toc__link" data-md-level="2">
+                          Overview
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#playbook-content" class="md-toc__link" data-md-level="2">
+                          Playbook Content
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#backup-operation" class="md-toc__link" data-md-level="3">
+                                  Backup Operation
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-operation" class="md-toc__link" data-md-level="3">
+                                  Restore Operation
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#required-environment-variables" class="md-toc__link" data-md-level="2">
+                          Required Environment Variables
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#common-variables-backup-and-restore" class="md-toc__link" data-md-level="3">
+                                  Common Variables (Backup and Restore)
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#backup-specific-variables" class="md-toc__link" data-md-level="3">
+                                  Backup-Specific Variables
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-specific-variables" class="md-toc__link" data-md-level="3">
+                                  Restore-Specific Variables
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#optional-environment-variables" class="md-toc__link" data-md-level="2">
+                          Optional Environment Variables
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#storage-class-override-restore" class="md-toc__link" data-md-level="3">
+                                  Storage Class Override (Restore)
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#application-specific" class="md-toc__link" data-md-level="3">
+                                  Application-Specific
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#usage-examples" class="md-toc__link" data-md-level="2">
+                          Usage Examples
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#backup-mongodb-instance" class="md-toc__link" data-md-level="3">
+                                  Backup MongoDB Instance
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#backup-with-custom-version" class="md-toc__link" data-md-level="3">
+                                  Backup with Custom Version
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#backup-individual-database" class="md-toc__link" data-md-level="3">
+                                  Backup Individual Database
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-mongodb-instance" class="md-toc__link" data-md-level="3">
+                                  Restore MongoDB Instance
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-with-storage-class-override" class="md-toc__link" data-md-level="3">
+                                  Restore with Storage Class Override
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-individual-database" class="md-toc__link" data-md-level="3">
+                                  Restore Individual Database
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#important-considerations" class="md-toc__link" data-md-level="2">
+                          Important Considerations
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#backup-actions" class="md-toc__link" data-md-level="3">
+                                  Backup Actions
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-actions" class="md-toc__link" data-md-level="3">
+                                  Restore Actions
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#prerequisites-for-restore" class="md-toc__link" data-md-level="3">
+                                  Prerequisites for Restore
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#backup-best-practices" class="md-toc__link" data-md-level="3">
+                                  Backup Best Practices
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-best-practices" class="md-toc__link" data-md-level="3">
+                                  Restore Best Practices
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#storage-requirements" class="md-toc__link" data-md-level="3">
+                                  Storage Requirements
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#security-considerations" class="md-toc__link" data-md-level="3">
+                                  Security Considerations
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#additional-resources" class="md-toc__link" data-md-level="2">
+                          Additional Resources
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#db2-backup-and-restore" class="md-toc__link" data-md-level="1">
+                  Db2 Backup and Restore
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#overview_2" class="md-toc__link" data-md-level="2">
+                          Overview
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#required-environment-variables_1" class="md-toc__link" data-md-level="2">
+                          Required Environment Variables
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#common-variables-backup-and-restore_1" class="md-toc__link" data-md-level="3">
+                                  Common Variables (Backup and Restore)
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#backup-specific-variables_1" class="md-toc__link" data-md-level="3">
+                                  Backup-Specific Variables
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-specific-variables_1" class="md-toc__link" data-md-level="3">
+                                  Restore-Specific Variables
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#s3-storage-variables-when-backup_vendors3" class="md-toc__link" data-md-level="3">
+                                  S3 Storage Variables (when BACKUP_VENDOR=s3)
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#optional-environment-variables_1" class="md-toc__link" data-md-level="2">
+                          Optional Environment Variables
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#db2-configuration" class="md-toc__link" data-md-level="3">
+                                  Db2 Configuration
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#storage-class-override-restore_1" class="md-toc__link" data-md-level="3">
+                                  Storage Class Override (Restore)
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#usage-examples_1" class="md-toc__link" data-md-level="2">
+                          Usage Examples
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#backup-db2-to-disk-online" class="md-toc__link" data-md-level="3">
+                                  Backup Db2 to Disk (Online)
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#backup-db2-to-s3" class="md-toc__link" data-md-level="3">
+                                  Backup Db2 to S3
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-db2-from-backup" class="md-toc__link" data-md-level="3">
+                                  Restore Db2 from Backup
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-with-storage-class-override_1" class="md-toc__link" data-md-level="3">
+                                  Restore with Storage Class Override
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#important-considerations_1" class="md-toc__link" data-md-level="2">
+                          Important Considerations
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#backup-types" class="md-toc__link" data-md-level="3">
+                                  Backup Types
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#storage-vendor-options" class="md-toc__link" data-md-level="3">
+                                  Storage Vendor Options
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#prerequisites-for-restore_1" class="md-toc__link" data-md-level="3">
+                                  Prerequisites for Restore
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#mas-core-backup-and-restore" class="md-toc__link" data-md-level="1">
+                  MAS Core Backup and Restore
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#overview_3" class="md-toc__link" data-md-level="2">
+                          Overview
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#guidance-content" class="md-toc__link" data-md-level="2">
+                          Guidance Content
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#backup-operation_1" class="md-toc__link" data-md-level="3">
+                                  Backup Operation
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-operation_1" class="md-toc__link" data-md-level="3">
+                                  Restore Operation
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#important-considerations_2" class="md-toc__link" data-md-level="2">
+                          Important Considerations
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#prerequisites-for-restore_2" class="md-toc__link" data-md-level="3">
+                                  Prerequisites for Restore
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#backup-best-practices_1" class="md-toc__link" data-md-level="3">
+                                  Backup Best Practices
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-best-practices_1" class="md-toc__link" data-md-level="3">
+                                  Restore Best Practices
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#storage-requirements_1" class="md-toc__link" data-md-level="3">
+                                  Storage Requirements
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#security-considerations_1" class="md-toc__link" data-md-level="3">
+                                  Security Considerations
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#additional-resources_1" class="md-toc__link" data-md-level="2">
+                          Additional Resources
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#manage-application-backup-and-restore" class="md-toc__link" data-md-level="1">
+                  Manage Application Backup and Restore
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#overview_4" class="md-toc__link" data-md-level="2">
+                          Overview
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#content" class="md-toc__link" data-md-level="2">
+                          Content
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#backup-operation_2" class="md-toc__link" data-md-level="3">
+                                  Backup Operation
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-operation_2" class="md-toc__link" data-md-level="3">
+                                  Restore Operation
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#important-considerations_3" class="md-toc__link" data-md-level="2">
+                          Important Considerations
+                        </a>
+                          <ul class="md-toc__list">
+                              <li class="md-toc__item">
+                                <a href="#prerequisites-for-restore_3" class="md-toc__link" data-md-level="3">
+                                  Prerequisites for Restore
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#backup-best-practices_2" class="md-toc__link" data-md-level="3">
+                                  Backup Best Practices
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#restore-best-practices_2" class="md-toc__link" data-md-level="3">
+                                  Restore Best Practices
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#storage-requirements_2" class="md-toc__link" data-md-level="3">
+                                  Storage Requirements
+                                </a>
+                              </li>
+                              <li class="md-toc__item">
+                                <a href="#security-considerations_2" class="md-toc__link" data-md-level="3">
+                                  Security Considerations
+                                </a>
+                              </li>
+                          </ul>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#additional-resources_2" class="md-toc__link" data-md-level="2">
+                          Additional Resources
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+      </aside>
+    </div>
+
+    <!-- Footer - Full width outside container -->
+    <footer class="md-footer">
+      Built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/durera/mkdocs-carbon">Carbon theme</a>
+    </footer>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": false, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

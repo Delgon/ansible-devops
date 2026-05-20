@@ -1,0 +1,1141 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>suite_app_backup - MAS DevOps Ansible Collection</title>
+
+    <!-- Pure CSS (https://pure-css.github.io/) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="../../js/theme.js"></script>
+
+    <!-- Carbon theme zones (white, g10, g90, g100) -->
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css">
+
+    <!-- The Carbon web-components/framework -->
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/ui-shell.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/accordion.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/breadcrumb.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/select.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/tabs.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/search.min.js"></script>
+
+    <!-- HighlightJS code formatting support -->
+    <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <!-- Required by MkDocs search -->
+    <script>var base_url = "../..";</script>
+
+    <!-- User defined extras -->
+    
+    
+
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: black; }
+        </style></head>
+
+  <body class="md-grid" data-theme-default="g90">
+    <!-- Header -->
+    <cds-header aria-label="MAS DevOps Ansible Collection" class="md-header">
+      <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+      <cds-header-name href="../.." prefix="IBM">MAS DevOps Ansible Collection</cds-header-name>
+      <cds-header-nav menu-bar-label="IBM MAS DevOps Ansible Collection">
+          <cds-header-nav-item is-active="" target="" href="">Ansible</cds-header-nav-item>
+          <cds-header-nav-item target="" href="https://ibm-mas.github.io/cli/">CLI</cds-header-nav-item>
+      </cds-header-nav>
+
+      <div class="cds--header__global">
+<div class="md-theme-toggle" data-theme-default="g90">
+  <button class="md-theme-toggle__button" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="md-theme-toggle__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+    </svg>
+  </button>
+  <div class="md-theme-toggle__menu" hidden="">
+    <button class="md-theme-toggle__option" data-theme="white">
+      <span class="md-theme-toggle__label">Light</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--white"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g10">
+      <span class="md-theme-toggle__label">Light Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g10"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g90">
+      <span class="md-theme-toggle__label">Dark Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g90"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g100">
+      <span class="md-theme-toggle__label">Dark</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g100"></span>
+    </button>
+  </div>
+</div>
+        <cds-search id="header-search" label-text="Search" cds-search-input="search-event" expandable=""></cds-search>
+      </div>
+      <script>
+        var el = document.getElementById("header-search");
+        el.addEventListener("cds-search-input", function (ev) {
+          console.info(ev.detail.value)
+          document.getElementById("header-search-value").setAttribute("value", ev.detail.value);
+        });
+        el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            location.href="../../search.html?q=" + document.querySelector("#header-search").shadowRoot.querySelector("#input").value;
+          }
+        });
+      </script>
+
+      
+    </cds-header>
+
+    <!-- Main container with three-column layout -->
+    <div class="md-container">
+      <!-- Left sidebar - Navigation -->
+      <aside class="md-sidebar md-sidebar--primary" data-md-component="sidebar">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            <cds-side-nav aria-label="Side navigation">
+              <cds-side-nav-items>
+                
+                  
+  <cds-side-nav-menu title="General Information">
+    
+      
+  <cds-side-nav-menu-item href="../..">
+    Home
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../execution-environment/">
+    Ansible Automation Platform
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Playbooks">
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/ocp/">
+    OCP
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/cp4d/">
+    Install Cloud Pak For Data
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/aiservice/">
+    Install AI Service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-core/">
+    Install Core
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-iot/">
+    Add IoT
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-manage/">
+    Add Manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-monitor/">
+    Add Monitor
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-optimizer/">
+    Add Optimizer
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-predict/">
+    Add Predict
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-visualinspection/">
+    Add Visual Inspection
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-facilities/">
+    Add Real Estate and Facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-update/">
+    Update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-upgrade/">
+    Upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/backup-restore/">
+    Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/legacy-backup-restore/">
+    Legacy Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: OCP Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../ocp_cluster_monitoring/">
+    ocp_cluster_monitoring
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_config/">
+    ocp_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_deprovision/">
+    ocp_deprovision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_efs/">
+    ocp_efs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_github_oauth/">
+    ocp_github_oauth
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_login/">
+    ocp_login
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_node_config/">
+    ocp_node_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_provision/">
+    ocp_provision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_roks_upgrade_registry_storage/">
+    ocp_roks_upgrade_registry_storage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_upgrade/">
+    ocp_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_verify/">
+    ocp_verify
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Dependency Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../aws_bucket_access_point/">
+    aws_bucket_access_point
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_documentdb_user/">
+    aws_documentdb_user
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_policy/">
+    aws_policy
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_route53/">
+    aws_route53
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_user_creation/">
+    aws_user_creation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_vpc/">
+    aws_vpc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cert_manager/">
+    cert_manager
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cis/">
+    cis
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../configure_manage_eventstreams/">
+    configure_manage_eventstreams
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos/">
+    cos
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos_bucket/">
+    cos_bucket
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_admin_pwd_update/">
+    cp4d_admin_pwd_update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d/">
+    cp4d
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_service/">
+    cp4d_service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../db2/">
+    db2
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../dro/">
+    dro
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../eck/">
+    eck
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../grafana/">
+    grafana
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ibm_catalogs/">
+    ibm_catalogs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../kafka/">
+    kafka
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../longhorn/">
+    longhorn
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../nvidia_gpu/">
+    nvidia_gpu
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mongodb/">
+    mongodb
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocs/">
+    ocs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../sls/">
+    sls
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../turbonomic/">
+    turbonomic
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Image Mirroring">
+    
+      
+  <cds-side-nav-menu-item href="../mirror_case_prepare/">
+    mirror_case_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_extras_prepare/">
+    mirror_extras_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_images/">
+    mirror_images
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_ocp/">
+    mirror_ocp
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_idms/">
+    ocp_idms
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_simulate_disconnected_network/">
+    ocp_simulate_disconnected_network
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../registry/">
+    registry
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Suite Mgmt" active="" expanded="">
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_config/">
+    suite_app_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_install/">
+    suite_app_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_uninstall/">
+    suite_app_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_upgrade/">
+    suite_app_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_rollback/">
+    suite_app_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="./" active="" expanded="">
+    suite_app_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_restore/">
+    suite_app_restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_certs/">
+    suite_certs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_config/">
+    suite_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_manage/">
+    suite_db2_setup_for_manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_facilities/">
+    suite_db2_setup_for_facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_dns/">
+    suite_dns
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_install/">
+    suite_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_attachments_config/">
+    suite_manage_attachments_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_birt_report_config/">
+    suite_manage_birt_report_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_bim_config/">
+    suite_manage_bim_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_customer_files_config/">
+    suite_manage_customer_files_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_imagestitching_config/">
+    suite_manage_imagestitching_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_import_certs_config/">
+    suite_manage_import_certs_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_load_dbc_scripts/">
+    suite_manage_load_dbc_scripts
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_logging_config/">
+    suite_manage_logging_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_pvc_config/">
+    suite_manage_pvc_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_uninstall/">
+    suite_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_upgrade/">
+    suite_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_rollback/">
+    suite_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_verify/">
+    suite_verify
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_backup/">
+    suite_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_restore/">
+    suite_restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Utilities">
+    
+      
+  <cds-side-nav-menu-item href="../ansible_version_check/">
+    ansible_version_check
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../entitlement_key_rotation/">
+    entitlement_key_rotation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_jdbc/">
+    gencfg_jdbc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_watsonstudio/">
+    gencfg_watsonstudio
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_workspace/">
+    gencfg_workspace
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_mongo/">
+    gencfg_mongo
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+              </cds-side-nav-items>
+            </cds-side-nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="md-content" data-md-component="content">
+        <article class="md-content__inner">
+          <!-- Breadcrumbs -->
+          <div class="md-breadcrumbs"><cds-breadcrumb no-trailing-slash="">
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="../..">Home</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+      <cds-breadcrumb-item>Roles: Suite Mgmt</cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#backup-mas-applications">Backup MAS Applications</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+
+  <cds-breadcrumb-item aria-current="page">
+    <cds-select id="breadcrumbs-toc" inline="" placeholder="..." oninput="changeAnchor(this.value)">
+    
+    
+      <cds-select-item value="#overview">Overview</cds-select-item>
+    
+      <cds-select-item value="#role-variables-general">Role Variables - General</cds-select-item>
+    
+      <cds-select-item value="#what-gets-backed-up">What Gets Backed Up</cds-select-item>
+    
+      <cds-select-item value="#how-persistent-volume-backup-works">How Persistent Volume Backup Works</cds-select-item>
+    
+      <cds-select-item value="#backup-directory-structure">Backup Directory Structure</cds-select-item>
+    
+      <cds-select-item value="#example-playbooks">Example Playbooks</cds-select-item>
+    
+      <cds-select-item value="#notes">Notes</cds-select-item>
+    
+    </cds-select>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+          </div>
+
+          <!-- Page content -->
+          <div class="rst-content">
+            
+            <h1 id="backup-mas-applications">Backup MAS Applications<a class="headerlink" href="#backup-mas-applications" title="Permanent link">¤</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¤</a></h2>
+<p>This role supports backing up MAS application resources and data. Currently supported applications:</p>
+<ul>
+<li><strong><code>manage</code></strong>: Backs up Manage namespace resources (CRs, secrets, subscriptions) and persistent volume data</li>
+<li><strong><code>facilities</code></strong>: Backs up Facilities namespace resources (CRs, secrets, subscriptions) and persistent volume data</li>
+</ul>
+<p>Future support planned for: <code>iot</code>, <code>monitor</code>, <code>health</code>, <code>optimizer</code>, <code>visualinspection</code></p>
+<p>The backup process creates a timestamped backup directory containing:
+1. <strong>Namespace Resources</strong>: Kubernetes resources including application CRs (ManageApp/FacilitiesApp, ManageWorkspace/FacilitiesWorkspace), secrets, and subscriptions
+2. <strong>Persistent Volume Data</strong>: Application data stored in PVCs (automatically detected from workspace CR)</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul>
+<li>An application backup can only be restored to an instance with the same MAS instance ID</li>
+<li>This role backs up application resources and PV data only. Database backups must be performed separately using the appropriate database backup role</li>
+<li>For Manage, see the <a href="../db2/">db2</a> role for database backup</li>
+<li>For Facilities, see the <a href="../db2/">db2</a> role for database backup</li>
+</ul>
+</div>
+<h2 id="role-variables-general">Role Variables - General<a class="headerlink" href="#role-variables-general" title="Permanent link">¤</a></h2>
+<h3 id="mas_app_id">mas_app_id<a class="headerlink" href="#mas_app_id" title="Permanent link">¤</a></h3>
+<p>Defines the MAS application ID for the backup action.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>MAS_APP_ID</code></li>
+<li>Default: None</li>
+<li>Valid Values: <code>manage</code>, <code>facilities</code> (currently supported)</li>
+</ul>
+<h3 id="mas_instance_id">mas_instance_id<a class="headerlink" href="#mas_instance_id" title="Permanent link">¤</a></h3>
+<p>Defines the MAS instance ID for the backup action.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>MAS_INSTANCE_ID</code></li>
+<li>Default: None</li>
+</ul>
+<h3 id="mas_workspace_id">mas_workspace_id<a class="headerlink" href="#mas_workspace_id" title="Permanent link">¤</a></h3>
+<p>Defines the MAS workspace ID for the backup action.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>MAS_WORKSPACE_ID</code></li>
+<li>Default: None</li>
+</ul>
+<h3 id="mas_backup_dir">mas_backup_dir<a class="headerlink" href="#mas_backup_dir" title="Permanent link">¤</a></h3>
+<p>Defines the directory where backups will be stored. The role will create a timestamped subdirectory within this location.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>MAS_BACKUP_DIR</code></li>
+<li>Default: None</li>
+<li>Example: <code>/backup/mas</code></li>
+</ul>
+<h3 id="mas_app_backup_version">mas_app_backup_version<a class="headerlink" href="#mas_app_backup_version" title="Permanent link">¤</a></h3>
+<p>Optional custom version identifier for the backup. If not specified, defaults to timestamp format <code>YYYYMMDD-HHMMSS</code>.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>MAS_APP_BACKUP_VERSION</code></li>
+<li>Default: Auto-generated timestamp</li>
+<li>Example: <code>20240315-143022</code> or <code>v1.0-prod</code></li>
+</ul>
+<h2 id="what-gets-backed-up">What Gets Backed Up<a class="headerlink" href="#what-gets-backed-up" title="Permanent link">¤</a></h2>
+<h3 id="manage-application">Manage Application<a class="headerlink" href="#manage-application" title="Permanent link">¤</a></h3>
+<p>When backing up the Manage application, the following resources are included:</p>
+<p><strong>Namespace Resources</strong> (automatically backed up):
+- <code>ManageApp</code> CR
+- <code>ManageWorkspace</code> CR
+- Encryption secrets (dynamically determined from ManageWorkspace CR)
+- Certificates with <code>mas.ibm.com/instanceId</code> label
+- Subscription and OperatorGroup
+- IBM entitlement secret
+- All referenced secrets (auto-discovered)</p>
+<p><strong>Persistent Volume Data</strong> (automatically backed up if configured in ManageWorkspace CR):
+- All persistent volumes defined in <code>spec.settings.deployment.persistentVolumes</code>
+- Data is backed up as compressed tar.gz archives
+- Each PVC's mount path is archived separately
+- Archives are stored in the <code>data</code> subdirectory</p>
+<p><strong>NOT Included</strong> (must be backed up separately):
+- Manage database (Db2) - use the <a href="../db2/">db2</a> role
+- Suite-level resources - use the <a href="../suite_backup/">suite_backup</a> role</p>
+<h3 id="facilities-application">Facilities Application<a class="headerlink" href="#facilities-application" title="Permanent link">¤</a></h3>
+<p>When backing up the Facilities application, the following resources are included:</p>
+<p><strong>Namespace Resources</strong> (automatically backed up):
+- <code>FacilitiesApp</code> CR
+- <code>FacilitiesWorkspace</code> CR
+- Encryption secrets (dynamically determined from FacilitiesWorkspace CR)
+- Certificates with <code>mas.ibm.com/instanceId</code> label
+- Subscription and OperatorGroup
+- IBM entitlement secret
+- All referenced secrets (auto-discovered)</p>
+<p><strong>Persistent Volume Data</strong> (automatically backed up if configured in FacilitiesWorkspace CR):
+- All persistent volumes defined in <code>spec.settings.deployment.persistentVolumes</code>
+- Data is backed up as compressed tar.gz archives
+- Each PVC's mount path is archived separately
+- Archives are stored in the <code>data</code> subdirectory</p>
+<p><strong>NOT Included</strong> (must be backed up separately):
+- Facilities database (Db2) - use the <a href="../db2/">db2</a> role
+- Suite-level resources - use the <a href="../suite_backup/">suite_backup</a> role</p>
+<h2 id="how-persistent-volume-backup-works">How Persistent Volume Backup Works<a class="headerlink" href="#how-persistent-volume-backup-works" title="Permanent link">¤</a></h2>
+<p>The role automatically detects and backs up persistent volumes configured in the application workspace CR (ManageWorkspace or FacilitiesWorkspace):</p>
+<ol>
+<li><strong>Detection</strong>: Reads <code>spec.settings.deployment.persistentVolumes</code> from the workspace CR</li>
+<li><strong>Pod Selection</strong>: Finds the UI or ALL server bundle pod for the workspace</li>
+<li><strong>Archive Creation</strong>: Creates tar.gz archives of each mount path inside the pod</li>
+<li><strong>Transfer</strong>: Copies archives from pod to local backup directory</li>
+<li><strong>Cleanup</strong>: Removes temporary archives from the pod</li>
+</ol>
+<p>Example ManageWorkspace CR configuration:</p>
+<pre><code class="language-yaml">spec:
+  settings:
+    deployment:
+      persistentVolumes:
+        - accessModes:
+            - ReadWriteMany
+          mountPath: /jmsstore
+          pvcName: mas-inst1-ws1-jmsserver-pvc
+          size: 25Gi
+          storageClassName: efs-csi
+        - accessModes:
+            - ReadWriteMany
+          mountPath: /usr/share/fonts/truetype/Free3of9Extended
+          pvcName: masms-inst1-ws1-fonts-pvc
+          size: 8Gi
+          storageClassName: efs-csi
+</code></pre>
+<p>This configuration will result in two tar.gz archives:
+- <code>mas-inst1-ws1-jmsserver-pvc.tar.gz</code>
+- <code>masms-inst1-ws1-fonts-pvc.tar.gz</code></p>
+<p>Example FacilitiesWorkspace CR configuration:</p>
+<pre><code class="language-yaml">spec:
+  settings:
+    deployment:
+      persistentVolumes:
+        - accessModes:
+            - ReadWriteMany
+          mountPath: /jmsstore
+          pvcName: mas-inst1-ws1-jmsserver-pvc
+          size: 25Gi
+          storageClassName: efs-csi
+</code></pre>
+<p>This configuration will result in one tar.gz archive:
+- <code>mas-inst1-ws1-jmsserver-pvc.tar.gz</code></p>
+<h2 id="backup-directory-structure">Backup Directory Structure<a class="headerlink" href="#backup-directory-structure" title="Permanent link">¤</a></h2>
+<p>The role creates a backup directory with the following structure:</p>
+<pre><code>&lt;mas_backup_dir&gt;/
+├── backup-&lt;version&gt;-app-manage/
+│   ├── resources/
+│   │   ├── projects
+│   │   │   └── mas-&lt;instance_id&gt;-manage.yaml
+│   |   ├── secrets
+│   │   │   └── &lt;secret1_name&gt;.yaml
+│   │   │   └── &lt;secret2_name&gt;.yaml
+│   |   ├── configmaps
+│   │   │   └── &lt;configmap1_name&gt;.yaml
+│   │   │   └── &lt;configmap2_name&gt;.yaml
+│   |   ├── subscriptions
+│   │   │   └── &lt;subscription_name&gt;.yaml
+│   │   └── ... (other resources)
+│   └── data/
+│       ├── &lt;pvc-name-1&gt;.tar.gz
+│       ├── &lt;pvc-name-2&gt;.tar.gz
+└── backup-&lt;version&gt;-app-facilities/
+    ├── resources/
+    │   ├── projects
+    │   │   └── mas-&lt;instance_id&gt;-facilities.yaml
+    |   ├── secrets
+    │   │   └── &lt;secret1_name&gt;.yaml
+    │   │   └── &lt;secret2_name&gt;.yaml
+    |   ├── configmaps
+    │   │   └── &lt;configmap1_name&gt;.yaml
+    │   │   └── &lt;configmap2_name&gt;.yaml
+    |   ├── subscriptions
+    │   │   └── &lt;subscription_name&gt;.yaml
+    │   └── ... (other resources)
+    └── data/
+        ├── &lt;pvc-name-1&gt;.tar.gz
+</code></pre>
+<h2 id="example-playbooks">Example Playbooks<a class="headerlink" href="#example-playbooks" title="Permanent link">¤</a></h2>
+<h3 id="basic-backup">Basic Backup<a class="headerlink" href="#basic-backup" title="Permanent link">¤</a></h3>
+<p>Backup Manage namespace resources and any configured persistent volumes:</p>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    mas_instance_id: inst1
+    mas_workspace_id: ws1
+    mas_app_id: manage
+    mas_backup_dir: /backup/mas
+  roles:
+    - ibm.mas_devops.suite_app_backup
+</code></pre>
+<h3 id="backup-with-custom-version">Backup with Custom Version<a class="headerlink" href="#backup-with-custom-version" title="Permanent link">¤</a></h3>
+<p>Backup with a custom version identifier:</p>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    mas_instance_id: inst1
+    mas_workspace_id: ws1
+    mas_app_id: manage
+    mas_backup_dir: /backup/mas
+    mas_app_backup_version: "prod-backup-20240315"
+  roles:
+    - ibm.mas_devops.suite_app_backup
+</code></pre>
+<h3 id="backup-facilities-with-custom-version">Backup Facilities with Custom Version<a class="headerlink" href="#backup-facilities-with-custom-version" title="Permanent link">¤</a></h3>
+<p>Backup Facilities with a custom version identifier:</p>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    mas_instance_id: inst1
+    mas_workspace_id: ws1
+    mas_app_id: facilities
+    mas_backup_dir: /backup/mas
+    mas_app_backup_version: "prod-backup-20240315"
+  roles:
+    - ibm.mas_devops.suite_app_backup
+</code></pre>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">¤</a></h2>
+<ul>
+<li><strong>Database Backup</strong>: This role does NOT backup application databases. Use the <a href="../db2/">db2</a> role to backup Db2 databases separately</li>
+<li><strong>Suite Resources</strong>: This role backs up application-specific resources only. For suite-level resources (Suite CR, workspace CRs, etc.), use the <a href="../suite_backup/">suite_backup</a> role</li>
+<li><strong>Storage Requirements</strong>: Ensure sufficient storage space in <code>mas_backup_dir</code> for both namespace resources and PV data</li>
+<li><strong>Pod Access</strong>: The role uses the UI or ALL server bundle pod to access PVC data. Ensure at least one of these pods is running and healthy</li>
+<li><strong>Backup Time</strong>: PV backup duration depends on the amount of data in the persistent volumes</li>
+<li><strong>Automatic Detection</strong>: Persistent volumes are automatically detected from the application workspace CR - no manual configuration needed</li>
+<li><strong>Compression</strong>: All PV data is compressed using gzip to minimize storage requirements</li>
+</ul>
+            
+          </div>
+
+          <!-- Navigation footer (prev/next) -->
+<nav class="md-footer-nav" aria-label="Footer navigation">
+  <div class="md-footer-nav__inner">
+    <a href="../suite_app_rollback/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+      <div class="md-footer-nav__direction">
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+        <span>Previous</span>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">suite_app_rollback</span>
+      </div>
+    </a>
+    <a href="../suite_app_restore/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+      <div class="md-footer-nav__direction">
+        <span>Next</span>
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+        </svg>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">suite_app_restore</span>
+      </div>
+    </a>
+  </div>
+</nav>
+        </article>
+      </div>
+
+      <!-- Right sidebar - Table of Contents -->
+      <aside class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<nav class="md-sidebar md-sidebar--secondary" aria-label="Table of contents">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <div class="md-toc">
+        <div class="md-toc__title">On this page</div>
+        <ul class="md-toc__list">
+              <li class="md-toc__item">
+                <a href="#overview" class="md-toc__link" data-md-level="1">
+                  Overview
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-general" class="md-toc__link" data-md-level="1">
+                  Role Variables - General
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#mas_app_id" class="md-toc__link" data-md-level="2">
+                          mas_app_id
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_instance_id" class="md-toc__link" data-md-level="2">
+                          mas_instance_id
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_workspace_id" class="md-toc__link" data-md-level="2">
+                          mas_workspace_id
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_backup_dir" class="md-toc__link" data-md-level="2">
+                          mas_backup_dir
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_app_backup_version" class="md-toc__link" data-md-level="2">
+                          mas_app_backup_version
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#what-gets-backed-up" class="md-toc__link" data-md-level="1">
+                  What Gets Backed Up
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#manage-application" class="md-toc__link" data-md-level="2">
+                          Manage Application
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#facilities-application" class="md-toc__link" data-md-level="2">
+                          Facilities Application
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#how-persistent-volume-backup-works" class="md-toc__link" data-md-level="1">
+                  How Persistent Volume Backup Works
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#backup-directory-structure" class="md-toc__link" data-md-level="1">
+                  Backup Directory Structure
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#example-playbooks" class="md-toc__link" data-md-level="1">
+                  Example Playbooks
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#basic-backup" class="md-toc__link" data-md-level="2">
+                          Basic Backup
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup-with-custom-version" class="md-toc__link" data-md-level="2">
+                          Backup with Custom Version
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup-facilities-with-custom-version" class="md-toc__link" data-md-level="2">
+                          Backup Facilities with Custom Version
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#notes" class="md-toc__link" data-md-level="1">
+                  Notes
+                </a>
+              </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+      </aside>
+    </div>
+
+    <!-- Footer - Full width outside container -->
+    <footer class="md-footer">
+      Built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/durera/mkdocs-carbon">Carbon theme</a>
+    </footer>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": false, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

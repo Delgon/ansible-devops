@@ -1,338 +1,904 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://ibm-mas.github.io/ansible-devops/roles/suite_app_rollback/" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>suite_app_rollback - MAS Devops Collection</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
-        <link href="../../extra.css" rel="stylesheet" />
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>suite_app_rollback - MAS DevOps Ansible Collection</title>
+
+    <!-- Pure CSS (https://pure-css.github.io/) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="../../js/theme.js"></script>
+
+    <!-- Carbon theme zones (white, g10, g90, g100) -->
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css">
+
+    <!-- The Carbon web-components/framework -->
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/ui-shell.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/accordion.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/breadcrumb.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/select.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/tabs.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/search.min.js"></script>
+
+    <!-- HighlightJS code formatting support -->
+    <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <!-- Required by MkDocs search -->
+    <script>var base_url = "../..";</script>
+
+    <!-- User defined extras -->
     
+    
+
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: black; }
+        </style></head>
+
+  <body class="md-grid" data-theme-default="g90">
+    <!-- Header -->
+    <cds-header aria-label="MAS DevOps Ansible Collection" class="md-header">
+      <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+      <cds-header-name href="../.." prefix="IBM">MAS DevOps Ansible Collection</cds-header-name>
+      <cds-header-nav menu-bar-label="IBM MAS DevOps Ansible Collection">
+          <cds-header-nav-item is-active="" target="" href="">Ansible</cds-header-nav-item>
+          <cds-header-nav-item target="" href="https://ibm-mas.github.io/cli/">CLI</cds-header-nav-item>
+      </cds-header-nav>
+
+      <div class="cds--header__global">
+<div class="md-theme-toggle" data-theme-default="g90">
+  <button class="md-theme-toggle__button" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="md-theme-toggle__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+    </svg>
+  </button>
+  <div class="md-theme-toggle__menu" hidden="">
+    <button class="md-theme-toggle__option" data-theme="white">
+      <span class="md-theme-toggle__label">Light</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--white"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g10">
+      <span class="md-theme-toggle__label">Light Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g10"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g90">
+      <span class="md-theme-toggle__label">Dark Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g90"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g100">
+      <span class="md-theme-toggle__label">Dark</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g100"></span>
+    </button>
+  </div>
+</div>
+        <cds-search id="header-search" label-text="Search" cds-search-input="search-event" expandable=""></cds-search>
+      </div>
       <script>
-        // Current page data
-        var mkdocs_page_name = "suite_app_rollback";
-        var mkdocs_page_input_path = "roles/suite_app_rollback.md";
-        var mkdocs_page_url = "/ansible-devops/roles/suite_app_rollback/";
+        var el = document.getElementById("header-search");
+        el.addEventListener("cds-search-input", function (ev) {
+          console.info(ev.detail.value)
+          document.getElementById("header-search-value").setAttribute("value", ev.detail.value);
+        });
+        el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            location.href="../../search.html?q=" + document.querySelector("#header-search").shadowRoot.querySelector("#input").value;
+          }
+        });
       </script>
+
+      
+    </cds-header>
+
+    <!-- Main container with three-column layout -->
+    <div class="md-container">
+      <!-- Left sidebar - Navigation -->
+      <aside class="md-sidebar md-sidebar--primary" data-md-component="sidebar">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            <cds-side-nav aria-label="Side navigation">
+              <cds-side-nav-items>
+                
+                  
+  <cds-side-nav-menu title="General Information">
     
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+      
+  <cds-side-nav-menu-item href="../..">
+    Home
+  </cds-side-nav-menu-item>
 
-<body class="wy-body-for-nav" role="document">
+    
+      
+  <cds-side-nav-menu-item href="../../execution-environment/">
+    Ansible Automation Platform
+  </cds-side-nav-menu-item>
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> MAS Devops Collection
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+  </cds-side-nav-menu>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Playbooks</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/ocp/">OCP</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/cp4d/">Install Cloud Pak For Data</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-core/">Install Core</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-iot/">Add IoT</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-manage/">Add Manage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-monitor/">Add Monitor</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-optimizer/">Add Optimizer</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-predict/">Add Predict</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-visualinspection/">Add Visual Inspection</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-update/">Update</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-upgrade/">Upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/uninstall-core/">Uninstall Core</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: OCP Mgmt</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_cluster_monitoring/">ocp_cluster_monitoring</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_config/">ocp_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_deprovision/">ocp_deprovision</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_efs/">ocp_efs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_github_oauth/">ocp_github_oauth</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_login/">ocp_login</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_node_config/">ocp_node_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_provision/">ocp_provision</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_roks_upgrade_registry_storage/">ocp_roks_upgrade_registry_storage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_upgrade/">ocp_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_verify/">ocp_verify</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Dependency Mgmt</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../appconnect/">appconnect</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_bucket_access_point/">aws_bucket_access_point</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_documentdb_user/">aws_documentdb_user</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_policy/">aws_policy</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_route53/">aws_route53</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_user_creation/">aws_user_creation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_vpc/">aws_vpc</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cert_manager/">cert_manager</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cis/">cis</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../common_services/">common-services</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../configure_manage_eventstreams/">configure_manage_eventstreams</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cos/">cos</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cos_bucket/">cos_bucket</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d_admin_pwd_update/">cp4d_admin_pwd_update</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d/">cp4d</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d_service/">cp4d_service</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2/">db2</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2_backup/">db2_backup</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2_restore/">db2_restore</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../dro/">dro</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../grafana/">grafana</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ibm_catalogs/">ibm_catalogs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../kafka/">kafka</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../nvidia_gpu/">nvidia_gpu</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mongodb/">mongodb</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocs/">ocs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../sls/">sls</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../turbonomic/">turbonomic</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../uds/">uds</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Image Mirroring</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_case_prepare/">mirror_case_prepare</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_extras_prepare/">mirror_extras_prepare</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_images/">mirror_images</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_ocp/">mirror_ocp</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_contentsourcepolicy/">ocp_contentsourcepolicy</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_simulate_disconnected_network/">ocp_simulate_disconnected_network</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../registry/">registry</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Suite Mgmt</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_config/">suite_app_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_install/">suite_app_install</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_uninstall/">suite_app_uninstall</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_upgrade/">suite_app_upgrade</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">suite_app_rollback</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables">Role Variables</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_instance_id">mas_instance_id</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#rollback_mas_app">rollback_mas_app</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#verify_app_version">verify_app_version</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_app_version">mas_app_version</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_app_id">mas_app_id</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#example-playbook">Example Playbook</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#automatic-target-selection">Automatic Target Selection</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#verify-manage-app-version">Verify Manage App version</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_certs/">suite_certs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_config/">suite_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_db2_setup_for_manage/">suite_db2_setup_for_manage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_dns/">suite_dns</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_install/">suite_install</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_birt_report_config/">suite_manage_birt_report_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_bim_config/">suite_manage_bim_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_customer_files_config/">suite_manage_customer_files_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_doclinks_config/">suite_manage_doclinks_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_import_certs_config/">suite_manage_import_certs_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_load_dbc_scripts/">suite_manage_load_dbc_scripts</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_logging_config/">suite_manage_logging_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_pvc_config/">suite_manage_pvc_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_uninstall/">suite_uninstall</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_upgrade/">suite_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_rollback/">suite_rollback</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_verify/">suite_verify</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Utilities</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../ansible_version_check/">ansible_version_check</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../entitlement_key_rotation/">entitlement_key_rotation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_jdbc/">gencfg_jdbc</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_watsonstudio/">gencfg_watsonstudio</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_workspace/">gencfg_workspace</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../install_operator/">install_operator</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_mongo/">gencfg_mongo</a>
-                  </li>
-              </ul>
-      </div>
-    </div>
-    </nav>
+                
+                  
+  <cds-side-nav-menu title="Playbooks">
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/ocp/">
+    OCP
+  </cds-side-nav-menu-item>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">MAS Devops Collection</a>
-        
-      </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Roles: Suite Mgmt</li>
-      <li class="breadcrumb-item active">suite_app_rollback</li>
-    <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/ibm-mas/ansible-devops/blob/master/docs/roles/suite_app_rollback.md" class="icon icon-github"> Edit on GitHub</a>
-    </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
-              
-                <h1 id="suite_app_rollback">suite_app_rollback<a class="headerlink" href="#suite_app_rollback" title="Permanent link"></a></h1>
-<p>This role is to roll back Maximo Application Suite Applications to an earlier version. Currently, this is designed for Manage Application only. Rollback is possible only in 8.7 and later. From 8.7 onwards, every version comes with a set of supported versions to which the Application can be rolled back. For example, you can roll back Manage Application from 8.7.x to 8.7.0. 
-This role will rollback the version for an an installed MAS application after validating:
-- That the specificied version of application is compatible to rollback from the current version. 
-- That the specificied version of application is compatible with the running MAS core platform.</p>
-<p>It will rollback the Manage Application to the desired version.
-It will validate that the Manage Application has been successfully reconciled at the rolled back version.</p>
-<h2 id="role-variables">Role Variables<a class="headerlink" href="#role-variables" title="Permanent link"></a></h2>
-<h3 id="mas_instance_id">mas_instance_id<a class="headerlink" href="#mas_instance_id" title="Permanent link"></a></h3>
-<p>Set the instance ID for the MAS installation where you wish to rollback the application.</p>
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/cp4d/">
+    Install Cloud Pak For Data
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/aiservice/">
+    Install AI Service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-core/">
+    Install Core
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-iot/">
+    Add IoT
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-manage/">
+    Add Manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-monitor/">
+    Add Monitor
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-optimizer/">
+    Add Optimizer
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-predict/">
+    Add Predict
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-visualinspection/">
+    Add Visual Inspection
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-facilities/">
+    Add Real Estate and Facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-update/">
+    Update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-upgrade/">
+    Upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/backup-restore/">
+    Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/legacy-backup-restore/">
+    Legacy Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: OCP Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../ocp_cluster_monitoring/">
+    ocp_cluster_monitoring
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_config/">
+    ocp_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_deprovision/">
+    ocp_deprovision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_efs/">
+    ocp_efs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_github_oauth/">
+    ocp_github_oauth
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_login/">
+    ocp_login
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_node_config/">
+    ocp_node_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_provision/">
+    ocp_provision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_roks_upgrade_registry_storage/">
+    ocp_roks_upgrade_registry_storage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_upgrade/">
+    ocp_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_verify/">
+    ocp_verify
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Dependency Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../aws_bucket_access_point/">
+    aws_bucket_access_point
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_documentdb_user/">
+    aws_documentdb_user
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_policy/">
+    aws_policy
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_route53/">
+    aws_route53
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_user_creation/">
+    aws_user_creation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_vpc/">
+    aws_vpc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cert_manager/">
+    cert_manager
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cis/">
+    cis
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../configure_manage_eventstreams/">
+    configure_manage_eventstreams
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos/">
+    cos
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos_bucket/">
+    cos_bucket
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_admin_pwd_update/">
+    cp4d_admin_pwd_update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d/">
+    cp4d
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_service/">
+    cp4d_service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../db2/">
+    db2
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../dro/">
+    dro
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../eck/">
+    eck
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../grafana/">
+    grafana
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ibm_catalogs/">
+    ibm_catalogs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../kafka/">
+    kafka
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../longhorn/">
+    longhorn
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../nvidia_gpu/">
+    nvidia_gpu
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mongodb/">
+    mongodb
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocs/">
+    ocs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../sls/">
+    sls
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../turbonomic/">
+    turbonomic
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Image Mirroring">
+    
+      
+  <cds-side-nav-menu-item href="../mirror_case_prepare/">
+    mirror_case_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_extras_prepare/">
+    mirror_extras_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_images/">
+    mirror_images
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_ocp/">
+    mirror_ocp
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_idms/">
+    ocp_idms
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_simulate_disconnected_network/">
+    ocp_simulate_disconnected_network
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../registry/">
+    registry
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Suite Mgmt" active="" expanded="">
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_config/">
+    suite_app_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_install/">
+    suite_app_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_uninstall/">
+    suite_app_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_upgrade/">
+    suite_app_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="./" active="" expanded="">
+    suite_app_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_backup/">
+    suite_app_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_restore/">
+    suite_app_restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_certs/">
+    suite_certs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_config/">
+    suite_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_manage/">
+    suite_db2_setup_for_manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_facilities/">
+    suite_db2_setup_for_facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_dns/">
+    suite_dns
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_install/">
+    suite_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_attachments_config/">
+    suite_manage_attachments_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_birt_report_config/">
+    suite_manage_birt_report_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_bim_config/">
+    suite_manage_bim_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_customer_files_config/">
+    suite_manage_customer_files_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_imagestitching_config/">
+    suite_manage_imagestitching_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_import_certs_config/">
+    suite_manage_import_certs_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_load_dbc_scripts/">
+    suite_manage_load_dbc_scripts
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_logging_config/">
+    suite_manage_logging_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_pvc_config/">
+    suite_manage_pvc_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_uninstall/">
+    suite_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_upgrade/">
+    suite_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_rollback/">
+    suite_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_verify/">
+    suite_verify
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_backup/">
+    suite_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_restore/">
+    suite_restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Utilities">
+    
+      
+  <cds-side-nav-menu-item href="../ansible_version_check/">
+    ansible_version_check
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../entitlement_key_rotation/">
+    entitlement_key_rotation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_jdbc/">
+    gencfg_jdbc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_watsonstudio/">
+    gencfg_watsonstudio
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_workspace/">
+    gencfg_workspace
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_mongo/">
+    gencfg_mongo
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+              </cds-side-nav-items>
+            </cds-side-nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="md-content" data-md-component="content">
+        <article class="md-content__inner">
+          <!-- Breadcrumbs -->
+          <div class="md-breadcrumbs"><cds-breadcrumb no-trailing-slash="">
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="../..">Home</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+      <cds-breadcrumb-item>Roles: Suite Mgmt</cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#suite_app_rollback">suite_app_rollback</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+
+  <cds-breadcrumb-item aria-current="page">
+    <cds-select id="breadcrumbs-toc" inline="" placeholder="..." oninput="changeAnchor(this.value)">
+    
+    
+      <cds-select-item value="#role-variables">Role Variables</cds-select-item>
+    
+      <cds-select-item value="#example-playbook">Example Playbook</cds-select-item>
+    
+      <cds-select-item value="#license">License</cds-select-item>
+    
+    </cds-select>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+          </div>
+
+          <!-- Page content -->
+          <div class="rst-content">
+            
+            <h1 id="suite_app_rollback">suite_app_rollback<a class="headerlink" href="#suite_app_rollback" title="Permanent link">¤</a></h1>
+<p>Roll back Maximo Application Suite applications to earlier versions when issues are encountered after upgrades. This role provides a safe rollback mechanism with built-in compatibility validation to ensure the target version is supported for rollback from the current version and compatible with the running MAS core platform.</p>
+<p><strong>Important</strong>: Currently designed for Manage application only. Rollback capability is available in MAS 8.7 and later versions. Each version defines a set of supported rollback targets (e.g., from 8.7.x to 8.7.0).</p>
+<p>The role performs comprehensive validation before rollback and monitors the reconciliation process to ensure successful completion at the target version.</p>
+<h2 id="role-variables">Role Variables<a class="headerlink" href="#role-variables" title="Permanent link">¤</a></h2>
+<h3 id="mas_instance_id">mas_instance_id<a class="headerlink" href="#mas_instance_id" title="Permanent link">¤</a></h3>
+<p>MAS instance identifier where the application rollback will be performed.</p>
 <ul>
 <li><strong>Required</strong></li>
 <li>Environment Variable: <code>MAS_INSTANCE_ID</code></li>
-<li>Default Value: None</li>
+<li>Default: None</li>
 </ul>
-<h3 id="rollback_mas_app">rollback_mas_app<a class="headerlink" href="#rollback_mas_app" title="Permanent link"></a></h3>
-<p>When set to <code>true</code> will ensure that the role performs rollback operation.</p>
-<ul>
-<li>optional</li>
-<li>Environment Variable: <code>ROLLBACK_MAS_APP</code></li>
-<li>Default: True</li>
-</ul>
-<h3 id="verify_app_version">verify_app_version<a class="headerlink" href="#verify_app_version" title="Permanent link"></a></h3>
-<p>When set to <code>true</code> will ensure that the role checks the current Manage Appliation version matches with specified version. </p>
-<ul>
-<li>optional</li>
-<li>Environment Variable: <code>VERIFY_APP_VERSION</code></li>
-<li>Default: False</li>
-</ul>
-<h3 id="mas_app_version">mas_app_version<a class="headerlink" href="#mas_app_version" title="Permanent link"></a></h3>
-<p>The version you wish to rollback to.  Built-in validation will ensure that the rollback will only proceed if a supportable rollback path is chosen. It is required when any of the ROLLBACK_MAS_APP and VERIFY_APP_VERSION variables is set to <code>true</code>.</p>
-<ul>
-<li><strong>Required</strong></li>
-<li>Environment Variable: <code>MAS_APP_VERSION</code></li>
-<li>Default Value: None</li>
-</ul>
-<h3 id="mas_app_id">mas_app_id<a class="headerlink" href="#mas_app_id" title="Permanent link"></a></h3>
-<p>The name of the Maximo Application Suite Application. This will be used to lookup for application namespace and resources. Please be aware that at present, 'manage' is the only supported value for this variable.</p>
+<p><strong>Purpose</strong>: Identifies the target MAS instance containing the application to be rolled back.</p>
+<p><strong>When to use</strong>: Always required. Must match an existing MAS instance with the application installed.</p>
+<p><strong>Valid values</strong>: Valid MAS instance ID (typically 3-12 lowercase alphanumeric characters).</p>
+<p><strong>Impact</strong>: The rollback operation will target the application in the <code>mas-&lt;instance-id&gt;-&lt;app-id&gt;</code> namespace. Incorrect instance ID will cause the role to fail.</p>
+<p><strong>Related variables</strong>: <code>mas_app_id</code>, <code>mas_app_version</code></p>
+<p><strong>Notes</strong>:
+- Must match the instance ID used during MAS installation
+- Case-sensitive value
+- Ensure you have proper backups before performing rollback operations</p>
+<h3 id="mas_app_id">mas_app_id<a class="headerlink" href="#mas_app_id" title="Permanent link">¤</a></h3>
+<p>MAS application identifier to be rolled back.</p>
 <ul>
 <li><strong>Required</strong></li>
 <li>Environment Variable: <code>MAS_APP_ID</code></li>
-<li>Default Value: None </li>
+<li>Default: None</li>
 </ul>
-<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link"></a></h2>
-<h3 id="automatic-target-selection">Automatic Target Selection<a class="headerlink" href="#automatic-target-selection" title="Permanent link"></a></h3>
+<p><strong>Purpose</strong>: Specifies which MAS application will be rolled back to an earlier version.</p>
+<p><strong>When to use</strong>: Always required. Currently only <code>manage</code> is supported.</p>
+<p><strong>Valid values</strong>:
+- <code>manage</code> - Maximo Manage application (only supported value currently)</p>
+<p><strong>Impact</strong>: Determines which application namespace and resources will be targeted for rollback. Only Manage application rollback is currently implemented.</p>
+<p><strong>Related variables</strong>: <code>mas_instance_id</code>, <code>mas_app_version</code></p>
+<p><strong>Notes</strong>:
+- <strong>Critical</strong>: Only <code>manage</code> is supported in current implementation
+- Future versions may support additional applications
+- Application must be installed and running before rollback
+- Rollback capability requires MAS 8.7 or later</p>
+<h3 id="mas_app_version">mas_app_version<a class="headerlink" href="#mas_app_version" title="Permanent link">¤</a></h3>
+<p>Target version to roll back to.</p>
+<ul>
+<li><strong>Required</strong> when <code>rollback_mas_app</code> or <code>verify_app_version</code> is <code>true</code></li>
+<li>Environment Variable: <code>MAS_APP_VERSION</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the exact version to which the application should be rolled back.</p>
+<p><strong>When to use</strong>: Required for rollback operations or version verification. Must be a version that is supported for rollback from the current version.</p>
+<p><strong>Valid values</strong>: Valid MAS application version string (e.g., <code>8.7.0</code>, <code>8.7.1</code>, <code>8.8.0</code>). Must be:
+- A version supported for rollback from the current version
+- Compatible with the running MAS core platform version
+- Available in the configured catalog source</p>
+<p><strong>Impact</strong>: The application will be rolled back to this specific version. Built-in validation prevents unsupported rollback paths.</p>
+<p><strong>Related variables</strong>: <code>mas_app_id</code>, <code>rollback_mas_app</code>, <code>skip_compatibility_check</code></p>
+<p><strong>Notes</strong>:
+- Each MAS version defines supported rollback targets
+- Cannot roll back across major version boundaries in most cases
+- Verify rollback compatibility in IBM documentation before proceeding
+- Consider database schema compatibility when rolling back
+- <strong>Always backup before rollback operations</strong></p>
+<h3 id="rollback_mas_app">rollback_mas_app<a class="headerlink" href="#rollback_mas_app" title="Permanent link">¤</a></h3>
+<p>Enable or disable the actual rollback operation.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>ROLLBACK_MAS_APP</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p><strong>Purpose</strong>: Controls whether the role performs the actual rollback operation or just validation checks.</p>
+<p><strong>When to use</strong>: Set to <code>true</code> to perform rollback, <code>false</code> to only validate without making changes.</p>
+<p><strong>Valid values</strong>:
+- <code>true</code> - Perform the rollback operation (default)
+- <code>false</code> - Validation only, no changes made</p>
+<p><strong>Impact</strong>: When <code>false</code>, the role will validate compatibility but not modify the application. Useful for testing rollback feasibility before execution.</p>
+<p><strong>Related variables</strong>: <code>verify_app_version</code>, <code>mas_app_version</code></p>
+<p><strong>Notes</strong>:
+- Default <code>true</code> means rollback will execute if validation passes
+- Set to <code>false</code> for dry-run validation before actual rollback
+- Combine with <code>verify_app_version</code> for post-rollback verification
+- Validation includes compatibility checks and version availability</p>
+<h3 id="verify_app_version">verify_app_version<a class="headerlink" href="#verify_app_version" title="Permanent link">¤</a></h3>
+<p>Enable verification that the application is at the specified version.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>VERIFY_APP_VERSION</code></li>
+<li>Default: <code>false</code></li>
+</ul>
+<p><strong>Purpose</strong>: Checks whether the current application version matches the specified target version, useful for post-rollback verification.</p>
+<p><strong>When to use</strong>: Set to <code>true</code> to verify the application version without performing rollback. Useful after rollback to confirm success.</p>
+<p><strong>Valid values</strong>:
+- <code>true</code> - Verify current version matches <code>mas_app_version</code>
+- <code>false</code> - Skip version verification (default)</p>
+<p><strong>Impact</strong>: When <code>true</code>, the role will check if the application is at the specified version and report success or failure. No changes are made to the application.</p>
+<p><strong>Related variables</strong>: <code>mas_app_version</code>, <code>rollback_mas_app</code></p>
+<p><strong>Notes</strong>:
+- Useful for post-rollback validation in automation pipelines
+- Can be used independently of rollback operation
+- Set <code>rollback_mas_app=false</code> and <code>verify_app_version=true</code> for verification-only mode
+- Helps confirm rollback completed successfully</p>
+<h3 id="mas_rollback_dryrun">mas_rollback_dryrun<a class="headerlink" href="#mas_rollback_dryrun" title="Permanent link">¤</a></h3>
+<p>Enable dry-run mode for rollback operations.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>MAS_ROLLBACK_DRYRUN</code></li>
+<li>Default: <code>false</code></li>
+</ul>
+<p><strong>Purpose</strong>: Performs all validation checks without actually executing the rollback, allowing you to test the rollback process safely.</p>
+<p><strong>When to use</strong>: Set to <code>true</code> when you want to validate rollback feasibility without making any changes to the system.</p>
+<p><strong>Valid values</strong>:
+- <code>true</code> - Dry-run mode, validation only
+- <code>false</code> - Normal operation (default)</p>
+<p><strong>Impact</strong>: When <code>true</code>, all compatibility checks and validations are performed, but no changes are made to the application or cluster.</p>
+<p><strong>Related variables</strong>: <code>rollback_mas_app</code>, <code>skip_compatibility_check</code></p>
+<p><strong>Notes</strong>:
+- Recommended to run in dry-run mode first before actual rollback
+- Helps identify potential issues before committing to rollback
+- All validation errors will be reported without risk
+- Does not affect the running application</p>
+<h3 id="skip_compatibility_check">skip_compatibility_check<a class="headerlink" href="#skip_compatibility_check" title="Permanent link">¤</a></h3>
+<p>Bypass compatibility validation checks.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>SKIP_COMPATIBILITY_CHECK</code></li>
+<li>Default: <code>false</code></li>
+</ul>
+<p><strong>Purpose</strong>: Allows skipping the built-in compatibility validation between the target rollback version and the current MAS core platform version.</p>
+<p><strong>When to use</strong>: <strong>Use with extreme caution</strong>. Only skip checks when you have verified compatibility through other means or are following IBM support guidance.</p>
+<p><strong>Valid values</strong>:
+- <code>true</code> - Skip compatibility validation (dangerous)
+- <code>false</code> - Perform all compatibility checks (default, recommended)</p>
+<p><strong>Impact</strong>: When <code>true</code>, the role will not validate version compatibility, potentially allowing unsupported rollback operations that could cause system instability or data corruption.</p>
+<p><strong>Related variables</strong>: <code>mas_app_version</code>, <code>rollback_mas_app</code></p>
+<p><strong>Notes</strong>:
+- <strong>Warning</strong>: Skipping compatibility checks can lead to unsupported configurations
+- Only use when explicitly instructed by IBM support
+- May result in application failures or data issues
+- Default <code>false</code> is strongly recommended for production environments
+- Compatibility checks protect against unsupported rollback paths</p>
+<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link">¤</a></h2>
+<h3 id="automatic-target-selection">Automatic Target Selection<a class="headerlink" href="#automatic-target-selection" title="Permanent link">¤</a></h3>
 <p>Running this playbook will rollback Manage Application to the 8.7.1 version. If you run this playbook when you are already on the same version it will take no action.</p>
 <pre><code class="language-yaml">- hosts: localhost
   any_errors_fatal: true
@@ -343,8 +909,8 @@ It will validate that the Manage Application has been successfully reconciled at
   roles:
     - ibm.mas_devops.suite_app_rollback
 </code></pre>
-<h3 id="verify-manage-app-version">Verify Manage App version<a class="headerlink" href="#verify-manage-app-version" title="Permanent link"></a></h3>
-<p>Running this playbook will attempt to verify the current version of Manage Application matches with the specified version. </p>
+<h3 id="verify-manage-app-version">Verify Manage App Version<a class="headerlink" href="#verify-manage-app-version" title="Permanent link">¤</a></h3>
+<p>Running this playbook will attempt to verify the current version of Manage Application matches with the specified version.</p>
 <pre><code class="language-yaml">- hosts: localhost
   any_errors_fatal: true
   vars:
@@ -356,51 +922,125 @@ It will validate that the Manage Application has been successfully reconciled at
   roles:
     - ibm.mas_devops.suite_app_rollback
 </code></pre>
-              
-            </div>
-          </div><footer>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">¤</a></h2>
+<p>EPL-2.0</p>
+            
+          </div>
 
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
+          <!-- Navigation footer (prev/next) -->
+<nav class="md-footer-nav" aria-label="Footer navigation">
+  <div class="md-footer-nav__inner">
+    <a href="../suite_app_upgrade/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+      <div class="md-footer-nav__direction">
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+        <span>Previous</span>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">suite_app_upgrade</span>
+      </div>
+    </a>
+    <a href="../suite_app_backup/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+      <div class="md-footer-nav__direction">
+        <span>Next</span>
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+        </svg>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">suite_app_backup</span>
+      </div>
+    </a>
   </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
-          
-        </div>
+</nav>
+        </article>
       </div>
 
-    </section>
-
+      <!-- Right sidebar - Table of Contents -->
+      <aside class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<nav class="md-sidebar md-sidebar--secondary" aria-label="Table of contents">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <div class="md-toc">
+        <div class="md-toc__title">On this page</div>
+        <ul class="md-toc__list">
+              <li class="md-toc__item">
+                <a href="#role-variables" class="md-toc__link" data-md-level="1">
+                  Role Variables
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#mas_instance_id" class="md-toc__link" data-md-level="2">
+                          mas_instance_id
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_app_id" class="md-toc__link" data-md-level="2">
+                          mas_app_id
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_app_version" class="md-toc__link" data-md-level="2">
+                          mas_app_version
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#rollback_mas_app" class="md-toc__link" data-md-level="2">
+                          rollback_mas_app
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#verify_app_version" class="md-toc__link" data-md-level="2">
+                          verify_app_version
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_rollback_dryrun" class="md-toc__link" data-md-level="2">
+                          mas_rollback_dryrun
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#skip_compatibility_check" class="md-toc__link" data-md-level="2">
+                          skip_compatibility_check
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#example-playbook" class="md-toc__link" data-md-level="1">
+                  Example Playbook
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#automatic-target-selection" class="md-toc__link" data-md-level="2">
+                          Automatic Target Selection
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#verify-manage-app-version" class="md-toc__link" data-md-level="2">
+                          Verify Manage App Version
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#license" class="md-toc__link" data-md-level="1">
+                  License
+                </a>
+              </li>
+        </ul>
+      </div>
+    </div>
   </div>
+</nav>
+      </aside>
+    </div>
 
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-        <span>
-          <a href="https://github.com/ibm-mas/ansible-devops" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
-        </span>
-    
-    
-      <span><a href="../suite_app_upgrade/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../suite_certs/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
-</div>
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "../..";</script>
-    <script src="../../js/theme_extra.js"></script>
-    <script src="../../js/theme.js"></script>
-      <script src="../../search/main.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
-
-</body>
-</html>
+    <!-- Footer - Full width outside container -->
+    <footer class="md-footer">
+      Built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/durera/mkdocs-carbon">Carbon theme</a>
+    </footer>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": false, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

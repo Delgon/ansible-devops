@@ -1,725 +1,1569 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://ibm-mas.github.io/ansible-devops/roles/db2/" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>db2 - MAS Devops Collection</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
-        <link href="../../extra.css" rel="stylesheet" />
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>db2 - MAS DevOps Ansible Collection</title>
+
+    <!-- Pure CSS (https://pure-css.github.io/) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="../../js/theme.js"></script>
+
+    <!-- Carbon theme zones (white, g10, g90, g100) -->
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css">
+
+    <!-- The Carbon web-components/framework -->
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/ui-shell.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/accordion.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/breadcrumb.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/select.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/tabs.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/search.min.js"></script>
+
+    <!-- HighlightJS code formatting support -->
+    <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <!-- Required by MkDocs search -->
+    <script>var base_url = "../..";</script>
+
+    <!-- User defined extras -->
     
+    
+
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: black; }
+        </style></head>
+
+  <body class="md-grid" data-theme-default="g90">
+    <!-- Header -->
+    <cds-header aria-label="MAS DevOps Ansible Collection" class="md-header">
+      <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+      <cds-header-name href="../.." prefix="IBM">MAS DevOps Ansible Collection</cds-header-name>
+      <cds-header-nav menu-bar-label="IBM MAS DevOps Ansible Collection">
+          <cds-header-nav-item is-active="" target="" href="">Ansible</cds-header-nav-item>
+          <cds-header-nav-item target="" href="https://ibm-mas.github.io/cli/">CLI</cds-header-nav-item>
+      </cds-header-nav>
+
+      <div class="cds--header__global">
+<div class="md-theme-toggle" data-theme-default="g90">
+  <button class="md-theme-toggle__button" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="md-theme-toggle__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+    </svg>
+  </button>
+  <div class="md-theme-toggle__menu" hidden="">
+    <button class="md-theme-toggle__option" data-theme="white">
+      <span class="md-theme-toggle__label">Light</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--white"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g10">
+      <span class="md-theme-toggle__label">Light Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g10"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g90">
+      <span class="md-theme-toggle__label">Dark Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g90"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g100">
+      <span class="md-theme-toggle__label">Dark</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g100"></span>
+    </button>
+  </div>
+</div>
+        <cds-search id="header-search" label-text="Search" cds-search-input="search-event" expandable=""></cds-search>
+      </div>
       <script>
-        // Current page data
-        var mkdocs_page_name = "db2";
-        var mkdocs_page_input_path = "roles/db2.md";
-        var mkdocs_page_url = "/ansible-devops/roles/db2/";
+        var el = document.getElementById("header-search");
+        el.addEventListener("cds-search-input", function (ev) {
+          console.info(ev.detail.value)
+          document.getElementById("header-search-value").setAttribute("value", ev.detail.value);
+        });
+        el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            location.href="../../search.html?q=" + document.querySelector("#header-search").shadowRoot.querySelector("#input").value;
+          }
+        });
       </script>
+
+      
+    </cds-header>
+
+    <!-- Main container with three-column layout -->
+    <div class="md-container">
+      <!-- Left sidebar - Navigation -->
+      <aside class="md-sidebar md-sidebar--primary" data-md-component="sidebar">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            <cds-side-nav aria-label="Side navigation">
+              <cds-side-nav-items>
+                
+                  
+  <cds-side-nav-menu title="General Information">
     
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+      
+  <cds-side-nav-menu-item href="../..">
+    Home
+  </cds-side-nav-menu-item>
 
-<body class="wy-body-for-nav" role="document">
+    
+      
+  <cds-side-nav-menu-item href="../../execution-environment/">
+    Ansible Automation Platform
+  </cds-side-nav-menu-item>
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> MAS Devops Collection
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+  </cds-side-nav-menu>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Playbooks</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/ocp/">OCP</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/cp4d/">Install Cloud Pak For Data</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-core/">Install Core</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-iot/">Add IoT</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-manage/">Add Manage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-monitor/">Add Monitor</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-optimizer/">Add Optimizer</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-predict/">Add Predict</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-visualinspection/">Add Visual Inspection</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-update/">Update</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-upgrade/">Upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/uninstall-core/">Uninstall Core</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: OCP Mgmt</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_cluster_monitoring/">ocp_cluster_monitoring</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_config/">ocp_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_deprovision/">ocp_deprovision</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_efs/">ocp_efs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_github_oauth/">ocp_github_oauth</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_login/">ocp_login</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_node_config/">ocp_node_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_provision/">ocp_provision</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_roks_upgrade_registry_storage/">ocp_roks_upgrade_registry_storage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_upgrade/">ocp_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_verify/">ocp_verify</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Dependency Mgmt</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../appconnect/">appconnect</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_bucket_access_point/">aws_bucket_access_point</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_documentdb_user/">aws_documentdb_user</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_policy/">aws_policy</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_route53/">aws_route53</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_user_creation/">aws_user_creation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_vpc/">aws_vpc</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cert_manager/">cert_manager</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cis/">cis</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../common_services/">common-services</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../configure_manage_eventstreams/">configure_manage_eventstreams</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cos/">cos</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cos_bucket/">cos_bucket</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d_admin_pwd_update/">cp4d_admin_pwd_update</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d/">cp4d</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d_service/">cp4d_service</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">db2</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-installation">Role Variables - Installation</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#common_services_namespace">common_services_namespace</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_action">db2_action</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_namespace">db2_namespace</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_channel">db2_channel</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_instance_name">db2_instance_name</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ibm_entitlement_key">ibm_entitlement_key</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_dbname">db2_dbname</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_version">db2_version</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_type">db2_type</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_timezone">db2_timezone</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_4k_device_support">db2_4k_device_support</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_workload">db2_workload</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_table_org">db2_table_org</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_ldap_username">db2_ldap_username</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_ldap_password">db2_ldap_password</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_rotate_password">db2_rotate_password</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-storage">Role Variables - Storage</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_meta_storage_class">db2_meta_storage_class</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_meta_storage_size">db2_meta_storage_size</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_meta_storage_accessmode">db2_meta_storage_accessmode</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_data_storage_class">db2_data_storage_class</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_data_storage_size">db2_data_storage_size</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_data_storage_accessmode">db2_data_storage_accessmode</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_backup_storage_class">db2_backup_storage_class</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_backup_storage_size">db2_backup_storage_size</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_backup_storage_accessmode">db2_backup_storage_accessmode</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_logs_storage_class">db2_logs_storage_class</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_logs_storage_size">db2_logs_storage_size</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_logs_storage_accessmode">db2_logs_storage_accessmode</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_temp_storage_class">db2_temp_storage_class</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_temp_storage_size">db2_temp_storage_size</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_temp_storage_accessmode">db2_temp_storage_accessmode</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-resource-requests">Role Variables - Resource Requests</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_cpu_requests">db2_cpu_requests</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_cpu_limits">db2_cpu_limits</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_memory_requests">db2_memory_requests</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_memory_limits">db2_memory_limits</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-node-label-affinity">Role Variables - Node Label Affinity</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_affinity_key">db2_affinity_key</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_affinity_value">db2_affinity_value</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-node-taint-toleration">Role Variables - Node Taint Toleration</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_tolerate_key">db2_tolerate_key</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_tolerate_value">db2_tolerate_value</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_tolerate_effect">db2_tolerate_effect</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-db2ucluster-database-configuration-settings">Role Variables - DB2UCluster Database Configuration Settings</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_database_db_config">db2_database_db_config</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_instance_dbm_config">db2_instance_dbm_config</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_instance_registry">db2_instance_registry</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-mpp-system">Role Variables - MPP System</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_mln_count">db2_mln_count</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#db2_num_pods">db2_num_pods</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-mas-configuration">Role Variables - MAS Configuration</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_instance_id">mas_instance_id</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_config_dir">mas_config_dir</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_config_scope">mas_config_scope</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_workspace_id">mas_workspace_id</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_application_id">mas_application_id</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#example-playbook">Example Playbook</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
-    </li>
-    </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2_backup/">db2_backup</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2_restore/">db2_restore</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../dro/">dro</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../grafana/">grafana</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ibm_catalogs/">ibm_catalogs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../kafka/">kafka</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../nvidia_gpu/">nvidia_gpu</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mongodb/">mongodb</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocs/">ocs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../sls/">sls</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../turbonomic/">turbonomic</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../uds/">uds</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Image Mirroring</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_case_prepare/">mirror_case_prepare</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_extras_prepare/">mirror_extras_prepare</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_images/">mirror_images</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_ocp/">mirror_ocp</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_contentsourcepolicy/">ocp_contentsourcepolicy</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_simulate_disconnected_network/">ocp_simulate_disconnected_network</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../registry/">registry</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Suite Mgmt</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_config/">suite_app_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_install/">suite_app_install</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_uninstall/">suite_app_uninstall</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_upgrade/">suite_app_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_rollback/">suite_app_rollback</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_certs/">suite_certs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_config/">suite_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_db2_setup_for_manage/">suite_db2_setup_for_manage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_dns/">suite_dns</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_install/">suite_install</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_birt_report_config/">suite_manage_birt_report_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_bim_config/">suite_manage_bim_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_customer_files_config/">suite_manage_customer_files_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_doclinks_config/">suite_manage_doclinks_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_import_certs_config/">suite_manage_import_certs_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_load_dbc_scripts/">suite_manage_load_dbc_scripts</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_logging_config/">suite_manage_logging_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_pvc_config/">suite_manage_pvc_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_uninstall/">suite_uninstall</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_upgrade/">suite_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_rollback/">suite_rollback</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_verify/">suite_verify</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Utilities</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../ansible_version_check/">ansible_version_check</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../entitlement_key_rotation/">entitlement_key_rotation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_jdbc/">gencfg_jdbc</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_watsonstudio/">gencfg_watsonstudio</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_workspace/">gencfg_workspace</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../install_operator/">install_operator</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_mongo/">gencfg_mongo</a>
-                  </li>
-              </ul>
-      </div>
-    </div>
-    </nav>
+                
+                  
+  <cds-side-nav-menu title="Playbooks">
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/ocp/">
+    OCP
+  </cds-side-nav-menu-item>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">MAS Devops Collection</a>
-        
-      </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Roles: Dependency Mgmt</li>
-      <li class="breadcrumb-item active">db2</li>
-    <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/ibm-mas/ansible-devops/blob/master/docs/roles/db2.md" class="icon icon-github"> Edit on GitHub</a>
-    </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
-              
-                <h1 id="db2">db2<a class="headerlink" href="#db2" title="Permanent link"></a></h1>
-<p>This role creates or upgrades a Db2 instance using the Db2u Operator. When installing db2, the db2u operator will now be installed into the same namespace as the db2 instance (<code>db2ucluster</code>). If you already have db2 operator and db2 instances running in separate namespaces, this role will take care of migrating (by deleting &amp; reinstalling) the db2 operators from <code>ibm-common-services</code> to the namespace defined by <code>db2_namespace</code> property (in case of a new role execution for a db2 install or db2 upgrade). A private root CA certificate is created and is used to secure the TLS connections to the database. A Db2 Warehouse cluster will be created along with a public TLS encrypted route to allow external access to the cluster (access is via the ssl-server nodeport port on the <em>-db2u-engn-svc service). Internal access is via the </em>-db2u-engn-svc service and port 50001. Both the external route and the internal service use the same server certificate.</p>
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/cp4d/">
+    Install Cloud Pak For Data
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/aiservice/">
+    Install AI Service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-core/">
+    Install Core
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-iot/">
+    Add IoT
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-manage/">
+    Add Manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-monitor/">
+    Add Monitor
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-optimizer/">
+    Add Optimizer
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-predict/">
+    Add Predict
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-visualinspection/">
+    Add Visual Inspection
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-facilities/">
+    Add Real Estate and Facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-update/">
+    Update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-upgrade/">
+    Upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/backup-restore/">
+    Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/legacy-backup-restore/">
+    Legacy Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: OCP Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../ocp_cluster_monitoring/">
+    ocp_cluster_monitoring
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_config/">
+    ocp_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_deprovision/">
+    ocp_deprovision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_efs/">
+    ocp_efs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_github_oauth/">
+    ocp_github_oauth
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_login/">
+    ocp_login
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_node_config/">
+    ocp_node_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_provision/">
+    ocp_provision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_roks_upgrade_registry_storage/">
+    ocp_roks_upgrade_registry_storage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_upgrade/">
+    ocp_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_verify/">
+    ocp_verify
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Dependency Mgmt" active="" expanded="">
+    
+      
+  <cds-side-nav-menu-item href="../aws_bucket_access_point/">
+    aws_bucket_access_point
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_documentdb_user/">
+    aws_documentdb_user
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_policy/">
+    aws_policy
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_route53/">
+    aws_route53
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_user_creation/">
+    aws_user_creation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_vpc/">
+    aws_vpc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cert_manager/">
+    cert_manager
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cis/">
+    cis
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../configure_manage_eventstreams/">
+    configure_manage_eventstreams
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos/">
+    cos
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos_bucket/">
+    cos_bucket
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_admin_pwd_update/">
+    cp4d_admin_pwd_update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d/">
+    cp4d
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_service/">
+    cp4d_service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="./" active="" expanded="">
+    db2
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../dro/">
+    dro
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../eck/">
+    eck
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../grafana/">
+    grafana
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ibm_catalogs/">
+    ibm_catalogs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../kafka/">
+    kafka
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../longhorn/">
+    longhorn
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../nvidia_gpu/">
+    nvidia_gpu
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mongodb/">
+    mongodb
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocs/">
+    ocs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../sls/">
+    sls
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../turbonomic/">
+    turbonomic
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Image Mirroring">
+    
+      
+  <cds-side-nav-menu-item href="../mirror_case_prepare/">
+    mirror_case_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_extras_prepare/">
+    mirror_extras_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_images/">
+    mirror_images
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_ocp/">
+    mirror_ocp
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_idms/">
+    ocp_idms
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_simulate_disconnected_network/">
+    ocp_simulate_disconnected_network
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../registry/">
+    registry
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Suite Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_config/">
+    suite_app_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_install/">
+    suite_app_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_uninstall/">
+    suite_app_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_upgrade/">
+    suite_app_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_rollback/">
+    suite_app_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_backup/">
+    suite_app_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_restore/">
+    suite_app_restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_certs/">
+    suite_certs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_config/">
+    suite_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_manage/">
+    suite_db2_setup_for_manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_facilities/">
+    suite_db2_setup_for_facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_dns/">
+    suite_dns
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_install/">
+    suite_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_attachments_config/">
+    suite_manage_attachments_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_birt_report_config/">
+    suite_manage_birt_report_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_bim_config/">
+    suite_manage_bim_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_customer_files_config/">
+    suite_manage_customer_files_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_imagestitching_config/">
+    suite_manage_imagestitching_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_import_certs_config/">
+    suite_manage_import_certs_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_load_dbc_scripts/">
+    suite_manage_load_dbc_scripts
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_logging_config/">
+    suite_manage_logging_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_pvc_config/">
+    suite_manage_pvc_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_uninstall/">
+    suite_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_upgrade/">
+    suite_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_rollback/">
+    suite_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_verify/">
+    suite_verify
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_backup/">
+    suite_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_restore/">
+    suite_restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Utilities">
+    
+      
+  <cds-side-nav-menu-item href="../ansible_version_check/">
+    ansible_version_check
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../entitlement_key_rotation/">
+    entitlement_key_rotation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_jdbc/">
+    gencfg_jdbc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_watsonstudio/">
+    gencfg_watsonstudio
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_workspace/">
+    gencfg_workspace
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_mongo/">
+    gencfg_mongo
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+              </cds-side-nav-items>
+            </cds-side-nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="md-content" data-md-component="content">
+        <article class="md-content__inner">
+          <!-- Breadcrumbs -->
+          <div class="md-breadcrumbs"><cds-breadcrumb no-trailing-slash="">
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="../..">Home</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+      <cds-breadcrumb-item>Roles: Dependency Mgmt</cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#db2">db2</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+
+  <cds-breadcrumb-item aria-current="page">
+    <cds-select id="breadcrumbs-toc" inline="" placeholder="..." oninput="changeAnchor(this.value)">
+    
+    
+      <cds-select-item value="#role-variables-general">Role Variables - General</cds-select-item>
+    
+      <cds-select-item value="#role-variables-resource-requests">Role Variables - Resource Requests</cds-select-item>
+    
+      <cds-select-item value="#role-variables-db2ucluster-database-configuration-settings">Role Variables - DB2UCluster Database Configuration Settings</cds-select-item>
+    
+      <cds-select-item value="#role-variables-mas-configuration">Role Variables - MAS Configuration</cds-select-item>
+    
+      <cds-select-item value="#role-variables-backup-and-restore">Role Variables - Backup and Restore</cds-select-item>
+    
+      <cds-select-item value="#example-usage-backup-and-restore">Example Usage - Backup and Restore</cds-select-item>
+    
+      <cds-select-item value="#backup-and-restore-troubleshooting">Backup and Restore Troubleshooting</cds-select-item>
+    
+      <cds-select-item value="#upgrading-db2-from-v11-to-v12">Upgrading Db2 from v11 to v12</cds-select-item>
+    
+      <cds-select-item value="#license">License</cds-select-item>
+    
+    </cds-select>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+          </div>
+
+          <!-- Page content -->
+          <div class="rst-content">
+            
+            <h1 id="db2">db2<a class="headerlink" href="#db2" title="Permanent link">¤</a></h1>
+<p>This role creates or upgrades a Db2 instance using the Db2u Operator. When installing db2, the db2u operator will now be installed into the same namespace as the db2 instance. </p>
+<p><strong>IMPORTANT:</strong> The Db2uCluster resource is deprecated (replaced by Db2uInstance). This Ansible collection will retain support for Db2uCluster until it's eventual EOL.</p>
+<p>If you already have db2 operator and db2 instances running in separate namespaces, this role will migrate the db2 <strong>operators</strong> (not the instances) from <code>ibm-common-services</code> to the namespace defined by <code>db2_namespace</code> property (in case of a new role execution for a db2 install or db2 upgrade). A private root CA certificate is created and is used to secure the TLS connections to the database. A Db2 Warehouse cluster will be created along with a public TLS encrypted route to allow external access to the cluster (access is via the ssl-server nodeport port on the <em>-db2u-engn-svc service). Internal access is via the </em>-db2u-engn-svc service and port 50001. Both the external route and the internal service use the same server certificate.</p>
 <p>The private root CA certificate and the server certificate are available from the <code>db2u-ca</code> and <code>db2u-certificate</code> secrets in the db2 namespace.  The default user is <code>db2inst1</code> and the password is available in the <code>instancepassword</code> secret in the same namespace.  You can examine the deployed resources in the db2 namespace. This example assumes the default namespace <code>db2u</code>:</p>
-<pre><code class="language-bash">oc -n db2u get db2ucluster
+<pre><code class="language-bash">oc -n db2u get db2uinstance
 
 NAME        STATE   MAINTENANCESTATE   AGE
 db2u-db01   Ready   None               29m
 </code></pre>
 <p>It typically takes 20-30 minutes from the db2ucluster being created till it is ready. If the db2ucluster is not ready after that period then check that all the PersistentVolumeClaims in the db2 namespace are ready and that the pods in the namespace are not stuck in init state. If the <code>c-&lt;db2_instance_name&gt;-db2u-0</code> pod is running then you can exec into the pod and check the <code>/var/log/db2u.log</code> for any issue.</p>
 <p>If the <code>mas_instance_id</code> and <code>mas_config_dir</code> are provided then the role will generate the JdbcCfg yaml that can be used to configure MAS to connect to this database. It does not apply the yaml to the cluster but does provide you with the yaml files to apply if needed.</p>
-<p>When upgrading db2, specify the existing namespace where the <code>db2uCluster</code> instances exist. All the instances under that namespace will be upgraded to the db2 version specified. The version of db2 <strong>must</strong> match the channel of db2 being used for the upgrade.</p>
-<h2 id="role-variables-installation">Role Variables - Installation<a class="headerlink" href="#role-variables-installation" title="Permanent link"></a></h2>
-<h3 id="common_services_namespace">common_services_namespace<a class="headerlink" href="#common_services_namespace" title="Permanent link"></a></h3>
-<p>Namespace where IBM Common Services is installed.</p>
+<p>When upgrading db2, specify the existing namespace where the <code>Db2uInstance</code> instances exist. All the instances under that namespace will be upgraded to the db2 version specified. The version of db2 <strong>must</strong> match the channel of db2 being used for the upgrade.</p>
+<h2 id="role-variables-general">Role Variables - General<a class="headerlink" href="#role-variables-general" title="Permanent link">¤</a></h2>
+<h3 id="installation-variables">Installation Variables<a class="headerlink" href="#installation-variables" title="Permanent link">¤</a></h3>
+<h4 id="db2u_kind">db2u_kind<a class="headerlink" href="#db2u_kind" title="Permanent link">¤</a></h4>
+<p>Specifies which Db2 deployment type to use.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>DB2U_KIND</code></li>
+<li>Default: <code>db2ucluster</code></li>
+</ul>
+<p><strong>Purpose</strong>: Controls whether to deploy Db2uCluster (deprecated) or Db2uInstance (current). This variable enables explicit control over deployment type while maintaining backward compatibility with existing deployments.</p>
+<p><strong>When to use</strong>:
+- Use <code>db2ucluster</code> for maintaining existing deprecated deployments
+- Use <code>db2uinstance</code> (recommended) for all new deployments
+- <strong>IMPORTANT</strong>: Cannot change deployment type for existing instances - strict validation enforces this</p>
+<p><strong>Valid values</strong>: <code>db2ucluster</code>, <code>db2uinstance</code></p>
+<p><strong>Impact</strong>:
+- <code>db2ucluster</code>: Deploys deprecated Db2uCluster CR (for existing deployments only)
+- <code>db2uinstance</code>: Deploys current Db2uInstance CR (recommended for new deployments)
+- Strict validation ensures DB2U_KIND matches existing deployment type to prevent accidental changes
+- Attempting to change deployment type for an existing instance will fail with a clear error message</p>
+<p><strong>Related variables</strong>: Works with all db2 configuration variables. The deployment type affects which Kubernetes custom resource is created but uses the same underlying configuration variables.</p>
+<p><strong>Note</strong>: <strong>Db2uCluster is deprecated</strong>. New deployments should use <code>db2uinstance</code>. Existing Db2uCluster deployments will continue to work but cannot be automatically converted. The default value of <code>db2ucluster</code> ensures backward compatibility for existing automation and scripts.</p>
+<p><strong>Example usage</strong>:</p>
+<pre><code class="language-bash"># New deployment with Db2uInstance (recommended)
+export DB2U_KIND=db2uinstance
+export DB2_INSTANCE_NAME=my-new-db
+
+# Existing Db2uCluster deployment (backward compatible)
+export DB2U_KIND=db2ucluster
+export DB2_INSTANCE_NAME=my-existing-cluster
+
+# Default behavior (backward compatible)
+# If DB2U_KIND is not set, defaults to db2ucluster
+export DB2_INSTANCE_NAME=my-db
+</code></pre>
+<h4 id="common_services_namespace">common_services_namespace<a class="headerlink" href="#common_services_namespace" title="Permanent link">¤</a></h4>
+<p>OpenShift namespace where IBM Common Services is installed.</p>
+<ul>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>COMMON_SERVICES_NAMESPACE</code></li>
 <li>Default Value: <code>ibm-common-services</code></li>
 </ul>
-<h3 id="db2_action">db2_action<a class="headerlink" href="#db2_action" title="Permanent link"></a></h3>
-<p>Inform the role whether to perform an install or upgrade of DB2 Database. This can be set to <code>install</code> or <code>upgrade</code>. When <code>DB2_ACTION</code> is set to upgrade, then all instances in the <code>DB2_NAMESPACE</code> will be upgraded to the <code>DB2_VERSION</code>.</p>
+<p><strong>Purpose</strong>: Specifies the namespace containing IBM Common Services, which provides shared services used by Db2 operator. This is needed for the role to locate and interact with Common Services components.</p>
+<p><strong>When to use</strong>:
+- Leave as default (<code>ibm-common-services</code>) for standard installations
+- Set only if Common Services is installed in a non-standard namespace
+- Required when Common Services namespace differs from default</p>
+<p><strong>Valid values</strong>: Any valid Kubernetes namespace name where IBM Common Services is installed</p>
+<p><strong>Impact</strong>: The role uses this to locate Common Services resources. Incorrect namespace will cause the role to fail when trying to access Common Services components.</p>
+<p><strong>Related variables</strong>: Works with <code>db2_namespace</code> to manage operator and instance placement.</p>
+<p><strong>Note</strong>: The default <code>ibm-common-services</code> is the standard namespace for Common Services. Only change if your installation uses a different namespace.</p>
+<h4 id="db2_action">db2_action<a class="headerlink" href="#db2_action" title="Permanent link">¤</a></h4>
+<p>Specifies which operation to perform on the Db2 database.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_ACTION</code></li>
 <li>Default: <code>install</code></li>
 </ul>
-<h3 id="db2_namespace">db2_namespace<a class="headerlink" href="#db2_namespace" title="Permanent link"></a></h3>
-<p>Name of the namespace where Db2 operators and Db2 instances (DB2UCluster custom resources) will be created</p>
+<p><strong>Purpose</strong>: Controls what action the role executes against Db2 instances. This allows the same role to handle installation, upgrades, backups, and restores of Db2 databases.</p>
+<p><strong>When to use</strong>:
+- Use <code>install</code> (default) for initial Db2 deployment
+- Use <code>upgrade</code> to upgrade all Db2 instances in the namespace to a new version
+- Use <code>backup</code> to create a backup of Db2 instance and/or database
+- Use <code>restore</code> to restore a backup of db2 instance and database
+- Use <code>restore-database</code> to restore only the database to an existing Db2 instance</p>
+<p><strong>Valid values</strong>: <code>install</code>, <code>upgrade</code>, <code>backup</code>, <code>restore</code>, <code>restore-database</code></p>
+<p><strong>Impact</strong>:
+- <code>install</code>: Creates new Db2 operator and instance. When <code>db2_backup_version</code> is provided, installs from backup (instance + database)
+- <code>upgrade</code>: Upgrades ALL instances in <code>db2_namespace</code> to <code>db2_version</code> (affects all instances in namespace)
+- <code>backup</code>: Creates backup of Db2 instance resources and/or database data
+- <code>restore</code>: Creates new Db2 operator and instance from the backup of Db2 instance resources and restores database data to the created instance
+- <code>restore-database</code>: Restores database to an existing running Db2 instance (does not restore instance resources)</p>
+<p><strong>Related variables</strong>:
+- <code>db2_version</code>: Required for upgrade action to specify target version
+- <code>db2_namespace</code>: All instances in this namespace are affected by upgrade
+- <code>db2_backup_version</code>: Required for restore/restore-database action; optional for backup, defaults to YYYYMMDD-HHMMSS
+- <code>override_storageclass</code>: In Restore, controls whether storage classes are overridden</p>
+<p><strong>Note</strong>: <strong>WARNING</strong> - When using <code>upgrade</code>, ALL Db2 instances in the specified namespace will be upgraded. Plan accordingly and ensure <code>db2_version</code> matches the operator channel.</p>
+<h4 id="db2_namespace">db2_namespace<a class="headerlink" href="#db2_namespace" title="Permanent link">¤</a></h4>
+<p>OpenShift namespace where Db2 operator and instances will be deployed.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_NAMESPACE</code></li>
 <li>Default: <code>db2u</code></li>
 </ul>
-<h3 id="db2_channel">db2_channel<a class="headerlink" href="#db2_channel" title="Permanent link"></a></h3>
-<p>The subscription channel for the DB2 Universal Operator.</p>
+<p><strong>Purpose</strong>: Specifies the namespace for deploying the Db2u operator and Db2 instances (Db2uCluster custom resources). Starting with recent versions, the operator is installed in the same namespace as the instances.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>db2u</code>) for standard single-instance deployments
+- Set to a custom namespace when organizing multiple Db2 deployments
+- Must match existing namespace when upgrading Db2 instances</p>
+<p><strong>Valid values</strong>: Any valid Kubernetes namespace name (e.g., <code>db2u</code>, <code>db2-prod</code>, <code>mas-db2</code>)</p>
+<p><strong>Impact</strong>: All Db2 resources (operator, instances, secrets, services) are created in this namespace. When upgrading, ALL instances in this namespace will be upgraded together.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_action</code>: When set to <code>upgrade</code>, affects all instances in this namespace
+- <code>db2_instance_name</code>: Instance created within this namespace</p>
+<p><strong>Note</strong>: The role handles migration of operators from <code>ibm-common-services</code> to this namespace if needed. All instances in the namespace are upgraded together when using <code>db2_action=upgrade</code>.</p>
+<h4 id="db2_channel">db2_channel<a class="headerlink" href="#db2_channel" title="Permanent link">¤</a></h4>
+<p>Subscription channel for the Db2 Universal Operator.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_CHANNEL</code></li>
-<li>Default: The default channel, as defined in the operator package, will be used if this is not set.</li>
+<li>Default: The default channel from the operator package (automatically selected)</li>
 </ul>
-<h3 id="db2_instance_name">db2_instance_name<a class="headerlink" href="#db2_instance_name" title="Permanent link"></a></h3>
-<p>Name of the database instance, note that this is the instance <strong>name</strong>.</p>
+<p><strong>Purpose</strong>: Specifies which operator channel to subscribe to, determining which Db2 operator version stream you receive. Channels typically correspond to major Db2 versions (e.g., <code>v2.2</code>, <code>v3.0</code>).</p>
+<p><strong>When to use</strong>:
+- Leave unset to use the default channel (recommended for new installations)
+- Set explicitly when you need a specific operator version stream
+- Must match <code>db2_version</code> when upgrading (version must be available in the channel)</p>
+<p><strong>Valid values</strong>: Valid Db2 operator channel names (e.g., <code>v2.2</code>, <code>v3.0</code>, <code>v3.1</code>)</p>
+<p><strong>Impact</strong>: Determines which operator version is installed and which Db2 engine versions are available. Changing channels may require operator migration.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_version</code>: Must be compatible with the selected channel
+- When upgrading, version must match channel</p>
+<p><strong>Note</strong>: The operator channel determines available Db2 engine versions. Check the operator package for available channels and their supported versions.</p>
+<h4 id="db2_instance_name">db2_instance_name<a class="headerlink" href="#db2_instance_name" title="Permanent link">¤</a></h4>
+<p>Unique name for the Db2 instance (Db2uCluster resource).</p>
 <ul>
 <li><strong>Required</strong></li>
 <li>Environment Variable: <code>DB2_INSTANCE_NAME</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="ibm_entitlement_key">ibm_entitlement_key<a class="headerlink" href="#ibm_entitlement_key" title="Permanent link"></a></h3>
-<p>Provide your <a href="https://myibm.ibm.com/products-services/containerlibrary">IBM entitlement key</a>.</p>
+<p><strong>Purpose</strong>: Defines the name of the Db2uCluster custom resource that will be created. This name is used to identify the Db2 instance and is embedded in resource names (services, pods, secrets).</p>
+<p><strong>When to use</strong>:
+- Always required for Db2 installation
+- Use descriptive names that indicate purpose (e.g., <code>maximo-db</code>, <code>iot-db</code>, <code>manage-db</code>)
+- Must be unique within the namespace</p>
+<p><strong>Valid values</strong>: Valid Kubernetes resource name (lowercase alphanumeric with hyphens, e.g., <code>db01</code>, <code>mas-db</code>, <code>manage-db</code>)</p>
+<p><strong>Impact</strong>: This name is used throughout the Db2 deployment:
+- Db2uCluster resource name
+- Service names (e.g., <code>{instance_name}-db2u-engn-svc</code>)
+- Pod names (e.g., <code>c-{instance_name}-db2u-0</code>)
+- Secret names</p>
+<p><strong>Related variables</strong>:
+- <code>db2_dbname</code>: Name of the database within this instance
+- Used in generated JdbcCfg when <code>mas_instance_id</code> is provided</p>
+<p><strong>Note</strong>: Choose a meaningful name as it appears in many resource names and cannot be easily changed after creation.</p>
+<h4 id="ibm_entitlement_key">ibm_entitlement_key<a class="headerlink" href="#ibm_entitlement_key" title="Permanent link">¤</a></h4>
+<p>IBM Container Library entitlement key for accessing Db2 container images.</p>
 <ul>
 <li><strong>Required</strong></li>
 <li>Environment Variable: <code>IBM_ENTITLEMENT_KEY</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="db2_dbname">db2_dbname<a class="headerlink" href="#db2_dbname" title="Permanent link"></a></h3>
-<p>Name of the database within the instance.</p>
+<p><strong>Purpose</strong>: Provides authentication credentials to pull Db2 container images from the IBM Container Registry. This key is associated with your IBM entitlement and grants access to licensed software.</p>
+<p><strong>When to use</strong>:
+- Always required for Db2 installation
+- Obtain from <a href="https://myibm.ibm.com/products-services/containerlibrary">IBM Container Library</a>
+- Same key used across all IBM MAS components</p>
+<p><strong>Valid values</strong>: Valid IBM entitlement key string</p>
+<p><strong>Impact</strong>: Without a valid key, Db2 container images cannot be pulled and installation will fail. The key is stored in an image pull secret in the Db2 namespace.</p>
+<p><strong>Related variables</strong>: Used across multiple roles for accessing IBM container images.</p>
+<p><strong>Note</strong>: Keep this key secure and do not commit to source control. The key is tied to your IBM entitlement and should be treated as a credential. Obtain from the IBM Container Library using your IBM ID.</p>
+<h4 id="db2_dbname">db2_dbname<a class="headerlink" href="#db2_dbname" title="Permanent link">¤</a></h4>
+<p>Name of the database to create within the Db2 instance.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_DBNAME</code></li>
 <li>Default: <code>BLUDB</code></li>
 </ul>
-<h3 id="db2_version">db2_version<a class="headerlink" href="#db2_version" title="Permanent link"></a></h3>
-<p>Version of the DB2 engine to be used while creating/upgrading the DB2 instances.</p>
+<p><strong>Purpose</strong>: Specifies the name of the database that will be created inside the Db2 instance. A Db2 instance can contain multiple databases, and this defines the primary database name.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>BLUDB</code>) for standard MAS deployments
+- Set to a custom name when organizational standards require specific naming
+- Must match the database name expected by applications connecting to Db2</p>
+<p><strong>Valid values</strong>: Valid Db2 database name (uppercase alphanumeric, up to 8 characters, e.g., <code>BLUDB</code>, <code>MAXDB</code>, <code>MASDB</code>)</p>
+<p><strong>Impact</strong>: This database name is used in connection strings and JDBC configurations. Applications must use this exact name to connect to the database.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_instance_name</code>: The instance containing this database
+- Used in generated JdbcCfg for MAS configuration</p>
+<p><strong>Note</strong>: The default <code>BLUDB</code> is standard for Db2 Warehouse. Db2 database names are typically uppercase and limited to 8 characters.</p>
+<h4 id="db2_version">db2_version<a class="headerlink" href="#db2_version" title="Permanent link">¤</a></h4>
+<p>Db2 engine version to use for installation or upgrade.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_VERSION</code></li>
-<li>Default: The default db2 engine version will be automatically defined to the latest version supported by the installed DB2 operator if this is not set. The DB2 engine versions supported by the installed DB2 operator are stored in <code>db2u-release</code> configmap under <code>ibm-common-services</code> namespace.</li>
+<li>Default: Latest version supported by the installed Db2 operator (auto-detected from <code>db2u-release</code> configmap)</li>
 </ul>
-<h3 id="db2_type">db2_type<a class="headerlink" href="#db2_type" title="Permanent link"></a></h3>
-<p>Type of the DB2 instance. Available options are <code>db2wh</code> and <code>db2oltp</code>.</p>
+<p><strong>Purpose</strong>: Specifies which Db2 engine version to deploy or upgrade to. The version must be compatible with the installed operator channel.</p>
+<p><strong>When to use</strong>:
+- Leave unset for new installations to use the latest supported version (recommended)
+- Set explicitly when you need a specific Db2 version
+- Required when upgrading to specify the target version
+- Must match the operator channel capabilities</p>
+<p><strong>Valid values</strong>: Valid Db2 engine version supported by the operator (e.g., <code>11.5.8.0</code>, <code>11.5.9.0</code>)</p>
+<p><strong>Impact</strong>: Determines which Db2 engine version is deployed. When upgrading, ALL instances in <code>db2_namespace</code> will be upgraded to this version. Version must be available in the operator's supported versions list.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_channel</code>: Version must be compatible with the operator channel
+- <code>db2_action</code>: When set to <code>upgrade</code>, this version is the target
+- <code>db2_namespace</code>: All instances in namespace upgraded to this version</p>
+<p><strong>Note</strong>: Supported versions are listed in the <code>db2u-release</code> configmap in <code>ibm-common-services</code> namespace. Ensure the version matches your operator channel. When upgrading, all instances in the namespace are upgraded together.</p>
+<h4 id="db2_license_file">db2_license_file<a class="headerlink" href="#db2_license_file" title="Permanent link">¤</a></h4>
+<p>Path to the Db2 v12 license file on the local filesystem.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Required</strong> when upgrading from Db2 v11 to v12</li>
+<li><strong>Optional</strong> for new Db2 installations</li>
+<li>Environment Variable: <code>DB2_LICENSE_FILE</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Provides the Db2 Warehouse license to apply to the instance. Without a valid license, Db2 v12 operates under a 30-day trial license. When the trial expires, the database becomes unavailable — this is especially critical for production systems.</p>
+<p><strong>When to use</strong>:
+- <strong>Required</strong> when <code>db2_action=upgrade</code> and upgrading from v11 to v12 (<code>db2_v12_upgrade=true</code>)
+- Optional for new installations (Db2 will use trial license if not provided)
+- IBM may refer to this file by different names: "Db2 Warehouse license", "Db2 activation key", <code>db2wh.lic</code>, or <code>db2ese.lic</code> — see the <a href="#upgrading-db2-from-v11-to-v12">Upgrading Db2 from v11 to v12</a> section for an example of the expected file format</p>
+<p><strong>Valid values</strong>: Absolute path to a valid Db2 license file (<code>.lic</code> format)</p>
+<p><strong>Related variables</strong>:
+- <code>db2_v12_upgrade</code>: Must be <code>true</code> alongside this variable for v12 upgrades
+- <code>db2_channel</code>: Must target a v12 channel (e.g., <code>v12.0.0-cn1</code>)</p>
+<p><strong>Example</strong>: <code>/path/to/db2wh.lic</code></p>
+<h4 id="db2_v12_upgrade">db2_v12_upgrade<a class="headerlink" href="#db2_v12_upgrade" title="Permanent link">¤</a></h4>
+<p>Explicit opt-in flag required to authorize a major version upgrade from Db2 v11 to v12.</p>
+<ul>
+<li><strong>Required</strong> when upgrading from Db2 v11 to v12</li>
+<li>Environment Variable: <code>DB2_V12_UPGRADE</code></li>
+<li>Default: <code>false</code></li>
+</ul>
+<p><strong>Purpose</strong>: Acts as a safety gate to prevent accidental major version upgrades. Upgrading from Db2 v11 to v12 is a significant, irreversible operation that requires explicit user consent. This flag, combined with <code>db2_license_file</code>, ensures the upgrade is intentional and properly licensed.</p>
+<p><strong>When to use</strong>:
+- Set to <code>true</code> only when you intend to upgrade from Db2 v11 to v12
+- Must be combined with <code>db2_license_file</code> — the upgrade will fail if the license file is not provided, to prevent a silent downgrade to a 30-day trial license</p>
+<p><strong>Valid values</strong>: <code>true</code>, <code>false</code></p>
+<p><strong>Related variables</strong>:
+- <code>db2_license_file</code>: Required alongside this flag for v12 upgrades
+- <code>db2_channel</code>: Must target a v12 channel (e.g., <code>v12.0.0-cn1</code>)</p>
+<h4 id="db2_type">db2_type<a class="headerlink" href="#db2_type" title="Permanent link">¤</a></h4>
+<p>Db2 instance type optimized for specific workload patterns.</p>
+<ul>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_TYPE</code></li>
 <li>Default: <code>db2wh</code></li>
 </ul>
-<h3 id="db2_timezone">db2_timezone<a class="headerlink" href="#db2_timezone" title="Permanent link"></a></h3>
-<p>Server timezone code of the DB2 instance. If you want to align the same timezone with Manage's DB2 database, you also need to must also set <code>MAS_APP_SETTINGS_SERVER_TIMEZONE</code> variable to the same value.</p>
+<p><strong>Purpose</strong>: Determines the Db2 instance configuration optimized for either data warehouse (analytical) or online transaction processing workloads. This affects resource allocation and database tuning.</p>
+<p><strong>When to use</strong>:
+- Use <code>db2wh</code> (default) for MAS Manage and analytical workloads
+- Use <code>db2oltp</code> for high-transaction workloads requiring OLTP optimization
+- Choose based on your primary use case</p>
+<p><strong>Valid values</strong>: <code>db2wh</code>, <code>db2oltp</code></p>
+<p><strong>Impact</strong>: 
+- <code>db2wh</code>: Optimized for data warehouse/analytical queries (recommended for MAS Manage)
+- <code>db2oltp</code>: Optimized for online transaction processing with high concurrency</p>
+<p><strong>Related variables</strong>:
+- <code>db2_workload</code>: Further refines workload optimization
+- <code>db2_table_org</code>: Table organization should align with instance type</p>
+<p><strong>Note</strong>: MAS Manage typically uses <code>db2wh</code> for optimal performance with its analytical workload patterns.</p>
+<h4 id="db2_timezone">db2_timezone<a class="headerlink" href="#db2_timezone" title="Permanent link">¤</a></h4>
+<p>Server timezone for the Db2 instance.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_TIMEZONE</code></li>
 <li>Default: <code>GMT</code></li>
 </ul>
-<h3 id="db2_4k_device_support">db2_4k_device_support<a class="headerlink" href="#db2_4k_device_support" title="Permanent link"></a></h3>
-<p>Whether 4K device support is turned on or not.</p>
+<p><strong>Purpose</strong>: Sets the timezone used by the Db2 server for timestamp operations and scheduling. This affects how Db2 interprets and stores timestamp data.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>GMT</code>) for globally distributed systems
+- Set to local timezone when all users are in the same timezone
+- Must match MAS Manage timezone if using Manage with this database</p>
+<p><strong>Valid values</strong>: Valid timezone codes (e.g., <code>GMT</code>, <code>EST</code>, <code>PST</code>, <code>CET</code>, <code>UTC</code>)</p>
+<p><strong>Impact</strong>: Affects timestamp interpretation and storage in the database. Mismatched timezones between Db2 and applications can cause data inconsistencies.</p>
+<p><strong>Related variables</strong>:
+- <code>MAS_APP_SETTINGS_SERVER_TIMEZONE</code>: Must be set to the same value for MAS Manage
+- Affects all timestamp operations in the database</p>
+<p><strong>Note</strong>: <strong>IMPORTANT</strong> - If using this Db2 instance with MAS Manage, you must also set <code>MAS_APP_SETTINGS_SERVER_TIMEZONE</code> to the same value to ensure consistent timestamp handling.</p>
+<h4 id="db2_4k_device_support">db2_4k_device_support<a class="headerlink" href="#db2_4k_device_support" title="Permanent link">¤</a></h4>
+<p>Controls 4K sector device support in Db2.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_4K_DEVICE_SUPPORT</code></li>
 <li>Default: <code>ON</code></li>
 </ul>
-<h3 id="db2_workload">db2_workload<a class="headerlink" href="#db2_workload" title="Permanent link"></a></h3>
-<p>The workload profile of the db2 instance, possible values are <code>PUREDATA_OLAP</code> or <code>ANALYTICS</code>.</p>
+<p><strong>Purpose</strong>: Enables or disables support for storage devices with 4K sector sizes. Modern storage systems often use 4K sectors instead of traditional 512-byte sectors.</p>
+<p><strong>When to use</strong>:
+- Leave as <code>ON</code> (default) for modern storage systems with 4K sectors
+- Set to <code>OFF</code> only if using legacy storage with 512-byte sectors
+- Check your storage specifications if unsure</p>
+<p><strong>Valid values</strong>: <code>ON</code>, <code>OFF</code></p>
+<p><strong>Impact</strong>: 
+- <code>ON</code>: Enables 4K sector support (required for most modern storage)
+- <code>OFF</code>: Uses traditional 512-byte sector mode (legacy storage only)</p>
+<p><strong>Related variables</strong>: Works with storage class configuration to ensure compatibility.</p>
+<p><strong>Note</strong>: Most modern storage systems use 4K sectors. Keep this <code>ON</code> unless you have specific legacy storage requirements.</p>
+<h4 id="db2_workload">db2_workload<a class="headerlink" href="#db2_workload" title="Permanent link">¤</a></h4>
+<p>Workload profile for Db2 instance optimization.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_WORKLOAD</code></li>
 <li>Default: <code>ANALYTICS</code></li>
 </ul>
-<h3 id="db2_table_org">db2_table_org<a class="headerlink" href="#db2_table_org" title="Permanent link"></a></h3>
-<p>The way database tables will be organized. It can be set to either <code>ROW</code> or <code>COLUMN</code>.</p>
+<p><strong>Purpose</strong>: Configures Db2 with predefined settings optimized for specific workload patterns. This affects memory allocation, query optimization, and other performance parameters.</p>
+<p><strong>When to use</strong>:
+- Use <code>ANALYTICS</code> (default) for general analytical and MAS workloads
+- Use <code>PUREDATA_OLAP</code> for pure data warehouse/OLAP workloads
+- Choose based on your primary query patterns</p>
+<p><strong>Valid values</strong>: <code>ANALYTICS</code>, <code>PUREDATA_OLAP</code></p>
+<p><strong>Impact</strong>: 
+- <code>ANALYTICS</code>: Balanced optimization for mixed analytical workloads (recommended for MAS)
+- <code>PUREDATA_OLAP</code>: Optimized specifically for OLAP/data warehouse queries</p>
+<p><strong>Related variables</strong>:
+- <code>db2_type</code>: Should align with workload choice
+- <code>db2_table_org</code>: Table organization should match workload pattern</p>
+<p><strong>Note</strong>: The default <code>ANALYTICS</code> is suitable for most MAS deployments. Only change if you have specific OLAP requirements.</p>
+<h4 id="db2_table_org">db2_table_org<a class="headerlink" href="#db2_table_org" title="Permanent link">¤</a></h4>
+<p>Default table organization for database tables.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_TABLE_ORG</code></li>
 <li>Default: <code>ROW</code></li>
 </ul>
-<h3 id="db2_ldap_username">db2_ldap_username<a class="headerlink" href="#db2_ldap_username" title="Permanent link"></a></h3>
-<p>Define the username of db2 in the local LDAP registry. If this is defined, the LDAP user will be the user identity passed into the MAS JDBC configuration.</p>
+<p><strong>Purpose</strong>: Determines the default storage organization for tables in the database. Row-organized tables are optimized for transactional workloads, while column-organized tables are optimized for analytical queries.</p>
+<p><strong>When to use</strong>:
+- Use <code>ROW</code> (default) for MAS Manage and mixed workloads
+- Use <code>COLUMN</code> only for pure analytical/reporting workloads
+- Choose based on your primary query patterns</p>
+<p><strong>Valid values</strong>: <code>ROW</code>, <code>COLUMN</code></p>
+<p><strong>Impact</strong>: 
+- <code>ROW</code>: Tables stored row-by-row (better for OLTP, updates, and mixed workloads)
+- <code>COLUMN</code>: Tables stored column-by-column (better for analytical queries and aggregations)</p>
+<p><strong>Related variables</strong>:
+- <code>db2_type</code>: Should align with table organization choice
+- <code>db2_workload</code>: Workload profile should match table organization</p>
+<p><strong>Note</strong>: MAS Manage requires <code>ROW</code> organization. Only use <code>COLUMN</code> for dedicated analytical databases. This sets the default; individual tables can override this setting.</p>
+<h4 id="db2_ldap_username">db2_ldap_username<a class="headerlink" href="#db2_ldap_username" title="Permanent link">¤</a></h4>
+<p>Username for Db2 LDAP authentication.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_LDAP_USERNAME</code></li>
-<li>Default: None</li>
+<li>Default: None (uses default <code>db2inst1</code> user)</li>
 </ul>
-<h3 id="db2_ldap_password">db2_ldap_password<a class="headerlink" href="#db2_ldap_password" title="Permanent link"></a></h3>
-<p>Define the password of above db2 user in the local LDAP registry. Must define when <code>db2_ldap_username</code> is used.</p>
+<p><strong>Purpose</strong>: Defines a custom LDAP username for Db2 authentication instead of the default <code>db2inst1</code> user. When set, this user is configured in Db2's local LDAP registry and used in MAS JDBC configuration.</p>
+<p><strong>When to use</strong>:
+- Set when you need a custom database user for MAS connections
+- Set when organizational policies require specific usernames
+- Leave unset to use the default <code>db2inst1</code> user
+- Must be set together with <code>db2_ldap_password</code></p>
+<p><strong>Valid values</strong>: Valid LDAP username string</p>
+<p><strong>Impact</strong>: When set, this user is created in Db2's LDAP registry and used in the generated JdbcCfg for MAS. The user will have necessary database permissions configured.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_ldap_password</code>: Required when this is set
+- <code>db2_rotate_password</code>: Can auto-generate password for this user
+- Used in generated JdbcCfg for MAS configuration</p>
+<p><strong>Note</strong>: If not set, MAS will use the default <code>db2inst1</code> user. When set, you must also provide <code>db2_ldap_password</code>.</p>
+<h4 id="db2_ldap_password">db2_ldap_password<a class="headerlink" href="#db2_ldap_password" title="Permanent link">¤</a></h4>
+<p>Password for the Db2 LDAP user.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Required</strong> (when <code>db2_ldap_username</code> is set for initial user creation)</li>
 <li>Environment Variable: <code>DB2_LDAP_PASSWORD</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="db2_rotate_password">db2_rotate_password<a class="headerlink" href="#db2_rotate_password" title="Permanent link"></a></h3>
-<p>Determines if the role should rotate the LDAP password for current LDAP user configured within Db2 for MAS. When using this capability, LDAP user password will auto generated by this role and configured with MAS.</p>
+<p><strong>Purpose</strong>: Sets the password for the LDAP user specified in <code>db2_ldap_username</code>. This password is configured in Db2's local LDAP registry and used for database authentication.</p>
+<p><strong>When to use</strong>:
+- <strong>Always required</strong> when <code>db2_ldap_username</code> is set for initial user creation
+- Set to a strong password meeting security requirements
+- Required because <code>db2_rotate_password</code> defaults to <code>false</code> for new user creation</p>
+<p><strong>Valid values</strong>: Strong password string meeting security requirements</p>
+<p><strong>Impact</strong>: This password is stored in Db2's LDAP registry and used for database authentication. It's also included in the generated JdbcCfg for MAS.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_ldap_username</code>: Must be set together with this password
+- <code>db2_rotate_password</code>: Defaults to <code>false</code>; can be set to <code>true</code> in subsequent runs to rotate this password</p>
+<p><strong>Important</strong>: You must provide <code>db2_ldap_password</code> together with <code>db2_ldap_username</code> for initial user creation. The <code>db2_rotate_password</code> feature only works with existing users and cannot create new users.</p>
+<p><strong>Note</strong>: Keep this password secure and do not commit to source control.</p>
+<h4 id="db2_rotate_password">db2_rotate_password<a class="headerlink" href="#db2_rotate_password" title="Permanent link">¤</a></h4>
+<p>Rotates the password for an <strong>existing</strong> Db2 LDAP user.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_LDAP_ROTATE_PASSWORD</code></li>
-<li>Default: False</li>
+<li>Default: <code>False</code></li>
 </ul>
-<h2 id="role-variables-storage">Role Variables - Storage<a class="headerlink" href="#role-variables-storage" title="Permanent link"></a></h2>
+<p><strong>Purpose</strong>: Rotates the password for an existing Db2 LDAP user by generating a new random password and updating both Db2 and MAS configurations. This improves security by enabling regular password rotation.</p>
+<p><strong>IMPORTANT</strong>: This feature is <strong>only for existing users</strong>. The user must already exist in Db2's LDAP registry before using this feature. It will fail if the user does not exist.</p>
+<p><strong>When to use</strong>:
+- Set to <code>True</code> to rotate an existing user's password to an auto-generated value
+- Set to <code>True</code> for regular password rotation as a security practice
+- Set to <code>False</code> for initial user creation with a known password</p>
+<p><strong>Valid values</strong>: <code>True</code>, <code>False</code></p>
+<p><strong>Typical Workflow</strong>:
+1. <strong>First deployment</strong> - Create user with known password:
+   ```yaml
+   db2_ldap_username: "tridata"
+   db2_ldap_password: "InitialPassword123"
+   db2_rotate_password: false</p>
+<ol>
+<li><strong>Subsequent deployments</strong> - Rotate to auto-generated password:
+   ```yaml
+    db2_ldap_username: "tridata"
+    db2_rotate_password: true</li>
+</ol>
+<p>Note: db2_ldap_password is not needed for rotation as the password is auto-generated.</p>
+<p><strong>Impact</strong>: 
+- Generates a strong random password
+- Updates password in Db2's LDAP registry
+- Updates MAS JdbcCfg with new password
+- Fails with error if user does not exist</p>
+<p><strong>Related variables</strong>:
+- <code>db2_ldap_username</code>: Existing user whose password will be rotated
+- <code>db2_ldap_password</code>: Not used during rotation (password is auto-generated)
+- <code>mas_instance_id</code>: Required to update MAS JDBC configuration</p>
+<p><strong>Note</strong>: When enabled, the auto-generated password is stored securely in Kubernetes secrets and MAS configuration.</p>
+<h3 id="storage-variables">Storage Variables<a class="headerlink" href="#storage-variables" title="Permanent link">¤</a></h3>
 <p>We recommend reviewing the Db2 documentation about the certified storage options for Db2 on Red Hat OpenShift. Please ensure your storage class meets the specified deployment requirements for Db2. <a href="https://www.ibm.com/docs/en/db2/11.5?topic=storage-certified-options">https://www.ibm.com/docs/en/db2/11.5?topic=storage-certified-options</a></p>
-<h3 id="db2_meta_storage_class">db2_meta_storage_class<a class="headerlink" href="#db2_meta_storage_class" title="Permanent link"></a></h3>
-<p>Storage class used for metadata. This must support ReadWriteMany</p>
+<h4 id="db2_meta_storage_class">db2_meta_storage_class<a class="headerlink" href="#db2_meta_storage_class" title="Permanent link">¤</a></h4>
+<p>Storage class for Db2 metadata storage (must support ReadWriteMany).</p>
 <ul>
 <li><strong>Required</strong></li>
 <li>Environment Variable: <code>DB2_META_STORAGE_CLASS</code></li>
-<li>Default: Defaults to <code>ibmc-file-gold</code> if the storage class is available in the cluster.</li>
+<li>Default: <code>ibmc-file-gold</code> (if available in cluster)</li>
 </ul>
-<h3 id="db2_meta_storage_size">db2_meta_storage_size<a class="headerlink" href="#db2_meta_storage_size" title="Permanent link"></a></h3>
-<p>Size of the metadata persistent volume, in gigabytes</p>
+<p><strong>Purpose</strong>: Specifies the storage class for Db2 metadata storage, which requires ReadWriteMany (RWX) access mode for shared access across Db2 pods.</p>
+<p><strong>When to use</strong>:
+- Always required for Db2 installation
+- Must be a storage class supporting RWX access mode
+- Typically file-based storage (NFS, IBM Cloud File Storage, etc.)</p>
+<p><strong>Valid values</strong>: Any storage class name supporting ReadWriteMany access mode</p>
+<p><strong>Impact</strong>: Metadata storage is critical for Db2 operation. Incorrect storage class or one not supporting RWX will cause Db2 deployment to fail.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_meta_storage_size</code>: Size of metadata volume
+- <code>db2_meta_storage_accessmode</code>: Should be <code>ReadWriteMany</code></p>
+<p><strong>Note</strong>: See <a href="https://www.ibm.com/docs/en/db2/11.5?topic=storage-certified-options">Db2 certified storage options</a> for supported storage. File-based storage classes typically support RWX (e.g., <code>ibmc-file-gold</code>, <code>ocs-storagecluster-cephfs</code>).</p>
+<h4 id="db2_meta_storage_size">db2_meta_storage_size<a class="headerlink" href="#db2_meta_storage_size" title="Permanent link">¤</a></h4>
+<p>Size of the metadata persistent volume.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_META_STORAGE_SIZE</code></li>
-<li>Default: <code>20Gi</code></li>
+<li>Default: <code>10Gi</code></li>
 </ul>
-<h3 id="db2_meta_storage_accessmode">db2_meta_storage_accessmode<a class="headerlink" href="#db2_meta_storage_accessmode" title="Permanent link"></a></h3>
-<p>The access mode for the storage.</p>
+<p><strong>Purpose</strong>: Specifies the size of the persistent volume for Db2 metadata storage. Metadata includes system catalogs, configuration files, and other operational data.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>10Gi</code>) for most deployments
+- Increase for large-scale deployments with many databases or complex configurations
+- Monitor usage and adjust if metadata volume fills up</p>
+<p><strong>Valid values</strong>: Kubernetes storage size format (e.g., <code>10Gi</code>, <code>20Gi</code>, <code>50Gi</code>)</p>
+<p><strong>Impact</strong>: Insufficient metadata storage can cause Db2 operational issues. The volume must have enough space for system catalogs and configuration data.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_meta_storage_class</code>: Storage class for this volume
+- <code>db2_meta_storage_accessmode</code>: Access mode for this volume</p>
+<p><strong>Note</strong>: The default <code>10Gi</code> is sufficient for most deployments. Metadata storage requirements are typically much smaller than data storage.</p>
+<h4 id="db2_meta_storage_accessmode">db2_meta_storage_accessmode<a class="headerlink" href="#db2_meta_storage_accessmode" title="Permanent link">¤</a></h4>
+<p>Access mode for metadata storage volume.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_META_STORAGE_ACCESSMODE</code></li>
 <li>Default: <code>ReadWriteMany</code></li>
 </ul>
-<h3 id="db2_data_storage_class">db2_data_storage_class<a class="headerlink" href="#db2_data_storage_class" title="Permanent link"></a></h3>
-<p>Storage class used for user data. This must support ReadWriteOnce</p>
+<p><strong>Purpose</strong>: Defines the Kubernetes access mode for the metadata persistent volume. ReadWriteMany (RWX) is required for Db2 metadata to be accessible from multiple pods.</p>
+<p><strong>When to use</strong>:
+- Leave as default (<code>ReadWriteMany</code>) for standard Db2 deployments
+- RWX is required for Db2 high availability and proper operation</p>
+<p><strong>Valid values</strong>: <code>ReadWriteMany</code> (RWX)</p>
+<p><strong>Impact</strong>: Db2 requires RWX access mode for metadata storage. Using a different access mode will cause deployment failures.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_meta_storage_class</code>: Must support the specified access mode
+- <code>db2_meta_storage_size</code>: Size of this volume</p>
+<p><strong>Note</strong>: Do not change from the default <code>ReadWriteMany</code>. Db2 metadata requires RWX access mode for proper operation.</p>
+<h4 id="db2_data_storage_class">db2_data_storage_class<a class="headerlink" href="#db2_data_storage_class" title="Permanent link">¤</a></h4>
+<p>Storage class for Db2 user data storage (must support ReadWriteOnce).</p>
 <ul>
 <li><strong>Required</strong></li>
 <li>Environment Variable: <code>DB2_DATA_STORAGE_CLASS</code></li>
-<li>Default: Defaults to <code>ibmc-block-gold</code> if the storage class is available in the cluster.</li>
+<li>Default: <code>ibmc-block-gold</code> (if available in cluster)</li>
 </ul>
-<h3 id="db2_data_storage_size">db2_data_storage_size<a class="headerlink" href="#db2_data_storage_size" title="Permanent link"></a></h3>
-<p>Size of data persistent volume.</p>
+<p><strong>Purpose</strong>: Specifies the storage class for Db2 user data storage, which requires ReadWriteOnce (RWO) access mode. This is where database tables and user data are stored.</p>
+<p><strong>When to use</strong>:
+- Always required for Db2 installation
+- Must be a storage class supporting RWO access mode
+- Typically block-based storage for performance (SAN, IBM Cloud Block Storage, etc.)</p>
+<p><strong>Valid values</strong>: Any storage class name supporting ReadWriteOnce access mode</p>
+<p><strong>Impact</strong>: Data storage is critical for Db2 performance and capacity. Choose high-performance storage for production workloads. Incorrect storage class or one not supporting RWO will cause Db2 deployment to fail.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_data_storage_size</code>: Size of data volume
+- <code>db2_data_storage_accessmode</code>: Should be <code>ReadWriteOnce</code></p>
+<p><strong>Note</strong>: See <a href="https://www.ibm.com/docs/en/db2/11.5?topic=storage-certified-options">Db2 certified storage options</a> for supported storage. Block-based storage classes typically provide better performance for databases (e.g., <code>ibmc-block-gold</code>, <code>ocs-storagecluster-ceph-rbd</code>).</p>
+<h4 id="db2_data_storage_size">db2_data_storage_size<a class="headerlink" href="#db2_data_storage_size" title="Permanent link">¤</a></h4>
+<p>Size of the user data persistent volume.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_DATA_STORAGE_SIZE</code></li>
-<li>Default: <code>100Gi</code></li>
+<li>Default: <code>50Gi</code></li>
 </ul>
-<h3 id="db2_data_storage_accessmode">db2_data_storage_accessmode<a class="headerlink" href="#db2_data_storage_accessmode" title="Permanent link"></a></h3>
-<p>The access mode for the storage.</p>
+<p><strong>Purpose</strong>: Specifies the size of the persistent volume for Db2 user data storage. This is where database tables, indexes, and all user data are stored.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>50Gi</code>) for development/test environments
+- Increase significantly for production based on data volume estimates
+- Plan for data growth over time
+- Monitor usage and expand as needed</p>
+<p><strong>Valid values</strong>: Kubernetes storage size format (e.g., <code>50Gi</code>, <code>100Gi</code>, <code>500Gi</code>, <code>1Ti</code>)</p>
+<p><strong>Impact</strong>: Insufficient data storage will cause database operations to fail when the volume fills up. Size appropriately for your data volume plus growth.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_data_storage_class</code>: Storage class for this volume
+- <code>db2_data_storage_accessmode</code>: Access mode for this volume</p>
+<p><strong>Note</strong>: The default <code>50Gi</code> is suitable for small deployments only. Production MAS Manage deployments typically require 500Gi or more. Plan storage capacity based on expected data volume and growth.</p>
+<h4 id="db2_data_storage_accessmode">db2_data_storage_accessmode<a class="headerlink" href="#db2_data_storage_accessmode" title="Permanent link">¤</a></h4>
+<p>Access mode for user data storage volume.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_DATA_STORAGE_ACCESSMODE</code></li>
 <li>Default: <code>ReadWriteOnce</code></li>
 </ul>
-<h3 id="db2_backup_storage_class">db2_backup_storage_class<a class="headerlink" href="#db2_backup_storage_class" title="Permanent link"></a></h3>
-<p>Storage class used for backup. This must support ReadWriteMany</p>
+<p><strong>Purpose</strong>: Defines the Kubernetes access mode for the user data persistent volume. ReadWriteOnce (RWO) is standard for Db2 data storage as it's accessed by a single pod at a time.</p>
+<p><strong>When to use</strong>:
+- Leave as default (<code>ReadWriteOnce</code>) for standard Db2 deployments
+- RWO is the correct mode for Db2 data storage</p>
+<p><strong>Valid values</strong>: <code>ReadWriteOnce</code> (RWO)</p>
+<p><strong>Impact</strong>: Db2 data storage uses RWO access mode. Using a different access mode may cause deployment issues or performance problems.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_data_storage_class</code>: Must support the specified access mode
+- <code>db2_data_storage_size</code>: Size of this volume</p>
+<p><strong>Note</strong>: Do not change from the default <code>ReadWriteOnce</code>. Db2 data storage is designed for RWO access mode.</p>
+<h4 id="db2_backup_storage_class">db2_backup_storage_class<a class="headerlink" href="#db2_backup_storage_class" title="Permanent link">¤</a></h4>
+<p>Storage class for Db2 backup storage (must support ReadWriteMany).</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_BACKUP_STORAGE_CLASS</code></li>
-<li>Default: Defaults to <code>ibmc-file-gold</code> if the storage class is available in the cluster.</li>
+<li>Default: <code>ibmc-file-gold</code> (if available in cluster)</li>
 </ul>
-<h3 id="db2_backup_storage_size">db2_backup_storage_size<a class="headerlink" href="#db2_backup_storage_size" title="Permanent link"></a></h3>
-<p>Size of backup persistent volume.</p>
+<p><strong>Purpose</strong>: Specifies the storage class for Db2 backup storage, which requires ReadWriteMany (RWX) access mode for shared access during backup operations.</p>
+<p><strong>When to use</strong>:
+- Use default for standard backup storage configuration
+- Must be a storage class supporting RWX access mode
+- Set to <code>None</code> to disable backup storage (not recommended for production)
+- Typically file-based storage (NFS, IBM Cloud File Storage, etc.)</p>
+<p><strong>Valid values</strong>: Any storage class name supporting ReadWriteMany access mode, or <code>None</code> to disable</p>
+<p><strong>Impact</strong>: 
+- When set: Backup storage is configured for Db2 backups
+- When set to <code>None</code>: Backup storage is dropped from Db2uCluster CR (backups not possible)</p>
+<p><strong>Related variables</strong>:
+- <code>db2_backup_storage_size</code>: Size of backup volume
+- <code>db2_backup_storage_accessmode</code>: Should be <code>ReadWriteMany</code></p>
+<p><strong>Note</strong>: <strong>WARNING</strong> - Setting to <code>None</code> disables backup capability. Only do this for non-production environments. Production systems should always have backup storage configured.</p>
+<h4 id="db2_backup_storage_size">db2_backup_storage_size<a class="headerlink" href="#db2_backup_storage_size" title="Permanent link">¤</a></h4>
+<p>Size of the backup persistent volume.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_BACKUP_STORAGE_SIZE</code></li>
-<li>Default: <code>100Gi</code></li>
+<li>Default: <code>50Gi</code></li>
 </ul>
-<h3 id="db2_backup_storage_accessmode">db2_backup_storage_accessmode<a class="headerlink" href="#db2_backup_storage_accessmode" title="Permanent link"></a></h3>
-<p>The access mode for the storage.</p>
+<p><strong>Purpose</strong>: Specifies the size of the persistent volume for Db2 backup storage. This volume stores database backups for disaster recovery and point-in-time recovery.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>50Gi</code>) for small databases or development environments
+- Increase based on database size and backup retention requirements
+- Plan for multiple full backups plus transaction logs
+- Monitor usage and expand as database grows</p>
+<p><strong>Valid values</strong>: Kubernetes storage size format (e.g., <code>50Gi</code>, <code>100Gi</code>, <code>500Gi</code>, <code>1Ti</code>)</p>
+<p><strong>Impact</strong>: Insufficient backup storage will cause backup operations to fail. Size should accommodate multiple full backups based on your retention policy.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_backup_storage_class</code>: Storage class for this volume
+- <code>db2_backup_storage_accessmode</code>: Access mode for this volume
+- <code>db2_data_storage_size</code>: Backup storage should be sized relative to data storage</p>
+<p><strong>Note</strong>: Plan backup storage as a multiple of your data storage size. A common practice is 2-3x the data storage size to accommodate multiple full backups and transaction logs.</p>
+<h4 id="db2_backup_storage_accessmode">db2_backup_storage_accessmode<a class="headerlink" href="#db2_backup_storage_accessmode" title="Permanent link">¤</a></h4>
+<p>Access mode for backup storage volume.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_BACKUP_STORAGE_ACCESSMODE</code></li>
 <li>Default: <code>ReadWriteMany</code></li>
 </ul>
-<h3 id="db2_logs_storage_class">db2_logs_storage_class<a class="headerlink" href="#db2_logs_storage_class" title="Permanent link"></a></h3>
-<p>Storage class used for transaction logs. This must support ReadWriteOnce</p>
+<p><strong>Purpose</strong>: Defines the Kubernetes access mode for the backup persistent volume. ReadWriteMany (RWX) is required for Db2 backup operations to be accessible from multiple pods.</p>
+<p><strong>When to use</strong>:
+- Leave as default (<code>ReadWriteMany</code>) for standard Db2 backup configuration
+- RWX is required for Db2 backup operations</p>
+<p><strong>Valid values</strong>: <code>ReadWriteMany</code> (RWX)</p>
+<p><strong>Impact</strong>: Db2 backup storage requires RWX access mode. Using a different access mode will cause backup operations to fail.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_backup_storage_class</code>: Must support the specified access mode
+- <code>db2_backup_storage_size</code>: Size of this volume</p>
+<p><strong>Note</strong>: Do not change from the default <code>ReadWriteMany</code>. Db2 backup operations require RWX access mode for proper operation.
+- Default: <code>ReadWriteMany</code></p>
+<h4 id="db2_logs_storage_class">db2_logs_storage_class<a class="headerlink" href="#db2_logs_storage_class" title="Permanent link">¤</a></h4>
+<p>Storage class used for transaction logs. This must support ReadWriteOnce(RWO) access mode.</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>DB2_LOGS_STORAGE_CLASS</code></li>
-<li>Default: Defaults to <code>ibmc-block-gold</code> if the storage class is available in the cluster.</li>
+<li>Default: Defaults to <code>ibmc-block-gold</code> if the storage class is available in the cluster. Set to <code>None</code> will drop the logs storage on DB2ucluster CR.</li>
 </ul>
-<h3 id="db2_logs_storage_size">db2_logs_storage_size<a class="headerlink" href="#db2_logs_storage_size" title="Permanent link"></a></h3>
+<h4 id="db2_logs_storage_size">db2_logs_storage_size<a class="headerlink" href="#db2_logs_storage_size" title="Permanent link">¤</a></h4>
 <p>Size of transaction logs persistent volume.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_LOGS_STORAGE_SIZE</code></li>
-<li>Default: <code>100Gi</code></li>
+<li>Default: <code>10Gi</code></li>
 </ul>
-<h3 id="db2_logs_storage_accessmode">db2_logs_storage_accessmode<a class="headerlink" href="#db2_logs_storage_accessmode" title="Permanent link"></a></h3>
+<h4 id="db2_logs_storage_accessmode">db2_logs_storage_accessmode<a class="headerlink" href="#db2_logs_storage_accessmode" title="Permanent link">¤</a></h4>
 <p>The access mode for the storage.</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>DB2_LOGS_STORAGE_ACCESSMODE</code></li>
 <li>Default: <code>ReadWriteOnce</code></li>
 </ul>
-<h3 id="db2_temp_storage_class">db2_temp_storage_class<a class="headerlink" href="#db2_temp_storage_class" title="Permanent link"></a></h3>
-<p>Storage class used for temporary data. This must support ReadWriteOnce</p>
+<h4 id="db2_temp_storage_class">db2_temp_storage_class<a class="headerlink" href="#db2_temp_storage_class" title="Permanent link">¤</a></h4>
+<p>Storage class used for temporary data. This must support ReadWriteMany(RWX) access mode.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_TEMP_STORAGE_CLASS</code></li>
-<li>Default: Defaults to <code>ibmc-block-gold</code> if the storage class is available in the cluster.</li>
+<li>Default: Defaults to <code>ibmc-block-gold</code> if the storage class is available in the cluster. Set to <code>None</code> will drop the tempts storage on DB2ucluster CR.</li>
 </ul>
-<h3 id="db2_temp_storage_size">db2_temp_storage_size<a class="headerlink" href="#db2_temp_storage_size" title="Permanent link"></a></h3>
+<h4 id="db2_temp_storage_size">db2_temp_storage_size<a class="headerlink" href="#db2_temp_storage_size" title="Permanent link">¤</a></h4>
 <p>Size of temporary persistent volume.</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>DB2_TEMP_STORAGE_SIZE</code></li>
-<li>Default: <code>100Gi</code></li>
+<li>Default: <code>10Gi</code></li>
 </ul>
-<h3 id="db2_temp_storage_accessmode">db2_temp_storage_accessmode<a class="headerlink" href="#db2_temp_storage_accessmode" title="Permanent link"></a></h3>
-<p>The access mode for the storage.</p>
+<h4 id="db2_temp_storage_accessmode">db2_temp_storage_accessmode<a class="headerlink" href="#db2_temp_storage_accessmode" title="Permanent link">¤</a></h4>
+<p>The access mode for the storage. This must support ReadWriteOnce(RWO) access mode.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_TEMP_STORAGE_ACCESSMODE</code></li>
 <li>Default: <code>ReadWriteOnce</code></li>
 </ul>
-<h2 id="role-variables-resource-requests">Role Variables - Resource Requests<a class="headerlink" href="#role-variables-resource-requests" title="Permanent link"></a></h2>
+<h3 id="resource-request-variables">Resource Request Variables<a class="headerlink" href="#resource-request-variables" title="Permanent link">¤</a></h3>
+<h3 id="db2_audit_logs_storage_class">db2_audit_logs_storage_class<a class="headerlink" href="#db2_audit_logs_storage_class" title="Permanent link">¤</a></h3>
+<p>Storage class used for audit logs. This must support ReadWriteMany(RWX) access mode.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_AUDIT_LOGS_STORAGE_CLASS</code></li>
+<li>Default: Defaults to <code>ibmc-block-gold</code> if the storage class is available in the cluster. Set to <code>None</code> will drop the tempts storage on Db2uInstace CR.</li>
+</ul>
+<h3 id="db2_audit_logs_storage_size">db2_audit_logs_storage_size<a class="headerlink" href="#db2_audit_logs_storage_size" title="Permanent link">¤</a></h3>
+<p>Size of audit logs persistent volume.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_AUDIT_LOGS_STORAGE_SIZE</code></li>
+<li>Default: <code>10Gi</code></li>
+</ul>
+<h3 id="db2_audit_logs_storage_accessmode">db2_audit_logs_storage_accessmode<a class="headerlink" href="#db2_audit_logs_storage_accessmode" title="Permanent link">¤</a></h3>
+<p>The access mode for the storage. This must support ReadWriteOnce(RWO) access mode.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_AUDIT_LOGS_STORAGE_ACCESSMODE</code></li>
+<li>Default: <code>ReadWriteOnce</code></li>
+</ul>
+<h3 id="db2_archivelogs_storage_class">db2_archivelogs_storage_class<a class="headerlink" href="#db2_archivelogs_storage_class" title="Permanent link">¤</a></h3>
+<p>Storage class used for archive logs. This must support ReadWriteMany(RWX) access mode.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_ARCHIVELOGS_STORAGE_CLASS</code></li>
+<li>Default: Defaults to <code>ibmc-block-gold</code> if the storage class is available in the cluster. Set to <code>None</code> will drop the tempts storage on Db2uInstace CR.</li>
+</ul>
+<h3 id="db2_archivelogs_storage_size">db2_archivelogs_storage_size<a class="headerlink" href="#db2_archivelogs_storage_size" title="Permanent link">¤</a></h3>
+<p>Size of audit logs persistent volume.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_ARCHIVELOGS_STORAGE_SIZE</code></li>
+<li>Default: <code>10Gi</code></li>
+</ul>
+<h3 id="db2_archivelogs_storage_accessmode">db2_archivelogs_storage_accessmode<a class="headerlink" href="#db2_archivelogs_storage_accessmode" title="Permanent link">¤</a></h3>
+<p>The access mode for the storage. This must support ReadWriteOnce(RWO) access mode.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_ARCHIVELOGS_STORAGE_ACCESSMODE</code></li>
+<li>Default: <code>ReadWriteOnce</code></li>
+</ul>
+<h3 id="db2_audit_logs_storage_class_1">db2_audit_logs_storage_class<a class="headerlink" href="#db2_audit_logs_storage_class_1" title="Permanent link">¤</a></h3>
+<p>Storage class used for audit logs. This must support ReadWriteMany(RWX) access mode.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_AUDIT_LOGS_STORAGE_CLASS</code></li>
+<li>Default: Defaults to <code>ibmc-block-gold</code> if the storage class is available in the cluster. Set to <code>None</code> will drop the tempts storage on Db2uInstace CR.</li>
+</ul>
+<h3 id="db2_audit_logs_storage_size_1">db2_audit_logs_storage_size<a class="headerlink" href="#db2_audit_logs_storage_size_1" title="Permanent link">¤</a></h3>
+<p>Size of audit logs persistent volume.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_AUDIT_LOGS_STORAGE_SIZE</code></li>
+<li>Default: <code>10Gi</code></li>
+</ul>
+<h3 id="db2_audit_logs_storage_accessmode_1">db2_audit_logs_storage_accessmode<a class="headerlink" href="#db2_audit_logs_storage_accessmode_1" title="Permanent link">¤</a></h3>
+<p>The access mode for the storage. This must support ReadWriteOnce(RWO) access mode.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_AUDIT_LOGS_STORAGE_ACCESSMODE</code></li>
+<li>Default: <code>ReadWriteOnce</code></li>
+</ul>
+<h3 id="db2_archivelogs_storage_class_1">db2_archivelogs_storage_class<a class="headerlink" href="#db2_archivelogs_storage_class_1" title="Permanent link">¤</a></h3>
+<p>Storage class used for archive logs. This must support ReadWriteMany(RWX) access mode.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_ARCHIVELOGS_STORAGE_CLASS</code></li>
+<li>Default: Defaults to <code>ibmc-block-gold</code> if the storage class is available in the cluster. Set to <code>None</code> will drop the tempts storage on Db2uInstace CR.</li>
+</ul>
+<h3 id="db2_archivelogs_storage_size_1">db2_archivelogs_storage_size<a class="headerlink" href="#db2_archivelogs_storage_size_1" title="Permanent link">¤</a></h3>
+<p>Size of audit logs persistent volume.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_ARCHIVELOGS_STORAGE_SIZE</code></li>
+<li>Default: <code>10Gi</code></li>
+</ul>
+<h3 id="db2_archivelogs_storage_accessmode_1">db2_archivelogs_storage_accessmode<a class="headerlink" href="#db2_archivelogs_storage_accessmode_1" title="Permanent link">¤</a></h3>
+<p>The access mode for the storage. This must support ReadWriteOnce(RWO) access mode.</p>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>DB2_ARCHIVELOGS_STORAGE_ACCESSMODE</code></li>
+<li>Default: <code>ReadWriteOnce</code></li>
+</ul>
+<h2 id="role-variables-resource-requests">Role Variables - Resource Requests<a class="headerlink" href="#role-variables-resource-requests" title="Permanent link">¤</a></h2>
 <p>These variables allow you to customize the resources available to the Db2 pod in your cluster.  In most circumstances you will want to set these properties because it's impossible for us to provide a default value that will be appropriate for all users.  We have set defaults that are suitable for deploying Db2 onto a dedicated worker node with 4cpu and 16gb memory.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Note that you must take into account the system overhead on any given node when setting these parameters, if you set the requests equal to the number of CPU or amount of memory on yournode then the scheduler will not be able to schedule the Db2 pod because not 100% of the worker nodes' resource will be available to pod on that node, even if there's only a single pod on it.</p>
-<p>Db2 is sensitive to both CPU and memory issues, particularly memory, we recommennd setting requests and limits to the same values, ensuring the scheduler always reserves the resources that Db2 expects to be available to it.</p>
+<p>Note that you must take into account the system overhead on any given node when setting these parameters, if you set the requests equal to the number of CPU or amount of memory on your node then the scheduler will not be able to schedule the Db2 pod because not 100% of the worker nodes' resource will be available to pod on that node, even if there's only a single pod on it.</p>
+<p>Db2 is sensitive to both CPU and memory issues, particularly memory, we recommend setting requests and limits to the same values, ensuring the scheduler always reserves the resources that Db2 expects to be available to it.</p>
 </div>
-<h3 id="db2_cpu_requests">db2_cpu_requests<a class="headerlink" href="#db2_cpu_requests" title="Permanent link"></a></h3>
+<h4 id="db2_cpu_requests">db2_cpu_requests<a class="headerlink" href="#db2_cpu_requests" title="Permanent link">¤</a></h4>
 <p>Define the Kubernetes CPU request for the Db2 pod.</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>DB2_CPU_REQUESTS</code></li>
 <li>Default: <code>4000m</code></li>
 </ul>
-<h3 id="db2_cpu_limits">db2_cpu_limits<a class="headerlink" href="#db2_cpu_limits" title="Permanent link"></a></h3>
+<h4 id="db2_cpu_limits">db2_cpu_limits<a class="headerlink" href="#db2_cpu_limits" title="Permanent link">¤</a></h4>
 <p>Define the Kubernetes CPU limit for the Db2 pod.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_CPU_LIMITS</code></li>
 <li>Default: <code>6000m</code></li>
 </ul>
-<h3 id="db2_memory_requests">db2_memory_requests<a class="headerlink" href="#db2_memory_requests" title="Permanent link"></a></h3>
+<h4 id="db2_memory_requests">db2_memory_requests<a class="headerlink" href="#db2_memory_requests" title="Permanent link">¤</a></h4>
 <p>Define the Kubernetes memory request for the Db2 pod.</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>DB2_MEMORY_REQUESTS</code></li>
 <li>Default: <code>8Gi</code></li>
 </ul>
-<h3 id="db2_memory_limits">db2_memory_limits<a class="headerlink" href="#db2_memory_limits" title="Permanent link"></a></h3>
+<h4 id="db2_memory_limits">db2_memory_limits<a class="headerlink" href="#db2_memory_limits" title="Permanent link">¤</a></h4>
 <p>Define the Kubernetes memory limit for the Db2 pod.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_MEMORY_LIMITS</code></li>
 <li>Default: <code>16Gi</code></li>
 </ul>
-<h2 id="role-variables-node-label-affinity">Role Variables - Node Label Affinity<a class="headerlink" href="#role-variables-node-label-affinity" title="Permanent link"></a></h2>
+<h3 id="node-label-affinity-variables">Node Label Affinity Variables<a class="headerlink" href="#node-label-affinity-variables" title="Permanent link">¤</a></h3>
 <p>Specify both <code>db2_affinity_key</code> and <code>db2_affinity_value</code> to configure <code>requiredDuringSchedulingIgnoredDuringExecution</code> affinity with appropriately labelled nodes.</p>
-<h3 id="db2_affinity_key">db2_affinity_key<a class="headerlink" href="#db2_affinity_key" title="Permanent link"></a></h3>
+<h4 id="db2_affinity_key">db2_affinity_key<a class="headerlink" href="#db2_affinity_key" title="Permanent link">¤</a></h4>
 <p>Specify the key of a node label to declare affinity with.</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>DB2_AFFINITY_KEY</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="db2_affinity_value">db2_affinity_value<a class="headerlink" href="#db2_affinity_value" title="Permanent link"></a></h3>
+<h4 id="db2_affinity_value">db2_affinity_value<a class="headerlink" href="#db2_affinity_value" title="Permanent link">¤</a></h4>
 <p>Specify the value of a node label to declare affinity with.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_AFFINITY_VALUE</code></li>
 <li>Default: None</li>
 </ul>
-<h2 id="role-variables-node-taint-toleration">Role Variables - Node Taint Toleration<a class="headerlink" href="#role-variables-node-taint-toleration" title="Permanent link"></a></h2>
+<h3 id="node-taint-toleration-variables">Node Taint Toleration Variables<a class="headerlink" href="#node-taint-toleration-variables" title="Permanent link">¤</a></h3>
 <p>Specify <code>db2_tolerate_key</code>, <code>db2_tolerate_value</code>, and <code>db2_tolerate_effect</code> to configure a toleration policy to allow the db2 instance to be scheduled on nodes with the specified taint.</p>
-<h3 id="db2_tolerate_key">db2_tolerate_key<a class="headerlink" href="#db2_tolerate_key" title="Permanent link"></a></h3>
+<h4 id="db2_tolerate_key">db2_tolerate_key<a class="headerlink" href="#db2_tolerate_key" title="Permanent link">¤</a></h4>
 <p>Specify the key of the taint that is to be tolerated.</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>DB2_TOLERATE_KEY</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="db2_tolerate_value">db2_tolerate_value<a class="headerlink" href="#db2_tolerate_value" title="Permanent link"></a></h3>
+<h4 id="db2_tolerate_value">db2_tolerate_value<a class="headerlink" href="#db2_tolerate_value" title="Permanent link">¤</a></h4>
 <p>Specify the value of the taint that is to be tolerated.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_TOLERATE_VALUE</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="db2_tolerate_effect">db2_tolerate_effect<a class="headerlink" href="#db2_tolerate_effect" title="Permanent link"></a></h3>
+<h4 id="db2_tolerate_effect">db2_tolerate_effect<a class="headerlink" href="#db2_tolerate_effect" title="Permanent link">¤</a></h4>
 <p>Specify the type of taint effect that will be tolerated (<code>NoSchedule</code>, <code>PreferNoSchedule</code>, or <code>NoExecute</code>).</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>DB2_TOLERATE_EFFECT</code></li>
 <li>Default: None</li>
 </ul>
-<h2 id="role-variables-db2ucluster-database-configuration-settings">Role Variables - DB2UCluster Database Configuration Settings<a class="headerlink" href="#role-variables-db2ucluster-database-configuration-settings" title="Permanent link"></a></h2>
+<h2 id="role-variables-db2ucluster-database-configuration-settings">Role Variables - DB2UCluster Database Configuration Settings<a class="headerlink" href="#role-variables-db2ucluster-database-configuration-settings" title="Permanent link">¤</a></h2>
 <p>The following variables will overwrite DB2UCluster default properties for the DB2 configuration sections:</p>
 <ul>
 <li><code>spec.environment.database.dbConfig</code></li>
 <li><code>spec.environment.instance.dbmConfig</code></li>
 <li><code>spec.environment.instance.registry</code></li>
 </ul>
-<h3 id="db2_database_db_config">db2_database_db_config<a class="headerlink" href="#db2_database_db_config" title="Permanent link"></a></h3>
-<p>Overwrites the db2ucluster database configuration settings under <code>spec.environment.database.dbConfig</code> section.
-- Optional
-- Environment Variable: <code>DB2_DATABASE_DB_CONFIG</code>
-- Default: None</p>
-<h3 id="db2_instance_dbm_config">db2_instance_dbm_config<a class="headerlink" href="#db2_instance_dbm_config" title="Permanent link"></a></h3>
+<h4 id="db2_database_db_config">db2_database_db_config<a class="headerlink" href="#db2_database_db_config" title="Permanent link">¤</a></h4>
+<p>Overwrites the db2ucluster database configuration settings under <code>spec.environment.database.dbConfig</code> section.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>DB2_DATABASE_DB_CONFIG</code></li>
+<li>Default: None</li>
+</ul>
+<h4 id="db2_instance_dbm_config">db2_instance_dbm_config<a class="headerlink" href="#db2_instance_dbm_config" title="Permanent link">¤</a></h4>
 <p>Overwrites the db2ucluster instance database configuration settings under <code>spec.environment.instance.dbmConfig</code> section.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -730,137 +1574,1191 @@ db2u-db01   Ready   None               29m
 <li>Environment Variable: <code>DB2_INSTANCE_DBM_CONFIG</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="db2_instance_registry">db2_instance_registry<a class="headerlink" href="#db2_instance_registry" title="Permanent link"></a></h3>
-<p>Overwrites the db2ucluster instance database configuration settings under <code>spec.environment.instance.registry</code> section.
-You can define parameters to be included in this section using semicolon separated values.</p>
+<h4 id="db2_instance_registry">db2_instance_registry<a class="headerlink" href="#db2_instance_registry" title="Permanent link">¤</a></h4>
+<p>Overwrites the db2ucluster instance database configuration settings under <code>spec.environment.instance.registry</code> section. You can define parameters to be included in this section using semicolon separated values.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>DB2_INSTANCE_REGISTRY</code></li>
 <li>Default: None</li>
 </ul>
-<h2 id="role-variables-mpp-system">Role Variables - MPP System<a class="headerlink" href="#role-variables-mpp-system" title="Permanent link"></a></h2>
+<h3 id="mpp-system-variables">MPP System Variables<a class="headerlink" href="#mpp-system-variables" title="Permanent link">¤</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Do not use these variables if you intend to use the Db2 instance with IBM Maximo Application Suite; no MAS application supports Db2 MPP</p>
 </div>
-<h3 id="db2_mln_count">db2_mln_count<a class="headerlink" href="#db2_mln_count" title="Permanent link"></a></h3>
+<h4 id="db2_mln_count">db2_mln_count<a class="headerlink" href="#db2_mln_count" title="Permanent link">¤</a></h4>
 <p>The number of logical nodes (i.e. database partitions to create). Note: ensure that the application using this Db2 can support Db2 MPP (which is created when <code>DB2_MLN_COUNT</code> is greater than 1).</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>'DB2_MLN_COUNT</code></li>
 <li>Default: 1</li>
 </ul>
-<h3 id="db2_num_pods">db2_num_pods<a class="headerlink" href="#db2_num_pods" title="Permanent link"></a></h3>
+<h4 id="db2_num_pods">db2_num_pods<a class="headerlink" href="#db2_num_pods" title="Permanent link">¤</a></h4>
 <p>The number of Db2 pods to create in the instance. Note that <code>db2_num_pods</code> must be less than or equal to <code>db2_mln_count</code>.  A single db2u pod can contain multiple logical nodes. So be sure to avoid specifying a large number for <code>db2_mln_count</code> while specifying a small number for <code>db2_num_pods</code>. If in doubt, make <code>db2_mln_count = db2_num_pods</code>. For more information refer to the <a href="https://www.ibm.com/docs/en/db2-warehouse?topic=SSCJDQ/com.ibm.swg.im.dashdb.ucontainer.doc/doc/db2w-mempernode-new.html">Db2 documentation</a>.</p>
 <ul>
-<li>Optional</li>
-<li>Environment Variable: <code>'DB2_NUM_PODS</code></li>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>DB2_NUM_PODS</code></li>
 <li>Default: 1</li>
 </ul>
-<h2 id="role-variables-mas-configuration">Role Variables - MAS Configuration<a class="headerlink" href="#role-variables-mas-configuration" title="Permanent link"></a></h2>
-<h3 id="mas_instance_id">mas_instance_id<a class="headerlink" href="#mas_instance_id" title="Permanent link"></a></h3>
+<h3 id="db2_addons_audit_config">db2_addons_audit_config<a class="headerlink" href="#db2_addons_audit_config" title="Permanent link">¤</a></h3>
+<ul>
+<li>Optional</li>
+<li>Environment Variable: <code>'DB2_ADDONS_AUDIT_CONFIG</code></li>
+<li>Default: ""</li>
+</ul>
+<h2 id="role-variables-mas-configuration">Role Variables - MAS Configuration<a class="headerlink" href="#role-variables-mas-configuration" title="Permanent link">¤</a></h2>
+<h3 id="mas_instance_id">mas_instance_id<a class="headerlink" href="#mas_instance_id" title="Permanent link">¤</a></h3>
 <p>Providing this and <code>mas_config_dir</code> will instruct the role to generate a JdbcCfg template that can be used to configure MAS to connect to this database.</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>MAS_INSTANCE_ID</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="mas_config_dir">mas_config_dir<a class="headerlink" href="#mas_config_dir" title="Permanent link"></a></h3>
+<h4 id="mas_config_dir">mas_config_dir<a class="headerlink" href="#mas_config_dir" title="Permanent link">¤</a></h4>
 <p>Providing this and <code>mas_instance_id</code> will instruct the role to generate a JdbcCfg template that can be used to configure MAS to connect to this database.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>MAS_CONFIG_DIR</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="mas_config_scope">mas_config_scope<a class="headerlink" href="#mas_config_scope" title="Permanent link"></a></h3>
+<h4 id="mas_config_scope">mas_config_scope<a class="headerlink" href="#mas_config_scope" title="Permanent link">¤</a></h4>
 <p>Supported values are <code>system</code>, <code>ws</code>, <code>app</code>, or <code>wsapp</code>, this is only used when both <code>mas_config_dir</code> and <code>mas_instance_id</code> are set.</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>MAS_CONFIG_SCOPE</code></li>
 <li>Default: <code>system</code></li>
 </ul>
-<h3 id="mas_workspace_id">mas_workspace_id<a class="headerlink" href="#mas_workspace_id" title="Permanent link"></a></h3>
+<h4 id="mas_workspace_id">mas_workspace_id<a class="headerlink" href="#mas_workspace_id" title="Permanent link">¤</a></h4>
 <p>This is only used when both <code>mas_config_dir</code> and <code>mas_instance_id</code> are set, and <code>mas_config_scope</code> is set to either <code>ws</code> or <code>wsapp</code></p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>MAS_WORKSPACE_ID</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="mas_application_id">mas_application_id<a class="headerlink" href="#mas_application_id" title="Permanent link"></a></h3>
+<h4 id="mas_application_id">mas_application_id<a class="headerlink" href="#mas_application_id" title="Permanent link">¤</a></h4>
 <p>This is only used when both <code>mas_config_dir</code> and <code>mas_instance_id</code> are set, and <code>mas_config_scope</code> is set to either <code>app</code> or <code>wsapp</code></p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>'MAS_APP_ID</code></li>
 <li>Default: None</li>
 </ul>
-<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link"></a></h2>
+<h2 id="role-variables-backup-and-restore">Role Variables - Backup and Restore<a class="headerlink" href="#role-variables-backup-and-restore" title="Permanent link">¤</a></h2>
+<h3 id="mas_instance_id_1">mas_instance_id<a class="headerlink" href="#mas_instance_id_1" title="Permanent link">¤</a></h3>
+<p>MAS instance identifier for the backup/restore operation.</p>
+<ul>
+<li><strong>Required</strong> for backup and restore operations</li>
+<li>Environment Variable: <code>MAS_INSTANCE_ID</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Identifies the MAS instance associated with the Db2 backup. Used for organizing backups and ensuring restore operations target the correct instance.</p>
+<p><strong>When to use</strong>:
+- Always required when performing backup or restore operations
+- Must match the MAS instance ID that uses this Db2 instance</p>
+<p><strong>Valid values</strong>: Valid MAS instance ID (e.g., <code>inst1</code>, <code>masinst1</code>)</p>
+<p><strong>Example</strong>: <code>masinst1</code></p>
+<h3 id="mas_application_id_1">mas_application_id<a class="headerlink" href="#mas_application_id_1" title="Permanent link">¤</a></h3>
+<p>MAS application identifier for the backup/restore operation.</p>
+<ul>
+<li><strong>Required</strong> for backup and restore operations</li>
+<li>Environment Variable: <code>MAS_APP_ID</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Identifies the MAS application (e.g., manage, iot) that uses this Db2 database. Used for organizing backups and database-specific operations.</p>
+<p><strong>When to use</strong>:
+- Always required when performing backup or restore operations
+- Must match the MAS application that uses this Db2 database</p>
+<p><strong>Valid values</strong>: Valid MAS application ID (e.g., <code>manage</code>, <code>iot</code>, <code>monitor</code>)</p>
+<p><strong>Example</strong>: <code>manage</code></p>
+<h3 id="mas_backup_dir">mas_backup_dir<a class="headerlink" href="#mas_backup_dir" title="Permanent link">¤</a></h3>
+<p>Local directory path where backups will be stored or restored from.</p>
+<ul>
+<li><strong>Required</strong> for backup and restore operations</li>
+<li>Environment Variable: <code>MAS_BACKUP_DIR</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the local filesystem directory for storing Db2 backup files and metadata. This directory serves as the staging area for all backup and restore operations.</p>
+<p><strong>When to use</strong>:
+- Always required when performing backup or restore operations
+- Must be accessible from the system running the Ansible playbook
+- Should have sufficient disk space for database backups</p>
+<p><strong>Valid values</strong>: Any valid local filesystem path (e.g., <code>/tmp/mas_backups</code>, <code>/backup/db2</code>)</p>
+<p><strong>Impact</strong>:
+- Backup files and metadata are stored in subdirectories under this path
+- Directory structure: <code>&lt;mas_backup_dir&gt;/backup-&lt;version&gt;-db2u-&lt;app&gt;/</code>
+- Insufficient space will cause backup failures</p>
+<p><strong>Related variables</strong>:
+- <code>db2_backup_version</code>: Used to create versioned backup subdirectories
+- <code>backup_vendor</code>: When set to <code>s3</code>, database backups go to S3 but instance resources still use this directory</p>
+<p><strong>Example</strong>: <code>/tmp/masbr</code></p>
+<h3 id="db2_backup_version">db2_backup_version<a class="headerlink" href="#db2_backup_version" title="Permanent link">¤</a></h3>
+<p>The backup version timestamp identifier for backup and restore operations.</p>
+<ul>
+<li><strong>Required</strong> for <code>restore</code> and <code>restore-database</code> actions</li>
+<li><strong>Auto-generated</strong> for backup operations</li>
+<li>Environment Variable: <code>DB2_BACKUP_VERSION</code></li>
+<li>Default: Auto-generated in format <code>YYYYMMDD-HHMMSS</code></li>
+</ul>
+<p><strong>Purpose</strong>: Uniquely identifies a specific backup version using a timestamp. This allows multiple backups to coexist and enables point-in-time restore operations.</p>
+<p><strong>When to use</strong>:
+- Automatically generated during backup (no need to set manually)
+- Must be specified when restoring to identify which backup to use
+- Must be specified when installing Db2 from an existing backup</p>
+<p><strong>Valid values</strong>: Timestamp string in format <code>YYYYMMDD-HHMMSS</code> (e.g., <code>20251212-021316</code> for December 12, 2025 at 02:13:16)</p>
+<p><strong>Impact</strong>:
+- Determines the backup directory name: <code>backup-&lt;version&gt;-db2u-&lt;app&gt;</code>
+- Used to locate backup files during restore operations
+- Recorded in backup metadata file for verification</p>
+<p><strong>Related variables</strong>:
+- <code>mas_backup_dir</code>: Parent directory containing versioned backups
+- <code>db2_action</code>: Required when action is <code>restore-database</code> or <code>restore</code>(instance &amp; database)</p>
+<p><strong>Example</strong>: <code>20251212-021316</code></p>
+<h3 id="override_storageclass">override_storageclass<a class="headerlink" href="#override_storageclass" title="Permanent link">¤</a></h3>
+<p>Controls whether to override storage classes during Db2 installation from backup.
+Only used in Db2 instance restore.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>OVERRIDE_STORAGECLASS</code></li>
+<li>Default: <code>false</code></li>
+</ul>
+<p><strong>Purpose</strong>: Allows changing storage classes when restoring Db2 to a different cluster or when the original storage classes are not available. When enabled, uses specified storage class variables or cluster defaults instead of backup metadata values.</p>
+<p><strong>When to use</strong>:
+- Set to <code>true</code> when restoring to a cluster with different storage classes
+- Set to <code>true</code> when original storage classes are not available in target cluster
+- Leave as <code>false</code> to use the same storage classes as the original instance</p>
+<p><strong>Valid values</strong>: <code>true</code>, <code>false</code></p>
+<p><strong>Impact</strong>:
+- When <code>true</code>: Uses <code>CUSTOM_STORAGE_CLASS_RWO</code> and <code>CUSTOM_STORAGE_CLASS_RWX</code> if set, otherwise uses cluster default storage classes
+- When <code>false</code>: Uses storage classes from backup metadata (original instance configuration)</p>
+<p><strong>Related variables</strong>:
+- <code>custom_storage_class_rwo</code>: Override for ReadWriteOnce storage (applies to data, logs, temp, archivelogs, audit_logs)
+- <code>custom_storage_class_rwx</code>: Override for ReadWriteMany storage (applies to meta, backup)</p>
+<h3 id="custom_storage_class_rwo">custom_storage_class_rwo<a class="headerlink" href="#custom_storage_class_rwo" title="Permanent link">¤</a></h3>
+<p>Custom ReadWriteOnce storage class for Db2 restore operations.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>CUSTOM_STORAGE_CLASS_RWO</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Provides a single storage class override for all ReadWriteOnce (RWO) PVCs during restore. This simplifies storage class configuration when all RWO volumes can use the same storage class.</p>
+<p><strong>When to use</strong>:
+- Set when <code>override_storageclass</code> is <code>true</code> and you want to use the same storage class for all RWO volumes
+- Applies to: data, logs, temp, archivelogs, and audit_logs storage</p>
+<p><strong>Valid values</strong>: Valid storage class name available in the target cluster</p>
+<p><strong>Impact</strong>: When set, overrides the storage class for all RWO PVCs unless specific DB2 storage class variables are also set (which take precedence)</p>
+<p><strong>Example</strong>: <code>ocs-storagecluster-ceph-rbd</code></p>
+<h3 id="custom_storage_class_rwx">custom_storage_class_rwx<a class="headerlink" href="#custom_storage_class_rwx" title="Permanent link">¤</a></h3>
+<p>Custom ReadWriteMany storage class for Db2 restore operations.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>CUSTOM_STORAGE_CLASS_RWX</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Provides a single storage class override for all ReadWriteMany (RWX) PVCs during restore. This simplifies storage class configuration when all RWX volumes can use the same storage class.</p>
+<p><strong>When to use</strong>:
+- Set when <code>override_storageclass</code> is <code>true</code> and you want to use the same storage class for all RWX volumes
+- Applies to: meta and backup storage</p>
+<p><strong>Valid values</strong>: Valid storage class name available in the target cluster</p>
+<p><strong>Impact</strong>: When set, overrides the storage class for all RWX PVCs unless specific DB2 storage class variables are also set (which take precedence)</p>
+<p><strong>Example</strong>: <code>ocs-storagecluster-cephfs</code></p>
+<h3 id="backup_type">backup_type<a class="headerlink" href="#backup_type" title="Permanent link">¤</a></h3>
+<p>Type of backup operation to perform on the Db2 database.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>DB2_BACKUP_TYPE</code></li>
+<li>Default: <code>online</code></li>
+</ul>
+<p><strong>Purpose</strong>: Determines whether the database remains available during backup. Online backups allow continued database access but may impact performance, while offline backups require downtime but complete faster.</p>
+<p><strong>When to use</strong>:
+- Use <code>online</code> (default) for production systems requiring high availability
+- Use <code>offline</code> when downtime is acceptable and faster backup is desired
+- <strong>Must use <code>offline</code></strong> if circular logging is enabled (<code>LOGARCHMETH1: OFF</code> and/or <code>LOGARCHMETH2: OFF</code>)</p>
+<p><strong>Valid values</strong>: <code>online</code>, <code>offline</code></p>
+<p><strong>Impact</strong>:
+- <code>online</code>: Database remains accessible during backup; requires archive logging enabled; may impact performance
+- <code>offline</code>: Database is unavailable during backup; faster completion; works with circular logging</p>
+<p><strong>Related variables</strong>:
+- <code>db2_database_db_config</code>: Check <code>LOGARCHMETH1</code> and <code>LOGARCHMETH2</code> settings to determine if online backup is supported</p>
+<p><strong>Important</strong>: If your Db2 instance has circular logging enabled (default configuration), you can only use <code>offline</code> backup type. If archive logging is enabled, you can use either type.</p>
+<h3 id="backup_vendor">backup_vendor<a class="headerlink" href="#backup_vendor" title="Permanent link">¤</a></h3>
+<p>Storage backend for database backup files only.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>BACKUP_VENDOR</code></li>
+<li>Default: <code>disk</code></li>
+</ul>
+<p><strong>Purpose</strong>: Determines where database backup files are stored. Disk storage keeps backups locally, while S3 storage sends them directly to S3-compatible object storage.</p>
+<p><strong>When to use</strong>:
+- Use <code>disk</code> (default) for local backups or when S3 is not available
+- Use <code>s3</code> for cloud-based backups, long-term retention, or disaster recovery scenarios</p>
+<p><strong>Valid values</strong>: <code>disk</code>, <code>s3</code></p>
+<p><strong>Impact</strong>:
+- <code>disk</code>: Database Backup files stored locally and copied to <code>mas_backup_dir</code>; requires sufficient local storage
+- <code>s3</code>: Database backup sent directly to S3 bucket; instance resources still stored locally; requires S3 credentials</p>
+<p><strong>Related variables</strong>:
+- When <code>s3</code>: Requires <code>backup_s3_endpoint</code>, <code>backup_s3_bucket</code>, <code>backup_s3_access_key</code>, <code>backup_s3_secret_key</code>
+- <code>mas_backup_dir</code>: Always required for metadata and instance resources</p>
+<p><strong>Note</strong>: Instance resources (secrets, certificates, CRs) are always stored locally in <code>mas_backup_dir</code>, regardless of vendor setting. Only database backup files go to S3.</p>
+<p><strong>Purpose</strong>: Determines if Kubernetes resources (secrets, certificates, Db2uCluster CR, etc.) are backed up along with the database. When <code>false</code>, enables full disaster recovery by backing up both instance configuration and data.</p>
+<p><strong>When to use</strong>:
+- Set to <code>false</code> when you need complete disaster recovery capability (instance + database)
+- Set to <code>false</code> when migrating Db2 to a new cluster
+- Leave as <code>true</code> (default) for database-only backups when instance already exists</p>
+<p><strong>Valid values</strong>: <code>true</code>, <code>false</code></p>
+<p><strong>Impact</strong>:
+- <code>true</code>: Only database data is backed up; faster backup; requires existing Db2 instance for restore
+- <code>false</code>: Both instance resources and database are backed up; enables full recovery; allows install from backup</p>
+<p><strong>Note</strong>: Instance resources include: Db2uCluster CR, secrets (passwords, certificates), ConfigMaps, and other Kubernetes resources needed to recreate the Db2 instance.</p>
+<h3 id="backup_s3_endpoint">backup_s3_endpoint<a class="headerlink" href="#backup_s3_endpoint" title="Permanent link">¤</a></h3>
+<p>S3-compatible object storage endpoint URL.</p>
+<ul>
+<li><strong>Required</strong> when <code>backup_vendor</code> is <code>s3</code></li>
+<li>Environment Variable: <code>BACKUP_S3_ENDPOINT</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the S3 API endpoint for storing database backups. Supports AWS S3, IBM Cloud Object Storage, MinIO, and other S3-compatible services.</p>
+<p><strong>When to use</strong>:
+- Required when using S3 storage for backups (<code>backup_vendor: s3</code>)
+- Must be accessible from the Db2 pod</p>
+<p><strong>Valid values</strong>: HTTPS URL to S3-compatible endpoint (e.g., <code>https://s3.us-east.cloud-object-storage.appdomain.cloud</code>, <code>https://s3.amazonaws.com</code>)</p>
+<p><strong>Impact</strong>: Db2 connects to this endpoint to upload/download backup files. Incorrect endpoint will cause backup/restore failures.</p>
+<p><strong>Related variables</strong>:
+- <code>backup_vendor</code>: Must be set to <code>s3</code>
+- <code>backup_s3_bucket</code>: Bucket at this endpoint
+- <code>backup_s3_access_key</code>, <code>backup_s3_secret_key</code>: Credentials for this endpoint</p>
+<p><strong>Example</strong>: <code>https://s3.us-east.cloud-object-storage.appdomain.cloud</code></p>
+<h3 id="backup_s3_bucket">backup_s3_bucket<a class="headerlink" href="#backup_s3_bucket" title="Permanent link">¤</a></h3>
+<p>S3 bucket name for storing database backups.</p>
+<ul>
+<li><strong>Required</strong> when <code>backup_vendor</code> is <code>s3</code></li>
+<li>Environment Variable: <code>BACKUP_S3_BUCKET</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the S3 bucket where database backup files will be stored. The bucket must exist and credentials must have read/write permissions.</p>
+<p><strong>When to use</strong>:
+- Required when using S3 storage for backups (<code>backup_vendor: s3</code>)
+- Bucket must be created before running backup</p>
+<p><strong>Valid values</strong>: Valid S3 bucket name following S3 naming conventions</p>
+<p><strong>Impact</strong>: Backup files are stored in this bucket under path <code>&lt;backup_version&gt;/</code>. Incorrect bucket name or insufficient permissions will cause failures.</p>
+<p><strong>Related variables</strong>:
+- <code>backup_vendor</code>: Must be set to <code>s3</code>
+- <code>backup_s3_endpoint</code>: S3 service hosting this bucket
+- <code>backup_s3_access_key</code>, <code>backup_s3_secret_key</code>: Must have permissions for this bucket</p>
+<p><strong>Example</strong>: <code>mas-db2-backups</code></p>
+<h3 id="backup_s3_access_key">backup_s3_access_key<a class="headerlink" href="#backup_s3_access_key" title="Permanent link">¤</a></h3>
+<p>S3 access key ID for authentication.</p>
+<ul>
+<li><strong>Required</strong> when <code>backup_vendor</code> is <code>s3</code></li>
+<li>Environment Variable: <code>BACKUP_S3_ACCESS_KEY</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Provides the access key ID for authenticating to S3-compatible object storage. Used together with secret key for S3 API authentication.</p>
+<p><strong>When to use</strong>:
+- Required when using S3 storage for backups (<code>backup_vendor: s3</code>)
+- Must have read/write permissions to the specified bucket</p>
+<p><strong>Valid values</strong>: Valid S3 access key ID from your S3 provider</p>
+<p><strong>Impact</strong>: Used for S3 authentication. Invalid credentials will cause backup/restore to fail with authentication errors.</p>
+<p><strong>Related variables</strong>:
+- <code>backup_vendor</code>: Must be set to <code>s3</code>
+- <code>backup_s3_secret_key</code>: Corresponding secret key
+- <code>backup_s3_bucket</code>: Bucket these credentials can access</p>
+<p><strong>Security</strong>: Store securely using Ansible Vault or environment variables. Never commit to version control.</p>
+<h3 id="backup_s3_secret_key">backup_s3_secret_key<a class="headerlink" href="#backup_s3_secret_key" title="Permanent link">¤</a></h3>
+<p>S3 secret access key for authentication.</p>
+<ul>
+<li><strong>Required</strong> when <code>backup_vendor</code> is <code>s3</code></li>
+<li>Environment Variable: <code>BACKUP_S3_SECRET_KEY</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Provides the secret access key for authenticating to S3-compatible object storage. Used together with access key for S3 API authentication.</p>
+<p><strong>When to use</strong>:
+- Required when using S3 storage for backups (<code>backup_vendor: s3</code>)
+- Must correspond to the access key ID</p>
+<p><strong>Valid values</strong>: Valid S3 secret access key from your S3 provider</p>
+<p><strong>Impact</strong>: Used for S3 authentication. Invalid credentials will cause backup/restore to fail with authentication errors.</p>
+<p><strong>Related variables</strong>:
+- <code>backup_vendor</code>: Must be set to <code>s3</code>
+- <code>backup_s3_access_key</code>: Corresponding access key ID
+- <code>backup_s3_bucket</code>: Bucket these credentials can access</p>
+<p><strong>Security</strong>: Store securely using Ansible Vault or environment variables. Never commit to version control.</p>
+<h3 id="backup_s3_alias">backup_s3_alias<a class="headerlink" href="#backup_s3_alias" title="Permanent link">¤</a></h3>
+<p>Db2 storage access alias name for S3 configuration.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>BACKUP_S3_ALIAS</code></li>
+<li>Default: <code>S3DB2COS</code></li>
+</ul>
+<p><strong>Purpose</strong>: Defines the alias name used in Db2's storage access configuration for S3. This is an internal Db2 identifier for the S3 connection.</p>
+<p><strong>When to use</strong>:
+- Usually leave as default unless you have specific Db2 storage access naming requirements
+- Change only if you need to match existing Db2 storage access configurations</p>
+<p><strong>Valid values</strong>: Valid Db2 storage access alias name (alphanumeric, no spaces)</p>
+<p><strong>Impact</strong>: Used internally by Db2 to reference the S3 storage configuration. Changing this is rarely necessary.</p>
+<p><strong>Related variables</strong>:
+- <code>backup_vendor</code>: Only used when set to <code>s3</code></p>
+<p><strong>Default</strong>: <code>S3DB2COS</code></p>
+<h2 id="example-usage-backup-and-restore">Example Usage - Backup and Restore<a class="headerlink" href="#example-usage-backup-and-restore" title="Permanent link">¤</a></h2>
+<h3 id="backup-db2-database-to-disk">Backup Db2 Database to Disk<a class="headerlink" href="#backup-db2-database-to-disk" title="Permanent link">¤</a></h3>
 <pre><code class="language-yaml">- hosts: localhost
   any_errors_fatal: true
   vars:
-    ibm_entitlement_key: xxxxx
-
-    # Configuration for the Db2 cluster
-    db2_instance_name: db2u-db01
-
-    db2_meta_storage_class: &quot;ibmc-file-gold&quot;
-    db2_data_storage_class: &quot;ibmc-block-gold&quot;
-    db2_backup_storage_class: &quot;ibmc-file-gold&quot;
-    db2_logs_storage_class: &quot;ibmc-block-gold&quot;
-    db2_temp_storage_class: &quot;ibmc-block-gold&quot;
-
-    # Create the MAS JdbcCfg &amp; Secret resource definitions
-    mas_instance_id: inst1
-    mas_config_dir: /home/david/masconfig
+    mas_instance_id: masinst1
+    mas_application_id: manage
+    mas_backup_dir: /tmp/masbr
+    db2_action: backup-database
+    db2_instance_name: db2u-manage
+    db2_namespace: db2u
+    backup_type: online
+    backup_vendor: disk
   roles:
     - ibm.mas_devops.db2
 </code></pre>
-<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link"></a></h2>
+<h3 id="backup-db2-database-to-s3">Backup Db2 Database to S3<a class="headerlink" href="#backup-db2-database-to-s3" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    mas_instance_id: masinst1
+    mas_application_id: manage
+    mas_backup_dir: /tmp/masbr
+    db2_action: backup-database
+    db2_instance_name: db2u-manage
+    backup_type: online
+    backup_vendor: s3
+    backup_s3_endpoint: https://s3.us-east.cloud-object-storage.appdomain.cloud
+    backup_s3_bucket: mas-db2-backups # your bucket name
+    backup_s3_access_key: "{{ lookup('env', 'S3_ACCESS_KEY') }}"
+    backup_s3_secret_key: "{{ lookup('env', 'S3_SECRET_KEY') }}"
+  roles:
+    - ibm.mas_devops.db2
+</code></pre>
+<h3 id="backup-with-instance-resources-and-database-to-disk">Backup with Instance Resources and Database to disk<a class="headerlink" href="#backup-with-instance-resources-and-database-to-disk" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    mas_instance_id: masinst1
+    mas_application_id: manage
+    mas_backup_dir: /tmp/masbr
+    db2_action: backup
+    db2_instance_name: db2u-manage
+    db2_namespace: db2u
+    backup_vendor: disk
+  roles:
+    - ibm.mas_devops.db2
+</code></pre>
+<h3 id="restore-db2-database-from-disk">Restore Db2 Database from Disk<a class="headerlink" href="#restore-db2-database-from-disk" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    db2_action: restore-database
+    mas_instance_id: masinst1
+    mas_application_id: manage
+    db2_backup_version: 20251212-021316
+    mas_backup_dir: /tmp/masbr
+    db2_instance_name: db2u-manage
+    db2_namespace: db2u
+    backup_vendor: disk
+  roles:
+    - ibm.mas_devops.db2
+</code></pre>
+<h3 id="restore-db2-database-from-s3">Restore Db2 Database from S3<a class="headerlink" href="#restore-db2-database-from-s3" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    db2_action: restore-database
+    mas_instance_id: masinst1
+    mas_application_id: manage
+    db2_backup_version: 20251212-021316
+    mas_backup_dir: /tmp/masbr
+    db2_instance_name: db2u-manage
+    backup_vendor: s3
+    backup_s3_endpoint: https://s3.us-east.cloud-object-storage.appdomain.cloud
+    backup_s3_bucket: mas-db2-backups # your bucket name
+    backup_s3_access_key: "{{ lookup('env', 'S3_ACCESS_KEY') }}"
+    backup_s3_secret_key: "{{ lookup('env', 'S3_SECRET_KEY') }}"
+  roles:
+    - ibm.mas_devops.db2
+</code></pre>
+<h3 id="restore-db2-from-backup-instance-database">Restore Db2 from Backup (Instance + Database)<a class="headerlink" href="#restore-db2-from-backup-instance-database" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    db2_action: restore
+    mas_instance_id: masinst1
+    mas_application_id: manage
+    db2_backup_version: 20251212-021316
+    mas_backup_dir: /tmp/masbr
+    backup_vendor: disk
+  roles:
+    - ibm.mas_devops.db2
+</code></pre>
+<h3 id="restore-db2-from-backup-instance-database-w-storage-class-override-using-custom-storage-classes">Restore Db2 from Backup (Instance + Database) w/ storage class override using custom storage classes<a class="headerlink" href="#restore-db2-from-backup-instance-database-w-storage-class-override-using-custom-storage-classes" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    db2_action: restore
+    mas_instance_id: masinst1
+    mas_application_id: manage
+    db2_backup_version: 20251212-021316
+    mas_backup_dir: /tmp/masbr
+    backup_vendor: disk
+    override_storageclass: true
+    custom_storage_class_rwo: ocs-storagecluster-ceph-rbd  # For data, logs, temp, archivelogs, audit_logs
+    custom_storage_class_rwx: ocs-storagecluster-cephfs    # For meta, backup
+  roles:
+    - ibm.mas_devops.db2
+</code></pre>
+<h3 id="restore-db2-from-backup-instance-databases3">Restore Db2 from Backup (Instance + Database(S3))<a class="headerlink" href="#restore-db2-from-backup-instance-databases3" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    db2_action: restore
+    mas_instance_id: masinst1
+    mas_application_id: manage
+    db2_backup_version: 20251212-021316
+    mas_backup_dir: /tmp/masbr
+    backup_vendor: s3
+    backup_s3_endpoint: https://s3.us-east.cloud-object-storage.appdomain.cloud
+    backup_s3_bucket: mas-db2-backups # your bucket name
+    backup_s3_access_key: "{{ lookup('env', 'S3_ACCESS_KEY') }}"
+    backup_s3_secret_key: "{{ lookup('env', 'S3_SECRET_KEY') }}"
+  roles:
+    - ibm.mas_devops.db2
+</code></pre>
+<h3 id="backup-directory-structure-disk">Backup Directory Structure (Disk)<a class="headerlink" href="#backup-directory-structure-disk" title="Permanent link">¤</a></h3>
+<pre><code>/tmp/masbr/
+└── backup-&lt;YYYYMMDD-HHMMSS&gt;-db2u-&lt;app_id&gt;/
+    ├── data/
+    │   ├── db2-&lt;app_id&gt;-BLUDB-backup-&lt;YYYYMMDD-HHMMSS&gt;.tar.gz
+    │   └── db2-backup-info.yaml
+    └── resources/
+        ├── db2uclusters/
+        ├── secrets/
+        ├── certificates/
+        └── issuers/
+        └── {kind}s/
+</code></pre>
+<h3 id="database-backup-metadata-db2-backup-infoyaml">Database backup Metadata (db2-backup-info.yaml)<a class="headerlink" href="#database-backup-metadata-db2-backup-infoyaml" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">source_db2_backup_version: "20251212-021316"
+source_db2_backup_timestamp: "20251212021316"
+source_db2_instance_name: "db2u-manage"
+source_db2_instance_version: "11.5.8.0-cn7"
+database: "BLUDB"
+backup_vendor: "disk"
+vendor_backup_path: "/mnt/backup/20251212-021316/data"
+local_backup_path: "/tmp/masbr/backup-20251212-021316-db2u/data/db2-BLUDB-backup-20251212-021316.tar.gz"
+status: "SUCCESS"
+</code></pre>
+<h3 id="important-considerations">Important Considerations<a class="headerlink" href="#important-considerations" title="Permanent link">¤</a></h3>
+<p><strong>Version Compatibility:</strong>
+- The restore operation requires the target Db2 version to match the backup version
+- Always verify version compatibility before attempting a restore</p>
+<p><strong>Backup Types:</strong>
+If your DB2 instance has got circular logging enabled i.e <code>LOGARCHMETH1: OFF or/and LOGARCHMETH2: OFF</code>, you can only use <code>offline</code> backup type. 
+If your DB2 instance has got circular logging disabled, you can use either <code>online</code> or <code>offline</code> backup type. 
+If you are unsure, you can use default <code>online</code> backup type.
+- <strong>Online Backup</strong>: Database remains available during backup (recommended for production)
+- <strong>Offline Backup</strong>: Database is taken offline during backup (faster but requires downtime)</p>
+<p><strong>Storage Options:</strong>
+- <strong>Disk Storage</strong>: Backups stored locally and copied to backup directory
+- <strong>S3 Storage</strong>: Backups stored directly to S3-compatible object storage (no local storage required)</p>
+<p><strong>Security:</strong>
+- Backup files contain sensitive data and credentials
+- Secure the backup directory with appropriate permissions
+- Consider encrypting backup files for long-term storage</p>
+<p><strong>Performance:</strong>
+- Online backups may impact Db2 performance during execution
+- Schedule backups during low-usage periods
+- Monitor Db2 resource utilization during backup</p>
+<h2 id="backup-and-restore-troubleshooting">Backup and Restore Troubleshooting<a class="headerlink" href="#backup-and-restore-troubleshooting" title="Permanent link">¤</a></h2>
+<h3 id="common-issues-and-solutions">Common Issues and Solutions<a class="headerlink" href="#common-issues-and-solutions" title="Permanent link">¤</a></h3>
+<h4 id="backup-failures">Backup Failures<a class="headerlink" href="#backup-failures" title="Permanent link">¤</a></h4>
+<ul>
+<li>Check DB2 pod logs: <code>oc logs -n &lt;namespace&gt; &lt;db2-pod-name&gt; -c db2u</code></li>
+<li>Review backup script logs in the pod: <code>/tmp/db2_backup.log</code></li>
+<li>Verify S3 credentials and connectivity (for S3 backups)</li>
+<li>Ensure sufficient storage space in the backup PVC(/mnt/backup)</li>
+</ul>
+<p><strong>Issue: Backup fails with "insufficient storage space"</strong></p>
+<pre><code>Error: SQL2062N  An error occurred while accessing media "backup_path"
+</code></pre>
+<p><strong>Solution:</strong>
+- Check available disk space on the Db2 pod: <code>oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- df -h</code>
+- Verify backup storage PVC has sufficient capacity
+- For S3 backups, ensure bucket has adequate space and proper permissions
+- Consider using compression or incremental backups to reduce storage requirements</p>
+<p><strong>Issue: Backup fails with "database is in use"</strong></p>
+<pre><code>Error: SQL1035N  The database is currently in use. SQLSTATE=57019
+</code></pre>
+<p><strong>Solution:</strong>
+- For offline backups, ensure all applications are disconnected
+- Use online backup instead: <code>export DB2_BACKUP_TYPE=online</code>
+- Check active connections: <code>oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- su - db2inst1 -c "db2 list applications"</code>
+- Force disconnect if necessary: <code>db2 force applications all</code></p>
+<p><strong>Issue: S3 backup fails with authentication errors</strong></p>
+<pre><code>Error: Unable to authenticate with S3 endpoint
+</code></pre>
+<p><strong>Solution:</strong>
+- Verify S3 credentials are correct: <code>BACKUP_S3_ACCESS_KEY</code> and <code>BACKUP_S3_SECRET_KEY</code>
+- Test S3 connectivity from the Db2 pod
+- Ensure S3 endpoint URL is correct and accessible
+- Check firewall rules and network policies allow S3 access
+- Verify bucket exists and credentials have write permissions</p>
+<p><strong>Issue: Backup script execution timeout</strong></p>
+<pre><code>Error: Backup operation timed out after 3600 seconds
+</code></pre>
+<p><strong>Solution:</strong>
+- Large databases may require extended timeout periods
+- Monitor backup progress: <code>oc logs -n &lt;namespace&gt; &lt;db2-pod&gt; -f</code>
+- Check Db2 performance and resource utilization
+- Consider scheduling backups during low-usage periods
+- For very large databases, use incremental backups</p>
+<h4 id="restore-failures">Restore Failures<a class="headerlink" href="#restore-failures" title="Permanent link">¤</a></h4>
+<ul>
+<li>Verify backup version exists and is complete</li>
+<li>Check DB2 version compatibility</li>
+<li>Review restore script logs: <code>/tmp/db2_restore_disk.log</code> or <code>/tmp/db2_restore_s3.log</code></li>
+<li>Ensure DB2 instance is running and healthy before database restore</li>
+<li>For S3 restores, verify S3 connectivity and credentials</li>
+</ul>
+<p><strong>Issue: Restore fails with version mismatch</strong></p>
+<pre><code>Error: DB2 version mismatch. Backup version: 11.5.8.0, Target version: 11.5.9.0
+</code></pre>
+<p><strong>Solution:</strong>
+- Ensure target Db2 version matches backup version
+- Check backup metadata: <code>cat &lt;backup_dir&gt;/data/db2-backup-info.yaml</code>
+- Install matching Db2 version: <code>export DB2_VERSION=11.5.8.0-cn7</code>
+- Alternatively, upgrade backup to target version (requires manual intervention)</p>
+<p><strong>Issue: Restore fails with "database already exists"</strong></p>
+<pre><code>Error: SQL1005N  The database alias "BLUDB" already exists
+</code></pre>
+<p><strong>Solution:</strong>
+- Drop existing database before restore:
+  <code>bash
+  oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- su - db2inst1 -c "db2 drop database BLUDB"</code>
+- Or use a different database name during restore
+- Verify database state: <code>db2 list database directory</code></p>
+<p><strong>Issue: Restore fails with corrupted backup files</strong></p>
+<pre><code>Error: SQL2025N  The database cannot be restored from backup image
+</code></pre>
+<p><strong>Solution:</strong>
+- Verify backup file integrity:
+  <code>bash
+  tar -tzf &lt;backup-file&gt;.tar.gz &gt; /dev/null</code>
+- Check backup metadata for status: <code>status: SUCCESS</code>
+- Re-run backup if corruption detected
+- For S3 restores, verify file was completely uploaded
+- Check storage system for hardware errors</p>
+<p><strong>Issue: Restore fails with insufficient permissions</strong></p>
+<pre><code>Error: SQL0551N  User does not have required authorization
+</code></pre>
+<p><strong>Solution:</strong>
+- Verify db2inst1 user has proper permissions
+- Check pod security context and service account
+- Ensure restore scripts have execute permissions
+- Review OpenShift security policies (SCC)</p>
+<p><strong>Issue: S3 restore fails to download backup files</strong></p>
+<pre><code>Error: Failed to download backup from S3 bucket
+</code></pre>
+<p><strong>Solution:</strong>
+- Verify S3 credentials have read permissions
+- Check S3 bucket name and path are correct
+- Test S3 connectivity: <code>aws s3 ls s3://&lt;bucket-name&gt;/</code>
+- Ensure network policies allow outbound S3 access
+- Verify backup files exist in S3 bucket</p>
+<h4 id="performance-issues">Performance Issues<a class="headerlink" href="#performance-issues" title="Permanent link">¤</a></h4>
+<p><strong>Issue: Backup taking too long</strong>
+<strong>Solution:</strong>
+- Use online backups to avoid database downtime
+- Schedule backups during low-usage periods
+- Increase Db2 pod resources (CPU/memory)
+- Use compression to reduce backup size
+- Consider incremental backups for large databases
+- Check network bandwidth for S3 backups</p>
+<p><strong>Issue: Restore taking too long</strong>
+<strong>Solution:</strong>
+- Ensure adequate resources allocated to Db2 pod
+- Monitor pod resource utilization during restore
+- Check storage performance (IOPS, throughput)
+- For S3 restores, verify network bandwidth
+- Consider using faster storage classes</p>
+<h4 id="validation-and-verification">Validation and Verification<a class="headerlink" href="#validation-and-verification" title="Permanent link">¤</a></h4>
+<p><strong>Issue: How to verify backup completed successfully</strong>
+<strong>Solution:</strong>
+1. Check backup metadata file:
+   <code>bash
+   cat &lt;backup_dir&gt;/data/db2-backup-info.yaml</code>
+   Verify <code>status: SUCCESS</code></p>
+<ol>
+<li>
+<p>Verify backup file exists and has reasonable size:
+   <code>bash
+   ls -lh &lt;backup_dir&gt;/data/db2-*.tar.gz</code></p>
+</li>
+<li>
+<p>For S3 backups, verify files in bucket:
+   <code>bash
+   aws s3 ls s3://&lt;bucket-name&gt;/&lt;backup-version&gt;/</code></p>
+</li>
+<li>
+<p>Check Db2 backup history:
+   <code>bash
+   oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- su - db2inst1 -c "db2 list history backup all for BLUDB"</code></p>
+</li>
+</ol>
+<p><strong>Issue: How to verify restore completed successfully</strong>
+<strong>Solution:</strong>
+1. Check database is online:
+   <code>bash
+   oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- su - db2inst1 -c "db2 connect to BLUDB"</code></p>
+<ol>
+<li>
+<p>Verify table counts and data integrity:
+   <code>bash
+   oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- su - db2inst1 -c "db2 'select count(*) from &lt;table_name&gt;'"</code></p>
+</li>
+<li>
+<p>Check database configuration:
+   <code>bash
+   oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- su - db2inst1 -c "db2 get db cfg for BLUDB"</code></p>
+</li>
+<li>
+<p>Review restore logs for errors:
+   <code>bash
+   oc logs -n &lt;namespace&gt; &lt;db2-pod&gt; | grep -i error</code></p>
+</li>
+</ol>
+<h3 id="diagnostic-commands">Diagnostic Commands<a class="headerlink" href="#diagnostic-commands" title="Permanent link">¤</a></h3>
+<p><strong>Check Db2 pod status:</strong></p>
+<pre><code class="language-bash">oc get pods -n &lt;namespace&gt; | grep db2
+oc describe pod &lt;db2-pod&gt; -n &lt;namespace&gt;
+</code></pre>
+<p><strong>Check Db2 instance status:</strong></p>
+<pre><code class="language-bash">oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- su - db2inst1 -c "db2pd -"
+</code></pre>
+<p><strong>Check database status:</strong></p>
+<pre><code class="language-bash">oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- su - db2inst1 -c "db2 list active databases"
+</code></pre>
+<p><strong>Check backup storage:</strong></p>
+<pre><code class="language-bash">oc get pvc -n &lt;namespace&gt;
+oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- df -h /mnt/backup
+</code></pre>
+<p><strong>View Db2 diagnostic logs:</strong></p>
+<pre><code class="language-bash">oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- tail -f /var/log/db2u.log
+oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- cat /database/config/db2inst1/sqllib/db2dump/db2diag.log
+</code></pre>
+<p><strong>Check S3 configuration (if using S3):</strong></p>
+<pre><code class="language-bash">oc exec -n &lt;namespace&gt; &lt;db2-pod&gt; -- su - db2inst1 -c "db2 list storage access"
+</code></pre>
+<h3 id="getting-help">Getting Help<a class="headerlink" href="#getting-help" title="Permanent link">¤</a></h3>
+<p>If you encounter issues not covered in this troubleshooting guide:</p>
+<ol>
+<li><strong>Check Db2 logs</strong>: Review <code>/var/log/db2u.log</code> and <code>db2diag.log</code> for detailed error messages</li>
+<li><strong>Review backup metadata</strong>: Check <code>db2-backup-info.yaml</code> for backup details and status</li>
+<li><strong>Verify prerequisites</strong>: Ensure all required variables are set correctly</li>
+<li><strong>Test connectivity</strong>: Verify network access to storage (S3 or PVC)</li>
+<li><strong>Check resources</strong>: Ensure adequate CPU, memory, and storage are available</li>
+<li><strong>Open an issue</strong>: Report problems at the project repository with logs and configuration details</li>
+</ol>
+<h2 id="upgrading-db2-from-v11-to-v12">Upgrading Db2 from v11 to v12<a class="headerlink" href="#upgrading-db2-from-v11-to-v12" title="Permanent link">¤</a></h2>
+<p>Upgrading from Db2 v11 to v12 is a major version change that requires explicit opt-in and a valid Db2 Warehouse license. Without a license, Db2 v12 will operate under a 30-day trial license — <strong>this will cause your production system to go offline after expiry</strong>.</p>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">¤</a></h3>
+<ul>
+<li>A valid Db2 Warehouse license file (<code>.lic</code> format) — see <a href="#db2-v12-license-file-format">Db2 v12 License File Format</a> below</li>
+<li>The <code>db2_v12_upgrade</code> flag set to <code>true</code></li>
+<li>A v12 target channel (e.g., <code>v12.0.0-cn1</code>)</li>
+</ul>
+<h3 id="required-variables">Required Variables<a class="headerlink" href="#required-variables" title="Permanent link">¤</a></h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Environment Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>db2_v12_upgrade</code></td>
+<td><code>DB2_V12_UPGRADE</code></td>
+<td>Must be <code>true</code> to authorize the upgrade</td>
+</tr>
+<tr>
+<td><code>db2_license_file</code></td>
+<td><code>DB2_LICENSE_FILE</code></td>
+<td>Path to the Db2 v12 license file</td>
+</tr>
+<tr>
+<td><code>db2_channel</code></td>
+<td><code>DB2_CHANNEL</code></td>
+<td>Target v12 channel (e.g., <code>v12.0.0-cn1</code>)</td>
+</tr>
+<tr>
+<td><code>db2_namespace</code></td>
+<td><code>DB2_NAMESPACE</code></td>
+<td>Namespace containing the Db2 instances to upgrade</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    db2_action: upgrade
+    db2_namespace: db2u
+    db2_channel: v12.0.0-cn1
+    db2_v12_upgrade: true
+    db2_license_file: /path/to/db2wh.lic
+  roles:
+    - ibm.mas_devops.db2
+</code></pre>
+<p>Or using environment variables:</p>
+<pre><code class="language-bash">export DB2_ACTION=upgrade
+export DB2_NAMESPACE=db2u
+export DB2_CHANNEL=v12.0.0-cn1
+export DB2_V12_UPGRADE=true
+export DB2_LICENSE_FILE=/path/to/db2wh.lic
+ansible-playbook ibm.mas_devops.oneclick_upgrade_db2
+</code></pre>
+<h3 id="db2-v12-license-file-format">Db2 v12 License File Format<a class="headerlink" href="#db2-v12-license-file-format" title="Permanent link">¤</a></h3>
+<p>IBM distributes the Db2 Warehouse license under several names — you may have received it as <code>db2wh.lic</code>, <code>db2ese.lic</code>, <code>db2aese.lic</code>, or simply as an "activation key" or "entitlement file". The file is a plain-text file with the following structure:</p>
+<pre><code>[LicenseCertificate]
+CheckSum=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+TimeStamp=YYYY-MM-DD HH:MM:SS
+PasswordVersion=5
+VendorName=IBM Corporation
+VendorPassword=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ProductName=IBM Db2 Warehouse
+ProductID=5765-F41
+ProductVersion=12.0
+ProductAnnotation=
+LicenseType=Permanent
+...
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a sample structure only — not a real license. Use it to verify that the file you have from IBM matches this format. The file should contain <code>[LicenseCertificate]</code> as the first line and include <code>ProductName=IBM Db2 Warehouse</code> or similar. If your file looks significantly different, you may have the wrong entitlement file.</p>
+</div>
+<h3 id="what-happens-without-a-license">What Happens Without a License<a class="headerlink" href="#what-happens-without-a-license" title="Permanent link">¤</a></h3>
+<p>If <code>db2_license_file</code> is not provided when upgrading to v12, the role will <strong>fail immediately</strong> with a clear error message. This is intentional — it prevents a silent downgrade from a full production license to a 30-day trial license, which would cause your database to go offline after the trial period expires.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>New installations (<code>db2_action=install</code>) do not require a license file. Only upgrades from v11 to v12 enforce this requirement.</p>
+</div>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">¤</a></h2>
 <p>EPL-2.0</p>
-              
-            </div>
-          </div><footer>
+            
+          </div>
 
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
+          <!-- Navigation footer (prev/next) -->
+<nav class="md-footer-nav" aria-label="Footer navigation">
+  <div class="md-footer-nav__inner">
+    <a href="../cp4d_service/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+      <div class="md-footer-nav__direction">
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+        <span>Previous</span>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">cp4d_service</span>
+      </div>
+    </a>
+    <a href="../dro/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+      <div class="md-footer-nav__direction">
+        <span>Next</span>
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+        </svg>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">dro</span>
+      </div>
+    </a>
   </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
-          
-        </div>
+</nav>
+        </article>
       </div>
 
-    </section>
-
+      <!-- Right sidebar - Table of Contents -->
+      <aside class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<nav class="md-sidebar md-sidebar--secondary" aria-label="Table of contents">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <div class="md-toc">
+        <div class="md-toc__title">On this page</div>
+        <ul class="md-toc__list">
+              <li class="md-toc__item">
+                <a href="#role-variables-general" class="md-toc__link" data-md-level="1">
+                  Role Variables - General
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#installation-variables" class="md-toc__link" data-md-level="2">
+                          Installation Variables
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#storage-variables" class="md-toc__link" data-md-level="2">
+                          Storage Variables
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#resource-request-variables" class="md-toc__link" data-md-level="2">
+                          Resource Request Variables
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_audit_logs_storage_class" class="md-toc__link" data-md-level="2">
+                          db2_audit_logs_storage_class
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_audit_logs_storage_size" class="md-toc__link" data-md-level="2">
+                          db2_audit_logs_storage_size
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_audit_logs_storage_accessmode" class="md-toc__link" data-md-level="2">
+                          db2_audit_logs_storage_accessmode
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_archivelogs_storage_class" class="md-toc__link" data-md-level="2">
+                          db2_archivelogs_storage_class
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_archivelogs_storage_size" class="md-toc__link" data-md-level="2">
+                          db2_archivelogs_storage_size
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_archivelogs_storage_accessmode" class="md-toc__link" data-md-level="2">
+                          db2_archivelogs_storage_accessmode
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_audit_logs_storage_class_1" class="md-toc__link" data-md-level="2">
+                          db2_audit_logs_storage_class
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_audit_logs_storage_size_1" class="md-toc__link" data-md-level="2">
+                          db2_audit_logs_storage_size
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_audit_logs_storage_accessmode_1" class="md-toc__link" data-md-level="2">
+                          db2_audit_logs_storage_accessmode
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_archivelogs_storage_class_1" class="md-toc__link" data-md-level="2">
+                          db2_archivelogs_storage_class
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_archivelogs_storage_size_1" class="md-toc__link" data-md-level="2">
+                          db2_archivelogs_storage_size
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_archivelogs_storage_accessmode_1" class="md-toc__link" data-md-level="2">
+                          db2_archivelogs_storage_accessmode
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-resource-requests" class="md-toc__link" data-md-level="1">
+                  Role Variables - Resource Requests
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#db2_cpu_requests" class="md-toc__link" data-md-level="2">
+                          db2_cpu_requests
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_cpu_limits" class="md-toc__link" data-md-level="2">
+                          db2_cpu_limits
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_memory_requests" class="md-toc__link" data-md-level="2">
+                          db2_memory_requests
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_memory_limits" class="md-toc__link" data-md-level="2">
+                          db2_memory_limits
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#node-label-affinity-variables" class="md-toc__link" data-md-level="2">
+                          Node Label Affinity Variables
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#node-taint-toleration-variables" class="md-toc__link" data-md-level="2">
+                          Node Taint Toleration Variables
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-db2ucluster-database-configuration-settings" class="md-toc__link" data-md-level="1">
+                  Role Variables - DB2UCluster Database Configuration Settings
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#db2_database_db_config" class="md-toc__link" data-md-level="2">
+                          db2_database_db_config
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_instance_dbm_config" class="md-toc__link" data-md-level="2">
+                          db2_instance_dbm_config
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_instance_registry" class="md-toc__link" data-md-level="2">
+                          db2_instance_registry
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mpp-system-variables" class="md-toc__link" data-md-level="2">
+                          MPP System Variables
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_addons_audit_config" class="md-toc__link" data-md-level="2">
+                          db2_addons_audit_config
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-mas-configuration" class="md-toc__link" data-md-level="1">
+                  Role Variables - MAS Configuration
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#mas_instance_id" class="md-toc__link" data-md-level="2">
+                          mas_instance_id
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-backup-and-restore" class="md-toc__link" data-md-level="1">
+                  Role Variables - Backup and Restore
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#mas_instance_id_1" class="md-toc__link" data-md-level="2">
+                          mas_instance_id
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_application_id_1" class="md-toc__link" data-md-level="2">
+                          mas_application_id
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_backup_dir" class="md-toc__link" data-md-level="2">
+                          mas_backup_dir
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_backup_version" class="md-toc__link" data-md-level="2">
+                          db2_backup_version
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#override_storageclass" class="md-toc__link" data-md-level="2">
+                          override_storageclass
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#custom_storage_class_rwo" class="md-toc__link" data-md-level="2">
+                          custom_storage_class_rwo
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#custom_storage_class_rwx" class="md-toc__link" data-md-level="2">
+                          custom_storage_class_rwx
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup_type" class="md-toc__link" data-md-level="2">
+                          backup_type
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup_vendor" class="md-toc__link" data-md-level="2">
+                          backup_vendor
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup_s3_endpoint" class="md-toc__link" data-md-level="2">
+                          backup_s3_endpoint
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup_s3_bucket" class="md-toc__link" data-md-level="2">
+                          backup_s3_bucket
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup_s3_access_key" class="md-toc__link" data-md-level="2">
+                          backup_s3_access_key
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup_s3_secret_key" class="md-toc__link" data-md-level="2">
+                          backup_s3_secret_key
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup_s3_alias" class="md-toc__link" data-md-level="2">
+                          backup_s3_alias
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#example-usage-backup-and-restore" class="md-toc__link" data-md-level="1">
+                  Example Usage - Backup and Restore
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#backup-db2-database-to-disk" class="md-toc__link" data-md-level="2">
+                          Backup Db2 Database to Disk
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup-db2-database-to-s3" class="md-toc__link" data-md-level="2">
+                          Backup Db2 Database to S3
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup-with-instance-resources-and-database-to-disk" class="md-toc__link" data-md-level="2">
+                          Backup with Instance Resources and Database to disk
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#restore-db2-database-from-disk" class="md-toc__link" data-md-level="2">
+                          Restore Db2 Database from Disk
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#restore-db2-database-from-s3" class="md-toc__link" data-md-level="2">
+                          Restore Db2 Database from S3
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#restore-db2-from-backup-instance-database" class="md-toc__link" data-md-level="2">
+                          Restore Db2 from Backup (Instance + Database)
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#restore-db2-from-backup-instance-database-w-storage-class-override-using-custom-storage-classes" class="md-toc__link" data-md-level="2">
+                          Restore Db2 from Backup (Instance + Database) w/ storage class override using custom storage classes
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#restore-db2-from-backup-instance-databases3" class="md-toc__link" data-md-level="2">
+                          Restore Db2 from Backup (Instance + Database(S3))
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup-directory-structure-disk" class="md-toc__link" data-md-level="2">
+                          Backup Directory Structure (Disk)
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#database-backup-metadata-db2-backup-infoyaml" class="md-toc__link" data-md-level="2">
+                          Database backup Metadata (db2-backup-info.yaml)
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#important-considerations" class="md-toc__link" data-md-level="2">
+                          Important Considerations
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#backup-and-restore-troubleshooting" class="md-toc__link" data-md-level="1">
+                  Backup and Restore Troubleshooting
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#common-issues-and-solutions" class="md-toc__link" data-md-level="2">
+                          Common Issues and Solutions
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#diagnostic-commands" class="md-toc__link" data-md-level="2">
+                          Diagnostic Commands
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#getting-help" class="md-toc__link" data-md-level="2">
+                          Getting Help
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#upgrading-db2-from-v11-to-v12" class="md-toc__link" data-md-level="1">
+                  Upgrading Db2 from v11 to v12
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#prerequisites" class="md-toc__link" data-md-level="2">
+                          Prerequisites
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#required-variables" class="md-toc__link" data-md-level="2">
+                          Required Variables
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#example-usage" class="md-toc__link" data-md-level="2">
+                          Example Usage
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2-v12-license-file-format" class="md-toc__link" data-md-level="2">
+                          Db2 v12 License File Format
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#what-happens-without-a-license" class="md-toc__link" data-md-level="2">
+                          What Happens Without a License
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#license" class="md-toc__link" data-md-level="1">
+                  License
+                </a>
+              </li>
+        </ul>
+      </div>
+    </div>
   </div>
+</nav>
+      </aside>
+    </div>
 
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-        <span>
-          <a href="https://github.com/ibm-mas/ansible-devops" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
-        </span>
-    
-    
-      <span><a href="../cp4d_service/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../db2_backup/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
-</div>
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "../..";</script>
-    <script src="../../js/theme_extra.js"></script>
-    <script src="../../js/theme.js"></script>
-      <script src="../../search/main.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
-
-</body>
-</html>
+    <!-- Footer - Full width outside container -->
+    <footer class="md-footer">
+      Built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/durera/mkdocs-carbon">Carbon theme</a>
+    </footer>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": false, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

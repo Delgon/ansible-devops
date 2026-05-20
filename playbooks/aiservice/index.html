@@ -1,0 +1,1175 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Install AI Service - MAS DevOps Ansible Collection</title>
+
+    <!-- Pure CSS (https://pure-css.github.io/) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="../../js/theme.js"></script>
+
+    <!-- Carbon theme zones (white, g10, g90, g100) -->
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css">
+
+    <!-- The Carbon web-components/framework -->
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/ui-shell.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/accordion.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/breadcrumb.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/select.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/tabs.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/search.min.js"></script>
+
+    <!-- HighlightJS code formatting support -->
+    <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <!-- Required by MkDocs search -->
+    <script>var base_url = "../..";</script>
+
+    <!-- User defined extras -->
+    
+    
+
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: black; }
+        </style></head>
+
+  <body class="md-grid" data-theme-default="g90">
+    <!-- Header -->
+    <cds-header aria-label="MAS DevOps Ansible Collection" class="md-header">
+      <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+      <cds-header-name href="../.." prefix="IBM">MAS DevOps Ansible Collection</cds-header-name>
+      <cds-header-nav menu-bar-label="IBM MAS DevOps Ansible Collection">
+          <cds-header-nav-item is-active="" target="" href="">Ansible</cds-header-nav-item>
+          <cds-header-nav-item target="" href="https://ibm-mas.github.io/cli/">CLI</cds-header-nav-item>
+      </cds-header-nav>
+
+      <div class="cds--header__global">
+<div class="md-theme-toggle" data-theme-default="g90">
+  <button class="md-theme-toggle__button" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="md-theme-toggle__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+    </svg>
+  </button>
+  <div class="md-theme-toggle__menu" hidden="">
+    <button class="md-theme-toggle__option" data-theme="white">
+      <span class="md-theme-toggle__label">Light</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--white"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g10">
+      <span class="md-theme-toggle__label">Light Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g10"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g90">
+      <span class="md-theme-toggle__label">Dark Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g90"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g100">
+      <span class="md-theme-toggle__label">Dark</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g100"></span>
+    </button>
+  </div>
+</div>
+        <cds-search id="header-search" label-text="Search" cds-search-input="search-event" expandable=""></cds-search>
+      </div>
+      <script>
+        var el = document.getElementById("header-search");
+        el.addEventListener("cds-search-input", function (ev) {
+          console.info(ev.detail.value)
+          document.getElementById("header-search-value").setAttribute("value", ev.detail.value);
+        });
+        el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            location.href="../../search.html?q=" + document.querySelector("#header-search").shadowRoot.querySelector("#input").value;
+          }
+        });
+      </script>
+
+      
+        <cds-header-nav>
+          <cds-header-nav-item href="https://github.com/ibm-mas/ansible-devops/blob/master/docs/playbooks/aiservice.md">Edit on GitHub</cds-header-nav-item>
+        </cds-header-nav>
+      
+    </cds-header>
+
+    <!-- Main container with three-column layout -->
+    <div class="md-container">
+      <!-- Left sidebar - Navigation -->
+      <aside class="md-sidebar md-sidebar--primary" data-md-component="sidebar">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            <cds-side-nav aria-label="Side navigation">
+              <cds-side-nav-items>
+                
+                  
+  <cds-side-nav-menu title="General Information">
+    
+      
+  <cds-side-nav-menu-item href="../..">
+    Home
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../execution-environment/">
+    Ansible Automation Platform
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Playbooks" active="" expanded="">
+    
+      
+  <cds-side-nav-menu-item href="../ocp/">
+    OCP
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d/">
+    Install Cloud Pak For Data
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="./" active="" expanded="">
+    Install AI Service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-core/">
+    Install Core
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-iot/">
+    Add IoT
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-manage/">
+    Add Manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-monitor/">
+    Add Monitor
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-optimizer/">
+    Add Optimizer
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-predict/">
+    Add Predict
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-visualinspection/">
+    Add Visual Inspection
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-facilities/">
+    Add Real Estate and Facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-update/">
+    Update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mas-upgrade/">
+    Upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../backup-restore/">
+    Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../legacy-backup-restore/">
+    Legacy Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: OCP Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_cluster_monitoring/">
+    ocp_cluster_monitoring
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_config/">
+    ocp_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_deprovision/">
+    ocp_deprovision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_efs/">
+    ocp_efs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_github_oauth/">
+    ocp_github_oauth
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_login/">
+    ocp_login
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_node_config/">
+    ocp_node_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_provision/">
+    ocp_provision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_roks_upgrade_registry_storage/">
+    ocp_roks_upgrade_registry_storage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_upgrade/">
+    ocp_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_verify/">
+    ocp_verify
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Dependency Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_bucket_access_point/">
+    aws_bucket_access_point
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_documentdb_user/">
+    aws_documentdb_user
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_policy/">
+    aws_policy
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_route53/">
+    aws_route53
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_user_creation/">
+    aws_user_creation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/aws_vpc/">
+    aws_vpc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cert_manager/">
+    cert_manager
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cis/">
+    cis
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/configure_manage_eventstreams/">
+    configure_manage_eventstreams
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cos/">
+    cos
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cos_bucket/">
+    cos_bucket
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cp4d_admin_pwd_update/">
+    cp4d_admin_pwd_update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cp4d/">
+    cp4d
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/cp4d_service/">
+    cp4d_service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/db2/">
+    db2
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/dro/">
+    dro
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/eck/">
+    eck
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/grafana/">
+    grafana
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ibm_catalogs/">
+    ibm_catalogs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/kafka/">
+    kafka
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/longhorn/">
+    longhorn
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/nvidia_gpu/">
+    nvidia_gpu
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/mongodb/">
+    mongodb
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocs/">
+    ocs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/sls/">
+    sls
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/turbonomic/">
+    turbonomic
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Image Mirroring">
+    
+      
+  <cds-side-nav-menu-item href="../../roles/mirror_case_prepare/">
+    mirror_case_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/mirror_extras_prepare/">
+    mirror_extras_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/mirror_images/">
+    mirror_images
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/mirror_ocp/">
+    mirror_ocp
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_idms/">
+    ocp_idms
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ocp_simulate_disconnected_network/">
+    ocp_simulate_disconnected_network
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/registry/">
+    registry
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Suite Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_config/">
+    suite_app_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_install/">
+    suite_app_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_uninstall/">
+    suite_app_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_upgrade/">
+    suite_app_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_rollback/">
+    suite_app_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_backup/">
+    suite_app_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_app_restore/">
+    suite_app_restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_certs/">
+    suite_certs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_config/">
+    suite_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_db2_setup_for_manage/">
+    suite_db2_setup_for_manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_db2_setup_for_facilities/">
+    suite_db2_setup_for_facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_dns/">
+    suite_dns
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_install/">
+    suite_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_attachments_config/">
+    suite_manage_attachments_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_birt_report_config/">
+    suite_manage_birt_report_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_bim_config/">
+    suite_manage_bim_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_customer_files_config/">
+    suite_manage_customer_files_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_imagestitching_config/">
+    suite_manage_imagestitching_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_import_certs_config/">
+    suite_manage_import_certs_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_load_dbc_scripts/">
+    suite_manage_load_dbc_scripts
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_logging_config/">
+    suite_manage_logging_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_manage_pvc_config/">
+    suite_manage_pvc_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_uninstall/">
+    suite_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_upgrade/">
+    suite_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_rollback/">
+    suite_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_verify/">
+    suite_verify
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_backup/">
+    suite_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/suite_restore/">
+    suite_restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Utilities">
+    
+      
+  <cds-side-nav-menu-item href="../../roles/ansible_version_check/">
+    ansible_version_check
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/entitlement_key_rotation/">
+    entitlement_key_rotation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/gencfg_jdbc/">
+    gencfg_jdbc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/gencfg_watsonstudio/">
+    gencfg_watsonstudio
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/gencfg_workspace/">
+    gencfg_workspace
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../roles/gencfg_mongo/">
+    gencfg_mongo
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+              </cds-side-nav-items>
+            </cds-side-nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="md-content" data-md-component="content">
+        <article class="md-content__inner">
+          <!-- Breadcrumbs -->
+          <div class="md-breadcrumbs"><cds-breadcrumb no-trailing-slash="">
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="../..">Home</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+      <cds-breadcrumb-item>Playbooks</cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#install-ai-service">Install AI Service</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+
+  <cds-breadcrumb-item aria-current="page">
+    <cds-select id="breadcrumbs-toc" inline="" placeholder="..." oninput="changeAnchor(this.value)">
+    
+    
+      <cds-select-item value="#dependencies">Dependencies</cds-select-item>
+    
+      <cds-select-item value="#overview">Overview</cds-select-item>
+    
+      <cds-select-item value="#required-environment-variables">Required environment variables</cds-select-item>
+    
+      <cds-select-item value="#required-environment-variables-saas">Required environment variables (SaaS)</cds-select-item>
+    
+      <cds-select-item value="#optional-environment-variables">Optional environment variables</cds-select-item>
+    
+      <cds-select-item value="#usage">Usage</cds-select-item>
+    
+      <cds-select-item value="#create-s3">Create S3</cds-select-item>
+    
+      <cds-select-item value="#delete-s3">Delete S3</cds-select-item>
+    
+      <cds-select-item value="#create-api-key">Create API Key</cds-select-item>
+    
+      <cds-select-item value="#delete-api-key">Delete API Key</cds-select-item>
+    
+      <cds-select-item value="#create-watsonx-api-key">Create WatsonX API Key</cds-select-item>
+    
+      <cds-select-item value="#delete-watsonx-api-key">Delete WatsonX API Key</cds-select-item>
+    
+      <cds-select-item value="#create-tenant">Create Tenant</cds-select-item>
+    
+    </cds-select>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+          </div>
+
+          <!-- Page content -->
+          <div class="rst-content">
+            
+            <h1 id="install-ai-service">Install AI Service<a class="headerlink" href="#install-ai-service" title="Permanent link">¤</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>These playbooks are samples to demonstrate how to use the roles in this collection.</p>
+<p>They are <strong>not intended for production use</strong> as-is, they are a starting point for power users to aid in the development of their own Ansible playbooks using the roles in this collection.</p>
+<p>The recommended way to install AI Service is to use the <a href="https://ibm-mas.github.io/cli/">MAS CLI</a>, which uses this Ansible Collection to deliver a complete managed lifecycle for your MAS instance.</p>
+</div>
+<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">¤</a></h2>
+<ul>
+<li>IBM Suite License Service installed on OCP cluster or external instance or details from external instance</li>
+<li>IBM Data Reporter Operator installed on OCP cluster or external instance or details from external instance</li>
+<li>Object Storage</li>
+<li>Minio (installed on the same cluster as aiservice)</li>
+<li>AWS S3 (Provide details to connect to AWS S3. Bucket names must be unique globally. Ensure to use a unique bucket prefix when using AWS S3)</li>
+</ul>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¤</a></h2>
+<p>This playbook will add <strong>AI Service v9.1.x</strong> to OCP cluster.</p>
+<p>This playbook can be ran against any OCP cluster regardless of its type; whether it's running in IBM Cloud, Azure, AWS, or your local datacenter.</p>
+<ul>
+<li>Install dependencies:<ul>
+<li>IBM Maximo Operator Catalog </li>
+<li>RedHat Certificate Manager </li>
+<li>MongoDb <strong>optional if SLS is not being installed on same cluster</strong></li>
+<li>IBM Suite License Service (~10 Minutes) <strong>optional if customer chooses to use SLS from external cluster</strong></li>
+<li>IBM Data Reporter Operator (~10 Minutes) <strong>optional if customer chooses to use DRO from external cluster</strong></li>
+<li>IBM Db2</li>
+<li>Minio (~5 minutes) <strong>optional if customer choose to use external object storage</strong></li>
+</ul>
+</li>
+<li>Install ODH:<ul>
+<li>Install Red Hat OpenShift Serverless Operator <strong>Required when using serverless deployment mode for ODH</strong></li>
+<li>Install Red Hat OpenShift Service Mesh Operator <strong>Required when using serverless deployment mode for ODH</strong></li>
+<li>Install Authorino Operator</li>
+<li>Install Open Data Hub Operator</li>
+<li>Create DSCInitialization instance</li>
+<li>Create DataScienceCluster instance</li>
+</ul>
+</li>
+<li>Install AI Service (using playbook):<ul>
+<li>Install application (~20 Minutes)</li>
+<li>Configure AI Service (kmodels, tenant, etc) (~20 Minutes)</li>
+</ul>
+</li>
+</ul>
+<p>All timings are estimates, see the individual pages for each of these playbooks for more information. Use this sample playbook as a starting point for installing application, just customize the application install and configure stages at the end of the playbook.</p>
+<h2 id="required-environment-variables">Required environment variables<a class="headerlink" href="#required-environment-variables" title="Permanent link">¤</a></h2>
+<ul>
+<li><code>AISERVICE_INSTANCE_ID</code> Declare the instance ID for the AI service install</li>
+<li><code>MAS_ENTITLEMENT_KEY</code> Your IBM Entitlement key to access the IBM Container Registry</li>
+<li><code>MAS_ENTITLEMENT_USERNAME</code> Your IBM Entitlement user to access the IBM Container Registry</li>
+<li><code>AISERVICE_CHANNEL</code> Aiservice application channel</li>
+<li><code>AISERVICE_S3_ACCESSKEY</code> Access Key for object storage provider</li>
+<li><code>AISERVICE_S3_SECRETKEY</code> Secret key for object storage provider</li>
+<li><code>AISERVICE_S3_HOST</code> Your object storage provider host</li>
+<li><code>AISERVICE_S3_REGION</code> Your object storage provider region - only when use AWS S3 instance</li>
+<li><code>AISERVICE_S3_SSL</code> Is your object storage SSL enabled? (true/false)</li>
+<li><code>AISERVICE_S3_TENANTS_BUCKET</code> Bucket name to store tenants info</li>
+<li><code>AISERVICE_S3_TEMPLATES_BUCKET</code> Bucket name to store templates info</li>
+<li><code>AISERVICE_S3_BUCKET_PREFIX</code> Bucket prefix configured with object storage provider</li>
+<li><code>AISERVICE_WATSONXAI_APIKEY</code> You WatsonX AI api key</li>
+<li><code>AISERVICE_WATSONXAI_URL</code> You WatsonX AI url</li>
+<li><code>AISERVICE_WATSONXAI_PROJECT_ID</code> You WatsonX projedt Id</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>AI service supports <strong>AWS</strong> and <strong>Minio</strong> storage providers.</p>
+</div>
+<h2 id="required-environment-variables-saas">Required environment variables (SaaS)<a class="headerlink" href="#required-environment-variables-saas" title="Permanent link">¤</a></h2>
+<ul>
+<li><code>AISERVICE_SAAS</code> specify if saas deployment (default value is: false)</li>
+<li><code>MAS_CONFIG_DIR</code> specify config location, mandatory when <code>AISERVICE_SAAS=true</code></li>
+<li><code>AISERVICE_DOMAIN</code> specify cluster domain, mandatory when <code>AISERVICE_SAAS=true</code></li>
+<li><code>AISERVICE_SLS_URL</code> specify SLS url, mandatory when <code>AISERVICE_SAAS=true</code></li>
+<li><code>AISERVICE_SLS_REGISTRATION_KEY</code> specify sls registration key, mandatory when <code>AISERVICE_SAAS=true</code>, to get value: look in <code>ibm-sls</code> namespace, pod <code>sls-api-licensing-xxx</code> and in <code>Environment</code> tab check <code>REGISTRATION_KEY</code> value</li>
+<li><code>AISERVICE_DRO_URL</code> specify DRO url, mandatory when <code>AISERVICE_SAAS=true</code></li>
+<li><code>AISERVICE_DRO_TOKEN</code> specify DRO token, mandatory when <code>AISERVICE_SAAS=true</code> to get value: go to <code>mas-{{ instance_id }}-core</code> and look in secret <code>dro-apikey</code></li>
+<li><code>DB2_INSTANCE_NAME</code> specify DB2 instance name (default value is: aiservice), mandatory when <code>AISERVICE_SAAS=true</code></li>
+<li><code>IBM_ENTITLEMENT_KEY</code> specify IBM Entitlement key, mandatory when <code>AISERVICE_SAAS=true</code></li>
+</ul>
+<h2 id="optional-environment-variables">Optional environment variables<a class="headerlink" href="#optional-environment-variables" title="Permanent link">¤</a></h2>
+<ul>
+<li><code>MAS_ICR_CP</code> Provide custom registry for AI service applications</li>
+<li><code>MAS_ICR_CPOPEN</code> Provide custom registry for AI service operator</li>
+<li><code>MAS_CATALOG_VERSION</code> Your custom AI service catalog version</li>
+<li><code>ARTIFACTORY_USERNAME</code> Your artifactory user name to access - this is needed if user deploy from custom registry for example <code>docker-na-public.artifactory.swg-devops.com</code></li>
+<li><code>ARTIFACTORY_TOKEN</code> Your artifactory token for user to access - this is needed if user deploy from custom registry for example <code>docker-na-public.artifactory.swg-devops.com</code></li>
+<li><code>AISERVICE_TENANT_ACTION</code> Whether to install or remove tenant (default value is: install)</li>
+<li><code>AISERVICE_APIKEY_ACTION</code> Whether to install or remove or update apikey (default value is: install)</li>
+<li><code>AISERVICE_WATSONX_ACTION</code> Whether to install or remove watsonx secret (default value is: install)</li>
+<li><code>AISERVICE_S3_ACTION</code> Whether to install or remove s3 (default value is: install)</li>
+<li><code>INSTALL_DB2</code> Whether to install DB2 (default value is: false)</li>
+<li><code>INSTALL_MINIO</code> Whether to install minio (default value is: false)</li>
+<li><code>INSTALL_SLS</code> Whether to install IBM Suite License Service (default value is: false)</li>
+<li><code>INSTALL_DRO</code> Whether to install IBM Data Reporter Operator (default value is: false)</li>
+<li><code>AISERVICE_DB2_USERNAME</code> The username to use for authentication with the database</li>
+<li><code>AISERVICE_DB2_PASSWORD</code> The password to use for authentication with the database</li>
+<li><code>AISERVICE_DB2_JDBC_URL</code> The JDBC URL specifying the host and port of the database, typically in the format jdbc:db2://host:port/</li>
+<li><code>USE_AWS_DB2</code> A flag indicating whether to use an AWS-hosted DB2 instance (default value is: false)</li>
+<li><code>AISERVICE_DOMAIN</code> Provide custom domain (default value is: empty)</li>
+<li><code>AISERVICE_WATSONXAI_CA_CRT</code> provide WatsonX AI CA certificate</li>
+<li><code>AISERVICE_WATSONXAI_FULL</code> optional on prem to define if WatsonX AI engine is full or light (true/false)</li>
+<li><code>AISERVICE_WATSONXAI_DEPLOYMENT_ID</code> optional on prem define deployment Id</li>
+<li><code>AISERVICE_WATSONXAI_SPACE_ID</code> optional on prem define space Id</li>
+<li><code>AISERVICE_WATSONXAI_INSTANCE_ID</code> optional on prem define instance id (default: openshift)</li>
+<li><code>AISERVICE_WATSONXAI_USERNAME</code> optional on prem define user name</li>
+<li><code>AISERVICE_WATSONXAI_VERSION</code> optional on prem define version of CPD</li>
+<li><code>AISERVICE_CERTIFICATE_ISSUER</code> Optional to specify pre-configured certificate issuer to use for AI Service public certificates</li>
+<li><code>AISERVICE_CERTIFICATE_DURATION</code> Optional to specify expiration duration for public certificates (default: 8760h0m0s)</li>
+<li><code>AISERVICE_CERTIFICATE_RENEW_BEFORE</code> Optional to specify when to renew public certificates before they expire (default: 72h0m0s)</li>
+</ul>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">¤</a></h2>
+<h3 id="ai-service-deployment-steps">AI service deployment steps<a class="headerlink" href="#ai-service-deployment-steps" title="Permanent link">¤</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>For S3 manage please make sure you have deployed dependencies</p>
+</div>
+<p>Install boto3 python module (use python environment):</p>
+<pre><code class="language-bash">python3 -m venv /tmp/venv
+source /tmp/venv/bin/activate
+python3 -m pip install boto3
+</code></pre>
+<p>Run playbooks for deploy AI service:</p>
+<ul>
+<li><code>AISERVICE_SLS_REGISTRATION_KEY</code> - value can be found in <code>ibm-sls</code> namespace, in pod  <code>sls-api-licensing-85699fb57-9lmrq</code> please look in environments tab, then value <code>REGISTRATION_KEY</code></li>
+<li><code>AISERVICE_DRO_TOKEN</code> - go to <code>mas-instance_id-core</code> namespace and in secrets find <code>dro-apikey</code></li>
+<li>In <code>AWS</code> for <code>AISERVICE_S3_TENANTS_BUCKET</code>,  <code>AISERVICE_S3_TEMPLATES_BUCKET</code> user need to create S3 buckets with unique name</li>
+</ul>
+<pre><code class="language-bash">export ARTIFACTORY_USERNAME=""
+export ARTIFACTORY_TOKEN=""
+export MAS_ICR_CP=""
+export MAS_ICR_CPOPEN=""
+export MAS_ENTITLEMENT_USERNAME=""
+export MAS_ENTITLEMENT_KEY=""
+export MAS_INSTANCE_ID=""
+export MAS_APP_CHANNEL=""
+export MAS_CATALOG_VERSION=""
+export IBM_ENTITLEMENT_KEY=${MAS_ENTITLEMENT_KEY}
+export MAS_CONFIG_DIR=""
+export DRO_CONTACT_EMAIL=""
+export DRO_CONTACT_FIRSTNAME=""
+export DRO_CONTACT_LASTNAME=""
+export SLS_MONGODB_CFG_FILE=${MAS_CONFIG_DIR}/mongo-mongoce.yml
+export SLS_LICENSE_ID=""
+export SLS_LICENSE_FILE=""
+export INSTALL_DB2=""
+export INSTALL_MINIO="" 
+export INSTALL_MONGO=""
+export INSTALL_SLS=""
+export INSTALL_DRO=""
+export AISERVICE_S3_BUCKET_PREFIX=""
+export AISERVICE_S3_REGION=""
+export AISERVICE_S3_ENDPOINT_URL=""
+export AISERVICE_TENANT_S3_REGION=""
+export AISERVICE_TENANT_S3_ENDPOINT_URL=""
+export AISERVICE_TENANT_S3_BUCKET_PREFIX=""
+export AISERVICE_TENANT_S3_ACCESS_KEY=""
+export AISERVICE_TENANT_S3_SECRET_KEY=""
+# Removed rsl_org, rsl_rl, rsl_token
+export MINIO_ROOT_PASSWORD=""
+export AISERVICE_S3_ACCESSKEY=""
+export AISERVICE_S3_SECRETKEY=${MINIO_ROOT_PASSWORD}
+export AISERVICE_S3_HOST=""
+export AISERVICE_S3_SSL=""
+export AISERVICE_S3_PROVIDER=""
+export AISERVICE_S3_PORT=""
+export AISERVICE_S3_REGION=""
+export AISERVICE_S3_TENANTS_BUCKET=""
+export AISERVICE_S3_TEMPLATES_BUCKET=""
+export AISERVICE_WATSONXAI_APIKEY=""
+export AISERVICE_WATSONXAI_URL=""
+export AISERVICE_WATSONXAI_PROJECT_ID=""
+export AISERVICE_SUBSCRIPTION_ID=""
+export AISERVICE_DRO_TENANT_ID=""
+export AISERVICE_TENANT_ENTITLEMENT_START_DATE="YYYY-MM-DD"
+export AISERVICE_TENANT_ENTITLEMENT_END_DATE="YYYY-MM-DD"
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook playbooks/aiservice.yml
+</code></pre>
+<h2 id="create-s3">Create S3<a class="headerlink" href="#create-s3" title="Permanent link">¤</a></h2>
+<pre><code class="language-bash">export MAS_INSTANCE_ID="&lt;instanceId&gt;"
+export AISERVICE_S3_ACCESSKEY="&lt;storage provider access key&gt;"
+export AISERVICE_S3_SECRETKEY="&lt;storage provider secret key&gt;"
+export AISERVICE_S3_HOST="&lt;storage provider host&gt;"
+export AISERVICE_S3_REGION="&lt;storage provider region&gt;"
+export AISERVICE_S3_ACTION="install"
+export ROLE_NAME="aiservice"
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook playbooks/run_role.yml
+</code></pre>
+<h2 id="delete-s3">Delete S3<a class="headerlink" href="#delete-s3" title="Permanent link">¤</a></h2>
+<pre><code class="language-bash">export MAS_INSTANCE_ID="&lt;instanceId&gt;"
+export AISERVICE_S3_ACCESSKEY="&lt;storage provider access key&gt;"
+export AISERVICE_S3_SECRETKEY="&lt;storage provider secret key&gt;"
+export AISERVICE_S3_HOST="&lt;storage provider host&gt;"
+export AISERVICE_S3_REGION="&lt;storage provider region&gt;"
+export AISERVICE_S3_ACTION="remove"
+export ROLE_NAME="aiservice"
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook playbooks/run_role.yml
+</code></pre>
+<h2 id="create-api-key">Create API Key<a class="headerlink" href="#create-api-key" title="Permanent link">¤</a></h2>
+<pre><code class="language-bash">export MAS_INSTANCE_ID="&lt;instanceId&gt;"
+export AISERVICE_APIKEY_ACTION="install"
+export ROLE_NAME="aiservice"
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook playbooks/run_role.yml
+</code></pre>
+<h2 id="delete-api-key">Delete API Key<a class="headerlink" href="#delete-api-key" title="Permanent link">¤</a></h2>
+<pre><code class="language-bash">export MAS_INSTANCE_ID="&lt;instanceId&gt;"
+export AISERVICE_APIKEY_ACTION="remove"
+export ROLE_NAME="aiservice"
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook playbooks/run_role.yml
+</code></pre>
+<h2 id="create-watsonx-api-key">Create WatsonX API Key<a class="headerlink" href="#create-watsonx-api-key" title="Permanent link">¤</a></h2>
+<pre><code class="language-bash">export MAS_INSTANCE_ID="&lt;instanceId&gt;"
+export AISERVICE_WATSONX_ACTION="install"
+export ROLE_NAME="aiservice"
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook playbooks/run_role.yml
+</code></pre>
+<h2 id="delete-watsonx-api-key">Delete WatsonX API Key<a class="headerlink" href="#delete-watsonx-api-key" title="Permanent link">¤</a></h2>
+<pre><code class="language-bash">export MAS_INSTANCE_ID="&lt;instanceId&gt;"
+export AISERVICE_WATSONX_ACTION="remove"
+export ROLE_NAME="aiservice"
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook playbooks/run_role.yml
+</code></pre>
+<h2 id="create-tenant">Create Tenant<a class="headerlink" href="#create-tenant" title="Permanent link">¤</a></h2>
+<p>The <code>AISERVICE_SLS_REGISTRATION_KEY</code> value can be found in <code>ibm-sls</code> namespace, in pod <code>sls-api-licensing-85699fb57-9lmrq</code> please look in environments tab, then value <code>REGISTRATION_KEY</code> .  To obtain the <code>AISERVICE_DRO_TOKEN</code> go to <code>mas-instance_id-core</code> namespace and in secrets find <code>dro-apikey</code></p>
+<pre><code class="language-bash">export AISERVICE_TENANT_NAME="user7"
+export AISERVICE_SLS_SUBSCRIPTION_ID="007"
+export TENANT_ACTION="install"
+export ROLE_NAME="aiservice_tenant"
+export AISERVICE_SAAS="true"
+export AISERVICE_DOMAIN=""
+export AISERVICE_SLS_URL="https://sls.ibm-sls.ibm-sls."${AISERVICE_DOMAIN}
+export AISERVICE_SLS_REGISTRATION_KEY=""
+export AISERVICE_DRO_URL="https://ibm-data-reporter-redhat-marketplace."${AISERVICE_DOMAIN}
+export AISERVICE_DRO_TOKEN=""
+export AISERVICE_SLS_CACERT=""
+export AISERVICE_DRO_CACERT=""
+export AISERVICE_WATSONXAI_APIKEY=""
+export AISERVICE_WATSONXAI_URL=""
+export AISERVICE_WATSONXAI_PROJECT_ID=""
+export AISERVICE_S3_ACCESSKEY=""
+export AISERVICE_S3_SECRETKEY=""
+export AISERVICE_S3_HOST=""
+export AISERVICE_S3_SSL=""
+export AISERVICE_S3_PROVIDER=""
+export AISERVICE_S3_PORT=""
+export AISERVICE_S3_REGION=""
+export AISERVICE_S3_TENANTS_BUCKET=""
+export AISERVICE_S3_TEMPLATES_BUCKET=""
+oc login --token=xxxx --server=https://myocpserver
+ansible-playbook playbooks/run_role.yml
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To create addidional tenants we don't need to specify buckets</p>
+</div>
+            
+          </div>
+
+          <!-- Navigation footer (prev/next) -->
+<nav class="md-footer-nav" aria-label="Footer navigation">
+  <div class="md-footer-nav__inner">
+    <a href="../cp4d/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+      <div class="md-footer-nav__direction">
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+        <span>Previous</span>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">Install Cloud Pak For Data</span>
+      </div>
+    </a>
+    <a href="../mas-core/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+      <div class="md-footer-nav__direction">
+        <span>Next</span>
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+        </svg>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">Install Core</span>
+      </div>
+    </a>
+  </div>
+</nav>
+        </article>
+      </div>
+
+      <!-- Right sidebar - Table of Contents -->
+      <aside class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<nav class="md-sidebar md-sidebar--secondary" aria-label="Table of contents">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <div class="md-toc">
+        <div class="md-toc__title">On this page</div>
+        <ul class="md-toc__list">
+              <li class="md-toc__item">
+                <a href="#dependencies" class="md-toc__link" data-md-level="1">
+                  Dependencies
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#overview" class="md-toc__link" data-md-level="1">
+                  Overview
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#required-environment-variables" class="md-toc__link" data-md-level="1">
+                  Required environment variables
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#required-environment-variables-saas" class="md-toc__link" data-md-level="1">
+                  Required environment variables (SaaS)
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#optional-environment-variables" class="md-toc__link" data-md-level="1">
+                  Optional environment variables
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#usage" class="md-toc__link" data-md-level="1">
+                  Usage
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#ai-service-deployment-steps" class="md-toc__link" data-md-level="2">
+                          AI service deployment steps
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#create-s3" class="md-toc__link" data-md-level="1">
+                  Create S3
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#delete-s3" class="md-toc__link" data-md-level="1">
+                  Delete S3
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#create-api-key" class="md-toc__link" data-md-level="1">
+                  Create API Key
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#delete-api-key" class="md-toc__link" data-md-level="1">
+                  Delete API Key
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#create-watsonx-api-key" class="md-toc__link" data-md-level="1">
+                  Create WatsonX API Key
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#delete-watsonx-api-key" class="md-toc__link" data-md-level="1">
+                  Delete WatsonX API Key
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#create-tenant" class="md-toc__link" data-md-level="1">
+                  Create Tenant
+                </a>
+              </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+      </aside>
+    </div>
+
+    <!-- Footer - Full width outside container -->
+    <footer class="md-footer">
+      Built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/durera/mkdocs-carbon">Carbon theme</a>
+    </footer>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": false, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

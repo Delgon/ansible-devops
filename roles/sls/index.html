@@ -1,747 +1,1905 @@
-<!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://ibm-mas.github.io/ansible-devops/roles/sls/" />
-      <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>sls - MAS Devops Collection</title>
-    <link rel="stylesheet" href="../../css/theme.css" />
-    <link rel="stylesheet" href="../../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
-        <link href="../../extra.css" rel="stylesheet" />
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>sls - MAS DevOps Ansible Collection</title>
+
+    <!-- Pure CSS (https://pure-css.github.io/) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="../../js/theme.js"></script>
+
+    <!-- Carbon theme zones (white, g10, g90, g100) -->
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css">
+
+    <!-- The Carbon web-components/framework -->
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/ui-shell.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/accordion.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/breadcrumb.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/select.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/tabs.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/search.min.js"></script>
+
+    <!-- HighlightJS code formatting support -->
+    <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <!-- Required by MkDocs search -->
+    <script>var base_url = "../..";</script>
+
+    <!-- User defined extras -->
     
+    
+
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: black; }
+        </style></head>
+
+  <body class="md-grid" data-theme-default="g90">
+    <!-- Header -->
+    <cds-header aria-label="MAS DevOps Ansible Collection" class="md-header">
+      <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+      <cds-header-name href="../.." prefix="IBM">MAS DevOps Ansible Collection</cds-header-name>
+      <cds-header-nav menu-bar-label="IBM MAS DevOps Ansible Collection">
+          <cds-header-nav-item is-active="" target="" href="">Ansible</cds-header-nav-item>
+          <cds-header-nav-item target="" href="https://ibm-mas.github.io/cli/">CLI</cds-header-nav-item>
+      </cds-header-nav>
+
+      <div class="cds--header__global">
+<div class="md-theme-toggle" data-theme-default="g90">
+  <button class="md-theme-toggle__button" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="md-theme-toggle__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+    </svg>
+  </button>
+  <div class="md-theme-toggle__menu" hidden="">
+    <button class="md-theme-toggle__option" data-theme="white">
+      <span class="md-theme-toggle__label">Light</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--white"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g10">
+      <span class="md-theme-toggle__label">Light Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g10"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g90">
+      <span class="md-theme-toggle__label">Dark Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g90"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g100">
+      <span class="md-theme-toggle__label">Dark</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g100"></span>
+    </button>
+  </div>
+</div>
+        <cds-search id="header-search" label-text="Search" cds-search-input="search-event" expandable=""></cds-search>
+      </div>
       <script>
-        // Current page data
-        var mkdocs_page_name = "sls";
-        var mkdocs_page_input_path = "roles/sls.md";
-        var mkdocs_page_url = "/ansible-devops/roles/sls/";
+        var el = document.getElementById("header-search");
+        el.addEventListener("cds-search-input", function (ev) {
+          console.info(ev.detail.value)
+          document.getElementById("header-search-value").setAttribute("value", ev.detail.value);
+        });
+        el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            location.href="../../search.html?q=" + document.querySelector("#header-search").shadowRoot.querySelector("#input").value;
+          }
+        });
       </script>
+
+      
+    </cds-header>
+
+    <!-- Main container with three-column layout -->
+    <div class="md-container">
+      <!-- Left sidebar - Navigation -->
+      <aside class="md-sidebar md-sidebar--primary" data-md-component="sidebar">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            <cds-side-nav aria-label="Side navigation">
+              <cds-side-nav-items>
+                
+                  
+  <cds-side-nav-menu title="General Information">
     
-    <!--[if lt IE 9]>
-      <script src="../../js/html5shiv.min.js"></script>
-    <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
-      <script>hljs.highlightAll();</script> 
-</head>
+      
+  <cds-side-nav-menu-item href="../..">
+    Home
+  </cds-side-nav-menu-item>
 
-<body class="wy-body-for-nav" role="document">
+    
+      
+  <cds-side-nav-menu-item href="../../execution-environment/">
+    Ansible Automation Platform
+  </cds-side-nav-menu-item>
 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-          <a href="../.." class="icon icon-home"> MAS Devops Collection
-        </a><div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    
+  </cds-side-nav-menu>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
-                </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Playbooks</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/ocp/">OCP</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/cp4d/">Install Cloud Pak For Data</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-core/">Install Core</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-iot/">Add IoT</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-manage/">Add Manage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-monitor/">Add Monitor</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-optimizer/">Add Optimizer</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-predict/">Add Predict</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-visualinspection/">Add Visual Inspection</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-update/">Update</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/oneclick-upgrade/">Upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../../playbooks/uninstall-core/">Uninstall Core</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: OCP Mgmt</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_cluster_monitoring/">ocp_cluster_monitoring</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_config/">ocp_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_deprovision/">ocp_deprovision</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_efs/">ocp_efs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_github_oauth/">ocp_github_oauth</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_login/">ocp_login</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_node_config/">ocp_node_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_provision/">ocp_provision</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_roks_upgrade_registry_storage/">ocp_roks_upgrade_registry_storage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_upgrade/">ocp_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_verify/">ocp_verify</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Dependency Mgmt</span></p>
-              <ul class="current">
-                  <li class="toctree-l1"><a class="reference internal" href="../appconnect/">appconnect</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_bucket_access_point/">aws_bucket_access_point</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_documentdb_user/">aws_documentdb_user</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_policy/">aws_policy</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_route53/">aws_route53</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_user_creation/">aws_user_creation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../aws_vpc/">aws_vpc</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cert_manager/">cert_manager</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cis/">cis</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../common_services/">common-services</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../configure_manage_eventstreams/">configure_manage_eventstreams</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cos/">cos</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cos_bucket/">cos_bucket</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d_admin_pwd_update/">cp4d_admin_pwd_update</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d/">cp4d</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../cp4d_service/">cp4d_service</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2/">db2</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2_backup/">db2_backup</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../db2_restore/">db2_restore</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../dro/">dro</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../grafana/">grafana</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ibm_catalogs/">ibm_catalogs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../kafka/">kafka</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../nvidia_gpu/">nvidia_gpu</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mongodb/">mongodb</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocs/">ocs</a>
-                  </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">sls</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables">Role Variables</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_action">sls_action</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-installation">Role Variables - Installation</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#artifactory_username">artifactory_username</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#artifactory_token">artifactory_token</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_catalog_source">sls_catalog_source</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_channel">sls_channel</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_namespace">sls_namespace</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_icr_cpopen">sls_icr_cpopen</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_instance_name">sls_instance_name</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_icr_cp-deprecated-in-sls-380">sls_icr_cp [Deprecated in SLS 3.8.0]</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ibm_entitlement_key-deprecated-in-sls-380">ibm_entitlement_key [Deprecated in SLS 3.8.0]</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_entitlement_username-deprecated-in-sls-380">sls_entitlement_username [Deprecated in SLS 3.8.0]</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_entitlement_key-deprecated-in-sls-380">sls_entitlement_key [Deprecated in SLS 3.8.0]</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-configuration">Role Variables - Configuration</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_domain">sls_domain</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_auth_enforce">sls_auth_enforce</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_mongo_retrywrites">sls_mongo_retrywrites</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_compliance_enforce">sls_compliance_enforce</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_registration_open">sls_registration_open</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_mongodb_cfg_file">sls_mongodb_cfg_file</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_mongodbhosts">sls_mongodb.hosts</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_mongodbcertificates">sls_mongodb.certificates</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_mongodbusername">sls_mongodb.username</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_mongodbpassword">sls_mongodb.password</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_pod_templates_dir">mas_pod_templates_dir</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-bootstrap-sls-370-and-higher">Role Variables - Bootstrap [SLS 3.7.0 and higher]</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#entitlement_file">entitlement_file</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-bootstrap-partly-deprecated-in-sls-370">Role Variables - Bootstrap [Partly deprecated in SLS 3.7.0]</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#bootstraplicense_file-deprecated-in-sls-370">bootstrap.license_file [Deprecated in SLS 3.7.0]</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#bootstraplicense_id-deprecated-in-sls-370">bootstrap.license_id [Deprecated in SLS 3.7.0]</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#bootstrapregistration_key">bootstrap.registration_key</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#role-variables-slscfg">Role Variables - SLSCfg</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_instance_id">mas_instance_id</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_config_dir">mas_config_dir</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_url">sls_url</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_license_sync_frequency">mas_license_sync_frequency</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_tls_crt">sls_tls_crt</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_tls_crt_local_file_path">sls_tls_crt_local_file_path</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#sls_registration_key">sls_registration_key</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#custom_labels">custom_labels</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mas_pod_templates_dir_1">mas_pod_templates_dir</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#example-playbook">Example Playbook</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#install-and-generate-a-configuration-up-to-sls-360">Install and generate a configuration [up to SLS 3.6.0]</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#install-and-upload-license-file-sls-370">Install and upload license file [SLS 3.7.0]</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#install-and-upload-license-file-from-sls-380">Install and upload license file [from SLS 3.8.0]</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#generate-a-configuration-for-an-existing-installation">Generate a configuration for an existing installation</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
-    </li>
-    </ul>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../turbonomic/">turbonomic</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../uds/">uds</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Image Mirroring</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_case_prepare/">mirror_case_prepare</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_extras_prepare/">mirror_extras_prepare</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_images/">mirror_images</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../mirror_ocp/">mirror_ocp</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_contentsourcepolicy/">ocp_contentsourcepolicy</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../ocp_simulate_disconnected_network/">ocp_simulate_disconnected_network</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../registry/">registry</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Suite Mgmt</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_config/">suite_app_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_install/">suite_app_install</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_uninstall/">suite_app_uninstall</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_upgrade/">suite_app_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_app_rollback/">suite_app_rollback</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_certs/">suite_certs</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_config/">suite_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_db2_setup_for_manage/">suite_db2_setup_for_manage</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_dns/">suite_dns</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_install/">suite_install</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_birt_report_config/">suite_manage_birt_report_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_bim_config/">suite_manage_bim_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_customer_files_config/">suite_manage_customer_files_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_doclinks_config/">suite_manage_doclinks_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_import_certs_config/">suite_manage_import_certs_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_load_dbc_scripts/">suite_manage_load_dbc_scripts</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_logging_config/">suite_manage_logging_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_manage_pvc_config/">suite_manage_pvc_config</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_uninstall/">suite_uninstall</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_upgrade/">suite_upgrade</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_rollback/">suite_rollback</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../suite_verify/">suite_verify</a>
-                  </li>
-              </ul>
-              <p class="caption"><span class="caption-text">Roles: Utilities</span></p>
-              <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../ansible_version_check/">ansible_version_check</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../entitlement_key_rotation/">entitlement_key_rotation</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_jdbc/">gencfg_jdbc</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_watsonstudio/">gencfg_watsonstudio</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_workspace/">gencfg_workspace</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../install_operator/">install_operator</a>
-                  </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../gencfg_mongo/">gencfg_mongo</a>
-                  </li>
-              </ul>
-      </div>
-    </div>
-    </nav>
+                
+                  
+  <cds-side-nav-menu title="Playbooks">
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/ocp/">
+    OCP
+  </cds-side-nav-menu-item>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../..">MAS Devops Collection</a>
-        
-      </nav>
-      <div class="wy-nav-content">
-        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Roles: Dependency Mgmt</li>
-      <li class="breadcrumb-item active">sls</li>
-    <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/ibm-mas/ansible-devops/blob/master/docs/roles/sls.md" class="icon icon-github"> Edit on GitHub</a>
-    </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-            <div class="section" itemprop="articleBody">
-              
-                <h1 id="sls">sls<a class="headerlink" href="#sls" title="Permanent link"></a></h1>
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/cp4d/">
+    Install Cloud Pak For Data
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/aiservice/">
+    Install AI Service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-core/">
+    Install Core
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-iot/">
+    Add IoT
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-manage/">
+    Add Manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-monitor/">
+    Add Monitor
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-optimizer/">
+    Add Optimizer
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-predict/">
+    Add Predict
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-visualinspection/">
+    Add Visual Inspection
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-facilities/">
+    Add Real Estate and Facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-update/">
+    Update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-upgrade/">
+    Upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/backup-restore/">
+    Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/legacy-backup-restore/">
+    Legacy Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: OCP Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../ocp_cluster_monitoring/">
+    ocp_cluster_monitoring
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_config/">
+    ocp_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_deprovision/">
+    ocp_deprovision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_efs/">
+    ocp_efs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_github_oauth/">
+    ocp_github_oauth
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_login/">
+    ocp_login
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_node_config/">
+    ocp_node_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_provision/">
+    ocp_provision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_roks_upgrade_registry_storage/">
+    ocp_roks_upgrade_registry_storage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_upgrade/">
+    ocp_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_verify/">
+    ocp_verify
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Dependency Mgmt" active="" expanded="">
+    
+      
+  <cds-side-nav-menu-item href="../aws_bucket_access_point/">
+    aws_bucket_access_point
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_documentdb_user/">
+    aws_documentdb_user
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_policy/">
+    aws_policy
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_route53/">
+    aws_route53
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_user_creation/">
+    aws_user_creation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_vpc/">
+    aws_vpc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cert_manager/">
+    cert_manager
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cis/">
+    cis
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../configure_manage_eventstreams/">
+    configure_manage_eventstreams
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos/">
+    cos
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos_bucket/">
+    cos_bucket
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_admin_pwd_update/">
+    cp4d_admin_pwd_update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d/">
+    cp4d
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_service/">
+    cp4d_service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../db2/">
+    db2
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../dro/">
+    dro
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../eck/">
+    eck
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../grafana/">
+    grafana
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ibm_catalogs/">
+    ibm_catalogs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../kafka/">
+    kafka
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../longhorn/">
+    longhorn
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../nvidia_gpu/">
+    nvidia_gpu
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mongodb/">
+    mongodb
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocs/">
+    ocs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="./" active="" expanded="">
+    sls
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../turbonomic/">
+    turbonomic
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Image Mirroring">
+    
+      
+  <cds-side-nav-menu-item href="../mirror_case_prepare/">
+    mirror_case_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_extras_prepare/">
+    mirror_extras_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_images/">
+    mirror_images
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_ocp/">
+    mirror_ocp
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_idms/">
+    ocp_idms
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_simulate_disconnected_network/">
+    ocp_simulate_disconnected_network
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../registry/">
+    registry
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Suite Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_config/">
+    suite_app_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_install/">
+    suite_app_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_uninstall/">
+    suite_app_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_upgrade/">
+    suite_app_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_rollback/">
+    suite_app_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_backup/">
+    suite_app_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_restore/">
+    suite_app_restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_certs/">
+    suite_certs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_config/">
+    suite_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_manage/">
+    suite_db2_setup_for_manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_facilities/">
+    suite_db2_setup_for_facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_dns/">
+    suite_dns
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_install/">
+    suite_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_attachments_config/">
+    suite_manage_attachments_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_birt_report_config/">
+    suite_manage_birt_report_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_bim_config/">
+    suite_manage_bim_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_customer_files_config/">
+    suite_manage_customer_files_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_imagestitching_config/">
+    suite_manage_imagestitching_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_import_certs_config/">
+    suite_manage_import_certs_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_load_dbc_scripts/">
+    suite_manage_load_dbc_scripts
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_logging_config/">
+    suite_manage_logging_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_pvc_config/">
+    suite_manage_pvc_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_uninstall/">
+    suite_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_upgrade/">
+    suite_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_rollback/">
+    suite_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_verify/">
+    suite_verify
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_backup/">
+    suite_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_restore/">
+    suite_restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Utilities">
+    
+      
+  <cds-side-nav-menu-item href="../ansible_version_check/">
+    ansible_version_check
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../entitlement_key_rotation/">
+    entitlement_key_rotation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_jdbc/">
+    gencfg_jdbc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_watsonstudio/">
+    gencfg_watsonstudio
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_workspace/">
+    gencfg_workspace
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_mongo/">
+    gencfg_mongo
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+              </cds-side-nav-items>
+            </cds-side-nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="md-content" data-md-component="content">
+        <article class="md-content__inner">
+          <!-- Breadcrumbs -->
+          <div class="md-breadcrumbs"><cds-breadcrumb no-trailing-slash="">
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="../..">Home</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+      <cds-breadcrumb-item>Roles: Dependency Mgmt</cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#sls">sls</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+
+  <cds-breadcrumb-item aria-current="page">
+    <cds-select id="breadcrumbs-toc" inline="" placeholder="..." oninput="changeAnchor(this.value)">
+    
+    
+      <cds-select-item value="#role-variables-general">Role Variables - General</cds-select-item>
+    
+      <cds-select-item value="#role-variables-installation">Role Variables - Installation</cds-select-item>
+    
+      <cds-select-item value="#role-variables-configuration">Role Variables - Configuration</cds-select-item>
+    
+      <cds-select-item value="#role-variables-bootstrap-partly-deprecated-in-sls-370">Role Variables - Bootstrap [Partly deprecated in SLS 3.7.0]</cds-select-item>
+    
+      <cds-select-item value="#role-variables-backup-and-restore-variables">Role Variables - Backup and Restore Variables</cds-select-item>
+    
+      <cds-select-item value="#backup-and-restore-operations">Backup and Restore Operations</cds-select-item>
+    
+      <cds-select-item value="#example-playbook">Example Playbook</cds-select-item>
+    
+      <cds-select-item value="#run-role-playbook">Run Role Playbook</cds-select-item>
+    
+      <cds-select-item value="#license">License</cds-select-item>
+    
+    </cds-select>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+          </div>
+
+          <!-- Page content -->
+          <div class="rst-content">
+            
+            <h1 id="sls">sls<a class="headerlink" href="#sls" title="Permanent link">¤</a></h1>
 <p>Install <strong>IBM Suite License Service</strong> and generate a configuration that can be directly applied to IBM Maximo Application Suite.</p>
 <p>The role assumes that you have already installed the Certificate Manager in the target cluster.  This action is performed by the <a href="../cert_manager/">cert_manager</a> role if you want to use this collection to install the cert-manager operator.</p>
-<h2 id="role-variables">Role Variables<a class="headerlink" href="#role-variables" title="Permanent link"></a></h2>
-<h3 id="sls_action">sls_action<a class="headerlink" href="#sls_action" title="Permanent link"></a></h3>
-<p>Inform the role whether to perform an install or uninstall of the Suite License Service.</p>
+<h2 id="role-variables-general">Role Variables - General<a class="headerlink" href="#role-variables-general" title="Permanent link">¤</a></h2>
+<h3 id="general-variables">General Variables<a class="headerlink" href="#general-variables" title="Permanent link">¤</a></h3>
+<h4 id="sls_action">sls_action<a class="headerlink" href="#sls_action" title="Permanent link">¤</a></h4>
+<p>Specifies which operation to perform on the Suite License Service (SLS) instance.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_ACTION</code></li>
 <li>Default: <code>install</code></li>
 </ul>
-<h2 id="role-variables-installation">Role Variables - Installation<a class="headerlink" href="#role-variables-installation" title="Permanent link"></a></h2>
+<p><strong>Purpose</strong>: Controls what action the role executes against the SLS instance. This allows the same role to handle installation, configuration generation, backup, restore, and removal of SLS.</p>
+<p><strong>When to use</strong>:
+- Use <code>install</code> for initial SLS deployment or updates
+- Use <code>gencfg</code> to generate SLS configuration for MAS without installing SLS (when using existing SLS)
+- Use <code>backup</code> to create a backup of SLS instance and its configuration
+- Use <code>restore</code> to restore SLS instance from a backup
+- Use <code>uninstall</code> to remove SLS instance (use with caution)</p>
+<p><strong>Valid values</strong>: <code>install</code>, <code>gencfg</code>, <code>backup</code>, <code>restore</code>, <code>uninstall</code></p>
+<p><strong>Impact</strong>:
+- <code>install</code>: Deploys or updates SLS operator and instance
+- <code>gencfg</code>: Only generates SLSCfg resource for MAS integration
+- <code>backup</code>: Creates a backup of all SLS resources, secrets, and registration data
+- <code>restore</code>: Restores SLS from a previously created backup
+- <code>uninstall</code>: Removes SLS instance and operator (destructive operation)</p>
+<p><strong>Related variables</strong>:
+- When using <code>gencfg</code>, requires <code>sls_url</code> to be set to point to existing SLS instance
+- When using <code>backup</code>, requires <code>mas_backup_dir</code> and optionally <code>sls_backup_version</code>
+- When using <code>restore</code>, requires <code>mas_backup_dir</code> and <code>sls_backup_version</code></p>
+<p><strong>Note</strong>: Always backup license data before using <code>uninstall</code>. The <code>gencfg</code> action is useful when SLS is shared across multiple MAS instances.</p>
+<h2 id="role-variables-installation">Role Variables - Installation<a class="headerlink" href="#role-variables-installation" title="Permanent link">¤</a></h2>
 <p>If <code>sls_url</code> is set then the role will skip the installation of an SLS instance and simply generate the SLSCfg resource for the SLS instance defined.</p>
-<h3 id="artifactory_username">artifactory_username<a class="headerlink" href="#artifactory_username" title="Permanent link"></a></h3>
-<p>Provide your artifactory username, primarily used to update the image pull secret in development.</p>
+<h4 id="artifactory_username">artifactory_username<a class="headerlink" href="#artifactory_username" title="Permanent link">¤</a></h4>
+<p>Username for authenticating to IBM Artifactory to access development builds of SLS.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>ARTIFACTORY_USERNAME</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="artifactory_token">artifactory_token<a class="headerlink" href="#artifactory_token" title="Permanent link"></a></h3>
-<p>Provide your artifactory api key, primarily used to update the image pull secret in development.</p>
+<p><strong>Purpose</strong>: Provides authentication credentials to pull development/pre-release SLS operator images from IBM's Artifactory registry. Required only when installing development builds for testing or early access.</p>
+<p><strong>When to use</strong>:
+- Required when <code>sls_catalog_source</code> is set to <code>ibm-sls-operators</code> (development catalog)
+- Not needed for production installations using <code>ibm-operator-catalog</code>
+- Use your IBM w3Id username for development builds</p>
+<p><strong>Valid values</strong>: Valid IBM Artifactory username (typically your w3Id)</p>
+<p><strong>Impact</strong>: Without valid credentials, development catalog subscriptions will fail to pull operator images. This variable is ignored when using production catalogs.</p>
+<p><strong>Related variables</strong>:
+- <code>artifactory_token</code>: Must be set together with this username
+- <code>sls_catalog_source</code>: Determines if Artifactory credentials are needed</p>
+<p><strong>Note</strong>: Only required for development/pre-release builds. Production installations use <code>ibm_entitlement_key</code> instead (for SLS 3.7.0 and earlier).</p>
+<h4 id="artifactory_token">artifactory_token<a class="headerlink" href="#artifactory_token" title="Permanent link">¤</a></h4>
+<p>API token for authenticating to IBM Artifactory to access development builds of SLS.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>ARTIFACTORY_TOKEN</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="sls_catalog_source">sls_catalog_source<a class="headerlink" href="#sls_catalog_source" title="Permanent link"></a></h3>
-<p>Defines the OLM catalog to be used to install SLS. Set to <code>ibm-sls-operators</code> if you want to deploy pre-release development builds of SLS or leave as the default <code>ibm-operator-catalog</code> for the released versions.</p>
+<p><strong>Purpose</strong>: Provides the API token/password credential to authenticate with IBM's Artifactory registry when pulling development/pre-release SLS operator images.</p>
+<p><strong>When to use</strong>:
+- Required when <code>sls_catalog_source</code> is set to <code>ibm-sls-operators</code> (development catalog)
+- Not needed for production installations using <code>ibm-operator-catalog</code>
+- Use your IBM Artifactory API key for development builds</p>
+<p><strong>Valid values</strong>: Valid IBM Artifactory API token</p>
+<p><strong>Impact</strong>: Without a valid token, development catalog subscriptions will fail to pull operator images. This variable is ignored when using production catalogs.</p>
+<p><strong>Related variables</strong>:
+- <code>artifactory_username</code>: Must be set together with this token
+- <code>sls_catalog_source</code>: Determines if Artifactory credentials are needed</p>
+<p><strong>Note</strong>: Only required for development/pre-release builds. Keep this token secure and do not commit to source control.</p>
+<h4 id="sls_catalog_source">sls_catalog_source<a class="headerlink" href="#sls_catalog_source" title="Permanent link">¤</a></h4>
+<p>Specifies the OpenShift operator catalog source containing the SLS operator subscription.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_CATALOG_SOURCE</code></li>
 <li>Default: <code>ibm-operator-catalog</code></li>
 </ul>
-<h3 id="sls_channel">sls_channel<a class="headerlink" href="#sls_channel" title="Permanent link"></a></h3>
-<p>The SLS OLM subscription channel to be installed.</p>
+<p><strong>Purpose</strong>: Controls which operator catalog is used to locate and install the SLS operator. This determines where OpenShift looks for the operator images and metadata during installation.</p>
+<p><strong>When to use</strong>:
+- Use default <code>ibm-operator-catalog</code> for production installations with official IBM releases
+- Use <code>ibm-sls-operators</code> for development builds from Artifactory
+- Only change if directed to use a custom catalog for specific testing or airgap scenarios</p>
+<p><strong>Valid values</strong>: Any valid CatalogSource name present in the <code>openshift-marketplace</code> namespace (typically <code>ibm-operator-catalog</code> or <code>ibm-sls-operators</code>)</p>
+<p><strong>Impact</strong>: Changing this value affects which operator versions are available for installation. An invalid catalog source will cause the subscription to fail. Development catalogs require additional authentication via <code>artifactory_username</code> and <code>artifactory_token</code>.</p>
+<p><strong>Related variables</strong>:
+- <code>sls_channel</code>: Works together to determine the specific operator version installed
+- <code>artifactory_username</code> and <code>artifactory_token</code>: Required when using <code>ibm-sls-operators</code></p>
+<p><strong>Note</strong>: For development catalogs, you must also provide Artifactory credentials.</p>
+<h4 id="sls_channel">sls_channel<a class="headerlink" href="#sls_channel" title="Permanent link">¤</a></h4>
+<p>Specifies the SLS operator subscription channel, which determines the version stream you'll receive updates from.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_CHANNEL</code></li>
 <li>Default: <code>3.x</code></li>
 </ul>
-<h3 id="sls_namespace">sls_namespace<a class="headerlink" href="#sls_namespace" title="Permanent link"></a></h3>
-<p>Define the namespace where sls must be installed.</p>
+<p><strong>Purpose</strong>: Controls which version of SLS will be installed and which updates will be automatically applied. The channel corresponds to major version releases and determines the feature set and compatibility level of your SLS installation.</p>
+<p><strong>When to use</strong>:
+- Use default <code>3.x</code> for latest SLS 3.x releases (recommended for most deployments)
+- Use specific older channels only if required for compatibility with older MAS versions
+- Consult the MAS compatibility matrix before selecting a channel</p>
+<p><strong>Valid values</strong>: <code>3.x</code> (check the IBM Operator Catalog for currently available channels)</p>
+<p><strong>Impact</strong>: The channel determines which SLS version is installed and which automatic updates are applied. Changing channels after installation will trigger an upgrade to the latest version in that channel.</p>
+<p><strong>Related variables</strong>: Works with <code>sls_catalog_source</code> to determine available channels.</p>
+<p><strong>Note</strong>: SLS 3.8.0+ no longer requires IBM entitlement keys as images moved to public registry. Review the SLS release notes before changing this value.</p>
+<h4 id="sls_namespace">sls_namespace<a class="headerlink" href="#sls_namespace" title="Permanent link">¤</a></h4>
+<p>OpenShift namespace where the SLS operator and instance will be deployed.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_NAMESPACE</code></li>
 <li>Default: <code>ibm-sls</code></li>
 </ul>
-<h3 id="sls_icr_cpopen">sls_icr_cpopen<a class="headerlink" href="#sls_icr_cpopen" title="Permanent link"></a></h3>
-<p>The container registry source for all container images deployed by the SLS operator. From SLS 3.8.0 onwards this will be the only variable to set the registry. Override to use development images.</p>
+<p><strong>Purpose</strong>: Defines the Kubernetes namespace for SLS resources, providing isolation and organization for the SLS deployment within the cluster.</p>
+<p><strong>When to use</strong>:
+- Use default <code>ibm-sls</code> for standard deployments
+- Change only if you need multiple SLS instances or have namespace naming requirements
+- Ensure namespace doesn't conflict with existing deployments</p>
+<p><strong>Valid values</strong>: Any valid Kubernetes namespace name (lowercase alphanumeric and hyphens)</p>
+<p><strong>Impact</strong>: All SLS resources (operator, pods, secrets, services, ConfigMaps) will be created in this namespace. Changing this after deployment requires reinstallation.</p>
+<p><strong>Related variables</strong>: Used in SLSCfg generation to reference SLS service endpoints.</p>
+<p><strong>Note</strong>: The namespace will be created if it doesn't exist. Ensure you have permissions to create namespaces in the cluster.</p>
+<h4 id="sls_icr_cpopen">sls_icr_cpopen<a class="headerlink" href="#sls_icr_cpopen" title="Permanent link">¤</a></h4>
+<p>Container registry source for SLS operator and component images.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_ICR_CPOPEN</code></li>
 <li>Default: <code>icr.io/cpopen</code></li>
 </ul>
-<h3 id="sls_instance_name">sls_instance_name<a class="headerlink" href="#sls_instance_name" title="Permanent link"></a></h3>
-<p>Defines the instance ID to be used for SLS installation.</p>
+<p><strong>Purpose</strong>: Specifies the container registry from which SLS pulls all operator and component images. From SLS 3.8.0 onwards, this is the primary registry variable as images moved to the public IBM Container Registry.</p>
+<p><strong>When to use</strong>:
+- Use default <code>icr.io/cpopen</code> for production installations (SLS 3.8.0+)
+- Override only for development images or airgap/mirror scenarios
+- No authentication required for default public registry</p>
+<p><strong>Valid values</strong>: Any valid container registry URL (e.g., <code>icr.io/cpopen</code>, <code>my-registry.com/sls</code>)</p>
+<p><strong>Impact</strong>: All SLS images will be pulled from this registry. An incorrect or inaccessible registry will cause image pull failures. The default public registry requires no entitlement key (SLS 3.8.0+).</p>
+<p><strong>Related variables</strong>:
+- <code>sls_icr_cp</code>: Deprecated in SLS 3.8.0, only needed for SLS 3.7.0 and earlier
+- <code>ibm_entitlement_key</code>: Not required when using default public registry (SLS 3.8.0+)</p>
+<p><strong>Note</strong>: <strong>SLS 3.8.0+ uses public registry</strong> - no entitlement key needed. For SLS 3.7.0 and earlier, use <code>sls_icr_cp</code> and provide <code>ibm_entitlement_key</code>.</p>
+<h4 id="sls_instance_name">sls_instance_name<a class="headerlink" href="#sls_instance_name" title="Permanent link">¤</a></h4>
+<p>Unique identifier for this SLS installation within the cluster.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_INSTANCE_NAME</code></li>
 <li>Default: <code>sls</code></li>
 </ul>
-<h3 id="sls_icr_cp-deprecated-in-sls-380">sls_icr_cp [Deprecated in SLS 3.8.0]<a class="headerlink" href="#sls_icr_cp-deprecated-in-sls-380" title="Permanent link"></a></h3>
-<p>The container registry source for all container images deployed by the SLS operator. The api-licensing container image has moved to <code>icr.io/cpopen</code> in SLS 3.8.0. Set this variable for SLS 3.7.0 and lower. Override to use development images.</p>
+<p><strong>Purpose</strong>: Provides a unique identifier that distinguishes this SLS installation from others that may exist in the same cluster. This ID is used to generate resource names throughout the installation.</p>
+<p><strong>When to use</strong>:
+- Use default <code>sls</code> for standard single-SLS deployments
+- Change only if you need multiple SLS instances in the same cluster
+- Must be unique within the cluster if running multiple SLS instances</p>
+<p><strong>Valid values</strong>: Lowercase alphanumeric string (e.g., <code>sls</code>, <code>sls-prod</code>, <code>sls-dev</code>)</p>
+<p><strong>Impact</strong>: This ID becomes part of resource names and is embedded in many SLS resources. It cannot be changed after installation without reinstalling.</p>
+<p><strong>Related variables</strong>: Used in SLSCfg generation to identify the SLS instance.</p>
+<p><strong>Note</strong>: Choose carefully as this cannot be changed after installation. Most deployments use the default <code>sls</code> value.</p>
+<h4 id="sls_icr_cp">sls_icr_cp<a class="headerlink" href="#sls_icr_cp" title="Permanent link">¤</a></h4>
+<p>Container registry source for SLS images (SLS 3.7.0 and earlier only).</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_ICR_CP</code></li>
 <li>Default: <code>cp.icr.io/cp</code></li>
 </ul>
-<h3 id="ibm_entitlement_key-deprecated-in-sls-380">ibm_entitlement_key [Deprecated in SLS 3.8.0]<a class="headerlink" href="#ibm_entitlement_key-deprecated-in-sls-380" title="Permanent link"></a></h3>
-<p>Provide your <a href="https://myibm.ibm.com/products-services/containerlibrary">IBM entitlement key</a>. This is now deprecated in SLS 3.8.0. Provide this only for versions up to 3.7.0.</p>
+<p><strong>Purpose</strong>: Specifies the container registry for SLS images in versions 3.7.0 and earlier. This registry required IBM entitlement key authentication.</p>
+<p><strong>When to use</strong>:
+- Only required for SLS versions 3.7.0 and earlier
+- Not needed for SLS 3.8.0+ (images moved to public registry)
+- Override only for development images or airgap scenarios with older SLS versions</p>
+<p><strong>Valid values</strong>: Any valid container registry URL (e.g., <code>cp.icr.io/cp</code>, <code>my-registry.com/sls</code>)</p>
+<p><strong>Impact</strong>: For SLS 3.7.0 and earlier, all SLS images will be pulled from this registry. Requires <code>ibm_entitlement_key</code> for authentication.</p>
+<p><strong>Related variables</strong>:
+- <code>sls_icr_cpopen</code>: Use this instead for SLS 3.8.0+
+- <code>ibm_entitlement_key</code>: Required when using this registry (SLS 3.7.0 and earlier)</p>
+<p><strong>Note</strong>: <strong>DEPRECATED in SLS 3.8.0</strong> - SLS images moved to public registry (<code>icr.io/cpopen</code>). This variable is only required for SLS versions up to 3.7.0. For SLS 3.8.0+, use <code>sls_icr_cpopen</code> instead (no entitlement key needed).</p>
+<h4 id="ibm_entitlement_key">ibm_entitlement_key<a class="headerlink" href="#ibm_entitlement_key" title="Permanent link">¤</a></h4>
+<p>IBM entitlement key for accessing IBM Container Registry images (SLS 3.7.0 and earlier only).</p>
 <ul>
-<li><strong>Required</strong> unless <code>sls_url</code> is provided</li>
+<li><strong>Required</strong> for SLS 3.7.0 and earlier (unless <code>sls_url</code> is provided)</li>
 <li>Environment Variable: <code>IBM_ENTITLEMENT_KEY</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="sls_entitlement_username-deprecated-in-sls-380">sls_entitlement_username [Deprecated in SLS 3.8.0]<a class="headerlink" href="#sls_entitlement_username-deprecated-in-sls-380" title="Permanent link"></a></h3>
-<p>Username for entitled registry. This username will be used to create the image pull secret. This is now deprecated in SLS 3.8.0. Provide this only for versions up to 3.7.0.</p>
+<p><strong>Purpose</strong>: Authenticates access to IBM's entitled container registry to pull SLS operator and component images. This key is tied to your IBM Cloud account and product entitlements.</p>
+<p><strong>When to use</strong>:
+- Required for SLS versions 3.7.0 and earlier
+- Not required for SLS 3.8.0 and later (images moved to public registry)
+- Obtain from <a href="https://myibm.ibm.com/products-services/containerlibrary">IBM Container Library</a></p>
+<p><strong>Valid values</strong>: IBM entitlement key string (typically starts with "eyJ...")</p>
+<p><strong>Impact</strong>: Invalid or expired keys will cause image pull failures for SLS 3.7.0 and earlier. The key is stored in a Kubernetes secret in the SLS namespace.</p>
+<p><strong>Related variables</strong>:
+- <code>sls_entitlement_username</code>: Username paired with this key (default: <code>cp</code>)
+- <code>sls_icr_cp</code>: Registry requiring this authentication (SLS 3.7.0 and earlier)</p>
+<p><strong>Note</strong>: <strong>DEPRECATED in SLS 3.8.0</strong> - SLS images moved to public registry (<code>icr.io/cpopen</code>). This variable is only required for SLS versions up to 3.7.0. For SLS 3.8.0+, no entitlement key is needed.</p>
+<h4 id="sls_entitlement_username">sls_entitlement_username<a class="headerlink" href="#sls_entitlement_username" title="Permanent link">¤</a></h4>
+<p>Username for authenticating to IBM Container Registry (SLS 3.7.0 and earlier only).</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_ENTITLEMENT_USERNAME</code></li>
 <li>Default: <code>cp</code></li>
 </ul>
-<h3 id="sls_entitlement_key-deprecated-in-sls-380">sls_entitlement_key [Deprecated in SLS 3.8.0]<a class="headerlink" href="#sls_entitlement_key-deprecated-in-sls-380" title="Permanent link"></a></h3>
-<p>An IBM entitlement key specific for SLS installation, primarily used to override <code>ibm_entitlement_key</code> in development. This is now deprecated in SLS 3.8.0. Provide this only for versions up to 3.7.0.</p>
+<p><strong>Purpose</strong>: Provides the username credential for authenticating with IBM's entitled container registry when pulling SLS images for versions 3.7.0 and earlier.</p>
+<p><strong>When to use</strong>:
+- Only needed for SLS versions 3.7.0 and earlier
+- Not required for SLS 3.8.0+ (images moved to public registry)
+- Usually can be left at default <code>cp</code> for production installations</p>
+<p><strong>Valid values</strong>: <code>cp</code> (for production installations with IBM entitlement key)</p>
+<p><strong>Impact</strong>: Used together with <code>ibm_entitlement_key</code> to create image pull secrets for the SLS namespace. Incorrect username will cause image pull authentication failures.</p>
+<p><strong>Related variables</strong>:
+- <code>ibm_entitlement_key</code>: Must be set together with this username (SLS 3.7.0 and earlier)
+- <code>sls_entitlement_key</code>: Alternative entitlement key specific for SLS</p>
+<p><strong>Note</strong>: <strong>DEPRECATED in SLS 3.8.0</strong> - SLS images moved to public registry. This variable is only required for SLS versions up to 3.7.0. For SLS 3.8.0+, no authentication is needed.</p>
+<h4 id="sls_entitlement_key">sls_entitlement_key<a class="headerlink" href="#sls_entitlement_key" title="Permanent link">¤</a></h4>
+<p>SLS-specific IBM entitlement key override (SLS 3.7.0 and earlier only).</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_ENTITLEMENT_KEY</code></li>
-<li>Default: None</li>
+<li>Default: None (falls back to <code>ibm_entitlement_key</code>)</li>
 </ul>
-<h2 id="role-variables-configuration">Role Variables - Configuration<a class="headerlink" href="#role-variables-configuration" title="Permanent link"></a></h2>
-<h3 id="sls_domain">sls_domain<a class="headerlink" href="#sls_domain" title="Permanent link"></a></h3>
-<p>SLS can be configured to be externally accessible through a route by setting the domain. Set the domain if SLS is used by application suites that are installed in separate OpenShift clusters.</p>
+<p><strong>Purpose</strong>: Provides an SLS-specific IBM entitlement key that overrides the global <code>ibm_entitlement_key</code> variable. Primarily used in development scenarios where different keys are needed for different components.</p>
+<p><strong>When to use</strong>:
+- Only needed for SLS versions 3.7.0 and earlier
+- Use when you need a different entitlement key specifically for SLS
+- Leave unset to use the global <code>ibm_entitlement_key</code> value
+- Not required for SLS 3.8.0+ (images moved to public registry)</p>
+<p><strong>Valid values</strong>: IBM entitlement key string (typically starts with "eyJ...")</p>
+<p><strong>Impact</strong>: When set, this key is used instead of <code>ibm_entitlement_key</code> for SLS image authentication. Invalid keys will cause image pull failures.</p>
+<p><strong>Related variables</strong>:
+- <code>ibm_entitlement_key</code>: Global entitlement key that this variable overrides
+- <code>sls_entitlement_username</code>: Username paired with this key</p>
+<p><strong>Note</strong>: <strong>DEPRECATED in SLS 3.8.0</strong> - SLS images moved to public registry. This variable is only required for SLS versions up to 3.7.0. For SLS 3.8.0+, no entitlement key is needed.</p>
+<h2 id="role-variables-configuration">Role Variables - Configuration<a class="headerlink" href="#role-variables-configuration" title="Permanent link">¤</a></h2>
+<h4 id="sls_domain">sls_domain<a class="headerlink" href="#sls_domain" title="Permanent link">¤</a></h4>
+<p>Custom domain name for external access to SLS via OpenShift routes.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_DOMAIN</code></li>
-<li>Default: None</li>
+<li>Default: None (SLS is only accessible within the cluster)</li>
 </ul>
-<h3 id="sls_auth_enforce">sls_auth_enforce<a class="headerlink" href="#sls_auth_enforce" title="Permanent link"></a></h3>
-<p>Determines whether authorization is enforced. If set to true, clients must use mTLS with certificates generated from the client registration flow for SLS API calls.</p>
+<p><strong>Purpose</strong>: Enables external access to SLS through a custom domain route. This is essential when SLS needs to serve multiple MAS instances deployed in separate OpenShift clusters.</p>
+<p><strong>When to use</strong>:
+- Required when SLS serves MAS instances in different OpenShift clusters
+- Required for multi-cluster SLS deployments
+- Leave unset for single-cluster deployments where SLS and MAS are in the same cluster</p>
+<p><strong>Valid values</strong>: Any valid DNS domain name (e.g., <code>sls.mycompany.com</code>, <code>license.example.org</code>)</p>
+<p><strong>Impact</strong>: When set, SLS creates an external route accessible at the specified domain. You must ensure DNS is properly configured to resolve this domain to your cluster. When not set, SLS is only accessible via internal cluster services.</p>
+<p><strong>Related variables</strong>: Affects how MAS instances connect to SLS (internal service vs external route).</p>
+<p><strong>Note</strong>: Ensure proper DNS configuration and SSL certificates for the domain. External access requires appropriate network security controls.</p>
+<h4 id="sls_auth_enforce">sls_auth_enforce<a class="headerlink" href="#sls_auth_enforce" title="Permanent link">¤</a></h4>
+<p>Controls whether SLS enforces client authentication via mutual TLS (mTLS).</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_AUTH_ENFORCE</code></li>
 <li>Default: <code>True</code></li>
 </ul>
-<h3 id="sls_mongo_retrywrites">sls_mongo_retrywrites<a class="headerlink" href="#sls_mongo_retrywrites" title="Permanent link"></a></h3>
-<p>Set to true if MongoDB support retryable writes. In case if retryable writes is not supported (like in case of Amazon DocumentDB), set to false</p>
+<p><strong>Purpose</strong>: Determines whether SLS requires clients to authenticate using mTLS certificates generated through the client registration flow. This provides secure authentication for SLS API access.</p>
+<p><strong>When to use</strong>:
+- Use <code>True</code> (default) for production environments to enforce secure authentication
+- Set to <code>False</code> only in development/testing environments where simplified access is needed
+- Leave as default for standard secure deployments</p>
+<p><strong>Valid values</strong>: <code>True</code>, <code>False</code></p>
+<p><strong>Impact</strong>: 
+- When <code>True</code>: Clients must register with SLS and use mTLS certificates for API calls (secure)
+- When <code>False</code>: Authentication is not enforced, allowing unauthenticated API access (insecure)</p>
+<p><strong>Related variables</strong>: Works with <code>sls_registration_open</code> to control client registration and access.</p>
+<p><strong>Note</strong>: Setting to <code>False</code> removes authentication requirements and should only be used in non-production environments. Production deployments should always enforce authentication.</p>
+<h4 id="sls_mongo_retrywrites">sls_mongo_retrywrites<a class="headerlink" href="#sls_mongo_retrywrites" title="Permanent link">¤</a></h4>
+<p>Controls whether SLS uses MongoDB retryable writes feature.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_MONGO_RETRYWRITES</code></li>
 <li>Default: <code>true</code></li>
 </ul>
-<h3 id="sls_compliance_enforce">sls_compliance_enforce<a class="headerlink" href="#sls_compliance_enforce" title="Permanent link"></a></h3>
-<p>Determines whether compliance is enforced. If there are not enough tokens to support the request. If compliance is not enforced, license checkout requests will be allowed even if there are not enough tokens to support the request.</p>
+<p><strong>Purpose</strong>: Determines whether SLS enables MongoDB's retryable writes feature, which automatically retries certain write operations that fail due to transient network errors or replica set elections.</p>
+<p><strong>When to use</strong>:
+- Use <code>true</code> (default) when using MongoDB Community Edition or IBM Cloud Databases for MongoDB
+- Set to <code>false</code> when using AWS DocumentDB (which doesn't support retryable writes)
+- Set to <code>false</code> for any MongoDB-compatible database that doesn't support this feature</p>
+<p><strong>Valid values</strong>: <code>true</code>, <code>false</code></p>
+<p><strong>Impact</strong>: 
+- When <code>true</code>: Enables automatic retry of failed write operations (improves reliability)
+- When <code>false</code>: Disables retryable writes (required for DocumentDB and similar services)</p>
+<p><strong>Related variables</strong>: 
+- <code>sls_mongodb_cfg_file</code> or <code>sls_mongodb.*</code>: Determines which MongoDB service is used
+- Must align with the capabilities of your MongoDB provider</p>
+<p><strong>Note</strong>: AWS DocumentDB does not support retryable writes. Set to <code>false</code> when using DocumentDB to avoid connection errors.</p>
+<h4 id="sls_compliance_enforce">sls_compliance_enforce<a class="headerlink" href="#sls_compliance_enforce" title="Permanent link">¤</a></h4>
+<p>Controls whether SLS enforces license token compliance.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_COMPLIANCE_ENFORCE</code></li>
 <li>Default: <code>True</code></li>
 </ul>
-<h3 id="sls_registration_open">sls_registration_open<a class="headerlink" href="#sls_registration_open" title="Permanent link"></a></h3>
-<p>Determines whether registration is open. If set to true, clients will be able to register themselves with SLS and use SLS APIs.</p>
+<p><strong>Purpose</strong>: Determines whether SLS blocks license checkout requests when insufficient tokens are available. This controls whether license limits are strictly enforced or merely tracked.</p>
+<p><strong>When to use</strong>:
+- Use <code>True</code> (default) for production to enforce license compliance and prevent over-consumption
+- Set to <code>False</code> only in development/testing environments or during grace periods
+- Leave as default for standard compliant deployments</p>
+<p><strong>Valid values</strong>: <code>True</code>, <code>False</code></p>
+<p><strong>Impact</strong>: 
+- When <code>True</code>: License checkout requests are denied when insufficient tokens are available (enforces compliance)
+- When <code>False</code>: License checkout requests succeed even without available tokens (tracks but doesn't enforce)</p>
+<p><strong>Related variables</strong>: Works with license entitlement configuration to control token availability.</p>
+<p><strong>Note</strong>: Setting to <code>False</code> allows operation beyond licensed capacity and may result in license compliance issues. Use only in non-production environments or with explicit approval.</p>
+<h4 id="sls_registration_open">sls_registration_open<a class="headerlink" href="#sls_registration_open" title="Permanent link">¤</a></h4>
+<p>Controls whether SLS allows new client self-registration.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_REGISTRATION_OPEN</code></li>
 <li>Default: <code>True</code></li>
 </ul>
-<h3 id="sls_mongodb_cfg_file">sls_mongodb_cfg_file<a class="headerlink" href="#sls_mongodb_cfg_file" title="Permanent link"></a></h3>
-<p>Location of a MAS MongoCfg definition (as generated by the <code>mongodb</code> role).  If provided the role will use the information in that config file to configure SLS.</p>
+<p><strong>Purpose</strong>: Determines whether clients can register themselves with SLS to obtain certificates for API access. This controls the initial onboarding process for new SLS clients.</p>
+<p><strong>When to use</strong>:
+- Use <code>True</code> (default) to allow MAS instances and other clients to self-register
+- Set to <code>False</code> after all clients are registered to prevent unauthorized registrations
+- Leave as default for standard deployments where clients need to register</p>
+<p><strong>Valid values</strong>: <code>True</code>, <code>False</code></p>
+<p><strong>Impact</strong>: 
+- When <code>True</code>: Clients can register themselves and obtain mTLS certificates for SLS API access
+- When <code>False</code>: New client registrations are blocked; only pre-registered clients can access SLS</p>
+<p><strong>Related variables</strong>: Works with <code>sls_auth_enforce</code> to control authentication and registration flow.</p>
+<p><strong>Note</strong>: For production environments, consider setting to <code>False</code> after all legitimate clients are registered to prevent unauthorized access.</p>
+<h4 id="sls_mongodb_cfg_file">sls_mongodb_cfg_file<a class="headerlink" href="#sls_mongodb_cfg_file" title="Permanent link">¤</a></h4>
+<p>Local file path to a MongoCfg YAML file for SLS MongoDB configuration.</p>
 <ul>
-<li>Either <code>sls_mongodb_cfg_file</code> or the <code>sls_mongodb</code> object are required to install SLS.</li>
+<li><strong>Required</strong> (Either <code>sls_mongodb_cfg_file</code> or the <code>sls_mongodb</code> object are required to install SLS)</li>
 <li>Environment Variable: <code>SLS_MONGODB_CFG_FILE</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="sls_mongodbhosts">sls_mongodb.hosts<a class="headerlink" href="#sls_mongodbhosts" title="Permanent link"></a></h3>
-<p>Defines list of host and port pair for MongoDb to be used with SLS.</p>
+<p><strong>Purpose</strong>: Provides MongoDB connection details to SLS by referencing a MongoCfg file generated by the <code>mongodb</code> role. This simplifies configuration by reusing existing MongoDB setup information.</p>
+<p><strong>When to use</strong>:
+- Use when you've deployed MongoDB using the <code>mongodb</code> role (which generates this file)
+- Preferred method as it ensures consistency with MongoDB deployment
+- Alternative to manually specifying <code>sls_mongodb.*</code> variables</p>
+<p><strong>Valid values</strong>: Any valid local filesystem path to a MongoCfg YAML file (e.g., <code>/home/user/masconfig/mongocfg-mongoce-system.yaml</code>)</p>
+<p><strong>Impact</strong>: The role extracts MongoDB connection details (hosts, certificates, credentials) from this file to configure SLS. Invalid or missing file will cause installation to fail.</p>
+<p><strong>Related variables</strong>:
+- <code>sls_mongodb.*</code>: Alternative method to specify MongoDB connection details
+- <code>mas_config_dir</code>: Directory where <code>mongodb</code> role generates this file</p>
+<p><strong>Note</strong>: Either this variable or the <code>sls_mongodb</code> object must be provided. Using this file is recommended for consistency with MongoDB deployment.</p>
+<h4 id="sls_mongodbhosts">sls_mongodb.hosts<a class="headerlink" href="#sls_mongodbhosts" title="Permanent link">¤</a></h4>
+<p>List of MongoDB host:port pairs for SLS database connection.</p>
 <ul>
-<li>Either <code>sls_mongodb_cfg_file</code> or the <code>sls_mongodb</code> object are required to install SLS.</li>
+<li><strong>Required</strong> (Either <code>sls_mongodb_cfg_file</code> or the <code>sls_mongodb</code> object are required to install SLS)</li>
 <li>Environment Variable: None</li>
 <li>Default: None</li>
 </ul>
-<h3 id="sls_mongodbcertificates">sls_mongodb.certificates<a class="headerlink" href="#sls_mongodbcertificates" title="Permanent link"></a></h3>
-<p>Defines list of Certificates for MongoDb to be used with SLS.</p>
+<p><strong>Purpose</strong>: Specifies the MongoDB replica set members that SLS will connect to for license data storage. Multiple hosts provide high availability and failover capability.</p>
+<p><strong>When to use</strong>:
+- Use when manually configuring MongoDB connection (not using <code>sls_mongodb_cfg_file</code>)
+- Required for all MongoDB deployment types (Community, IBM Cloud, AWS DocumentDB)
+- Provide all replica set members for high availability</p>
+<p><strong>Valid values</strong>: Array of strings in format <code>["host1:port1", "host2:port2", "host3:port3"]</code> (e.g., <code>["mongo-0.mongo:27017", "mongo-1.mongo:27017", "mongo-2.mongo:27017"]</code>)</p>
+<p><strong>Impact</strong>: SLS uses these hosts to establish database connections. Incorrect hosts will cause SLS installation to fail. Multiple hosts enable automatic failover.</p>
+<p><strong>Related variables</strong>:
+- <code>sls_mongodb.certificates</code>: TLS certificates for secure connection
+- <code>sls_mongodb.username</code> and <code>sls_mongodb.password</code>: Authentication credentials
+- <code>sls_mongodb_cfg_file</code>: Alternative method to provide this information</p>
+<p><strong>Note</strong>: Part of the <code>sls_mongodb</code> object. All <code>sls_mongodb.*</code> variables must be provided together if not using <code>sls_mongodb_cfg_file</code>.</p>
+<h4 id="sls_mongodbcertificates">sls_mongodb.certificates<a class="headerlink" href="#sls_mongodbcertificates" title="Permanent link">¤</a></h4>
+<p>List of TLS/SSL certificates for secure MongoDB connections.</p>
 <ul>
-<li>Either <code>sls_mongodb_cfg_file</code> or the <code>sls_mongodb</code> object are required to install SLS.</li>
+<li><strong>Required</strong> (Either <code>sls_mongodb_cfg_file</code> or the <code>sls_mongodb</code> object are required to install SLS)</li>
 <li>Environment Variable: None</li>
 <li>Default: None</li>
 </ul>
-<h3 id="sls_mongodbusername">sls_mongodb.username<a class="headerlink" href="#sls_mongodbusername" title="Permanent link"></a></h3>
-<p>Defines the MongoDB Username.</p>
+<p><strong>Purpose</strong>: Provides the TLS/SSL certificates needed to establish secure, encrypted connections between SLS and MongoDB. These certificates verify the MongoDB server's identity and enable encrypted communication.</p>
+<p><strong>When to use</strong>:
+- Required when manually configuring MongoDB connection (not using <code>sls_mongodb_cfg_file</code>)
+- Needed for all MongoDB deployments using TLS/SSL (recommended for production)
+- Obtain from your MongoDB deployment (CA certificate or server certificate)</p>
+<p><strong>Valid values</strong>: Array of certificate strings in PEM format (e.g., <code>["-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"]</code>)</p>
+<p><strong>Impact</strong>: Without valid certificates, SLS cannot establish secure connections to MongoDB. Invalid certificates will cause connection failures.</p>
+<p><strong>Related variables</strong>:
+- <code>sls_mongodb.hosts</code>: MongoDB servers these certificates authenticate
+- <code>sls_mongodb.username</code> and <code>sls_mongodb.password</code>: Used with certificates for authentication
+- <code>sls_mongodb_cfg_file</code>: Alternative method to provide this information</p>
+<p><strong>Note</strong>: Part of the <code>sls_mongodb</code> object. All <code>sls_mongodb.*</code> variables must be provided together if not using <code>sls_mongodb_cfg_file</code>. Certificates must match the MongoDB deployment's TLS configuration.</p>
+<h4 id="sls_mongodbusername">sls_mongodb.username<a class="headerlink" href="#sls_mongodbusername" title="Permanent link">¤</a></h4>
+<p>MongoDB username for SLS database authentication.</p>
 <ul>
-<li>Either <code>sls_mongodb_cfg_file</code> or the <code>sls_mongodb</code> object are required to install SLS.</li>
+<li><strong>Required</strong> (Either <code>sls_mongodb_cfg_file</code> or the <code>sls_mongodb</code> object are required to install SLS)</li>
 <li>Environment Variable: None</li>
 <li>Default: None</li>
 </ul>
-<h3 id="sls_mongodbpassword">sls_mongodb.password<a class="headerlink" href="#sls_mongodbpassword" title="Permanent link"></a></h3>
-<p>Defines the MongoDb Password.</p>
+<p><strong>Purpose</strong>: Provides the username credential for SLS to authenticate with MongoDB. This user must have appropriate permissions to read and write to the SLS database.</p>
+<p><strong>When to use</strong>:
+- Required when manually configuring MongoDB connection (not using <code>sls_mongodb_cfg_file</code>)
+- Must correspond to a valid MongoDB user with SLS database permissions
+- Obtain from your MongoDB deployment configuration</p>
+<p><strong>Valid values</strong>: Valid MongoDB username string</p>
+<p><strong>Impact</strong>: SLS uses this username to authenticate with MongoDB. Invalid username will cause authentication failures and prevent SLS from accessing the database.</p>
+<p><strong>Related variables</strong>:
+- <code>sls_mongodb.password</code>: Password for this username
+- <code>sls_mongodb.hosts</code>: MongoDB servers to authenticate against
+- <code>sls_mongodb.certificates</code>: TLS certificates for secure authentication
+- <code>sls_mongodb_cfg_file</code>: Alternative method to provide this information</p>
+<p><strong>Note</strong>: Part of the <code>sls_mongodb</code> object. All <code>sls_mongodb.*</code> variables must be provided together if not using <code>sls_mongodb_cfg_file</code>. Ensure the user has appropriate database permissions.</p>
+<h4 id="sls_mongodbpassword">sls_mongodb.password<a class="headerlink" href="#sls_mongodbpassword" title="Permanent link">¤</a></h4>
+<p>MongoDB password for SLS database authentication.</p>
 <ul>
-<li>Either <code>sls_mongodb_cfg_file</code> or the <code>sls_mongodb</code> object are required to install SLS.</li>
+<li><strong>Required</strong> (Either <code>sls_mongodb_cfg_file</code> or the <code>sls_mongodb</code> object are required to install SLS)</li>
 <li>Environment Variable: None</li>
 <li>Default: None</li>
 </ul>
-<h3 id="mas_pod_templates_dir">mas_pod_templates_dir<a class="headerlink" href="#mas_pod_templates_dir" title="Permanent link"></a></h3>
-<p>Provide the directory where supported pod templates configuration files are defined.  This role will look for a configuration file named <code>ibm-sls-licenseservice.yml</code> in the named directory.  The content of the configuration file should be the yaml block that you wish to be inserted into the LicenseService spec under a top level <code>podTemplates</code> element, e.g. <code>podTemplates: {object}</code>.</p>
-<p>For examples refer to the <a href="https://github.com/ibm-mas/cli/blob/master/image/cli/mascli/templates/pod-templates/best-effort/ibm-sls-licenseservice.yml">BestEfforts reference configuration in the MAS CLI</a>, for full documentation of the supported options refer to the <a href="https://www.ibm.com/docs/en/mas-cd/continuous-delivery?topic=sls-supported-pods-workload-customization-in-suite-license-service">Customizing Pod Templates</a> in the product documentation.</p>
+<p><strong>Purpose</strong>: Provides the password credential for SLS to authenticate with MongoDB. Used together with the username to establish secure database connections.</p>
+<p><strong>When to use</strong>:
+- Required when manually configuring MongoDB connection (not using <code>sls_mongodb_cfg_file</code>)
+- Must correspond to the password for the specified MongoDB username
+- Obtain from your MongoDB deployment configuration</p>
+<p><strong>Valid values</strong>: Valid MongoDB password string</p>
+<p><strong>Impact</strong>: SLS uses this password to authenticate with MongoDB. Invalid password will cause authentication failures and prevent SLS from accessing the database.</p>
+<p><strong>Related variables</strong>:
+- <code>sls_mongodb.username</code>: Username for this password
+- <code>sls_mongodb.hosts</code>: MongoDB servers to authenticate against
+- <code>sls_mongodb.certificates</code>: TLS certificates for secure authentication
+- <code>sls_mongodb_cfg_file</code>: Alternative method to provide this information</p>
+<p><strong>Note</strong>: Part of the <code>sls_mongodb</code> object. All <code>sls_mongodb.*</code> variables must be provided together if not using <code>sls_mongodb_cfg_file</code>. Keep this password secure and do not commit to source control.</p>
+<h4 id="mas_pod_templates_dir">mas_pod_templates_dir<a class="headerlink" href="#mas_pod_templates_dir" title="Permanent link">¤</a></h4>
+<p>Local directory path containing pod template customization files for SLS.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>MAS_POD_TEMPLATES_DIR</code></li>
 <li>Default: None</li>
 </ul>
-<h2 id="role-variables-bootstrap-sls-370-and-higher">Role Variables - Bootstrap [SLS 3.7.0 and higher]<a class="headerlink" href="#role-variables-bootstrap-sls-370-and-higher" title="Permanent link"></a></h2>
-<h3 id="entitlement_file">entitlement_file<a class="headerlink" href="#entitlement_file" title="Permanent link"></a></h3>
-<p>Defines the License File to be used to bootstrap SLS. Don't set if you wish to setup entitlement later on.</p>
+<p><strong>Purpose</strong>: Allows customization of pod specifications for SLS workloads, enabling control over resource limits, node affinity, tolerations, and other Kubernetes pod settings. This is essential for production deployments with specific infrastructure requirements.</p>
+<p><strong>When to use</strong>:
+- Use to set custom resource limits (CPU, memory) for SLS pods
+- Use to configure node affinity or anti-affinity rules
+- Use to add tolerations for tainted nodes
+- Use to apply custom security contexts or service accounts
+- Leave unset for default pod configurations</p>
+<p><strong>Valid values</strong>: Any valid local filesystem path containing <code>ibm-sls-licenseservice.yml</code></p>
+<p><strong>Impact</strong>: The pod template file will be applied to the LicenseService Custom Resource under <code>spec.podTemplates</code>. Invalid templates can cause pod scheduling failures.</p>
+<p><strong>Related variables</strong>: None</p>
+<p><strong>Note</strong>: This role looks for a file named <code>ibm-sls-licenseservice.yml</code> in the specified directory. The file content should be the YAML block to insert under <code>podTemplates: {object}</code>. For examples, see the <a href="https://github.com/ibm-mas/cli/blob/master/image/cli/mascli/templates/pod-templates/best-effort/ibm-sls-licenseservice.yml">BestEfforts reference configuration</a>. For full documentation, refer to <a href="https://www.ibm.com/docs/en/mas-cd/continuous-delivery?topic=sls-supported-pods-workload-customization-in-suite-license-service">Customizing Pod Templates</a>.</p>
+<h3 id="bootstrap-variables-sls-370-and-higher">Bootstrap Variables (SLS 3.7.0 and higher)<a class="headerlink" href="#bootstrap-variables-sls-370-and-higher" title="Permanent link">¤</a></h3>
+<h4 id="entitlement_file">entitlement_file<a class="headerlink" href="#entitlement_file" title="Permanent link">¤</a></h4>
+<p>Local file path to the IBM license entitlement file for bootstrapping SLS.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_ENTITLEMENT_FILE</code></li>
 <li>Default: None</li>
 </ul>
-<h2 id="role-variables-bootstrap-partly-deprecated-in-sls-370">Role Variables - Bootstrap [Partly deprecated in SLS 3.7.0]<a class="headerlink" href="#role-variables-bootstrap-partly-deprecated-in-sls-370" title="Permanent link"></a></h2>
-<h3 id="bootstraplicense_file-deprecated-in-sls-370">bootstrap.license_file [Deprecated in SLS 3.7.0]<a class="headerlink" href="#bootstraplicense_file-deprecated-in-sls-370" title="Permanent link"></a></h3>
+<p><strong>Purpose</strong>: Provides the license entitlement file that defines the MAS product licenses and token allocations available in SLS. This file is obtained from IBM and contains your license entitlements.</p>
+<p><strong>When to use</strong>:
+- Use to automatically bootstrap SLS with license entitlements during installation
+- Leave unset if you plan to upload license entitlements manually after SLS installation
+- Required for fully automated SLS deployments</p>
+<p><strong>Valid values</strong>: Any valid local filesystem path to an IBM license entitlement file (e.g., <code>/home/user/licenses/entitlement.dat</code>)</p>
+<p><strong>Impact</strong>: When provided, SLS is automatically configured with the license entitlements from this file. Without this, you must manually upload license entitlements through the SLS UI or API after installation.</p>
+<p><strong>Related variables</strong>: None</p>
+<p><strong>Note</strong>: <strong>Application Support: SLS 3.7.0 and higher</strong>. The license file is obtained from IBM and contains your MAS product entitlements. Keep this file secure as it represents your license rights.</p>
+<h2 id="role-variables-bootstrap-partly-deprecated-in-sls-370">Role Variables - Bootstrap [Partly deprecated in SLS 3.7.0]<a class="headerlink" href="#role-variables-bootstrap-partly-deprecated-in-sls-370" title="Permanent link">¤</a></h2>
+<h4 id="bootstraplicense_file">bootstrap.license_file<a class="headerlink" href="#bootstraplicense_file" title="Permanent link">¤</a></h4>
+<p><strong>Deprecated in SLS 3.7.0</strong></p>
 <p>Defines the License File to be used to bootstrap SLS. Don't set if you wish to setup entitlement later on. Note: this variable used to be called bootstrap.entitlement_file and defaulted to <code>{{mas_config_dir}}/entitlement.lic</code>, this is no longer the case and <code>SLS_LICENSE_FILE</code> has to be set in order to bootstrap. This is now deprecated in SLS 3.7.0. Use this only for versions up to 3.6.0.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_LICENSE_FILE</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="bootstraplicense_id-deprecated-in-sls-370">bootstrap.license_id [Deprecated in SLS 3.7.0]<a class="headerlink" href="#bootstraplicense_id-deprecated-in-sls-370" title="Permanent link"></a></h3>
+<h4 id="bootstraplicense_id">bootstrap.license_id<a class="headerlink" href="#bootstraplicense_id" title="Permanent link">¤</a></h4>
+<p><strong>Deprecated in SLS 3.7.0</strong></p>
 <p>Defines the License Id to be used to bootstrap SLS. This must be set when <code>bootstrap.license_file</code> is also set and should match the licenseId from the license file. Don't set if you wish to setup entitlement later on. Note: this is now deprecated in SLS 3.7.0. Use this only for versions up to 3.6.0.</p>
 <ul>
 <li>Optional unless <code>bootstrap.license_file</code> is set</li>
 <li>Environment Variable: <code>SLS_LICENSE_ID</code></li>
 <li>Default: None</li>
 </ul>
-<h3 id="bootstrapregistration_key">bootstrap.registration_key<a class="headerlink" href="#bootstrapregistration_key" title="Permanent link"></a></h3>
+<h4 id="bootstrapregistration_key">bootstrap.registration_key<a class="headerlink" href="#bootstrapregistration_key" title="Permanent link">¤</a></h4>
 <p>Defines the Registration Key to be used to bootstrap SLS. Don't set if you wish to setup entitlement later on</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>SLS_REGISTRATION_KEY</code></li>
 <li>Default: None</li>
 </ul>
-<h2 id="role-variables-slscfg">Role Variables - SLSCfg<a class="headerlink" href="#role-variables-slscfg" title="Permanent link"></a></h2>
-<h3 id="mas_instance_id">mas_instance_id<a class="headerlink" href="#mas_instance_id" title="Permanent link"></a></h3>
+<h3 id="slscfg-variables">SLSCfg Variables<a class="headerlink" href="#slscfg-variables" title="Permanent link">¤</a></h3>
+<h4 id="mas_instance_id">mas_instance_id<a class="headerlink" href="#mas_instance_id" title="Permanent link">¤</a></h4>
 <p>The instance ID of Maximo Application Suite that the SlsCfg configuration will target.</p>
 <ul>
 <li>Optional, if this or <code>mas_config_dir</code> are not set then the role will not generate a SlsCfg template</li>
 <li>Environment Variable: <code>MAS_INSTANCE_ID</code></li>
 <li>Default Value: None</li>
 </ul>
-<h3 id="mas_config_dir">mas_config_dir<a class="headerlink" href="#mas_config_dir" title="Permanent link"></a></h3>
+<h4 id="mas_config_dir">mas_config_dir<a class="headerlink" href="#mas_config_dir" title="Permanent link">¤</a></h4>
 <p>Local directory to save the generated SlsCfg resource definition.  This can be used to manually configure a MAS instance to connect to SLS instance, or used as an input to the <a href="../suite_config/">suite_config</a> role. If this or <code>mas_instance_id</code> are not set then the role will not generate a SlsCfg template.</p>
 <ul>
-<li>Optional, if this or <code>mas_config_dir</code> are not set then the role will not generate a SlsCfg template</li>
+<li><strong>Optional</strong> (if this or <code>mas_config_dir</code> are not set then the role will not generate a SlsCfg template)</li>
 <li>Environment Variable: <code>MAS_CONFIG_DIR</code></li>
 <li>Default Value: None</li>
 </ul>
-<h3 id="sls_url">sls_url<a class="headerlink" href="#sls_url" title="Permanent link"></a></h3>
+<h4 id="sls_url">sls_url<a class="headerlink" href="#sls_url" title="Permanent link">¤</a></h4>
 <p>The URL of the LicenseService to be called when the Maximo Application Suite is registered with SLS.</p>
 <ul>
 <li>Optional, used to instruct the role to set up MAS for an existing SLS instance.</li>
 <li>Environment Variable: <code>SLS_URL</code></li>
 <li>Default Value: None</li>
 </ul>
-<h3 id="mas_license_sync_frequency">mas_license_sync_frequency<a class="headerlink" href="#mas_license_sync_frequency" title="Permanent link"></a></h3>
+<h4 id="mas_license_sync_frequency">mas_license_sync_frequency<a class="headerlink" href="#mas_license_sync_frequency" title="Permanent link">¤</a></h4>
 <p>The sync frequency of user license sync cronjob between Maximo Application Suite and SLS.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>MAS_LICENSE_SYNC_FREQUENCY</code></li>
 <li>Default Value: <code>*/30 * * * *</code></li>
 </ul>
-<h3 id="sls_tls_crt">sls_tls_crt<a class="headerlink" href="#sls_tls_crt" title="Permanent link"></a></h3>
+<h4 id="sls_tls_crt">sls_tls_crt<a class="headerlink" href="#sls_tls_crt" title="Permanent link">¤</a></h4>
 <p>The TLS CA certificate of the LicenseService to be used when the Maximo Application Suite is registered with SLS.  Takes precedence over  <code>sls_tls_crt_local_file_path</code>.</p>
 <ul>
 <li>Optional, used to instruct the role to set up MAS for an existing SLS instance.</li>
 <li>Environment Variable: <code>SLS_TLS_CERT</code></li>
 <li>Default Value: None</li>
 </ul>
-<h3 id="sls_tls_crt_local_file_path">sls_tls_crt_local_file_path<a class="headerlink" href="#sls_tls_crt_local_file_path" title="Permanent link"></a></h3>
+<h4 id="sls_tls_crt_local_file_path">sls_tls_crt_local_file_path<a class="headerlink" href="#sls_tls_crt_local_file_path" title="Permanent link">¤</a></h4>
 <p>The path on the local system to a file containing the TLS CA certificate of the LicenseService to be used when the Maximo Application Suite is registered with SLS.  This variable is only used if <code>sls_tls_crt</code> has not been set.</p>
 <ul>
-<li>Optional, used to instruct the role to set up MAS for an existing SLS instance.</li>
-<li>Environment Variable: <code>SLS_TLS_CERT_LOCAL_FILE</code></li>
+<li><strong>Optional</strong> (used to instruct the role to set up MAS for an existing SLS instance)</li>
+<li>Environment Variable: <code>SLS_TLS_CERT_LOCAL_FILE_PATH</code></li>
 <li>Default Value: None</li>
 </ul>
-<h3 id="sls_registration_key">sls_registration_key<a class="headerlink" href="#sls_registration_key" title="Permanent link"></a></h3>
+<h4 id="sls_registration_key">sls_registration_key<a class="headerlink" href="#sls_registration_key" title="Permanent link">¤</a></h4>
 <p>The Registration key of the LicenseService instance to be used when the Maximo Application Suite is registered with SLS.</p>
 <ul>
 <li>Optional</li>
 <li>Environment Variable: <code>SLS_REGISTRATION_KEY</code></li>
 <li>Default Value: None</li>
 </ul>
-<h3 id="custom_labels">custom_labels<a class="headerlink" href="#custom_labels" title="Permanent link"></a></h3>
+<h4 id="custom_labels">custom_labels<a class="headerlink" href="#custom_labels" title="Permanent link">¤</a></h4>
 <p>List of comma separated key=value pairs for setting custom labels on instance specific resources.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>CUSTOM_LABELS</code></li>
 <li>Default Value: None</li>
 </ul>
-<h3 id="mas_pod_templates_dir_1">mas_pod_templates_dir<a class="headerlink" href="#mas_pod_templates_dir_1" title="Permanent link"></a></h3>
+<h4 id="mas_pod_templates_dir_1">mas_pod_templates_dir<a class="headerlink" href="#mas_pod_templates_dir_1" title="Permanent link">¤</a></h4>
 <p>Provide the directory where supported pod templates configuration files are defined.  This role will look for a configuration file named <code>ibm-mas-slscfg.yml</code> in the named directory.  The content of the configuration file should be the yaml block that you wish to be inserted into the SlsCfg spec under a top level <code>podTemplates</code> element, e.g. <code>podTemplates: {object}</code>.</p>
 <p>For examples refer to the <a href="https://github.com/ibm-mas/cli/blob/master/image/cli/mascli/templates/pod-templates/best-effort/ibm-mas-slscfg.yml">BestEfforts reference configuration in the MAS CLI</a>, for full documentation of the supported options refer to the <a href="https://www.ibm.com/docs/en/mas-cd/continuous-delivery?topic=configuring-customizing-workloads">Customizing Pod Templates</a> in the product documentation.</p>
 <ul>
-<li>Optional</li>
+<li><strong>Optional</strong></li>
 <li>Environment Variable: <code>MAS_POD_TEMPLATES_DIR</code></li>
 <li>Default: None</li>
 </ul>
-<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link"></a></h2>
-<h3 id="install-and-generate-a-configuration-up-to-sls-360">Install and generate a configuration [up to SLS 3.6.0]<a class="headerlink" href="#install-and-generate-a-configuration-up-to-sls-360" title="Permanent link"></a></h3>
+<h2 id="role-variables-backup-and-restore-variables">Role Variables - Backup and Restore Variables<a class="headerlink" href="#role-variables-backup-and-restore-variables" title="Permanent link">¤</a></h2>
+<h4 id="mas_backup_dir">mas_backup_dir<a class="headerlink" href="#mas_backup_dir" title="Permanent link">¤</a></h4>
+<p>Directory path where SLS backup files will be stored.</p>
+<ul>
+<li><strong>Required</strong> for backup and restore operations</li>
+<li>Environment Variable: <code>MAS_BACKUP_DIR</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the local filesystem directory where backup archives will be created (for backup) or read from (for restore). This directory serves as the central location for all SLS backup data.</p>
+<p><strong>When to use</strong>:
+- Required when <code>sls_action</code> is set to <code>backup</code> or <code>restore</code>
+- Should be a persistent location with sufficient storage space
+- Ensure the directory is accessible and has appropriate permissions</p>
+<p><strong>Valid values</strong>: Any valid local filesystem path (e.g., <code>/backup/mas</code>, <code>/home/user/sls-backups</code>)</p>
+<p><strong>Impact</strong>: All backup files and metadata will be stored in subdirectories under this path. The backup creates a timestamped directory structure: <code>{mas_backup_dir}/backup-{version}-sls/</code></p>
+<p><strong>Related variables</strong>: Works with <code>sls_backup_version</code> to create unique backup directories.</p>
+<p><strong>Note</strong>: Ensure this directory has sufficient space for backup data and is regularly backed up to external storage for disaster recovery.</p>
+<h4 id="sls_backup_version">sls_backup_version<a class="headerlink" href="#sls_backup_version" title="Permanent link">¤</a></h4>
+<p>Version identifier for the backup, used to create unique backup directories.</p>
+<ul>
+<li><strong>Optional</strong> for backup (auto-generated if not provided)</li>
+<li><strong>Required</strong> for restore</li>
+<li>Environment Variable: <code>SLS_BACKUP_VERSION</code></li>
+<li>Default: Auto-generated timestamp in format <code>YYYYMMDD-HHMMSS</code></li>
+</ul>
+<p><strong>Purpose</strong>: Provides a unique identifier for each backup, allowing multiple backups to coexist and enabling point-in-time restore operations.</p>
+<p><strong>When to use</strong>:
+- For backup: Leave unset to auto-generate a timestamp-based version, or provide a custom identifier
+- For restore: Must specify the exact version identifier of the backup to restore</p>
+<p><strong>Valid values</strong>: Any string suitable for directory names (alphanumeric, hyphens, underscores). Auto-generated format: <code>YYYYMMDD-HHMMSS</code> (e.g., <code>20260122-131500</code>)</p>
+<p><strong>Impact</strong>:
+- For backup: Creates directory <code>{mas_backup_dir}/backup-{version}-sls/</code>
+- For restore: Looks for backup in <code>{mas_backup_dir}/backup-{version}-sls/</code></p>
+<p><strong>Related variables</strong>: Works with <code>mas_backup_dir</code> to determine backup location.</p>
+<p><strong>Note</strong>: When restoring, you must know the exact backup version identifier. List the contents of <code>mas_backup_dir</code> to see available backups.</p>
+<h2 id="backup-and-restore-operations">Backup and Restore Operations<a class="headerlink" href="#backup-and-restore-operations" title="Permanent link">¤</a></h2>
+<p>The SLS role supports backup and restore operations to protect your license service configuration and data. This is essential for disaster recovery, migration, and upgrade scenarios.</p>
+<h3 id="what-gets-backed-up">What Gets Backed Up<a class="headerlink" href="#what-gets-backed-up" title="Permanent link">¤</a></h3>
+<p>The SLS backup operation captures all critical resources needed to restore a complete SLS instance:</p>
+<p><strong>Kubernetes Resources:</strong>
+- <strong>Project/Namespace</strong>: The SLS namespace configuration
+- <strong>Secrets</strong>:
+  - IBM entitlement credentials (<code>ibm-entitlement</code>)
+  - MongoDB connection credentials (<code>ibm-sls-mongo-credentials</code>)
+  - Bootstrap configuration (<code>{instance-name}-bootstrap</code>)
+  - License entitlement data (<code>ibm-sls-{instance-name}-entitlement</code>)
+  - All referenced secrets (auto-discovered)
+- <strong>ConfigMaps</strong>: Suite registration configuration
+- <strong>Operator Resources</strong>:
+  - Subscription (<code>ibm-sls</code>)
+  - OperatorGroup
+- <strong>SLS Custom Resources</strong>:
+  - LicenseService CR (the main SLS instance)
+- <strong>Certificate Manager Resources</strong>:
+  - Issuers (self-signed and CA issuers)
+  - Certificates (CA certificate)</p>
+<p><strong>Registration Data:</strong>
+- License ID
+- Registration key
+- Suite registration information</p>
+<h3 id="backup-process">Backup Process<a class="headerlink" href="#backup-process" title="Permanent link">¤</a></h3>
+<p>The backup operation performs the following steps:</p>
+<ol>
+<li><strong>Validation</strong>: Verifies required variables (<code>mas_backup_dir</code>, <code>sls_namespace</code>, <code>sls_instance_name</code>)</li>
+<li><strong>Version Generation</strong>: Creates or uses provided backup version identifier</li>
+<li><strong>Resource Discovery</strong>: Identifies all SLS resources and auto-discovers referenced secrets</li>
+<li><strong>Backup Execution</strong>: Exports all resources to YAML files in the backup directory</li>
+<li><strong>Registration Capture</strong>: Saves SLS registration details for restore</li>
+<li><strong>Verification</strong>: Reports backup statistics and any failures</li>
+</ol>
+<p><strong>Backup Directory Structure:</strong></p>
+<pre><code>{mas_backup_dir}/
+└── backup-{version}-sls/
+    ├── resources/
+    │   ├── projects/
+    │   ├── secrets/
+    │   ├── configmaps/
+    │   ├── subscriptions/
+    │   ├── operatorgroups/
+    │   ├── licenseservices/
+    │   ├── issuers/
+    │   └── certificates/
+    └── sls-registration.yaml
+</code></pre>
+<h3 id="restore-process">Restore Process<a class="headerlink" href="#restore-process" title="Permanent link">¤</a></h3>
+<p>The restore operation performs the following steps:</p>
+<ol>
+<li><strong>Validation</strong>: Verifies required variables and backup existence</li>
+<li><strong>Backup Verification</strong>: Checks for valid backup structure and required files</li>
+<li><strong>Certificate Manager Check</strong>: Ensures cert-manager is installed in the cluster</li>
+<li><strong>Sequential Restoration</strong>:</li>
+<li>Projects/Namespaces</li>
+<li>Secrets and ConfigMaps</li>
+<li>OperatorGroups</li>
+<li>Subscriptions (triggers operator installation)</li>
+<li>Certificate Manager resources</li>
+<li>Bootstrap secret (recreated from registration data)</li>
+<li>LicenseService CR (with optional domain override)</li>
+<li><strong>Verification</strong>: Waits for SLS to become ready and reports restore statistics</li>
+</ol>
+<p><strong>Important Restore Considerations:</strong>
+- The target cluster must have Certificate Manager installed
+- MongoDB must be available and accessible (not restored by this role)
+- The restore can optionally override the <code>sls_domain</code> if deploying to a different cluster
+- All secrets and credentials are restored exactly as backed up</p>
+<h3 id="backup-example">Backup Example<a class="headerlink" href="#backup-example" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    sls_action: backup
+    mas_backup_dir: /backup/mas
+    sls_namespace: ibm-sls
+    sls_instance_name: sls
+    # Optional: specify custom backup version
+    # sls_backup_version: "pre-upgrade-backup"
+
+  roles:
+    - ibm.mas_devops.sls
+</code></pre>
+<p><strong>Using environment variables:</strong></p>
+<pre><code class="language-bash">export SLS_ACTION=backup
+export MAS_BACKUP_DIR=/backup/mas
+export SLS_NAMESPACE=ibm-sls
+export SLS_INSTANCE_NAME=sls
+# Optional: export SLS_BACKUP_VERSION=pre-upgrade-backup
+
+ansible-playbook ibm.mas_devops.run_role
+</code></pre>
+<h3 id="restore-example">Restore Example<a class="headerlink" href="#restore-example" title="Permanent link">¤</a></h3>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+    sls_action: restore
+    mas_backup_dir: /backup/mas
+    sls_backup_version: "20260122-131500"
+    # Optional: override domain for different cluster
+    # sls_domain: sls.newcluster.example.com
+
+  roles:
+    - ibm.mas_devops.sls
+</code></pre>
+<p><strong>Using environment variables:</strong></p>
+<pre><code class="language-bash">export SLS_ACTION=restore
+export MAS_BACKUP_DIR=/backup/mas
+export SLS_BACKUP_VERSION=20260122-131500
+# Optional: export SLS_DOMAIN=sls.newcluster.example.com
+
+ansible-playbook ibm.mas_devops.run_role
+</code></pre>
+<h3 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">¤</a></h3>
+<ol>
+<li><strong>Regular Backups</strong>: Schedule regular backups before:</li>
+<li>SLS upgrades</li>
+<li>License entitlement changes</li>
+<li>Cluster maintenance</li>
+<li>
+<p>MAS upgrades</p>
+</li>
+<li>
+<p><strong>Backup Storage</strong>:</p>
+</li>
+<li>Store backups in a location separate from the cluster</li>
+<li>Implement backup retention policies</li>
+<li>
+<p>Test restore procedures regularly</p>
+</li>
+<li>
+<p><strong>MongoDB Backup</strong>:</p>
+</li>
+<li>SLS backup does NOT include MongoDB data</li>
+<li>Ensure MongoDB is backed up separately using the <code>mongodb</code> role backup functionality</li>
+<li>
+<p>Coordinate SLS and MongoDB backups for consistency</p>
+</li>
+<li>
+<p><strong>Pre-Restore Checklist</strong>:</p>
+</li>
+<li>Verify Certificate Manager is installed</li>
+<li>Ensure MongoDB is available and accessible</li>
+<li>Confirm backup version exists and is complete</li>
+<li>
+<p>Review and adjust <code>sls_domain</code> if restoring to different cluster</p>
+</li>
+<li>
+<p><strong>Disaster Recovery</strong>:</p>
+</li>
+<li>Document backup locations and procedures</li>
+<li>Test restore process in non-production environment</li>
+<li>Keep backup version identifiers in a safe location</li>
+<li>
+<p>Maintain MongoDB connection details separately</p>
+</li>
+<li>
+<p><strong>Migration Scenarios</strong>:</p>
+</li>
+<li>When migrating to a new cluster, restore MongoDB first</li>
+<li>Update <code>sls_domain</code> if cluster ingress domain changed</li>
+<li>Verify network connectivity between restored SLS and MAS instances</li>
+</ol>
+<h3 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">¤</a></h3>
+<p><strong>Backup Issues:</strong>
+- <strong>"Required variables not provided"</strong>: Ensure <code>mas_backup_dir</code>, <code>sls_namespace</code>, and <code>sls_instance_name</code> are set
+- <strong>"Resource not found"</strong>: Some resources may not exist in your deployment (this is normal)
+- <strong>Permission errors</strong>: Ensure write access to <code>mas_backup_dir</code></p>
+<p><strong>Restore Issues:</strong>
+- <strong>"Backup archive not found"</strong>: Verify <code>sls_backup_version</code> matches an existing backup directory
+- <strong>"Certificate Manager not found"</strong>: Install cert-manager before restoring SLS
+- <strong>"LicenseService not ready"</strong>: Check operator logs and ensure MongoDB is accessible
+- <strong>Domain mismatch</strong>: Use <code>sls_domain</code> variable to override domain for new cluster</p>
+<p>For more information on backup and restore, refer to the <a href="https://www.ibm.com/docs/en/masv-and-l/cd?topic=service-backing-up-restoring">IBM Documentation on Backing up and Restoring SLS</a>.</p>
+<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link">¤</a></h2>
+<h3 id="install-and-generate-a-configuration-up-to-sls-360">Install and generate a configuration [up to SLS 3.6.0]<a class="headerlink" href="#install-and-generate-a-configuration-up-to-sls-360" title="Permanent link">¤</a></h3>
 <pre><code class="language-yaml">- hosts: localhost
   any_errors_fatal: true
   vars:
     ibm_entitlement_key: xxxx
     mas_instance_id: inst1
     mas_config_dir: /home/me/masconfig
-    sls_mongodb_cfg_file: &quot;/etc/mas/mongodb.yml&quot;
+    sls_mongodb_cfg_file: "/etc/mas/mongodb.yml"
 
     bootstrap:
-      license_id: &quot;aa78dd65ef10&quot;
-      license_file: &quot;/etc/mas/entitlement.lic&quot;
+      license_id: "aa78dd65ef10"
+      license_file: "/etc/mas/entitlement.lic"
       registration_key: xxxx
 
   roles:
     - ibm.mas_devops.sls
 </code></pre>
-<h3 id="install-and-upload-license-file-sls-370">Install and upload license file [SLS 3.7.0]<a class="headerlink" href="#install-and-upload-license-file-sls-370" title="Permanent link"></a></h3>
+<h3 id="install-and-upload-license-file-sls-370">Install and upload license file [SLS 3.7.0]<a class="headerlink" href="#install-and-upload-license-file-sls-370" title="Permanent link">¤</a></h3>
 <pre><code class="language-yaml">- hosts: localhost
   any_errors_fatal: true
   vars:
     ibm_entitlement_key: xxxx
     mas_instance_id: inst1
-    sls_mongodb_cfg_file: &quot;/etc/mas/mongodb.yml&quot;
-    entitlement_file: &quot;/etc/mas/entitlement.lic&quot;
+    sls_mongodb_cfg_file: "/etc/mas/mongodb.yml"
+    entitlement_file: "/etc/mas/entitlement.lic"
 
   roles:
     - ibm.mas_devops.sls
 </code></pre>
-<h3 id="install-and-upload-license-file-from-sls-380">Install and upload license file [from SLS 3.8.0]<a class="headerlink" href="#install-and-upload-license-file-from-sls-380" title="Permanent link"></a></h3>
+<h3 id="install-and-upload-license-file-from-sls-380">Install and upload license file [from SLS 3.8.0]<a class="headerlink" href="#install-and-upload-license-file-from-sls-380" title="Permanent link">¤</a></h3>
 <pre><code class="language-yaml">- hosts: localhost
   any_errors_fatal: true
   vars:
     mas_instance_id: inst1
-    sls_mongodb_cfg_file: &quot;/etc/mas/mongodb.yml&quot;
-    entitlement_file: &quot;/etc/mas/entitlement.lic&quot;
+    sls_mongodb_cfg_file: "/etc/mas/mongodb.yml"
+    entitlement_file: "/etc/mas/entitlement.lic"
 
   roles:
     - ibm.mas_devops.sls
 </code></pre>
-<h3 id="generate-a-configuration-for-an-existing-installation">Generate a configuration for an existing installation<a class="headerlink" href="#generate-a-configuration-for-an-existing-installation" title="Permanent link"></a></h3>
+<h3 id="generate-a-configuration-for-an-existing-installation">Generate a configuration for an existing installation<a class="headerlink" href="#generate-a-configuration-for-an-existing-installation" title="Permanent link">¤</a></h3>
 <pre><code class="language-yaml">- hosts: localhost
   any_errors_fatal: true
   vars:
     mas_instance_id: inst1
     mas_config_dir: /home/me/masconfig
 
-    sls_tls_crt_local_file_path: &quot;/home/me/sls.crt&quot;
-    slscfg_url: &quot;https://xxx&quot;
-    slscfg_registration_key: &quot;xxx&quot;
+    sls_action: gencfg
+    sls_tls_crt_local_file_path: "/home/me/sls.crt"
+    slscfg_url: "https://xxx"
+    slscfg_registration_key: "xxx"
 
   roles:
     - ibm.mas_devops.sls
 </code></pre>
-<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link"></a></h2>
+<h2 id="run-role-playbook">Run Role Playbook<a class="headerlink" href="#run-role-playbook" title="Permanent link">¤</a></h2>
+<pre><code class="language-bash">export SLS_MONGODB_CFG_FILE=/etc/mas/mongodb.yml
+export SLS_ENTITLEMENT_FILE=/etc/mas/entitlement.lic
+export MAS_INSTANCE_ID=inst1
+ansible-playbook ibm.mas_devops.run_role
+</code></pre>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">¤</a></h2>
 <p>EPL-2.0</p>
-              
-            </div>
-          </div><footer>
+            
+          </div>
 
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
+          <!-- Navigation footer (prev/next) -->
+<nav class="md-footer-nav" aria-label="Footer navigation">
+  <div class="md-footer-nav__inner">
+    <a href="../ocs/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+      <div class="md-footer-nav__direction">
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+        <span>Previous</span>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">ocs</span>
+      </div>
+    </a>
+    <a href="../turbonomic/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+      <div class="md-footer-nav__direction">
+        <span>Next</span>
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+        </svg>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">turbonomic</span>
+      </div>
+    </a>
   </div>
-
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
-          
-        </div>
+</nav>
+        </article>
       </div>
 
-    </section>
-
+      <!-- Right sidebar - Table of Contents -->
+      <aside class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<nav class="md-sidebar md-sidebar--secondary" aria-label="Table of contents">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <div class="md-toc">
+        <div class="md-toc__title">On this page</div>
+        <ul class="md-toc__list">
+              <li class="md-toc__item">
+                <a href="#role-variables-general" class="md-toc__link" data-md-level="1">
+                  Role Variables - General
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#general-variables" class="md-toc__link" data-md-level="2">
+                          General Variables
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-installation" class="md-toc__link" data-md-level="1">
+                  Role Variables - Installation
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#artifactory_username" class="md-toc__link" data-md-level="2">
+                          artifactory_username
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#artifactory_token" class="md-toc__link" data-md-level="2">
+                          artifactory_token
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_catalog_source" class="md-toc__link" data-md-level="2">
+                          sls_catalog_source
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_channel" class="md-toc__link" data-md-level="2">
+                          sls_channel
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_namespace" class="md-toc__link" data-md-level="2">
+                          sls_namespace
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_icr_cpopen" class="md-toc__link" data-md-level="2">
+                          sls_icr_cpopen
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_instance_name" class="md-toc__link" data-md-level="2">
+                          sls_instance_name
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_icr_cp" class="md-toc__link" data-md-level="2">
+                          sls_icr_cp
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#ibm_entitlement_key" class="md-toc__link" data-md-level="2">
+                          ibm_entitlement_key
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_entitlement_username" class="md-toc__link" data-md-level="2">
+                          sls_entitlement_username
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_entitlement_key" class="md-toc__link" data-md-level="2">
+                          sls_entitlement_key
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-configuration" class="md-toc__link" data-md-level="1">
+                  Role Variables - Configuration
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#sls_domain" class="md-toc__link" data-md-level="2">
+                          sls_domain
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_auth_enforce" class="md-toc__link" data-md-level="2">
+                          sls_auth_enforce
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_mongo_retrywrites" class="md-toc__link" data-md-level="2">
+                          sls_mongo_retrywrites
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_compliance_enforce" class="md-toc__link" data-md-level="2">
+                          sls_compliance_enforce
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_registration_open" class="md-toc__link" data-md-level="2">
+                          sls_registration_open
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_mongodb_cfg_file" class="md-toc__link" data-md-level="2">
+                          sls_mongodb_cfg_file
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_mongodbhosts" class="md-toc__link" data-md-level="2">
+                          sls_mongodb.hosts
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_mongodbcertificates" class="md-toc__link" data-md-level="2">
+                          sls_mongodb.certificates
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_mongodbusername" class="md-toc__link" data-md-level="2">
+                          sls_mongodb.username
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_mongodbpassword" class="md-toc__link" data-md-level="2">
+                          sls_mongodb.password
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#mas_pod_templates_dir" class="md-toc__link" data-md-level="2">
+                          mas_pod_templates_dir
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#bootstrap-variables-sls-370-and-higher" class="md-toc__link" data-md-level="2">
+                          Bootstrap Variables (SLS 3.7.0 and higher)
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-bootstrap-partly-deprecated-in-sls-370" class="md-toc__link" data-md-level="1">
+                  Role Variables - Bootstrap [Partly deprecated in SLS 3.7.0]
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#bootstraplicense_file" class="md-toc__link" data-md-level="2">
+                          bootstrap.license_file
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#bootstraplicense_id" class="md-toc__link" data-md-level="2">
+                          bootstrap.license_id
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#bootstrapregistration_key" class="md-toc__link" data-md-level="2">
+                          bootstrap.registration_key
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#slscfg-variables" class="md-toc__link" data-md-level="2">
+                          SLSCfg Variables
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables-backup-and-restore-variables" class="md-toc__link" data-md-level="1">
+                  Role Variables - Backup and Restore Variables
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#mas_backup_dir" class="md-toc__link" data-md-level="2">
+                          mas_backup_dir
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#sls_backup_version" class="md-toc__link" data-md-level="2">
+                          sls_backup_version
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#backup-and-restore-operations" class="md-toc__link" data-md-level="1">
+                  Backup and Restore Operations
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#what-gets-backed-up" class="md-toc__link" data-md-level="2">
+                          What Gets Backed Up
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup-process" class="md-toc__link" data-md-level="2">
+                          Backup Process
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#restore-process" class="md-toc__link" data-md-level="2">
+                          Restore Process
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#backup-example" class="md-toc__link" data-md-level="2">
+                          Backup Example
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#restore-example" class="md-toc__link" data-md-level="2">
+                          Restore Example
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#best-practices" class="md-toc__link" data-md-level="2">
+                          Best Practices
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#troubleshooting" class="md-toc__link" data-md-level="2">
+                          Troubleshooting
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#example-playbook" class="md-toc__link" data-md-level="1">
+                  Example Playbook
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#install-and-generate-a-configuration-up-to-sls-360" class="md-toc__link" data-md-level="2">
+                          Install and generate a configuration [up to SLS 3.6.0]
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#install-and-upload-license-file-sls-370" class="md-toc__link" data-md-level="2">
+                          Install and upload license file [SLS 3.7.0]
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#install-and-upload-license-file-from-sls-380" class="md-toc__link" data-md-level="2">
+                          Install and upload license file [from SLS 3.8.0]
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#generate-a-configuration-for-an-existing-installation" class="md-toc__link" data-md-level="2">
+                          Generate a configuration for an existing installation
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#run-role-playbook" class="md-toc__link" data-md-level="1">
+                  Run Role Playbook
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#license" class="md-toc__link" data-md-level="1">
+                  License
+                </a>
+              </li>
+        </ul>
+      </div>
+    </div>
   </div>
+</nav>
+      </aside>
+    </div>
 
-  <div class="rst-versions" role="note" aria-label="Versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-        <span>
-          <a href="https://github.com/ibm-mas/ansible-devops" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
-        </span>
-    
-    
-      <span><a href="../ocs/" style="color: #fcfcfc">&laquo; Previous</a></span>
-    
-    
-      <span><a href="../turbonomic/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
-</div>
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script>var base_url = "../..";</script>
-    <script src="../../js/theme_extra.js"></script>
-    <script src="../../js/theme.js"></script>
-      <script src="../../search/main.js"></script>
-    <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        });
-    </script>
-
-</body>
-</html>
+    <!-- Footer - Full width outside container -->
+    <footer class="md-footer">
+      Built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/durera/mkdocs-carbon">Carbon theme</a>
+    </footer>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": false, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>

@@ -1,0 +1,1086 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>suite_db2_setup_for_facilities - MAS DevOps Ansible Collection</title>
+
+    <!-- Pure CSS (https://pure-css.github.io/) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/theme.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script src="../../js/theme.js"></script>
+
+    <!-- Carbon theme zones (white, g10, g90, g100) -->
+    <link rel="stylesheet" href="https://1.www.s81c.com/common/carbon/web-components/tag/latest/themes.css">
+
+    <!-- The Carbon web-components/framework -->
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/ui-shell.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/accordion.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/breadcrumb.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/select.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/tabs.min.js"></script>
+    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v2.15.0/search.min.js"></script>
+
+    <!-- HighlightJS code formatting support -->
+    <link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+    <!-- Required by MkDocs search -->
+    <script>var base_url = "../..";</script>
+
+    <!-- User defined extras -->
+    
+    
+
+    
+
+    
+    <script src="../../search/main.js"></script>
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: black; }
+        </style></head>
+
+  <body class="md-grid" data-theme-default="g90">
+    <!-- Header -->
+    <cds-header aria-label="MAS DevOps Ansible Collection" class="md-header">
+      <cds-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></cds-header-menu-button>
+      <cds-header-name href="../.." prefix="IBM">MAS DevOps Ansible Collection</cds-header-name>
+      <cds-header-nav menu-bar-label="IBM MAS DevOps Ansible Collection">
+          <cds-header-nav-item is-active="" target="" href="">Ansible</cds-header-nav-item>
+          <cds-header-nav-item target="" href="https://ibm-mas.github.io/cli/">CLI</cds-header-nav-item>
+      </cds-header-nav>
+
+      <div class="cds--header__global">
+<div class="md-theme-toggle" data-theme-default="g90">
+  <button class="md-theme-toggle__button" aria-label="Toggle theme" title="Toggle theme">
+    <svg class="md-theme-toggle__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"></path>
+    </svg>
+  </button>
+  <div class="md-theme-toggle__menu" hidden="">
+    <button class="md-theme-toggle__option" data-theme="white">
+      <span class="md-theme-toggle__label">Light</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--white"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g10">
+      <span class="md-theme-toggle__label">Light Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g10"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g90">
+      <span class="md-theme-toggle__label">Dark Gray</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g90"></span>
+    </button>
+    <button class="md-theme-toggle__option" data-theme="g100">
+      <span class="md-theme-toggle__label">Dark</span>
+      <span class="md-theme-toggle__preview md-theme-toggle__preview--g100"></span>
+    </button>
+  </div>
+</div>
+        <cds-search id="header-search" label-text="Search" cds-search-input="search-event" expandable=""></cds-search>
+      </div>
+      <script>
+        var el = document.getElementById("header-search");
+        el.addEventListener("cds-search-input", function (ev) {
+          console.info(ev.detail.value)
+          document.getElementById("header-search-value").setAttribute("value", ev.detail.value);
+        });
+        el.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter') {
+            location.href="../../search.html?q=" + document.querySelector("#header-search").shadowRoot.querySelector("#input").value;
+          }
+        });
+      </script>
+
+      
+    </cds-header>
+
+    <!-- Main container with three-column layout -->
+    <div class="md-container">
+      <!-- Left sidebar - Navigation -->
+      <aside class="md-sidebar md-sidebar--primary" data-md-component="sidebar">
+        <div class="md-sidebar__scrollwrap">
+          <div class="md-sidebar__inner">
+            <cds-side-nav aria-label="Side navigation">
+              <cds-side-nav-items>
+                
+                  
+  <cds-side-nav-menu title="General Information">
+    
+      
+  <cds-side-nav-menu-item href="../..">
+    Home
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../execution-environment/">
+    Ansible Automation Platform
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Playbooks">
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/ocp/">
+    OCP
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/cp4d/">
+    Install Cloud Pak For Data
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/aiservice/">
+    Install AI Service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-core/">
+    Install Core
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-iot/">
+    Add IoT
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-manage/">
+    Add Manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-monitor/">
+    Add Monitor
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-optimizer/">
+    Add Optimizer
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-predict/">
+    Add Predict
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-visualinspection/">
+    Add Visual Inspection
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-facilities/">
+    Add Real Estate and Facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-update/">
+    Update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/mas-upgrade/">
+    Upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/backup-restore/">
+    Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../../playbooks/legacy-backup-restore/">
+    Legacy Backup and Restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: OCP Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../ocp_cluster_monitoring/">
+    ocp_cluster_monitoring
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_config/">
+    ocp_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_deprovision/">
+    ocp_deprovision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_efs/">
+    ocp_efs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_github_oauth/">
+    ocp_github_oauth
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_login/">
+    ocp_login
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_node_config/">
+    ocp_node_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_provision/">
+    ocp_provision
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_roks_upgrade_registry_storage/">
+    ocp_roks_upgrade_registry_storage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_upgrade/">
+    ocp_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_verify/">
+    ocp_verify
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Dependency Mgmt">
+    
+      
+  <cds-side-nav-menu-item href="../aws_bucket_access_point/">
+    aws_bucket_access_point
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_documentdb_user/">
+    aws_documentdb_user
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_policy/">
+    aws_policy
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_route53/">
+    aws_route53
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_user_creation/">
+    aws_user_creation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../aws_vpc/">
+    aws_vpc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cert_manager/">
+    cert_manager
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cis/">
+    cis
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../configure_manage_eventstreams/">
+    configure_manage_eventstreams
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos/">
+    cos
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cos_bucket/">
+    cos_bucket
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_admin_pwd_update/">
+    cp4d_admin_pwd_update
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d/">
+    cp4d
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../cp4d_service/">
+    cp4d_service
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../db2/">
+    db2
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../dro/">
+    dro
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../eck/">
+    eck
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../grafana/">
+    grafana
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ibm_catalogs/">
+    ibm_catalogs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../kafka/">
+    kafka
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../longhorn/">
+    longhorn
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../nvidia_gpu/">
+    nvidia_gpu
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mongodb/">
+    mongodb
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocs/">
+    ocs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../sls/">
+    sls
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../turbonomic/">
+    turbonomic
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Image Mirroring">
+    
+      
+  <cds-side-nav-menu-item href="../mirror_case_prepare/">
+    mirror_case_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_extras_prepare/">
+    mirror_extras_prepare
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_images/">
+    mirror_images
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../mirror_ocp/">
+    mirror_ocp
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_idms/">
+    ocp_idms
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../ocp_simulate_disconnected_network/">
+    ocp_simulate_disconnected_network
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../registry/">
+    registry
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Suite Mgmt" active="" expanded="">
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_config/">
+    suite_app_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_install/">
+    suite_app_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_uninstall/">
+    suite_app_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_upgrade/">
+    suite_app_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_rollback/">
+    suite_app_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_backup/">
+    suite_app_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_app_restore/">
+    suite_app_restore
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_certs/">
+    suite_certs
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_config/">
+    suite_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_db2_setup_for_manage/">
+    suite_db2_setup_for_manage
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="./" active="" expanded="">
+    suite_db2_setup_for_facilities
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_dns/">
+    suite_dns
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_install/">
+    suite_install
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_attachments_config/">
+    suite_manage_attachments_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_birt_report_config/">
+    suite_manage_birt_report_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_bim_config/">
+    suite_manage_bim_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_customer_files_config/">
+    suite_manage_customer_files_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_imagestitching_config/">
+    suite_manage_imagestitching_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_import_certs_config/">
+    suite_manage_import_certs_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_load_dbc_scripts/">
+    suite_manage_load_dbc_scripts
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_logging_config/">
+    suite_manage_logging_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_manage_pvc_config/">
+    suite_manage_pvc_config
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_uninstall/">
+    suite_uninstall
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_upgrade/">
+    suite_upgrade
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_rollback/">
+    suite_rollback
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_verify/">
+    suite_verify
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_backup/">
+    suite_backup
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../suite_restore/">
+    suite_restore
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+                  
+  <cds-side-nav-menu title="Roles: Utilities">
+    
+      
+  <cds-side-nav-menu-item href="../ansible_version_check/">
+    ansible_version_check
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../entitlement_key_rotation/">
+    entitlement_key_rotation
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_jdbc/">
+    gencfg_jdbc
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_watsonstudio/">
+    gencfg_watsonstudio
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_workspace/">
+    gencfg_workspace
+  </cds-side-nav-menu-item>
+
+    
+      
+  <cds-side-nav-menu-item href="../gencfg_mongo/">
+    gencfg_mongo
+  </cds-side-nav-menu-item>
+
+    
+  </cds-side-nav-menu>
+
+                
+              </cds-side-nav-items>
+            </cds-side-nav>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="md-content" data-md-component="content">
+        <article class="md-content__inner">
+          <!-- Breadcrumbs -->
+          <div class="md-breadcrumbs"><cds-breadcrumb no-trailing-slash="">
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="../..">Home</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+      <cds-breadcrumb-item>Roles: Suite Mgmt</cds-breadcrumb-item>
+  <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="#suite_db2_setup_for_facilities">suite_db2_setup_for_facilities</cds-breadcrumb-link>
+  </cds-breadcrumb-item>
+
+  <cds-breadcrumb-item aria-current="page">
+    <cds-select id="breadcrumbs-toc" inline="" placeholder="..." oninput="changeAnchor(this.value)">
+    
+    
+      <cds-select-item value="#what-this-role-does">What This Role Does</cds-select-item>
+    
+      <cds-select-item value="#role-variables">Role Variables</cds-select-item>
+    
+      <cds-select-item value="#example-playbook">Example Playbook</cds-select-item>
+    
+      <cds-select-item value="#license">License</cds-select-item>
+    
+    </cds-select>
+  </cds-breadcrumb-item>
+</cds-breadcrumb>
+          </div>
+
+          <!-- Page content -->
+          <div class="rst-content">
+            
+            <h1 id="suite_db2_setup_for_facilities">suite_db2_setup_for_facilities<a class="headerlink" href="#suite_db2_setup_for_facilities" title="Permanent link">¤</a></h1>
+<p>This role performs initial Db2 database setup required for Maximo Facilities (Real Estate and Facilities Management) application. It configures database parameters, creates tablespaces, and applies performance optimizations that the Facilities operator cannot yet handle automatically.</p>
+<div class="admonition note">
+<p class="admonition-title">Temporary Role</p>
+<p>This role exists as a workaround until the Facilities operator can perform these setup tasks automatically. It handles Facilities-specific database requirements.</p>
+</div>
+<h2 id="what-this-role-does">What This Role Does<a class="headerlink" href="#what-this-role-does" title="Permanent link">¤</a></h2>
+<ul>
+<li>Installs Db2 with required properties for Facilities</li>
+<li>Copies setup scripts into Db2 pod</li>
+<li>Executes database configuration changes inside container</li>
+<li>Creates and configures tablespaces for Facilities</li>
+<li>Applies enhanced Db2 performance parameters</li>
+<li>Optionally restarts Db2 instance to apply configuration</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Downtime Risk</p>
+<p>Setting <code>enforce_db2_config=true</code> will restart the Db2 instance, causing downtime. Schedule during maintenance windows or use with newly created instances.</p>
+</div>
+<h2 id="role-variables">Role Variables<a class="headerlink" href="#role-variables" title="Permanent link">¤</a></h2>
+<h3 id="db2_instance_name">db2_instance_name<a class="headerlink" href="#db2_instance_name" title="Permanent link">¤</a></h3>
+<p>Db2 instance name for Facilities setup.</p>
+<ul>
+<li><strong>Required</strong></li>
+<li>Environment Variable: <code>DB2_INSTANCE_NAME</code></li>
+<li>Default: None</li>
+</ul>
+<p><strong>Purpose</strong>: Identifies the Db2 Warehouse instance where Facilities database setup will be performed.</p>
+<p><strong>When to use</strong>:
+- Always required for Facilities database setup
+- Must match the Db2 instance name for Facilities
+- Used to locate the correct Db2 pod</p>
+<p><strong>Valid values</strong>: Valid Db2 instance name (e.g., <code>db2w-facilities</code>, <code>db2u-db01</code>)</p>
+<p><strong>Impact</strong>: Determines which Db2 instance receives the Facilities-specific configuration and tablespace setup.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_namespace</code>: Namespace containing this instance
+- <code>db2_dbname</code>: Database within this instance</p>
+<p><strong>Note</strong>: To find the instance name, go to the Db2 namespace and look for pods with <code>label=engine</code>. Describe the pod and find the <code>app</code> label value.</p>
+<h3 id="db2_namespace">db2_namespace<a class="headerlink" href="#db2_namespace" title="Permanent link">¤</a></h3>
+<p>Db2 instance namespace.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>DB2_NAMESPACE</code></li>
+<li>Default: <code>db2u</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the OpenShift namespace where the Db2 instance is deployed.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>db2u</code>) for standard Db2 deployments
+- Override if Db2 is deployed in a custom namespace
+- Required to locate the Db2 pod</p>
+<p><strong>Valid values</strong>: Valid Kubernetes namespace name</p>
+<p><strong>Impact</strong>: Determines where to find the Db2 instance for setup script execution.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_instance_name</code>: Instance to find in this namespace</p>
+<p><strong>Note</strong>: The default <code>db2u</code> namespace is used by most Db2 Warehouse deployments.</p>
+<h3 id="db2_username">db2_username<a class="headerlink" href="#db2_username" title="Permanent link">¤</a></h3>
+<p>Database connection username.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: None</li>
+<li>Default: <code>tridata</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the username for connecting to the Db2 database during Facilities setup script execution.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>tridata</code>) for standard Facilities deployments
+- Override if using custom database user
+- Must have appropriate database privileges</p>
+<p><strong>Valid values</strong>: Valid Db2 username with admin privileges</p>
+<p><strong>Impact</strong>: Determines which user account executes the setup script and database configuration changes.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_dbname</code>: Database to connect to
+- <code>db2_schema</code>: Schema to configure (TRIDATA)</p>
+<p><strong>Note</strong>: The default <code>tridata</code> user is specific to Facilities/TRIRIGA. The user must have sufficient privileges to create tablespaces and modify database configuration.</p>
+<h3 id="db2_dbname">db2_dbname<a class="headerlink" href="#db2_dbname" title="Permanent link">¤</a></h3>
+<p>Database name within Db2 instance.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: None</li>
+<li>Default: <code>BLUDB</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the database name within the Db2 instance where Facilities setup will be performed.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>BLUDB</code>) for standard Facilities deployments
+- Override if using custom database name
+- Must exist before running this role</p>
+<p><strong>Valid values</strong>: Valid Db2 database name</p>
+<p><strong>Impact</strong>: Determines which database receives the Facilities tablespace and configuration setup.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_instance_name</code>: Instance containing this database
+- <code>db2_schema</code>: Schema within this database (TRIDATA)</p>
+<p><strong>Note</strong>: <code>BLUDB</code> is the default database name for Facilities deployments.</p>
+<h3 id="db2_schema">db2_schema<a class="headerlink" href="#db2_schema" title="Permanent link">¤</a></h3>
+<p>Facilities database schema name.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: None</li>
+<li>Default: <code>TRIDATA</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the schema name where Facilities (TRIRIGA) tables and objects will be created.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>TRIDATA</code>) for standard Facilities deployments
+- Override if using custom schema name
+- Must match Facilities configuration</p>
+<p><strong>Valid values</strong>: Valid Db2 schema name</p>
+<p><strong>Impact</strong>: Determines which schema receives the tablespace configuration and Facilities-specific setup.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_dbname</code>: Database containing this schema
+- <code>db2_username</code>: User accessing this schema (tridata)</p>
+<p><strong>Note</strong>: The default <code>TRIDATA</code> schema is standard for Facilities/TRIRIGA deployments. This differs from Manage which uses <code>maximo</code> schema. Ensure this matches your Facilities database configuration.</p>
+<h3 id="db2_tablespace_data_size">db2_tablespace_data_size<a class="headerlink" href="#db2_tablespace_data_size" title="Permanent link">¤</a></h3>
+<p>Data tablespace size.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>DB2_TABLESPACE_DATA_SIZE</code></li>
+<li>Default: <code>5000 M</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the size of the data tablespace created for Facilities application data.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>5000 M</code>) for small to medium deployments
+- Increase for large Facilities deployments with extensive real estate data
+- Consider data growth over time</p>
+<p><strong>Valid values</strong>: Db2 size format (e.g., <code>5000 M</code>, <code>10 G</code>, <code>50 G</code>)</p>
+<p><strong>Impact</strong>: Determines how much data can be stored in Facilities tables. Insufficient size will prevent data insertion.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_tablespace_index_size</code>: Related index tablespace size</p>
+<p><strong>Note</strong>: Size requirements depend on:
+- Number of buildings and spaces
+- Historical data retention
+- Document attachments
+- Custom fields and extensions
+Start with 5GB and monitor usage. Tablespaces can be expanded later if needed.</p>
+<h3 id="db2_tablespace_index_size">db2_tablespace_index_size<a class="headerlink" href="#db2_tablespace_index_size" title="Permanent link">¤</a></h3>
+<p>Index tablespace size.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>DB2_TABLESPACE_INDEX_SIZE</code></li>
+<li>Default: <code>5000 M</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the size of the index tablespace created for Facilities database indexes.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>5000 M</code>) for small to medium deployments
+- Increase for large Facilities deployments with many indexes
+- Typically 20-30% of data tablespace size</p>
+<p><strong>Valid values</strong>: Db2 size format (e.g., <code>5000 M</code>, <code>10 G</code>, <code>20 G</code>)</p>
+<p><strong>Impact</strong>: Determines how many indexes can be created. Insufficient size will prevent index creation and impact performance.</p>
+<p><strong>Related variables</strong>:
+- <code>db2_tablespace_data_size</code>: Related data tablespace size</p>
+<p><strong>Note</strong>: Indexes improve query performance but consume space. A good rule of thumb is to allocate 20-30% of the data tablespace size for indexes. Monitor usage and adjust as needed.</p>
+<h3 id="db2_config_version">db2_config_version<a class="headerlink" href="#db2_config_version" title="Permanent link">¤</a></h3>
+<p>Db2 configuration parameter version.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>DB2_CONFIG_VERSION</code></li>
+<li>Default: <code>1.0.0</code></li>
+</ul>
+<p><strong>Purpose</strong>: Specifies the version of enhanced Db2 performance parameters to apply during Facilities setup.</p>
+<p><strong>When to use</strong>:
+- Use default (<code>1.0.0</code>) for current parameter set
+- Override only if specific version required
+- Different versions may have different parameter sets</p>
+<p><strong>Valid values</strong>: <code>1.0.0</code> (currently supported version)</p>
+<p><strong>Impact</strong>: Determines which set of Db2 performance parameters are applied to optimize for Facilities workloads.</p>
+<p><strong>Related variables</strong>:
+- <code>enforce_db2_config</code>: Controls whether parameters are applied with restart</p>
+<p><strong>Note</strong>: The parameter set includes optimizations for Facilities' specific database access patterns. Future versions may include additional optimizations.</p>
+<h3 id="enforce_db2_config">enforce_db2_config<a class="headerlink" href="#enforce_db2_config" title="Permanent link">¤</a></h3>
+<p>Force Db2 configuration with restart.</p>
+<ul>
+<li><strong>Optional</strong></li>
+<li>Environment Variable: <code>ENFORCE_DB2_CONFIG</code></li>
+<li>Default: <code>true</code></li>
+</ul>
+<p><strong>Purpose</strong>: Controls whether enhanced Db2 parameters are applied with a database restart. Restart is required for parameters to take effect but causes downtime.</p>
+<p><strong>When to use</strong>:
+- Set to <code>true</code> (default) for new Db2 instances
+- Set to <code>true</code> during scheduled maintenance windows
+- Set to <code>false</code> to skip parameter application (not recommended)</p>
+<p><strong>Valid values</strong>: <code>true</code>, <code>false</code></p>
+<p><strong>Impact</strong>:
+- <code>true</code>: Applies enhanced parameters and restarts Db2 instance (causes downtime)
+- <code>false</code>: Skips enhanced parameter application (suboptimal performance)</p>
+<p><strong>Related variables</strong>:
+- <code>db2_config_version</code>: Version of parameters to apply</p>
+<p><strong>Note</strong>: <strong>CRITICAL</strong> - Setting to <code>true</code> will restart the Db2 instance, causing downtime for all applications using the database. Schedule during maintenance windows. For production systems, coordinate with stakeholders. For new instances, this is safe as no applications are using the database yet.</p>
+<h2 id="example-playbook">Example Playbook<a class="headerlink" href="#example-playbook" title="Permanent link">¤</a></h2>
+<pre><code class="language-yaml">- hosts: localhost
+  any_errors_fatal: true
+  vars:
+
+    # Configuration for the Db2 cluster
+    db2_namespace: db2u
+    db2_instance_name: db2u-db01
+    db2_dbname: BLUDB
+
+  roles:
+    - ibm.mas_devops.suite_db2_setup_for_facilities
+</code></pre>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">¤</a></h2>
+<p>EPL-2.0</p>
+            
+          </div>
+
+          <!-- Navigation footer (prev/next) -->
+<nav class="md-footer-nav" aria-label="Footer navigation">
+  <div class="md-footer-nav__inner">
+    <a href="../suite_db2_setup_for_manage/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+      <div class="md-footer-nav__direction">
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+        </svg>
+        <span>Previous</span>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">suite_db2_setup_for_manage</span>
+      </div>
+    </a>
+    <a href="../suite_dns/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+      <div class="md-footer-nav__direction">
+        <span>Next</span>
+        <svg class="md-footer-nav__icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
+        </svg>
+      </div>
+      <div class="md-footer-nav__title">
+        <span class="md-footer-nav__title-text">suite_dns</span>
+      </div>
+    </a>
+  </div>
+</nav>
+        </article>
+      </div>
+
+      <!-- Right sidebar - Table of Contents -->
+      <aside class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<nav class="md-sidebar md-sidebar--secondary" aria-label="Table of contents">
+  <div class="md-sidebar__scrollwrap">
+    <div class="md-sidebar__inner">
+      <div class="md-toc">
+        <div class="md-toc__title">On this page</div>
+        <ul class="md-toc__list">
+              <li class="md-toc__item">
+                <a href="#what-this-role-does" class="md-toc__link" data-md-level="1">
+                  What This Role Does
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#role-variables" class="md-toc__link" data-md-level="1">
+                  Role Variables
+                </a>
+                  <ul class="md-toc__list">
+                      <li class="md-toc__item">
+                        <a href="#db2_instance_name" class="md-toc__link" data-md-level="2">
+                          db2_instance_name
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_namespace" class="md-toc__link" data-md-level="2">
+                          db2_namespace
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_username" class="md-toc__link" data-md-level="2">
+                          db2_username
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_dbname" class="md-toc__link" data-md-level="2">
+                          db2_dbname
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_schema" class="md-toc__link" data-md-level="2">
+                          db2_schema
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_tablespace_data_size" class="md-toc__link" data-md-level="2">
+                          db2_tablespace_data_size
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_tablespace_index_size" class="md-toc__link" data-md-level="2">
+                          db2_tablespace_index_size
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#db2_config_version" class="md-toc__link" data-md-level="2">
+                          db2_config_version
+                        </a>
+                      </li>
+                      <li class="md-toc__item">
+                        <a href="#enforce_db2_config" class="md-toc__link" data-md-level="2">
+                          enforce_db2_config
+                        </a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="md-toc__item">
+                <a href="#example-playbook" class="md-toc__link" data-md-level="1">
+                  Example Playbook
+                </a>
+              </li>
+              <li class="md-toc__item">
+                <a href="#license" class="md-toc__link" data-md-level="1">
+                  License
+                </a>
+              </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+      </aside>
+    </div>
+
+    <!-- Footer - Full width outside container -->
+    <footer class="md-footer">
+      Built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/durera/mkdocs-carbon">Carbon theme</a>
+    </footer>
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": false, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+</script></body></html>
